@@ -3,5 +3,26 @@ Reservations
 -------------------------------------------------------------------------------------------------------
 roomnumber | owneremail | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id
 -------------------------------------------------------------------------------------------------------
-roomnumber - the building number of the room as an int. ie Raburn 210 would be just 210 in the table.
-owneremail - the email of the individual who
+*roomnumber - the building number of the room as an int. ie Raburn 210 would be just 210 in the table.
+*owneremail - the email of the individual who added this reservation.
+*allowshare - a tinyint variable that can either be 1 or 0 (true or false, respectively). If true, then
+the individual making the reservation checked "Allow Other Reservations During This Time", meaning that
+the individual is alright sharing their room with someone else. A true value indicates that the reserving 
+individual entered a numeric value in the "headcount" field that is greater than 0 and less than the max seats
+available in a room, as defined in the rooms table.
+*headcount - this field is either null or contains a numeric value greater than 0 but less than the number of
+seats defined in the rooms table for the room this reservation belongs to as defined by the roomnumber field.
+It is to be checked to ensure that someone else attempting to share a room (provided the allowshare field is 1)
+can know how many students will be expected in the room during that time. We can use this to deny others from
+booking if their headcount on their reservation they are attempting to make plus this record's headcount field
+is greater than the max seats available as defined in the rooms table.
+*start - the staring time, a DATETIME variable.
+*end - the ending time, a DATETIME variable.
+*comment - a max 500 character field that is used for any additional comments the individual making the
+reservation may have.
+*id - an autoincrementing id field that we may need later.
+*repeat_id - an integer (maybe need a hex string instead?) that represents the id on repeated group of
+entries. Used for easily locating all records during the event of an update, retrieval or delete.
+For example, if someone chooses to repeat their reservation this time every Monday for the whole 
+semester, records are added for every monday, but all signed with the same repeat_id for easier
+access to the whole group later. This field can be NULL if the user just wanted to reserve once.
