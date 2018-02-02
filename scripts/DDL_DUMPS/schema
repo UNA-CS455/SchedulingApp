@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------------------------------
+Reservations
+-------------------------------------------------------------------------------------------------------
+roomnumber | owneremail | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id
+-------------------------------------------------------------------------------------------------------
+roomnumber - the building number of the room as an int. ie Raburn 210 would be just 210 in the table.
+owneremail - the email of the individual who
