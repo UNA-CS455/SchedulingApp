@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------------------------------
 Reservations
 -------------------------------------------------------------------------------------------------------
-roomid | owneremail | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id
+roomid | email | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id
 -------------------------------------------------------------------------------------------------------
 *roomid - the name of the room as a varchar. ie "Raburn 210" or "Conference Room"
 *owneremail - the email of the individual who added this reservation.
@@ -27,6 +27,9 @@ For example, if someone chooses to repeat their reservation this time every Mond
 semester, records are added for every monday, but all signed with the same repeat_id for easier
 access to the whole group later. This field can be NULL if the user just wanted to reserve once.
 
+roomid is a FOREIGN KEY --> pointing to roomid in the rooms table. 
+email is a FOREIGN KEY --> pointing to email in the users table.
+id is the PRIMARY KEY of this table.
 
 -------------------------------------------------------------------------------------------------------
 rooms
@@ -43,8 +46,8 @@ users
 -------------------------------------------------------------------------------------------------------
 email | firstname | lastname | classification | permissions
 -------------------------------------------------------------------------------------------------------
-*email -
-*firstname - 
-*lastname -
-*classification -
-*permissions -
+*email - email obtained from portal
+*firstname - Full first name
+*lastname - Full last name
+*classification - A string representing user type (professor, admin, worker, other)
+*permissions - A string of characters that can be used to define the permissions a user has.
