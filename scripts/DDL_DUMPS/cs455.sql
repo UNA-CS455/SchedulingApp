@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2018 at 03:42 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: Feb 03, 2018 at 06:50 AM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,8 +31,8 @@ USE `cs455`;
 --
 
 CREATE TABLE `reservations` (
-  `roomnumber` int(11) NOT NULL,
-  `owneremail` varchar(100) NOT NULL,
+  `roomnumber` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `allowshare` tinyint(1) NOT NULL,
   `headcount` int(11) DEFAULT NULL,
   `start` datetime NOT NULL,
@@ -46,8 +46,8 @@ CREATE TABLE `reservations` (
 -- Dumping data for table `reservations`
 --
 
-INSERT INTO `reservations` (`roomnumber`, `owneremail`, `allowshare`, `headcount`, `start`, `end`, `comment`, `id`, `repeat_id`) VALUES
-(110, 'dbrown4@una.edu', 1, 10, '2018-01-31 12:00:00', '2018-01-30 15:30:00', 'Test', 1, NULL);
+INSERT INTO `reservations` (`roomnumber`, `email`, `allowshare`, `headcount`, `start`, `end`, `comment`, `id`, `repeat_id`) VALUES
+('Raburn 210', 'dbrown4@una.edu', 1, 10, '2018-01-31 12:00:00', '2018-01-30 15:30:00', 'Test', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -56,10 +56,20 @@ INSERT INTO `reservations` (`roomnumber`, `owneremail`, `allowshare`, `headcount
 --
 
 CREATE TABLE `rooms` (
-  `id` varchar(100) NOT NULL COMMENT 'The room number, or identification string.',
+  `roomid` varchar(100) NOT NULL COMMENT 'The room number, or identification string.',
   `type` varchar(100) NOT NULL COMMENT 'computer lab, conference room, classroom',
-  `seats` int(11) NOT NULL COMMENT 'The number of open seats'
+  `seats` int(11) NOT NULL COMMENT 'The number of open seats',
+  `hascomputers` tinyint(4) NOT NULL,
+  `numcomputers` int(11) DEFAULT NULL COMMENT 'number of open computers given that hascomputers is true.',
+  `comment` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rooms`
+--
+
+INSERT INTO `rooms` (`roomid`, `type`, `seats`, `hascomputers`, `numcomputers`, `comment`) VALUES
+('Raburn 210', 'Classroom', 25, 1, 25, NULL);
 
 -- --------------------------------------------------------
 
@@ -76,6 +86,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`email`, `firstname`, `lastname`, `classification`, `permissions`) VALUES
+('dbrown4@una.edu', 'Derek', 'Brown', 'ADMIN', 'AA');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -89,7 +106,7 @@ ALTER TABLE `reservations`
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`roomid`);
 
 --
 -- Indexes for table `users`
