@@ -34,12 +34,14 @@ id is the PRIMARY KEY of this table.
 -------------------------------------------------------------------------------------------------------
 rooms
 -------------------------------------------------------------------------------------------------------
-roomid | type | seats | 
+roomid | type | seats | hascomputers | numcomputers | comment
 -------------------------------------------------------------------------------------------------------
 *roomid - the name of the room as a varchar. ie "Raburn 210" or "Conference Room"
 *type - one of the defined room types subject to change: (Conference, Testing Lab, Classroom, Other)
 *seats - an integer representing the number of seats (could be desks, computers, etc) in this room.
-
+*hascomputers - a tinyint that is 0 or false if this room has no computers, or a 1 or true if it does.
+if this is true, then numcomputers must have a value and should be checked.
+*numcomputers - 
 roomid is a PRIMARY KEY, since there cannot be more than one of the same room.
 
 -------------------------------------------------------------------------------------------------------
