@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------------------------------
 Reservations
 -------------------------------------------------------------------------------------------------------
-roomnumber | owneremail | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id
+roomid | owneremail | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id
 -------------------------------------------------------------------------------------------------------
-*roomnumber - the building number of the room as an int. ie Raburn 210 would be just 210 in the table.
+*roomid - the name of the room as a varchar. ie "Raburn 210" or "Conference Room"
 *owneremail - the email of the individual who added this reservation.
 *allowshare - a tinyint variable that can either be 1 or 0 (true or false, respectively). If true, then
 the individual making the reservation checked "Allow Other Reservations During This Time", meaning that
@@ -26,3 +26,25 @@ entries. Used for easily locating all records during the event of an update, ret
 For example, if someone chooses to repeat their reservation this time every Monday for the whole 
 semester, records are added for every monday, but all signed with the same repeat_id for easier
 access to the whole group later. This field can be NULL if the user just wanted to reserve once.
+
+
+-------------------------------------------------------------------------------------------------------
+rooms
+-------------------------------------------------------------------------------------------------------
+roomid | type | seats | 
+-------------------------------------------------------------------------------------------------------
+*roomid - the name of the room as a varchar. ie "Raburn 210" or "Conference Room"
+*type - one of the defined room types subject to change: (Conference, Testing Lab, Classroom, Other)
+*seats - an integer representing the number of seats (could be desks, computers, etc) in this room.
+
+
+-------------------------------------------------------------------------------------------------------
+users
+-------------------------------------------------------------------------------------------------------
+email | firstname | lastname | classification | permissions
+-------------------------------------------------------------------------------------------------------
+*email -
+*firstname - 
+*lastname -
+*classification -
+*permissions -
