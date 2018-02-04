@@ -1,10 +1,10 @@
 -------------------------------------------------------------------------------------------------------
 Reservations
 -------------------------------------------------------------------------------------------------------
-roomid | email | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id
+roomid | owneremail | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id | res_email
 -------------------------------------------------------------------------------------------------------
 *roomid - the name of the room as a varchar. ie "Raburn 210" or "Conference Room"
-*owneremail - the email of the individual who added this reservation.
+*owneremail - the email of the individual who requested this reservation be placed.
 *allowshare - a tinyint variable that can either be 1 or 0 (true or false, respectively). If true, then
 the individual making the reservation checked "Allow Other Reservations During This Time", meaning that
 the individual is alright sharing their room with someone else. A true value indicates that the reserving 
@@ -26,6 +26,7 @@ entries. Used for easily locating all records during the event of an update, ret
 For example, if someone chooses to repeat their reservation this time every Monday for the whole 
 semester, records are added for every monday, but all signed with the same repeat_id for easier
 access to the whole group later. This field can be NULL if the user just wanted to reserve once.
+*res_email - the email of the individual who placed this reservation.
 
 roomid is a FOREIGN KEY --> pointing to roomid in the rooms table. 
 email is a FOREIGN KEY --> pointing to email in the users table.
