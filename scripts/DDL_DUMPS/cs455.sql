@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2018 at 06:50 AM
+-- Generation Time: Feb 06, 2018 at 06:31 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -32,22 +32,23 @@ USE `cs455`;
 
 CREATE TABLE `reservations` (
   `roomnumber` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `owneremail` varchar(100) NOT NULL,
   `allowshare` tinyint(1) NOT NULL,
   `headcount` int(11) DEFAULT NULL,
   `start` datetime NOT NULL,
   `end` datetime NOT NULL,
   `comment` varchar(500) DEFAULT NULL,
   `id` int(11) NOT NULL,
-  `repeat_id` int(11) DEFAULT NULL
+  `repeat_id` int(11) DEFAULT NULL,
+  `res_email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `reservations`
 --
 
-INSERT INTO `reservations` (`roomnumber`, `email`, `allowshare`, `headcount`, `start`, `end`, `comment`, `id`, `repeat_id`) VALUES
-('Raburn 210', 'dbrown4@una.edu', 1, 10, '2018-01-31 12:00:00', '2018-01-30 15:30:00', 'Test', 1, NULL);
+INSERT INTO `reservations` (`roomnumber`, `owneremail`, `allowshare`, `headcount`, `start`, `end`, `comment`, `id`, `repeat_id`, `res_email`) VALUES
+('Raburn 210', 'dbrown4@una.edu', 1, 10, '2018-01-31 12:00:00', '2018-01-30 15:30:00', 'Test', 1, NULL, '');
 
 -- --------------------------------------------------------
 
