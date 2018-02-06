@@ -17,7 +17,7 @@ Description: Script to perform the create CRUD operation for new reservations
 	comment - a varchar(500) for additional comments
 	res_email - the email of the individual actually making the reservation.
 	TODO: take res_email from the email of the currently logged in user. !!!!!!!!!!!!!!!!!!!!!!!!!!!
-Authors: Luke Jennings, Jonathan Brazier
+Authors: Luke Jennings, Jonathan Brazier, Kyle Gibson
 
 
 */
