@@ -39,8 +39,15 @@ Authors: Luke Jennings, Jonathan Brazier, Kyle Gibson
 }
 
 
-
-
+//-------------------------------------------------------------------------------------------------------------
+//
+// Function name: displayReservationForm
+// Description: This function displays the HTML web page form for creating a reservation.
+// Input: N/A
+// Output: Displays an HTML web page.
+// Return: N/A
+// 
+//-------------------------------------------------------------------------------------------------------------
 function displayReservationForm()
 {
  {
@@ -87,6 +94,14 @@ HTMLBLOCK;
 }
 //-------------------------------------------------------------------------------------------------------------
 //
+// Function name: processReservation
+// Description: This function processes the input received from the HTML form for the
+// create reservation web page and adds the reservation to the database.
+// Input: Data from create reservation page including: room number, owner email, reservation email,
+// allowed share, start and end times, repeat id values, and a comment.
+// Output: Creates a new reservation using the data from the HTML form.
+// Return: N/A
+// 
 //-------------------------------------------------------------------------------------------------------------
 function processReservation()
 {
