@@ -1,0 +1,42 @@
+<html>
+	<head><link rel="stylesheet" href="styles/rooms.css">
+		
+		<title></title>
+	</head>
+	<body onload="getAgendaReservations()">  	
+	<script src="scripts/JS/rooms.js"></script>
+		<img src="images/dropdown.png" id="roomSelect" onclick="toggleRoomView()"></img>
+		<div id="banner">
+			<img src="images/una.png" id="logo">
+			</div>
+		</div>
+		<div id="roomWrapper"></div>
+		<font id="selectedRoom"><b>No Room Preference/All</b></font>
+		<div id="roomMenu">
+			<div id="filterArea">
+				<font id="filtersText">Filters</font>
+				<font id="typeText">Type: </font>
+				<select id="typeSelect" onchange="typeChanged(this.value)">
+					<option value="Any">Any</option>
+					<option value="Classroom">Classroom</option>
+					<option value="Conference">Conference Room</option>
+					<option value="Computer Lab">Computer Lab</option>
+				</select>
+			</div>
+			<div id="bookArea">
+				<table id="allRooms">
+					<tbody id="roominsert">
+					
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+
+		<div id="master-content"><div id="agenda"><h2 style="text-align:center" >Agenda</h2><br><hr><br></div></div> <? //TODO: add me me ?>
+
+		
+
+	</body>
+</html>
