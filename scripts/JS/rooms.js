@@ -45,7 +45,7 @@ function selectRoom(id){
 	document.getElementById('roomWrapper').style.display = "inline";
 	document.getElementById('selectedRoom').style.top = "14%";
 
-	// HERE IS WHERE AJAX CALL TO MAIN CALENDAR GOES!
+	// HERE IS WHERE AJAX CALL TO MAIN CALENDAR GOES! updateCalendar()?
 }
 
 /*
@@ -79,7 +79,9 @@ function getAgendaReservations() {
 }
 
 function typeChanged(id){
-	if (id == "Any"){
+	var e = document.getElementById('compSelect');
+	var f = document.getElementById('floorSelect');
+	if (id == "Any" && e.options[e.selectedIndex].value == "Any" && f.options[f.selectedIndex].value == "Any"){
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -96,9 +98,61 @@ function typeChanged(id){
 				document.getElementById("roominsert").innerHTML = this.responseText;
 			}
 		};
-		xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + id, true);
+		xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + id + "&floor=" + f.options[f.selectedIndex].value + "&comp=" + e.options[e.selectedIndex].value, true);
 		xhttp.send();
 	}
 	
 
+}
+
+function floorChanged(id){
+	var e = document.getElementById('typeSelect');
+	var f = document.getElementById('compSelect');
+	if (id == "Any" && e.options[e.selectedIndex].value == "Any" && f.options[f.selectedIndex].value == "Any"){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("roominsert").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "scripts/PHP/allrooms.php", true);
+		xhttp.send();
+	}
+	else{
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("roominsert").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + e.options[e.selectedIndex].value + "&floor=" + id + "&comp=" + f.options[f.selectedIndex].value, true);
+		xhttp.send();
+	}
+	
+}
+
+function compChanged(id){
+	var e = document.getElementById('typeSelect');
+	var f = document.getElementById('floorSelect');
+	if (id == "Any" && e.options[e.selectedIndex].value == "Any" && f.options[f.selectedIndex].value == "Any"){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("roominsert").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "scripts/PHP/allrooms.php", true);
+		xhttp.send();
+	}
+	else{
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("roominsert").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + e.options[e.selectedIndex].value + "&floor=" + f.options[f.selectedIndex].value + "&comp=" + id, true);
+		xhttp.send();
+	}
+	
 }
