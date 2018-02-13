@@ -1,4 +1,3 @@
-
 <?php session_start();
     //$_SESSION['logged_in_useremail'];
     //$roomnumber = $_POST['roomnumber'];
@@ -15,6 +14,7 @@
 <title>UNA Scheduling app</title>
 </head>
 <body>
+
 <div class="dayview">
 
 </div>
@@ -36,7 +36,7 @@
     <input id="date" type="date" name="date" placeholder="2018/01/26" required/><br>
   </select>
 
-    End time:  
+    End time:
     <input type="text" name="endHour" style="width: 48px">
     <input type="text" name="endMinute" style="width: 48px">
     <select>
