@@ -144,6 +144,32 @@ tbody{
 	height: 28%;
 }
 
+#floorText{
+	left: 34%;
+    top: 4%;
+    width: 8%;
+}
+
+#floorSelect{
+	left: 38%;
+    top: 4.5%;
+    width: 12%;
+    height: 28%;
+}
+
+#compText{
+	left: 56%;
+    top: 4%;
+    width: 8%;
+}
+
+#compSelect{
+	left: 64%;
+    top: 4.5%;
+    width: 12%;
+    height: 28%;
+}
+
 #agenda{
 	text-align: center;
 	z-index:4;
