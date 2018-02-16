@@ -46,19 +46,19 @@
 	while ($row = $result->fetch_assoc()) 
 	{
 		if ($_GET['floor'] == "first"){
-			if (split(" ", $row['roomid'], 15)[1][0] != "1"){
+			if ($row['floor']!= "1"){
 				continue;
 			}
 		}
 		
 		if ($_GET['floor'] == "second"){
-			if (split(" ", $row['roomid'], 15)[1][0] != "2"){
+			if ($row['floor']!= "2"){
 				continue;
 			}
 		}
 		
 		if ($_GET['floor'] == "third"){
-			if (split(" ", $row['roomid'], 15)[1][0] != "3"){
+			if ($row['floor']!= "3"){
 				continue;
 			}
 		}
