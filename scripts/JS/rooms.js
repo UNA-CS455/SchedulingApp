@@ -1,3 +1,4 @@
+
 var showrooms = false;
 
 var roomSelected = null;
@@ -51,6 +52,7 @@ function selectRoom(id){
 /*
 	A function whose purpose is to populate the agenda table with the user's
 	current reservations with a given email address.
+	Author: Derek Brown
 */
 function getAgendaReservations() {
 
@@ -72,7 +74,8 @@ function getAgendaReservations() {
 			document.getElementById("agenda").innerHTML += runString;
 		}
 	};
-	xmlhttp.open("GET", "res_user.php", true);
+
+	xmlhttp.open("GET", "scripts/PHP/res_user.php", true);
 	xmlhttp.send();
 
     
