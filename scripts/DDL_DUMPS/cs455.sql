@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2018 at 06:31 PM
+-- Generation Time: Feb 16, 2018 at 07:21 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -59,6 +59,7 @@ INSERT INTO `reservations` (`roomnumber`, `owneremail`, `allowshare`, `headcount
 CREATE TABLE `rooms` (
   `roomid` varchar(100) NOT NULL COMMENT 'The room number, or identification string.',
   `type` varchar(100) NOT NULL COMMENT 'computer lab, conference room, classroom',
+  `floor` tinyint(3) NOT NULL,
   `seats` int(11) NOT NULL COMMENT 'The number of open seats',
   `hascomputers` tinyint(4) NOT NULL,
   `numcomputers` int(11) DEFAULT NULL COMMENT 'number of open computers given that hascomputers is true.',
@@ -69,8 +70,8 @@ CREATE TABLE `rooms` (
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`roomid`, `type`, `seats`, `hascomputers`, `numcomputers`, `comment`) VALUES
-('Raburn 210', 'Classroom', 25, 1, 25, NULL);
+INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`, `comment`) VALUES
+('Raburn 210', 'Classroom', 2, 25, 1, 25, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,6 +115,16 @@ ALTER TABLE `rooms`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
