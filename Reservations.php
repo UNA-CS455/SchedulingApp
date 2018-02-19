@@ -77,27 +77,27 @@
     </tr>
     <tr>
       <td>7:00AM</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td bgcolor="#00FFFF">Roden@una.edu[7:00AM - 10:00AM]</td>
+      <td bgcolor="#00FFFF"></td>
+      <td bgcolor="#00FFFF"></td>
     </tr>
     <tr>
       <td>8:00AM</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td bgcolor="#00FFFF"></td>
+      <td bgcolor="#00FFFF"></td>
+      <td bgcolor="#00FFFF"></td>
     </tr>
     <tr>
       <td>9:00AM</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td bgcolor="#00FFFF"></td>
+      <td bgcolor="#00FFFF"></td>
+      <td bgcolor="#00FFFF"></td>
     </tr>
     <tr>
       <td>10:00AM</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td bgcolor="#00FFFF"></td>
+      <td bgcolor="#00FFFF"></td>
+      <td bgcolor="#00FFFF"></td>
     </tr>
     <tr>
       <td>11:00AM</td>
@@ -113,19 +113,19 @@
     </tr>
     <tr>
       <td>1:00PM</td>
-      <td></td>
+      <td bgcolor = "#FF9393">Jenkins@una.edu[1:00PM - 3:00PM]</td>
       <td></td>
       <td></td>
     </tr>
     <tr>
       <td>2:00PM</td>
-      <td></td>
+      <td bgcolor = "#FF9393"></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
       <td>3:00PM</td>
-      <td></td>
+      <td bgcolor = "#FF9393"></td>
       <td></td>
       <td></td>
     </tr>
@@ -145,25 +145,25 @@
       <td>6:00PM</td>
       <td></td>
       <td></td>
-      <td></td>
+      <td bgcolor = "#93FFB9">Crabtree@una.edu[6:00PM - 9:00PM]</td>
     </tr>
     <tr>
       <td>7:00PM</td>
       <td></td>
       <td></td>
-      <td></td>
+      <td bgcolor = "#93FFB9"></td>
     </tr>
     <tr>
       <td>8:00PM</td>
       <td></td>
       <td></td>
-      <td></td>
+      <td bgcolor = "#93FFB9"></td>
     </tr>
     <tr>
       <td>9:00PM</td>
       <td></td>
       <td></td>
-      <td></td>
+      <td bgcolor = "#93FFB9"></td>
     </tr>
     <tr>
       <td>10:00PM</td>

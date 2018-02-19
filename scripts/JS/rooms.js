@@ -1,3 +1,4 @@
+
 var showrooms = false;
 
 var roomSelected = null;
@@ -51,6 +52,7 @@ function selectRoom(id){
 /*
 	A function whose purpose is to populate the agenda table with the user's
 	current reservations with a given email address.
+	Author: Derek Brown
 */
 function getAgendaReservations() {
 
@@ -61,21 +63,45 @@ function getAgendaReservations() {
 			var runString = "<h2>Your Active Reservations</h2>";
 			runString+= "<br><table id = 'agendaTable' >\n<th>Room</th><th>From</th><th>To</th><th>Details</th>\n";
 			for(var i = 0; i < reservation.length; i++){
-				runString += "<tr>\n";
+				runString += "<tr id=" + i + ">\n";
 				runString += "<td>" + reservation[i].roomnumber + "</td>";
 				runString += "<td>" + reservation[i].start + "</td>";
-				runString += "<td>" + reservation[i].end + "</td>";
-				runString += "<td><a href =" + "TODO" + ">Edit</a><br><a href =" + "TODO" + ">Remove</a></td>";
+				runString += "<td>"  + reservation[i].end + "</td>";
+				runString += "<td><a >Edit</a><br><a onclick=openConfirmDelete(this.parentElement.parentElement)>Remove</a></td>";
 				runString += "</tr>\n"; 
 			}
 			runString += "</table>";
 			document.getElementById("agenda").innerHTML += runString;
 		}
 	};
-	xmlhttp.open("GET", "res_user.php", true);
+
+	xmlhttp.open("GET", "scripts/PHP/res_user.php", true);
 	xmlhttp.send();
 
     
+}
+
+function openConfirmDelete(ele){
+	// first display the modal using display: block (by default should be none)
+	// set id of info tag to append this info below.
+	alert(ele.children[0].innerHTML + " " + ele.children[1].innerHTML + " " + ele.children[2].innerHTML);
+}
+
+loadCalendar();
+
+function loadCalendar(){
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("mainCalendar").innerHTML = this.responseText;
+		}
+	};
+
+	let temp = new Date();
+	console.error(temp.getMonth() + " " + temp.getFullYear());
+
+	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + temp.getMonth() + "&year=" + temp.getFullYear(), true);
+	xmlhttp.send();
 }
 
 function typeChanged(id){
@@ -155,4 +181,15 @@ function compChanged(id){
 		xhttp.send();
 	}
 	
+}
+
+function calendarNavi(month, year){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("mainCalendar").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + month + "&year=" + year, true);
+	xhttp.send();
 }

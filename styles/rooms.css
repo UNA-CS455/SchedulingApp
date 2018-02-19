@@ -172,11 +172,11 @@ tbody{
 
 #agenda{
 	text-align: center;
-	z-index:4;
-	border: 2px solid black;
-	height: 100%;
-	width: 25%;
-
+    z-index: 4;
+    border: 2px solid black;
+    height: 100%;
+    width: 22%;
+    left: 7%;
 
 }
 
@@ -219,8 +219,15 @@ tbody{
 
 
 #master-content{
-	z-index:4;
-	width:95%;
-	height:70%;
-	top:22%;
+	    z-index: 4;
+    width: 95%;
+    height: 75%;
+    top: 22%;
+}
+
+#mainCalendar{
+	    right: 2%;
+    top: 0%;
+    width: 64%;
+    height: 100%;
 }
