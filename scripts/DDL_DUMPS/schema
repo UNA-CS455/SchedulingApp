@@ -60,3 +60,14 @@ email | firstname | lastname | classification | permissions
 
 email is the PRIMARY KEY, since it is the "username" of this system and there cannot be two individuals
 with the same email in the system.
+
+-------------------------------------------------------------------------------------------------------
+favorites
+-------------------------------------------------------------------------------------------------------
+email | roomid | 
+-------------------------------------------------------------------------------------------------------
+
+*email - email from portal; represents username of the favorites list that this entry belongs to.
+is a foreign key from the users table.
+*roomid - represents the name of the room in the favorites list. Is a foreign key.
+email and roomid represent the primary key for the favorites table.
