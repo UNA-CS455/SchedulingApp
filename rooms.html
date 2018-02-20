@@ -1,11 +1,12 @@
 <html>
 	<head><link rel="stylesheet" href="styles/rooms.css">
 		<link rel="stylesheet" href="styles/calendar.css">
+		<link rel="stylesheet" href="styles/Reservation.css">
 		<title></title>
 	</head>
 	<body onload="getAgendaReservations()">  	
 	<script src="scripts/JS/rooms.js"></script>
-		<img src="images/dropdown.png" id="roomSelect" onclick="toggleRoomView()"></img>
+		<img src="images/down_arrow.png" id="roomSelect" onclick="toggleRoomView()"></img>
 		<div id="banner">
 			<img src="images/una.png" id="logo">
 			</div>
@@ -46,6 +47,15 @@
 		</div>
 
 
+		<div id="createRes">
+		</div>
+		<div id="editRes">
+		</div>
+		<div id="deleteRes">
+			<h3>Are you sure you want to delete reservation:</h3><br><br><br><br>
+			<button id="yesDelete" onclick="deleteClicked(this.id)">Yes</button>
+			<button id="noDelete" onclick="deleteClicked(this.id)">No</button>
+		</div>
 
 		<div id="master-content">
 			<div id="agenda">

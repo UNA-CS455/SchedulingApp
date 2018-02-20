@@ -10,7 +10,7 @@ class Calendar {
     }
      
     /********************* PROPERTY ********************/  
-    private $dayLabels = array("MON","TUE","WED","THU","FRI","SAT","SUN");
+    private $dayLabels = array("SUN", "MON","TUE","WED","THU","FRI","SAT",);
      
     private $currentYear=0;
      
@@ -80,7 +80,7 @@ class Calendar {
                                      
                                     //Create days in a week
                                     for($j=1;$j<=7;$j++){
-                                        $content.=$this->_showDay($i*7+$j);
+                                        $content.=$this->_showDay($i*7+$j - 1);
                                     }
                                 }
                                  
@@ -127,7 +127,7 @@ class Calendar {
         }
              
          
-        return '<li id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
+        return '<li onclick="openCreateRes(this.id)" id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
                 ($cellContent==NULL?'mask':'').'">'.$cellContent.'</li>';
     }
      

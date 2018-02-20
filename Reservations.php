@@ -5,16 +5,6 @@
     //$month = $_POST['month'];
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-
-<link rel="stylesheet" type="text/css" href="/styles/Reservation.css">
-
-<title>UNA Scheduling app</title>
-</head>
-<body>
-
 <div class="dayview">
 
 </div>
@@ -179,5 +169,3 @@
     </tr>
   </table>
 </div>
-</body>
-</html>
