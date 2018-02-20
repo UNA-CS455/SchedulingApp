@@ -30,13 +30,13 @@ class Calendar {
     * print out the calendar
     */
     public function show() {
-		$startYear = date('Y');
+		$startYear = date('y');
         $year=$startYear;
          
-        $startMonth = date("M");
+        $startMonth = date("m");
 		$month = $startMonth;
 		
-		$startDay = date("j");
+		$startDay = date("D");
 		$day = $startDay;
          
         if(isset($_GET['year'])){
@@ -55,13 +55,15 @@ class Calendar {
          
         }else if(NULL==$month){
  
-            $month = date("m",time());
+            $month = date("M");
          
         }                  
          
-        $this->currentYear=$year;
+        $this->currentYear=intval($year);
          
-        $this->currentMonth=$month;
+        $this->currentMonth=intval($month);
+		
+		$this->currentDay=intval($day);
          
         $this->daysInMonth=$this->_daysInMonth($month,$year);  
          
@@ -197,6 +199,10 @@ class Calendar {
             $numOfweeks++;
          
         }
+
+		if ($monthStartDay == 7){
+			$numOfweeks--;
+		}
          
         return $numOfweeks;
     }

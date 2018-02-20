@@ -208,7 +208,7 @@ function loadCalendar(){
 	let temp = new Date();
 	console.error(temp.getMonth() + " " + temp.getFullYear());
 
-	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + temp.getMonth() + "&year=" + temp.getFullYear(), true);
+	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php", true);
 	xmlhttp.send();
 }
 
