@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ORS</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="frontEnd.css">
+</head>
+
+<body>
+  <div id="page-wrap">
+  <div id="contact-area">
+	<h1>Room Scheduler</h1>
+	<h2>Pick a day</h2><br>
+
+  <form method="POST" action="/scripts/PHP/frontEnd.php">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  	<script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
+  	<script>
+  	webshims.setOptions('forms-ext', {types: 'date'});
+  	webshims.polyfill('forms forms-ext');
+  	$.webshims.formcfg = {
+  	en: {
+  		dFormat: '-',
+  		dateSigns: '-',
+  		patterns: {
+  			d: "yy-mm-dd"
+  		}
+  	}
+  	};
+  	</script>
+  	<input id="date" type="date" name="date" placeholder="2018/01/26" required/>
+
+  	<br><br>
+
+  	<h2>Pick a room</h2><br>
+
+      <select name="room">
+        <option value="room1">Room 1</option>
+        <option value="room2">Room 2</option>
+        <option value="room3">Room 3</option>
+        <option value="room4">Room 4</option>
+      </select>
+
+      <br>
+
+      <input type="submit" name="submit" value="Submit" class="submit-button"/>
+    </form>
+
+    <!-- Earl and Adrianne select method -->
+    <form method="POST" action="/scripts/PHP/reservedrooms.php">
+      <input type="submit" value="test SELECT">
+    </form>
+
+  <div style="clear: both;"> </div>
+  </div>
+  </div>
+</body>
+</html>

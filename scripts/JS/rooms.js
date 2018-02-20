@@ -189,7 +189,7 @@ function openCreateRes(id){
 			document.getElementById("createRes").innerHTML = this.responseText;
 		}
 	};
-	xhttp.open("POST", "Reservations.php", true);
+	xhttp.open("POST", "scripts/PHP/Reservations.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("year=" + year + "&month=" + month + "&day=" + day);
 }
