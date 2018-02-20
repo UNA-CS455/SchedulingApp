@@ -89,3 +89,7 @@
     height: 6%;
     right: 9%;
 }
+
+#createRes textarea{
+	resize: none;
+}

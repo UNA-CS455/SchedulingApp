@@ -158,7 +158,7 @@ function openConfirmDelete(ele){
 	lastDeleteClicked = ele;
 	document.getElementById('deleteRes').style.display = "inline";
 	document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
-	document.getElementById('deleteRes').innerHTML = "<div id='delview'></div><h2>Are you sure you want to delete reservation:</h2><br><br><br><button id='yesDelete' onclick='deleteClicked(this.id)'>Yes</button><button id='noDelete' onclick='deleteClicked(this.id)'>No</button>";
+	document.getElementById('deleteRes').innerHTML = "<div id='delview'></div><br><br><h2>Are you sure you want to delete reservation:</h2><br><br><br><button id='yesDelete' onclick='deleteClicked(this.id)'>Yes</button><button id='noDelete' onclick='deleteClicked(this.id)'>No</button>";
 	document.getElementById('deleteRes').innerHTML += "<h3>" + ele.children[0].innerHTML + "</h2>";
 	document.getElementById('deleteRes').innerHTML += "<h3>From:" + ele.children[1].innerHTML + "</h2>";
 	document.getElementById('deleteRes').innerHTML += "<h3>To:" + ele.children[2].innerHTML + "</h2>";
