@@ -75,7 +75,7 @@ function getAgendaReservations() {
 		}
 	};
 
-	xmlhttp.open("GET", "scripts/PHP/res_user.php", true);
+	xmlhttp.open("GET", "./scripts/PHP/res_user.php", true);
 	xmlhttp.send();
 
     
