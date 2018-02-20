@@ -12,48 +12,46 @@
 <div class="makeReservation">
   <div class="test">
   <h1>Make Reservation</h1>
-  <form method="POST" action="/scripts/PHP/CreateReservation.php">
     Reserving email*:
-    <input type="text" name="owneremail"><br>
+    <input type="text" id="owneremail"><br>
 
     <p>Duration*:</p>
-    Start time:
-    <input type="text" name="startHour" style="width: 48px">
-    <input type="text" name="startMinute" style="width: 48px">
+    Start time:<br>
+    <input type="text" id="startHour" style="width: 48px">
+    <input type="text" id="startMinute" style="width: 48px">
     <select>
     <option value="startAM">AM</option>
     <option value="startPM">PM</option>
-    <input id="date" type="date" name="date" placeholder="2018/01/26" required/><br>
-  </select>
+    <input type="date" id="startDate" placeholder="2018/01/26" required/><br>
+  </select><br>
 
-    End time:
-    <input type="text" name="endHour" style="width: 48px">
-    <input type="text" name="endMinute" style="width: 48px">
+    End time:<br>
+    <input type="text" id="endHour" style="width: 48px">
+    <input type="text" id="endMinute" style="width: 48px">
     <select>
     <option value="endAM">AM</option>
     <option value="endPM">PM</option>
     </select>
-    <input id="date" type="date" name="date" placeholder="2018/01/26" required/><br>
-
+    <input type="date" id="endDate" placeholder="2018/01/26" required/><br>
+	<br>
     Recurring:
     <select>
     <option value="Once">Just Once</option>
     <option value="Weekly">Weekly</option>
     <option value="Monthly">Monthly</option>
-  </select><br>
+  </select><br><br>
 
-    <input type="checkbox" name="allowshare" value="true">Allow room sharing<br>
+    <input type="checkbox" id="allowshare" value="true">Allow room sharing<br><br>
 
     Expected number of seats needed:
-    <input type="text" name="numberOfSeats" style="width: 48px"><br>
+    <input type="text" id="numberOfSeats" style="width: 48px"><br><br>
 
     <!-- add css for this boi -->
     Comments<br>
-    <textarea rows="10" cols="50" name="comment">
-    </textarea><br>
+    <textarea rows="10" cols="50" id="comment">
+    </textarea><br><br><br><br><br><br><br><br><br><br>
 
-    <button type="submit" value="Submit">Make reservation</button>
-  </form>
+    <button id="submitMakeRes">Make reservation</button>
 </div>
 </div>
 
