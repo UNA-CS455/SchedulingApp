@@ -300,6 +300,47 @@ function compChanged(id){
 	
 }
 
+function createClicked(){
+	// sanity checks first.
+	var email = document.getElementById("owneremail").value;
+	var startHour = document.getElementById("startHour").value;
+	var startMin = document.getElementById("startMinute").value;
+	var endHour = document.getElementById("endHour").value;
+	var endMin = document.getElementById("endMinute").value;
+	var startDate = document.getElementById("startdate").value;
+	var endDate = document.getElementById("enddate").value;
+	var sharing = document.getElementById("allowshare").value;
+	var numSeats = document.getElementById("numberOfSeats").value;
+	var comment = document.getElementById("comment").value;
+	var start = document.getElementById("start");
+	start = start[start.selectedIndex].value;
+	var end = document.getElementById("end");
+	end = end[end.selectedIndex].value;
+	var occur = document.getElementById("occur");
+	occur = occur[occur.selectedIndex].value;
+	// ajax call to create script.
+
+	console.log('here');
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById('responseText').innerHTML = this.responseText;
+			if (this.responseText == "Reservation made successfully"){
+				document.getElementById('responseText').style.color = "green";
+			}
+			else{
+				document.getElementById('responseText').style.color = "red";
+			}
+			
+		}
+		getAgendaReservations();
+	};
+	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&startdate=" + startDate + "&enddate=" + endDate + "&endhour=" + endHour + "&endminute=" + endMin + "&start=" + start + "&end=" + end + "&occur=" + occur + "&comment=" + comment);
+}
+
 function calendarNavi(month, year){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
