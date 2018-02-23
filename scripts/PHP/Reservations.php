@@ -5,6 +5,16 @@
     //$month = $_POST['month'];
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="/styles/Reservation.css">
+
+<title>UNA Scheduling app</title>
+</head>
+<body>
+
 <div class="dayview">
 
 </div>
@@ -13,35 +23,35 @@
   <div class="test">
   <h1>Make Reservation</h1>
     Reserving email*:
-    <input type="text" id="owneremail"><br>
+    <input type="text" id="owneremail" required><br>
 
     <p>Duration*:</p>
-    Start time:<br>
-    <input type="text" id="startHour" style="width: 48px">
-    <input type="text" id="startMinute" style="width: 48px">
-    <select>
-    <option value="startAM">AM</option>
-    <option value="startPM">PM</option>
-    <input type="date" id="startDate" placeholder="2018/01/26" required/><br>
-  </select><br>
+    Start time:
+    <input type="text" id="startHour" style="width: 48px" required>
+    <input type="text" id="startMinute" style="width: 48px" required>
+    <select id="start">
+    <option value="AM">AM</option>
+    <option value="PM">PM</option>
+    
+  </select><input type="date" id="startdate" placeholder="2018/01/26" required/><br><br>
 
-    End time:<br>
-    <input type="text" id="endHour" style="width: 48px">
-    <input type="text" id="endMinute" style="width: 48px">
-    <select>
-    <option value="endAM">AM</option>
-    <option value="endPM">PM</option>
+    End time:
+    <input type="text" id="endHour" style="width: 48px" required>
+    <input type="text" id="endMinute" style="width: 48px" required>
+    <select id="end">
+    <option value="AM">AM</option>
+    <option value="PM">PM</option>
     </select>
-    <input type="date" id="endDate" placeholder="2018/01/26" required/><br>
-	<br>
+    <input type="date" id="enddate" placeholder="2018/01/26" required/><br><br>
+
     Recurring:
-    <select>
+    <select id="occur">
     <option value="Once">Just Once</option>
     <option value="Weekly">Weekly</option>
     <option value="Monthly">Monthly</option>
   </select><br><br>
 
-    <input type="checkbox" id="allowshare" value="true">Allow room sharing<br><br>
+    <input type="checkbox" id="allowshare" value="1">Allow room sharing<br><br>
 
     Expected number of seats needed:
     <input type="text" id="numberOfSeats" style="width: 48px"><br><br>
@@ -49,9 +59,10 @@
     <!-- add css for this boi -->
     Comments<br>
     <textarea rows="10" cols="50" id="comment">
-    </textarea><br><br><br><br><br><br><br><br><br><br>
+    </textarea><br><br><br><br><br><br><br><br><br>
 
-    <button id="submitMakeRes">Make reservation</button>
+    <button onclick="createClicked()">Make reservation</button><br><br>
+	<font id="responseText"></font>
 </div>
 </div>
 
@@ -167,3 +178,5 @@
     </tr>
   </table>
 </div>
+</body>
+</html>
