@@ -1,107 +1,86 @@
 <?php session_start();
 
-/*
-Name: Create Reservation Script
-Description: Script to perform the create CRUD operation for new reservations
-	into the reservation table of the database.
-	Requires POST from the previous page sending data to be inserted:
-	owneremail - varchar(100) that represents the email of the person who wants
-				the reservation.
-	roomnumber - varchar(100) that represents the name of the room.
-	start - string representing the start time of the reservation in proper sql 
-			datetime format: YYYY-MM-DD HH:MM:SS
-	end - string representing the end time of the reservation in proper sql 
-			datetime format: YYYY-MM-DD HH:MM:SS
-	allowshare - a checkbox that will send a value of 1 if selected
-	headcount - an integer
-	comment - a varchar(500) for additional comments
-	res_email - the email of the individual actually making the reservation.
-	TODO: take res_email from the email of the currently logged in user. !!!!!!!!!!!!!!!!!!!!!!!!!!!
-Authors: Luke Jennings, Jonathan Brazier, Kyle Gibson
-
-
-*/
-
-   // if (!isset($_SESSION['username'])) {
-     //   header("location:index.php");
-        // Make sure that code below does not get executed when we redirect.
-    //    exit;
-    
-//if(isset($_POST['create_reservation'])) //if make reservation clicked
-{
-	displayReservationForm();
-
-	//if (isset($_POST['reserve'])) //if reserve clicked
-	{
-		processReservation();
+	if (!isset($_SESSION['username'])){
+			$_SESSION['username'] = jcrabtree@una.edu
 	}
+	//$_SESSION['logged_in_useremail']
+    //$roomnumber = $_POST['roomnumber'];
+/*	displayReservationForm();
 
-}
+	if (isset($_POST['reserve'])) //if reserve clicked
+	{
 
+		processReservation();
+	}*/
+	processReservation();
 
-//-------------------------------------------------------------------------------------------------------------
-//
-// Function name: displayReservationForm
-// Description: This function displays the HTML web page form for creating a reservation.
-// Input: N/A
-// Output: Displays an HTML web page.
-// Return: N/A
-// 
-//-------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//Function to display reservation form once a day is clicked in index.html
+//-----------------------------------------------------------------------------
 function displayReservationForm()
 {
- {
-   echo <<<HTMLBLOCK
-	<form method = "POST" action = "CreateReservation.php">
-	<table>
-	  <tr>
-		<th><label for = "res_email"> Reservation Email </label></th>
-		<th><label for = "owneremail"> Owner Email </label></th>
-		<th><label for = "roomnumber"> Room Number </label></th>
-		<th><label for = "start"> Start Time </label></th>
-		<th><label for = "end"> End Time </label></th>
-		<th><label for = "repeat_id"> Reservation Email </label></th>
-		<th><label for = "allowshare"> Allow Share </label></th>
-		<th><label for = "headcount"> Head Count </label></th>
-		<th><label for = "comment"> Comment </label></th>
-	  </tr>
 
-	  <tr>
-		<td><input type = "email" id = "res_email" name = "res_email" maxlength = "50"></td>
-		<td><input type = "email" id = "owneremail" name = "owneremail" maxlength = "50"></td>
-		<td><input type = "text" id = "roomnumber" name = "roomnumber" maxlength = "50"></td>
-		<td><input type = "number" id = "start" name = "start" ></td>
-		<td><input type = "number" id = "end" name = "end"></td>
-		<td>
-		  <select id = "repeat_id" name = "repeat_id" placeholder = "Repeat">
-			<option value = "monday"> Monday </option>
-			<option value = "tuesday"> Tuesday </option>
-			<option value = "wednesday"> Wednesday </option>
-			<option value = "thursday"> Thursday </option>
-			<option value = "friday"> Friday </option>
-		  </select>
-		</td>
-		<td><input type = "checkbox" id = "allowshare" name = "allowshare" value = 1> Allow </td>
-		<td><input type = "number" id = "headcount" name = "headcount" maxlength = "2"></td>
-		<td><input type = "text" id = "comment" name = "comment" maxlength = "500"></td>
-		<br>
-		<td style = "float:right"><input type = "submit" id="reserve" name="reserve" value = "Save Reservation"></td>
-	 </tr>
-	</table>
-	</form>
-HTMLBLOCK;
-	}
+/*echo <<<HTMLBLOCK
+<!DOCTYPE html>
+<html>
+<head>
+<title>UNA Scheduling app</title>
+</head>
+<body>
+
+<h1>Make Reservation</h1>
+<form method="POST" action="CreateReservation.php">
+  Reserving email*:
+  <input type="email" name="owneremail"><br>
+
+  Room Number:
+  <input type="text" name="roomnumber"><br>
+
+  <p>Duration*:</p>
+  Start time:
+  <input type="text" name="starthour" style="width: 48px">
+  <input type="text" name="startminute" style="width: 48px">
+  <select name="start">
+  <option value="AM">AM</option>
+  <option value="PM">PM</option>
+  </select>
+  <input id="date" type="date" name="startdate" placeholder="2018/01/26" required/><br>
+
+  End time:
+  <input type="text" name="endhour" style="width: 48px">
+  <input type="text" name="endminute" style="width: 48px">
+  <select name="end">
+  <option value="AM">AM</option>
+  <option value="PM">PM</option>
+  </select>
+  <input id="date" type="date" name="enddate" placeholder="2018/01/26" required/><br>
+
+  Recurring:
+  <select name="occur">
+  <option value="Once">Just Once</option>
+  <option value="Weekly">Weekly</option>
+  <option value="Monthly">Monthly</option>
+</select><br>
+
+  <input type="checkbox" name="allowshare" value="1">Allow room sharing<br>
+
+  Expected number of seats needed:
+  <input type="text" name="numberOfSeats" style="width: 48px"><br>
+
+  Comments<br>
+  <input type = "text" textarea rows="10" cols="50" name="comment">
+  </textarea><br>
+
+  <button type="submit" name="reserve" value="Submit">Make reservation</button>
+</form>
+
+</body>
+</html>
+HTMLBLOCK;*/
 }
+
 //-------------------------------------------------------------------------------------------------------------
-//
-// Function name: processReservation
-// Description: This function processes the input received from the HTML form for the
-// create reservation web page and adds the reservation to the database.
-// Input: Data from create reservation page including: room number, owner email, reservation email,
-// allowed share, start and end times, repeat id values, and a comment.
-// Output: Creates a new reservation using the data from the HTML form.
-// Return: N/A
-// 
+//Function to process the reservation into the database once reserve is clicked
 //-------------------------------------------------------------------------------------------------------------
 function processReservation()
 {
@@ -110,54 +89,78 @@ $username = "root";
 $password = "";
 $dbname = "cs455";
 
+//roomnumber should come from index page....?????
 $roomnumber = ($_POST['roomnumber']);
-$roomnumber = trim($roomnumber);
-//$roomnumber = filter_var($roomnumber, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
 
+//email that owns the reservation
 $owneremail = ($_POST['owneremail']);
 $owneremail = trim($owneremail);
-//$owneremail = filter_var($owneremail, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
+$owneremail = filter_var($owneremail, FILTER_SANITIZE_EMAIL);
+//$owneremail = filter_var($owneremail, FILTER_VALIDATE_EMAIL, array("options"=>array("regexp"=>"/^[a-zA-Z \.\-!,]{1,64}$/")));
 
-if(isset($_POST['allowshare']))
-	$allowshare = ($_POST['allowshare']);
-else
-	$allowshare = 0;
+//checkbox type
+$allowshare=($_POST['allowshare']);
 
-$headcount = ($_POST['headcount']);
-$headcount = trim($headcount);
-//$headcount = filter_var($headcount, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
 
+//headcount
+$numberOfSeats = ($_POST['numberOfSeats']);
+$numberOfSeats = trim($numberOfSeats);
+$numberOfSeats = filter_var($numberOfSeats, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
+
+//Hour reservation starts
+$starthour = ($_POST['starthour']);
+$starthour = trim($starthour);
+$starthour = filter_var($starthour, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
+
+//minute reservation starts
+$startminute = ($_POST['startminute']);
+$startminute = trim($startminute);
+$startminute = filter_var($startminute, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
+
+//variable for start date of reservation
+$startdate = ($_POST['startdate']);
+
+//hour reservation ends
+$endhour = ($_POST['endhour']);
+$endhour = trim($endhour);
+$endhour = filter_var($endhour, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
+
+//minute reservation ends
+$endminute = ($_POST['endminute']);
+$endminute = trim($endminute);
+$endminute = filter_var($endminute, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
+
+//variable for end date of reservation
+$enddate = ($_POST['enddate']);
+
+//dropdown menu for start AM or PM select option
 $start = ($_POST['start']);
-$start = trim($start);
-//$start = filter_var($start, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
 
+//dropdown menu for end AM or PM select option
 $end = ($_POST['end']);
-$end = trim($end);
-//$end = filter_var($end, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
 
+//dropdown menu for how often the reservation should occur
+$occur = ($_POST['occur']);
+
+//comment variable
 $comment = ($_POST['comment']);
 $comment = trim($comment);
-//$comment = filter_var($comment, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
+$comment = filter_var($comment, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z''-'\s]{1,250}$/")));
 
-//$id = ($_POST['id']);
-//$id = trim($id);
-//$id = filter_var($id, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
+//submit button variable
+//probably don't need this?
+//$reserve = ($_POST['reserve']);
 
-$repeat_id = ($_REQUEST['repeat_id']);
-$repeat_id = trim($repeat_id);
-//$repeat_id = filter_var($repeat_id, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
-
-$res_email = ($_REQUEST['res_email']);
-$res_email = trim($res_email);
-//$res_email = filter_var($res_email, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^   $/")));
-
+//connect to database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+//if connection to database fails, die
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 	}
 
-$sql = "INSERT into reservations (roomnumber, owneremail, allowshare, headcount, start, end, comment, repeat_id, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$start', '$end', '$comment', '$repeat_id', '$res_email')";
+//if connection is success, insert data into database and echo to user result
+$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, numberOfSeats, starthour, startminute, startdate, endhour, endminute, enddate, start, end, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$starthour', '$startminute', '$startdate', '$endhour', '$endminute', '$enddate', '$start', '$end', '$occur', '$comment', '$_SESSION['username']')";
 
 	if ($conn->query($sql) === TRUE) {
                 echo "Reservation made successfully";
@@ -167,8 +170,7 @@ $sql = "INSERT into reservations (roomnumber, owneremail, allowshare, headcount,
 
             $conn->close();
 
-	//TODO Insert session variables that sends the data to mail.php.
-	// header("location:mail.php")
+
 
 }
 ?>

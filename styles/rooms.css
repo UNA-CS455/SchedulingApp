@@ -244,7 +244,7 @@ html, body{
     height: 100%;
     width: 22%;
     left: 7%;
-
+	overflow-y: scroll;
 }
 
 #agendaTable{
