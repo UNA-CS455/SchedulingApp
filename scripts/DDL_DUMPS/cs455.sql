@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2018 at 07:21 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Feb 23, 2018 at 08:13 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,21 +34,20 @@ CREATE TABLE `reservations` (
   `roomnumber` varchar(100) NOT NULL,
   `owneremail` varchar(100) NOT NULL,
   `allowshare` tinyint(1) NOT NULL,
-  `headcount` int(11) DEFAULT NULL,
-  `start` datetime NOT NULL,
-  `end` datetime NOT NULL,
+  `headcount` text,
+  `starthour` text NOT NULL,
+  `startminute` text NOT NULL,
+  `startdate` date NOT NULL,
+  `endhour` text NOT NULL,
+  `endminute` text NOT NULL,
+  `enddate` date NOT NULL,
+  `start` varchar(3) NOT NULL,
+  `end` varchar(3) NOT NULL,
+  `occur` varchar(11) NOT NULL,
   `comment` varchar(500) DEFAULT NULL,
   `id` int(11) NOT NULL,
-  `repeat_id` int(11) DEFAULT NULL,
-  `res_email` varchar(100) NOT NULL
+  `res_email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `reservations`
---
-
-INSERT INTO `reservations` (`roomnumber`, `owneremail`, `allowshare`, `headcount`, `start`, `end`, `comment`, `id`, `repeat_id`, `res_email`) VALUES
-('Raburn 210', 'dbrown4@una.edu', 1, 10, '2018-01-31 12:00:00', '2018-01-30 15:30:00', 'Test', 1, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -71,7 +70,15 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`, `comment`) VALUES
-('Raburn 210', 'Classroom', 2, 25, 1, 25, NULL);
+('Keller 122', 'Classroom', 1, 40, 0, NULL, NULL),
+('Keller 133', 'Classroom', 1, 64, 0, NULL, NULL),
+('Keller 220', 'Classroom', 2, 36, 0, NULL, NULL),
+('Keller 222', 'Classroom', 2, 40, 0, NULL, NULL),
+('Keller 227', 'Classroom', 2, 32, 0, NULL, NULL),
+('Keller 320', 'Classroom', 3, 36, 0, NULL, NULL),
+('Keller 322', 'Classroom', 3, 40, 0, NULL, NULL),
+('Keller 327', 'Classroom', 3, 32, 0, NULL, NULL),
+('Keller 333', 'Classroom', 3, 48, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -124,8 +131,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
