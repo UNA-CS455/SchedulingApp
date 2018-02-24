@@ -1,7 +1,7 @@
 <?php session_start();
 
 	if (!isset($_SESSION['username'])){
-			$_SESSION['username'] = jcrabtree@una.edu
+			$_SESSION['username'] = "jcrabtree@una.edu";
 	}
 	//$_SESSION['logged_in_useremail']
     //$roomnumber = $_POST['roomnumber'];
@@ -12,6 +12,7 @@
 
 		processReservation();
 	}*/
+
 	processReservation();
 
 //-----------------------------------------------------------------------------
@@ -84,6 +85,8 @@ HTMLBLOCK;*/
 //-------------------------------------------------------------------------------------------------------------
 function processReservation()
 {
+$logged_in_user = $_SESSION['username'];
+	
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -160,7 +163,7 @@ if ($conn->connect_error) {
 	}
 
 //if connection is success, insert data into database and echo to user result
-$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, numberOfSeats, starthour, startminute, startdate, endhour, endminute, enddate, start, end, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$starthour', '$startminute', '$startdate', '$endhour', '$endminute', '$enddate', '$start', '$end', '$occur', '$comment', '$_SESSION['username']')";
+$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, starthour, startminute, startdate, endhour, endminute, enddate, start, end, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$starthour', '$startminute', '$startdate', '$endhour', '$endminute', '$enddate', '$start', '$end', '$occur', '$comment', '$logged_in_user')";
 
 	if ($conn->query($sql) === TRUE) {
                 echo "Reservation made successfully";
