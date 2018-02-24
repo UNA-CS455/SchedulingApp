@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------------------------------
 Reservations
 -------------------------------------------------------------------------------------------------------
-roomid | owneremail | allowshare | headcount |  start  |  end  | comment |  id  |  repeat_id | res_email
+roomid | owneremail | allowshare | headcount |  startdate  |  enddate  |  starttime  |  endtime  | comment |  id  |  repeat_id | res_email
 -------------------------------------------------------------------------------------------------------
 *roomid - the name of the room as a varchar. ie "Raburn 210" or "Conference Room"
 *owneremail - the email of the individual who requested this reservation be placed.
@@ -16,8 +16,10 @@ It is to be checked to ensure that someone else attempting to share a room (prov
 can know how many students will be expected in the room during that time. We can use this to deny others from
 booking if their headcount on their reservation they are attempting to make plus this record's headcount field
 is greater than the max seats available as defined in the rooms table.
-*start - the staring time, a DATETIME variable.
-*end - the ending time, a DATETIME variable.
+*startdate - the staring date, a DATE variable.
+*enddate - the ending date, a DATE variable.
+*starttime - the staring time, a TIME variable stored in 24-hour format.
+*endtime - the ending time, a TIME variable stored in 24-hour format.
 *comment - a max 500 character field that is used for any additional comments the individual making the
 reservation may have.
 *id - an autoincrementing id field that we may need later.

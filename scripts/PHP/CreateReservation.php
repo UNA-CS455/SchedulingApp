@@ -163,7 +163,7 @@ if ($conn->connect_error) {
 	}
 
 //if connection is success, insert data into database and echo to user result
-$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, starthour, startminute, startdate, endhour, endminute, enddate, start, end, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$starthour', '$startminute', '$startdate', '$endhour', '$endminute', '$enddate', '$start', '$end', '$occur', '$comment', '$logged_in_user')";
+$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$startdate', '$enddate', '$starthour:$startminute $start', '$endhour:$endminute $end', '$occur', '$comment', '$logged_in_user')";
 
 	if ($conn->query($sql) === TRUE) {
                 echo "Reservation made successfully";

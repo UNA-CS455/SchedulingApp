@@ -68,22 +68,22 @@ function getAgendaReservations() {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-
+			//console.error(this.responseText);
 			var reservation = JSON.parse(this.responseText);
 			
-			var runString = "<h2 style='text-align:center' >Agenda</h2><br><hr><br><h2>Your Active Reservations</h2>";
+			var runString = ""//"<h2 style='text-align:center' >Agenda</h2><br><hr><br><h2>Your Active Reservations</h2>";
 			runString+= "<br><table id = 'agendaTable' >\n<th>Room</th><th>From</th><th>To</th><th>Details</th>\n";
 			for(var i = 0; i < reservation.length; i++){
 
 				runString += "<tr id=" + i + ">\n";
 				runString += "<td id=" + reservation[i].id + ">" + reservation[i].roomnumber + "</td>";
-				runString += "<td>" + reservation[i].startdate + "<br>" + reservation[i].starthour + ":" + reservation[i].startminute +reservation[i].start + "</td>";
-				runString += "<td>" + reservation[i].enddate + "<br>" + reservation[i].endhour + ":" + reservation[i].endminute + reservation[i].end +"</td>";
+				runString += "<td>" + reservation[i].startdate + "<br>" + reservation[i].starttime +reservation[i].start + "</td>";
+				runString += "<td>" + reservation[i].enddate + "<br>" + reservation[i].endtime + reservation[i].end +"</td>";
 				runString += "<td><a >Edit</a><br><a style='color: blue' onclick=openConfirmDelete(this.parentElement.parentElement)><u>Remove</u></a></td>";
 				runString += "</tr>\n"; 
 			}
 			runString += "</table>";
-			document.getElementById("agenda").innerHTML = runString;
+			document.getElementById("agendaReservations").innerHTML = runString;
 		}
 	};
 
@@ -105,7 +105,6 @@ function handleClick(e){
 		if (!document.getElementById('deleteRes').contains(e.target)){
 			document.getElementById('deleteRes').style.display = "none";
 			document.body.style.backgroundColor = "rgba(0,0,0,0)";
-			console.log('got here');
 			switchDelete = false;
 		}
 	}
@@ -126,9 +125,8 @@ function handleClick(e){
 }
 
 function deleteClicked(id, id2){
-console.error("balls-----=");
+
 	if (id == "yesDelete"){
-console.error("balls");
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
@@ -159,19 +157,16 @@ let lastDeleteClicked = null;
 function openConfirmDelete(ele){
 	// first display the modal using display: block (by default should be none)
 	// set id of info tag to append this info below.
-	console.error(ele);
-	console.error(ele.children[0].id);
+
 	lastDeleteClicked = ele;
 	document.getElementById('deleteRes').style.display = "inline";
 	document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
 	document.getElementById('deleteRes').innerHTML = "<div id='delview'></div><br><br><h2>Are you sure you want to delete reservation:</h2><br><br><br><button id='yesDelete' onclick='deleteClicked(this.id," + String(ele.children[0].id) + ")'>Yes</button><button id='noDelete' onclick='deleteClicked(this.id, " + String(ele.children[0].id) + ")'>No</button>";
-	console.error('got here');
-	console.error("deleteClicked(this.id, " + ele.children[0].id + ")");
 	document.getElementById('deleteRes').innerHTML += "<h3>" + ele.children[0].innerHTML + "</h2>";
 	document.getElementById('deleteRes').innerHTML += "<h3>From:" + ele.children[1].innerHTML + "</h2>";
 	document.getElementById('deleteRes').innerHTML += "<h3>To:" + ele.children[2].innerHTML + "</h2>";
 	//alert(ele.children[0].innerHTML + " " + ele.children[1].innerHTML + " " + ele.children[2].innerHTML);
-	console.error('end of f(x)');
+
 }
 
 
@@ -180,12 +175,8 @@ function openCreateRes(id){
 		return;
 	}
 	
-	let year = id.slice(3, 7);
-	console.log(year);
-	let month = id.slice(8, 10)[1];
-	console.log(month);
-	let day = id.slice(11, 13)[1];
-	console.log(day);
+	let date = id.substr(3);
+
 	
 	document.getElementById('createRes').style.display = "inline";
 	document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
@@ -200,7 +191,7 @@ function openCreateRes(id){
 	};
 	xhttp.open("POST", "scripts/PHP/Reservations.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("year=" + year + "&month=" + month + "&day=" + day);
+	xhttp.send("&date=" + date);
 }
 
 
@@ -215,7 +206,7 @@ function loadCalendar(){
 	};
 
 	let temp = new Date();
-	console.error(temp.getMonth() + " " + temp.getFullYear());
+	//console.error(temp.getMonth() + " " + temp.getFullYear());
 
 	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php", true);
 	xmlhttp.send();

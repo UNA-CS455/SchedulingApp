@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2018 at 08:13 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: Feb 24, 2018 at 10:54 PM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -35,19 +35,22 @@ CREATE TABLE `reservations` (
   `owneremail` varchar(100) NOT NULL,
   `allowshare` tinyint(1) NOT NULL,
   `headcount` text,
-  `starthour` text NOT NULL,
-  `startminute` text NOT NULL,
   `startdate` date NOT NULL,
-  `endhour` text NOT NULL,
-  `endminute` text NOT NULL,
   `enddate` date NOT NULL,
-  `start` varchar(3) NOT NULL,
-  `end` varchar(3) NOT NULL,
+  `starttime` time NOT NULL,
+  `endtime` time NOT NULL,
   `occur` varchar(11) NOT NULL,
   `comment` varchar(500) DEFAULT NULL,
   `id` int(11) NOT NULL,
   `res_email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reservations`
+--
+
+INSERT INTO `reservations` (`roomnumber`, `owneremail`, `allowshare`, `headcount`, `startdate`, `enddate`, `starttime`, `endtime`, `occur`, `comment`, `id`, `res_email`) VALUES
+('Keller 333', 'dbrown4@una.edu', 1, '', '2018-02-12', '2018-02-12', '15:00:00', '17:30:00', 'Once', 'hi', 48, 'jcrabtree@una.edu');
 
 -- --------------------------------------------------------
 
@@ -131,7 +134,8 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

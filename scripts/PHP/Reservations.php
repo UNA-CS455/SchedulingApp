@@ -1,8 +1,8 @@
 <?php session_start();
     //$_SESSION['logged_in_useremail'];
     //$roomnumber = $_POST['roomnumber'];
-    //$day = $_POST['day'];
-    //$month = $_POST['month'];
+    $date = $_POST['date'];
+
 ?>
 
 <!DOCTYPE html>
@@ -27,22 +27,23 @@
 
     <p>Duration*:</p>
     Start time:
-    <input type="text" id="startHour" style="width: 48px" required>
+    <input type="text" id="startHour" style="width: 48px" required>:
     <input type="text" id="startMinute" style="width: 48px" required>
     <select id="start">
     <option value="AM">AM</option>
     <option value="PM">PM</option>
-    
-  </select><input type="date" id="startdate" placeholder="2018/01/26" required/><br><br>
+	</select>
+	<br>
 
-    End time:
-    <input type="text" id="endHour" style="width: 48px" required>
+
+    End time:	
+    <input type="text" id="endHour" style="width: 48px" required>:
     <input type="text" id="endMinute" style="width: 48px" required>
     <select id="end">
     <option value="AM">AM</option>
     <option value="PM">PM</option>
     </select>
-    <input type="date" id="enddate" placeholder="2018/01/26" required/><br><br>
+	<br>
 
     Recurring:
     <select id="occur">
@@ -58,9 +59,10 @@
 
     <!-- add css for this boi -->
     Comments<br>
-    <textarea rows="10" cols="50" id="comment">
-    </textarea><br><br><br><br><br><br><br><br><br>
-
+    <textarea rows="10" cols="50" id="comment"></textarea><br><br><br><br><br><br><br><br><br>
+	<input type="hidden" id = "startdate" value = <?php echo "'$date'"; ?>>
+	<input type="hidden" id = "enddate" value = <?php echo "'$date'"; ?>>
+	
     <button onclick="createClicked()">Make reservation</button><br><br>
 	<font id="responseText"></font>
 </div>

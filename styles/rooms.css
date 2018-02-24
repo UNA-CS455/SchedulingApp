@@ -240,18 +240,37 @@ html, body{
 #agenda{
 	text-align: center;
     z-index: 4;
-    border: 2px solid black;
+    border: 6px solid #5F6062;
     height: 100%;
     width: 22%;
     left: 7%;
 	overflow-y: scroll;
 }
 
+#agendaReservations{
+	text-align: left;
+
+    height: 100%;
+    width: 100%;
+    left: 0;
+
+}
+
+#agenda-head{
+		text-align: left;
+
+    height: 50px;
+    width: 100%;
+    left: 0;
+	top:0;
+	background-color:#46166B;
+}
+
 #agendaTable{
 	z-index:4;
 	width:100%;
 	height:30%;
-
+	top:30px;
 }
 
 #agendaTable tbody{
@@ -279,7 +298,7 @@ html, body{
 		display: inline-flex;
 }
 #agendaTable th {
-		background-color: #4CAF50;
+		background-color: #5F6062;
 		color: white;
 }
 
