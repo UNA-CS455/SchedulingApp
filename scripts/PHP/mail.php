@@ -1,10 +1,24 @@
 <?php
-session_start();
+//session_start();
 
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "cs455";
+
+//PHP config
+ini_set('SMTP','mail.warehouse414.org');
+ini_set('smtp_port',26);
+ini_set('sendmail_from','reservations@warehouse414.org');
+ini_set('sendmail_path',"\"C:\xampp\php\phpMailer\sendmail\sendmail.exe\" -t");
+ini_set('error_logfile','error.log');
+ini_set('debug_logfile','debug.log'); 
+
+//mail config
+ini_set('smtp_server','mail.warehouse414.org');
+ini_set('smtp_port',26);
+ini_set('auth_username','reservations@warehouse414.org');
+ini_set('auth_password','RoarLions.2018');
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -83,8 +97,8 @@ $closemsg = "<br>If you think there has been error, please disregard this email 
 $msg = sprintf( $bodymsg . $tablemsg . $closemsg, 
          $firstname,
          $roomnumber,
-         $starthour . ":" . $startmin . $start, 
-         $starthour . ":" . $startmin . $end, 
+         $starthour . ":" . $startminute . $start, 
+         $starthour . ":" . $startminute . $end, 
          $occur, 
          $comment, 
          $owneremail, 
