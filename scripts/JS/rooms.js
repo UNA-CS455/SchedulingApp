@@ -358,7 +358,14 @@ function createClicked(){
 	var endMin = document.getElementById("endMinute").value;
 	var startDate = document.getElementById("startdate").value;
 	var endDate = document.getElementById("enddate").value;
-	var sharing = document.getElementById("allowshare").value;
+	var sharing = document.getElementById("allowshare").checked;
+	console.log(sharing);
+	if (sharing == false){
+		sharing = 0;
+	}
+	else{
+		sharing = 1;
+	}
 	var numSeats = document.getElementById("numberOfSeats").value;
 	var comment = document.getElementById("comment").value;
 	var start = document.getElementById("start");
@@ -367,29 +374,6 @@ function createClicked(){
 	end = end[end.selectedIndex].value;
 	start = start[start.selectedIndex].value;
 	occur = occur[occur.selectedIndex].value;
-
-	
-	
-	if (/^([1-9]|1[012])$/.test(startHour) && /^([1-9]|1[012])$/.test(endHour)){
-		// both are in range.
-	}
-	else{
-		// one isn't.
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please only enter times between 1-12!";
-		return;
-	}
-
-	if (start == "PM")
-	{
-		startHour = Number(startHour) + 12;
-	}
-
-	if (end == "PM")
-	{
-		endHour = Number(endHour) + 12;
-	}
-
 	if (email == ""){
 		document.getElementById('responseText').style.color = "red";
 		document.getElementById('responseText').innerHTML = "Please enter an email first!";
@@ -407,7 +391,6 @@ function createClicked(){
 		document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
 		return;
 	}
-
 	
 	if (/^\d+$/.test(startHour) && /^\d+$/.test(startMin)) {
         // Contain numbers only
@@ -428,7 +411,6 @@ function createClicked(){
 		document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
 		return;
     }
-
 	
 	if (document.getElementById('allowshare').checked == true && numSeats == ""){
 		document.getElementById('responseText').style.color = "red";
