@@ -9,14 +9,12 @@
 <html>
 <head>
 
-<link rel="stylesheet" type="text/css" href="/styles/Reservation.css">
-
 <title>UNA Scheduling app</title>
 </head>
 <body>
 
 <div class="dayview">
-
+	<font id="createLabel">08 March 2018 - Raburn 206</font>
 </div>
 
 <div class="makeReservation" id="createZone">
