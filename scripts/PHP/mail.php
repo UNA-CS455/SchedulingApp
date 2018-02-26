@@ -1,43 +1,24 @@
-/* 
-owneremail
-firstname
-starttime = dd/MM/yyyy hh:mm
-endtime = dd/MM/yyyy
-recur = true/false
-recur_str
-res_email
-share = true/false
-headcount
-*/
-
-
 <?php
 session_start();
-
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "cs455";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-
 // Get the firstname from the users database
-$sql = "SELECT firstname FROM users WHERE users.email ='" . $_SESSION['owneremail'] . "'";
+$sql = "SELECT firstname FROM users WHERE users.email ='" . $_POST['owneremail'] . "'";
 $result = $conn->query($sql);
-
 if($row = $result->fetch_assoc() && $result->num_rows > 0) {
 	$firstname = $row["firstname"];
 } else {
-    $firstname = " ";
+    $firstname = "";
 }
 $conn->close();
-
-
 
 $bodymsg = "<img src=\"YARSLOGO\"  alt=ScheduleConfirmation Made Easy border=0 > <br>" .
        "<table><tr><td><font face = 'Calibri' ><Center>YARS: a simple scheduler</center>" .
@@ -88,25 +69,25 @@ $tablemsg = <<<'EOT'
 EOT;
 $closemsg = "<br>If you think there has been error, please disregard this email or contact the system administrator. Do not reply to this email. You may change this reservation on the YARS system.<br>
 -YARS <br>";
-
-
 /* 
   Order of variables: 
   firstname, roomid, starttime, endtime, recurring, recur_str, res_email, share, headcount
 */  
-mail($_SESSION['owneremail'], "YARS CON", sprintf( $bodymsg . $tablemsg . $closemsg, 
+
+$msg = sprintf( $bodymsg . $tablemsg . $closemsg, 
          $firstname,
-         $_SESSION['roomid'],
-         $_SESSION['starttime'], 
-         $_SESSION['endtime'], 
-         $_SESSION['recur'], 
-         $_SESSION['recur_str'], 
-         $_SESSION['res_email'], 
-         $_SESSION['share'], 
-         $_SESSION['headcount']
-         ), "From: charlesetheredge@gmail.com");  
+         $roomnumber,
+         $starthour . ":" . $startmin . $start, 
+         $starthour . ":" . $startmin . $end, 
+         $occur, 
+         $comment, 
+         $owneremail, 
+         $allowshare, 
+         $numberOfSeats
+         );
+$msg = "<!DOCTYPE html><html>" . $msg . "<HTML>";
+echo $msg;
 
-
-
-
+mail($owneremail, "YARS CON", $msg, "From: reservations@warehouse414.org"); 
+ 
 ?>
