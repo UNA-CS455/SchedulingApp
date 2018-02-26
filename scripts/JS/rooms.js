@@ -40,10 +40,21 @@ function toggleRoomView()
 function selectRoom(id){
 	document.getElementById('selectedRoom').innerHTML = "<b>" + id + "</b>";
 	console.log(roomSelected);
-	if (roomSelected != null){
+	if (roomSelected == null){
+		document.getElementById('No Room Preference/All').style.backgroundColor = "white";
+	}
+	else{
 		document.getElementById(roomSelected).style.backgroundColor = "white";
 	}
-	roomSelected = id;
+	
+	if (id == "No Room Preference/All"){
+		roomSelected = null;
+	}
+	else{
+		roomSelected = id;
+	}
+	
+	
 	document.getElementById(id).style.backgroundColor = "gray";
 	showrooms = false;
 	document.getElementById('roomMenu').style.display = "none";
@@ -56,6 +67,7 @@ function selectRoom(id){
 	document.body.style.backgroundColor = "rgba(0,0,0,0)";
 
 	// HERE IS WHERE AJAX CALL TO MAIN CALENDAR GOES! updateCalendar()?
+	loadCalendar();
 }
 
 /*
@@ -208,7 +220,7 @@ function loadCalendar(){
 	let temp = new Date();
 	//console.error(temp.getMonth() + " " + temp.getFullYear());
 
-	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php", true);
+	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php?room=" + roomSelected, true);
 	xmlhttp.send();
 }
 
@@ -293,6 +305,13 @@ function compChanged(id){
 
 function createClicked(){
 	// sanity checks first.
+	if (roomSelected == null)
+	{
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please choose a room first (at the top)!";
+		return;
+	}
+	
 	var email = document.getElementById("owneremail").value;
 	var startHour = document.getElementById("startHour").value;
 	var startMin = document.getElementById("startMinute").value;
@@ -304,11 +323,54 @@ function createClicked(){
 	var numSeats = document.getElementById("numberOfSeats").value;
 	var comment = document.getElementById("comment").value;
 	var start = document.getElementById("start");
-	start = start[start.selectedIndex].value;
 	var end = document.getElementById("end");
-	end = end[end.selectedIndex].value;
 	var occur = document.getElementById("occur");
+	end = end[end.selectedIndex].value;
+	start = start[start.selectedIndex].value;
 	occur = occur[occur.selectedIndex].value;
+	if (email == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please enter an email first!";
+		return;
+	}
+	
+	if (startHour == "" || startMin == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please enter a full start time first!";
+		return;
+	}
+	
+	if (endHour == "" || endMin == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
+		return;
+	}
+	
+	if (/^\d+$/.test(startHour) && /^\d+$/.test(startMin)) {
+        // Contain numbers only
+    }
+	else {
+        // Contain other characters also
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please only enter numbers in start time boxes!";
+		return;
+    }
+	
+	if (/^\d+$/.test(endHour) && /^\d+$/.test(endMin)) {
+        // Contain numbers only
+    }
+	else {
+        // Contain other characters also
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
+		return;
+    }
+	
+	if (document.getElementById('allowshare').checked == true && numSeats == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please enter number of seats or do not share!";
+		return;
+	}
 	// ajax call to create script.
 
 	console.log('here');
@@ -323,7 +385,11 @@ function createClicked(){
 			else{
 				document.getElementById('responseText').style.color = "red";
 			}
-			
+			setTimeout(function(){
+				document.getElementById('createRes').style.display = "none";
+				document.body.style.backgroundColor = "rgba(0,0,0,0)";
+				switchCreate = false;
+			}, 1500);
 		}
 		getAgendaReservations();
 	};
@@ -339,6 +405,6 @@ function calendarNavi(month, year){
 			document.getElementById("mainCalendar").innerHTML = this.responseText;
 		}
 	};
-	xhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + month + "&year=" + year, true);
+	xhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + month + "&year=" + year + "&room=" + roomSelected, true);
 	xhttp.send();
 }

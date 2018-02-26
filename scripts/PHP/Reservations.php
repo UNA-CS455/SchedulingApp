@@ -19,7 +19,7 @@
 
 </div>
 
-<div class="makeReservation">
+<div class="makeReservation" id="createZone">
   <div class="test">
   <h1>Make Reservation</h1>
     Reserving email*:

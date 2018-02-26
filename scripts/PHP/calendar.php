@@ -127,10 +127,39 @@ class Calendar {
  
             $cellContent=NULL;
         }
-             
+         
+		$numRes = NULL;
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "cs455";
+
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		} 
+		
+		if ($_GET['room'] == "null"){
+			$sql = "SELECT COUNT(*) AS total FROM reservations WHERE startdate='$this->currentDate'";
+		}
+		else{
+			$sql = "SELECT COUNT(*) AS total FROM reservations WHERE roomnumber='" . $_GET['room'] . "' AND startdate='$this->currentDate'";
+		}
+		
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				$numRes = $row['total'];
+			}
+		}
+		$conn->close();
          
         return '<li onclick="openCreateRes(this.id)" id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
-                ($cellContent==NULL?'mask':'').'">'.$cellContent.'</li>';
+                ($cellContent==NULL?'mask':'').'">'.$cellContent. '<br><br>' . ($numRes==0?'':$numRes . ' Reservation(s)') . '</li>';
     }
      
     /**
