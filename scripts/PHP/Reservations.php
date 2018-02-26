@@ -50,7 +50,7 @@
     <option value="Monthly">Monthly</option>
   </select><br><br>
 
-    <input type="checkbox" id="allowshare" value="1">Allow room sharing<br><br>
+    <input type="checkbox" id="allowshare">Allow room sharing<br><br>
 
     Expected number of seats needed:
     <input type="text" id="numberOfSeats" style="width: 48px"><br><br>
