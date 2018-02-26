@@ -402,6 +402,22 @@ function createClicked(){
 		return;
     }
 	
+	if (/^\d+$/.test(numSeats)) {
+        // Contain numbers only
+    }
+	else {
+        // Contain other characters also
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please only enter numbers as a headcount!";
+		return;
+    }
+
+	if (Number(numSeats) > 60){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Headcount cannot be bigger than 60!";
+		return;
+	}
+	
 	if (/^\d+$/.test(endHour) && /^\d+$/.test(endMin)) {
         // Contain numbers only
     }
