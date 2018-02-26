@@ -182,6 +182,34 @@ function openConfirmDelete(ele){
 
 }
 
+function findDay(dayNum){
+	switch (dayNum){
+		case "01":
+			return "January";
+		case "02":
+			return "February";
+		case "03":
+			return "March";
+		case "04":
+			return "April";
+		case "05":
+			return "May";
+		case "06":
+			return "June";
+		case "07":
+			return "July";
+		case "08":
+			return "August";
+		case "09":
+			return "September";
+		case "10":
+			return "October";
+		case "11":
+			return "November";
+		case "12":
+			return "December";	
+	}
+}
 
 function openCreateRes(id){
 	if (id.length < 5){
@@ -189,8 +217,17 @@ function openCreateRes(id){
 	}
 	
 	let date = id.substr(3);
-
+	let year = date.slice(0, 4);
+	let month = date.slice(5, 7);
+	month = findDay(month);
+	let day = date.slice(8,10);
+	let roomChoice = roomSelected;
+	if (roomChoice == null){
+		roomChoice = "All Rooms";
+	}
+	let formattedLabel = day + " " + month + " " + year + " - " + roomChoice;
 	
+
 	document.getElementById('createRes').style.display = "inline";
 	document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
 	document.getElementById('createRes').innerHTML = "";
@@ -200,6 +237,7 @@ function openCreateRes(id){
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			document.getElementById("createRes").innerHTML = this.responseText;
+			document.getElementById('createLabel').innerHTML = formattedLabel;
 		}
 	};
 	xhttp.open("POST", "scripts/PHP/Reservations.php", true);
@@ -329,6 +367,29 @@ function createClicked(){
 	end = end[end.selectedIndex].value;
 	start = start[start.selectedIndex].value;
 	occur = occur[occur.selectedIndex].value;
+
+	
+	
+	if (/^([1-9]|1[012])$/.test(startHour) && /^([1-9]|1[012])$/.test(endHour)){
+		// both are in range.
+	}
+	else{
+		// one isn't.
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please only enter times between 1-12!";
+		return;
+	}
+
+	if (start == "PM")
+	{
+		startHour = Number(startHour) + 12;
+	}
+
+	if (end == "PM")
+	{
+		endHour = Number(endHour) + 12;
+	}
+
 	if (email == ""){
 		document.getElementById('responseText').style.color = "red";
 		document.getElementById('responseText').innerHTML = "Please enter an email first!";
@@ -346,6 +407,7 @@ function createClicked(){
 		document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
 		return;
 	}
+
 	
 	if (/^\d+$/.test(startHour) && /^\d+$/.test(startMin)) {
         // Contain numbers only
@@ -366,6 +428,7 @@ function createClicked(){
 		document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
 		return;
     }
+
 	
 	if (document.getElementById('allowshare').checked == true && numSeats == ""){
 		document.getElementById('responseText').style.color = "red";
