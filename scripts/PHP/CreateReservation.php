@@ -160,7 +160,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 //if connection to database fails, die
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-	}
+}
 
 //if connection is success, insert data into database and echo to user result
 $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$startdate', '$enddate', '$starthour:$startminute $start', '$endhour:$endminute $end', '$occur', '$comment', '$logged_in_user')";

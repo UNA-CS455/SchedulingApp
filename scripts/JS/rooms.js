@@ -156,6 +156,7 @@ function deleteClicked(id, id2){
 		xmlhttp.open("POST", "scripts/PHP/room_remove.php", true);
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("id=" + id2);
+		loadCalendar(); // reload the calendar to reflect new reservations.
 	}
 	else{
 		document.getElementById('deleteRes').style.display = "none";
@@ -218,7 +219,7 @@ function loadCalendar(){
 	};
 
 	let temp = new Date();
-	//console.error(temp.getMonth() + " " + temp.getFullYear());
+	console.error(temp.getMonth() + " " + temp.getFullYear());
 
 	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php?room=" + roomSelected, true);
 	xmlhttp.send();
@@ -392,6 +393,7 @@ function createClicked(){
 			}, 1500);
 		}
 		getAgendaReservations();
+		loadCalendar(); // reload the calendar to reflect new reservations.
 	};
 	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
