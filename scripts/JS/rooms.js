@@ -219,7 +219,7 @@ function loadCalendar(){
 	};
 
 	let temp = new Date();
-	console.error(temp.getMonth() + " " + temp.getFullYear());
+	//console.error(temp.getMonth() + " " + temp.getFullYear());
 
 	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php?room=" + roomSelected, true);
 	xmlhttp.send();

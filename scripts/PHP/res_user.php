@@ -16,7 +16,7 @@
 ?>
 
         <?php
-        $sql = "SELECT * FROM reservations order by roomnumber";
+        $sql = "SELECT * FROM reservations order by startdate, starttime";
         $result = $conn->query($sql);
 		$return_array = array();
         while ($row = $result->fetch_assoc()) {
