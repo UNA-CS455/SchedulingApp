@@ -167,6 +167,7 @@ $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount,
 
 	if ($conn->query($sql) === TRUE) {
                 echo "Reservation made successfully";
+		include 'mail.php';
             } else {
                 echo "Error making reservation: " . $conn->error;
             }
