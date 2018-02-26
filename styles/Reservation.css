@@ -93,3 +93,10 @@
 #createRes textarea{
 	resize: none;
 }
+
+#createLabel{
+	color: white;
+    font-size: 1.95vw;
+    left: 31%;
+    top: 23%;
+}
