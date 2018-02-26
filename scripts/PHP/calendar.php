@@ -10,7 +10,7 @@ class Calendar {
     }
      
     /********************* PROPERTY ********************/  
-    private $dayLabels = array("SUN", "MON","TUE","WED","THU","FRI","SAT",);
+    private $dayLabels = array("MON","TUE","WED","THU","FRI","SAT","SUN");
      
     private $currentYear=0;
      
@@ -82,7 +82,7 @@ class Calendar {
                                      
                                     //Create days in a week
                                     for($j=1;$j<=7;$j++){
-                                        $content.=$this->_showDay($i*7+$j - 1);
+                                        $content.=$this->_showDay(($i*7+$j));
                                     }
                                 }
                                  
@@ -190,7 +190,7 @@ class Calendar {
                  
         $content='';
          
-        foreach($this->dayLabels as $index=>$label){
+        foreach($this->dayLabels as $index =>$label){
              
             $content.='<li class="'.($label==6?'end title':'start title').' title">'.$label.'</li>';
  
