@@ -1,23 +1,29 @@
 <?php
 session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "cs455";
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
+
 // Get the firstname from the users database
 $sql = "SELECT firstname FROM users WHERE users.email ='" . $_POST['owneremail'] . "'";
 $result = $conn->query($sql);
+
 if($row = $result->fetch_assoc() && $result->num_rows > 0) {
 	$firstname = $row["firstname"];
 } else {
     $firstname = "";
 }
+
 $conn->close();
 
 $bodymsg = "<img src=\"YARSLOGO\"  alt=ScheduleConfirmation Made Easy border=0 > <br>" .
@@ -27,6 +33,7 @@ $bodymsg = "<img src=\"YARSLOGO\"  alt=ScheduleConfirmation Made Easy border=0 >
        "Attention: %s, <br> <br>" .
        "You are receiving this email automatically because of a reservation you made through YARS (Yet Another Room Scheduler):<br>"; 
 
+// create table to display reservation information
 $tablemsg = <<<'EOT'
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
@@ -67,13 +74,12 @@ $tablemsg = <<<'EOT'
   </tr>
 </table>
 EOT;
+
+// closing section of message
 $closemsg = "<br>If you think there has been error, please disregard this email or contact the system administrator. Do not reply to this email. You may change this reservation on the YARS system.<br>
 -YARS <br>";
-/* 
-  Order of variables: 
-  firstname, roomid, starttime, endtime, recurring, recur_str, res_email, share, headcount
-*/  
-
+ 
+// combine all text to single message and insert reservation information
 $msg = sprintf( $bodymsg . $tablemsg . $closemsg, 
          $firstname,
          $roomnumber,
@@ -85,9 +91,10 @@ $msg = sprintf( $bodymsg . $tablemsg . $closemsg,
          $allowshare, 
          $numberOfSeats
          );
+// add html headers        
 $msg = "<!DOCTYPE html><html>" . $msg . "<HTML>";
-echo $msg;
 
+// send email
 mail($owneremail, "YARS CON", $msg, "From: reservations@warehouse414.org"); 
  
 ?>
