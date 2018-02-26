@@ -407,14 +407,29 @@ function createClicked(){
     }
 	else {
         // Contain other characters also
+		if (sharing){
+			// Contain other characters also
 		document.getElementById('responseText').style.color = "red";
 		document.getElementById('responseText').innerHTML = "Please only enter numbers as a headcount!";
 		return;
+		}
     }
 
 	if (Number(numSeats) > 60){
 		document.getElementById('responseText').style.color = "red";
 		document.getElementById('responseText').innerHTML = "Headcount cannot be bigger than 60!";
+		return;
+	}
+	
+	if (startMin.length > 2 || endMin.length > 2){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Times can only be 2 numbers in length!";
+		return;
+	}
+
+	if (Number(startMin) > 59 || Number(endMin) > 59){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Times cannot be bigger than 60 seconds!";
 		return;
 	}
 	
