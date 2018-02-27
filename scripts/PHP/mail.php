@@ -1,10 +1,7 @@
 <?php
 //session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cs455";
+require "db_conf.php"; // set servername,username,password,and dbname
 
 //PHP config
 ini_set('SMTP','mail.warehouse414.org');

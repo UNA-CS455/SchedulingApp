@@ -87,10 +87,7 @@ function processReservation()
 {
 $logged_in_user = $_SESSION['username'];
 	
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cs455";
+require "db_conf.php"; // set servername,username,password,and dbname
 
 //roomnumber should come from index page....?????
 $roomnumber = ($_POST['roomnumber']);

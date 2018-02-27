@@ -1,12 +1,10 @@
 <html>
 <?php 
+require "db_conf.php"; // set servername,username,password,and dbname
 
 if ($_POST['Type'] == "all")
 {
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cs455";
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -43,10 +41,6 @@ $conn->close();
 
 else 
 {
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cs455";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

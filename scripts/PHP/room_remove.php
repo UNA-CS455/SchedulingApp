@@ -1,8 +1,6 @@
 <?php session_start();
-	$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "cs455";
+
+	require "db_conf.php"; // set servername,username,password,and dbname
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {

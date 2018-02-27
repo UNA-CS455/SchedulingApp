@@ -129,11 +129,8 @@ class Calendar {
         }
          
 		$numRes = NULL;
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "cs455";
-
+		
+		require "db_conf.php";
 		// Create connection
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		// Check connection
