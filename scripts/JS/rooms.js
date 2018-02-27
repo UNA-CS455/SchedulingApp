@@ -36,6 +36,18 @@ function toggleRoomView()
 	}
 }
 
+//Leaves the number of seats text box grey and disabled if allowshare is not checked.
+function changeSheet(){
+	var checkbox = document.getElementById('allowshare').checked;
+	if(checkbox == true){
+		document.getElementById('numseatstext').style.visibility = "visible";
+	}
+	else {
+		document.getElementById('numseatstext').style.visibility = "hidden";
+
+	}
+}
+
 
 function selectRoom(id){
 	document.getElementById('selectedRoom').innerHTML = "<b>" + id + "</b>";
