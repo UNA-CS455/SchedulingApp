@@ -98,6 +98,16 @@ $owneremail = trim($owneremail);
 $owneremail = filter_var($owneremail, FILTER_SANITIZE_EMAIL);
 //$owneremail = filter_var($owneremail, FILTER_VALIDATE_EMAIL, array("options"=>array("regexp"=>"/^[a-zA-Z \.\-!,]{1,64}$/")));
 
+//if($owneremail = filter_var($owneremail, FILTER_VALIDATE_EMAIL)) {
+//	echo "Valid email accepted";
+//}
+
+//else {
+//	echo "Error making reservation: Invalid email " . $conn->error;
+//	exit;
+//	$conn->close();
+//}
+
 //checkbox type
 $allowshare=($_POST['allowshare']);
 
@@ -146,6 +156,7 @@ $occur = ($_POST['occur']);
 $comment = ($_POST['comment']);
 $comment = trim($comment);
 $comment = filter_var($comment, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z''-'\s]{1,250}$/")));
+//$comment = str_replace("'","\'", $comment);
 
 //submit button variable
 //probably don't need this?
