@@ -254,7 +254,8 @@ function openCreateRes(id){
 	};
 	xhttp.open("POST", "scripts/PHP/Reservations.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("&date=" + date);
+	console.error(roomChoice);
+	xhttp.send("date=" + date + "&room=" + roomChoice);
 }
 
 

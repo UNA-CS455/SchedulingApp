@@ -2,7 +2,9 @@
     //$_SESSION['logged_in_useremail'];
     //$roomnumber = $_POST['roomnumber'];
     $date = $_POST['date'];
-
+	echo $_POST['room'];
+	$selectedRoom = "trash"; //$_POST['room'];
+	
 ?>
 
 <!DOCTYPE html>
@@ -84,9 +86,9 @@
 //	$month = $_POST['month'];
 //	$day = $_POST['day'];
 	//$date = date("Y-m-d", strtotime("$day $month $year"));
-	$date = date("Y-m-d", strtotime("12 Feb 2018"));    //test value
-
-	$sql = " SELECT * FROM reservations WHERE startdate='$date' AND roomnumber= 'Keller 333' ORDER BY starttime";
+	//$date = date("Y-m-d", strtotime("12 Feb 2018"));    //test value
+	
+	$sql = " SELECT * FROM reservations WHERE startdate='$date' AND roomnumber= '$selectedRoom' ORDER BY starttime";
 
 	$results = $conn->query($sql);
 	$res = array();
@@ -137,76 +139,79 @@
 	for($i = 0; $i <= count($blankCol)-1; $i++ ){
 		$labelID[] = $i;
 	}
-	// handle initial reservation
-	for($rowPlacementCounter = (int)$res[0]['starthour'] - 7; $rowPlacementCounter <= (int)$res[0]['endhour'] - 7;$rowPlacementCounter++){
-		$table[0][$rowPlacementCounter] = 0;
-	}
-
-	//iterate through reservations
-	for($resCounter = 1; $resCounter < count($res); $resCounter++){
-		//check if the current start hour or end hour falls in between the previous reservation's start and end hour or if it overlaps
-			$columnToPlaceIn = -1;
-			$isOverlapping = true;
-			for($i = 0; $i < count($resColumnArr); $i++){
-				for($j = 0; $j < count($resColumnArr[$i]); $j++){
-					if(!($res[(int)$resCounter]['starthour'] <= $resColumnArr[$i][$j]['endhour'])){
-						//the current reservation we are looking at to place is not overlapping with the one in this column, so place it in this column
-						break;
-						$isOverlapping = false;
-					}
-					$columnToPlaceIn = $j;
-				}
-			}
-			if($isOverlapping){
-				// all columns are full, so add a new column in the table
-				$table[] = $blankCol;
-				$columnToPlaceIn = count($table) - 1; // place in the newest column.
-			}
-			$res[$resCounter]['columnPOS'] = $columnToPlaceIn; // column set
-
-
-		// We now place the reservation into the table.
-		for($rowPlacementCounter = (int)$res[$resCounter]['starthour'] - 7; $rowPlacementCounter <= (int)$res[$resCounter]['endhour'] - 7; $rowPlacementCounter++){
-			$table[$res[$resCounter]['columnPOS']][$rowPlacementCounter] = $resCounter; // change the index value of the table cell.
-		}
-		// we need to add it to the column array
-		$resColumnArr[$res[$resCounter]['columnPOS']] = $resCounter;
-
-		// add a color
-		$res[$resCounter]['color'] = $colors[$resCounter % count($colors)];
-	}
-
 	
-
-	//the table is now full
-	$labelMaintainCount = 0;
-	for($row = 0; $row < count($blankCol); $row++){	
-		echo "<tr>";	
-		echo "<td>" . ($row+7) . ":00</td>";
-		for($col = 0; $col < count($table); $col++){
-			echo "<td";
-			if($table[$col][$row]== -1){
-				echo "> ";
-
-			}
-			else
-			{
-
-
-				$newColor = $res[$table[$col][$row]]['color'];
-				echo " bgcolor ='$newColor'>";
-				if($table[$col][$row] == $labelID[$labelMaintainCount]){
-					$labelMaintainCount++;
-					echo $res[$table[$col][$row]]['owneremail'];
-				}
-			}
-			
-			echo " </td>";
+	if(count($res) > 0){
+		// handle initial reservation
+		for($rowPlacementCounter = (int)$res[0]['starthour'] - 7; $rowPlacementCounter <= (int)$res[0]['endhour'] - 7;$rowPlacementCounter++){
+			$table[0][$rowPlacementCounter] = 0;
 		}
-		echo "</tr>";
+
+		//iterate through reservations
+		for($resCounter = 1; $resCounter < count($res); $resCounter++){
+			//check if the current start hour or end hour falls in between the previous reservation's start and end hour or if it overlaps
+				$columnToPlaceIn = -1;
+				$isOverlapping = true;
+				for($i = 0; $i < count($resColumnArr); $i++){
+					for($j = 0; $j < count($resColumnArr[$i]); $j++){
+						if(!($res[(int)$resCounter]['starthour'] <= $resColumnArr[$i][$j]['endhour'])){
+							//the current reservation we are looking at to place is not overlapping with the one in this column, so place it in this column
+							break;
+							$isOverlapping = false;
+						}
+						$columnToPlaceIn = $j;
+					}
+				}
+				if($isOverlapping){
+					// all columns are full, so add a new column in the table
+					$table[] = $blankCol;
+					$columnToPlaceIn = count($table) - 1; // place in the newest column.
+				}
+				$res[$resCounter]['columnPOS'] = $columnToPlaceIn; // column set
+
+
+			// We now place the reservation into the table.
+			for($rowPlacementCounter = (int)$res[$resCounter]['starthour'] - 7; $rowPlacementCounter <= (int)$res[$resCounter]['endhour'] - 7; $rowPlacementCounter++){
+				$table[$res[$resCounter]['columnPOS']][$rowPlacementCounter] = $resCounter; // change the index value of the table cell.
+			}
+			// we need to add it to the column array
+			$resColumnArr[$res[$resCounter]['columnPOS']] = $resCounter;
+
+			// add a color
+			$res[$resCounter]['color'] = $colors[$resCounter % count($colors)];
+		}
+
+		
+
+		//the table is now full
+		$labelMaintainCount = 0;
+		for($row = 0; $row < count($blankCol); $row++){	
+			echo "<tr>";	
+			echo "<td>" . ($row+7) . ":00</td>";
+			for($col = 0; $col < count($table); $col++){
+				echo "<td";
+				if($table[$col][$row]== -1){
+					echo "> ";
+
+				}
+				else
+				{
+
+
+					$newColor = $res[$table[$col][$row]]['color'];
+					echo " bgcolor ='$newColor'>";
+					if($table[$col][$row] == $labelID[$labelMaintainCount]){
+						$labelMaintainCount++;
+						echo $res[$table[$col][$row]]['owneremail'];
+					}
+				}
+				
+				echo " </td>";
+			}
+			echo "</tr>";
+		}
 	}
 
-
+echo $selectedRoom . "is selected";
 
 	?>
 <?php
