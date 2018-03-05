@@ -55,6 +55,7 @@
 #createRes h1{
 	position: initial;
 	text-align: left;
+	font-size: 2.65vmin;
 }
 
 
@@ -96,7 +97,9 @@
 
 #createLabel{
 	color: white;
-    font-size: 1.95vw;
-    left: 31%;
+    font-size: 3.75vmin;
+    left: 0%;
     top: 23%;
+    right: 0%;
+    text-align: center;
 }
