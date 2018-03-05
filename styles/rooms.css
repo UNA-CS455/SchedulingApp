@@ -1,5 +1,7 @@
 *{
 	position: absolute;
+	font-family: "Weiss Medium";
+    font-size: 1.6vmin;
 }
 
 br{
@@ -9,6 +11,10 @@ br{
 b{
 	left: 0%;
 	right: 0%;
+}
+
+#selectedRoom b{
+	font-size: 3vmin;
 }
 
 #deleteRes h2{
@@ -153,7 +159,7 @@ html, body{
 	top: 14%;
 	font-size: 22pt;
 	z-index: 3;
-	width: 30%;
+	width: 36%;
 	z-index: 11;
 }
 
