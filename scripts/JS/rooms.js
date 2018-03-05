@@ -513,3 +513,53 @@ function calendarNavi(month, year){
 	xhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + month + "&year=" + year + "&room=" + roomSelected, true);
 	xhttp.send();
 }
+
+
+function favoriteClicked(parentEle){
+	let star = document.getElementById(parentEle.id);
+	var xhttp = new XMLHttpRequest();
+	var id = document.getElementById('typeSelect');
+	id = id.options[id.selectedIndex].value;
+	var e = document.getElementById('floorSelect');
+	e = e.options[e.selectedIndex].value;
+	var f = document.getElementById('compSelect');
+	f = f.options[f.selectedIndex].value;
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			// if no filters set
+			if (id != "Any" || e != "Any" || f != "Any"){
+				// if filters set
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("roominsert").innerHTML = this.responseText;
+					}
+				};
+				xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + id + "&floor=" + e + "&comp=" + f, true);
+				xhttp.send();
+			}
+			else{
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("roominsert").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "scripts/PHP/allrooms.php", true);
+			xhttp.send();
+			}
+			
+		}
+	};
+	xhttp.open("POST", "scripts/PHP/favorite.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	
+	if (star.children[0].src.includes("images/fav-unselect.png")){
+		// add a favorite.
+		xhttp.send("add=yes&roomid=" + parentEle.id);
+	}
+	else{
+		// remove a favorite.
+		xhttp.send("add=no&roomid=" + parentEle.id);
+	}
+}
