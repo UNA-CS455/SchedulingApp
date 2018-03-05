@@ -12,7 +12,7 @@
 
 <?php
 
-	$sql = "SELECT * FROM favorites WHERE email='" . $_SESSION['username'] . "'";
+	$sql = "SELECT * FROM favorites WHERE email='" . $_SESSION['username'] . "' ORDER BY roomid";
     $result = $conn->query($sql);
 	$i = 0;
 	$headerPrinted = false;
