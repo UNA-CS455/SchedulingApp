@@ -327,3 +327,11 @@ html, body{
     width: 64%;
     height: 100%;
 }
+
+.favoriteIcon{
+	right: 0%;
+    /* top: 0%; */
+    width: 15%;
+    height: 20%;
+
+}
