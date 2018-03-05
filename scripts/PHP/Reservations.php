@@ -3,8 +3,9 @@
     //$roomnumber = $_POST['roomnumber'];
     $date = $_POST['date'];
 	echo $_POST['room'];
-	$selectedRoom = "trash"; //$_POST['room'];
-	
+	$selectedRoom = $_POST['room'];
+	$dayStart = 7;
+	$dayEnd = 22;
 ?>
 
 <!DOCTYPE html>
@@ -27,24 +28,13 @@
 
     <p>Duration*:</p>
     Start time:
-    <input type="text" id="startHour" style="width: 48px" required>:
-    <input type="text" id="startMinute" style="width: 48px" required>
-    <select id="start">
-    <option value="AM">AM</option>
-    <option value="PM">PM</option>
-	</select>
-	<br>
+    <input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" required><br><br>
+		
 
 
     End time:	
-    <input type="text" id="endHour" style="width: 48px" required>:
-    <input type="text" id="endMinute" style="width: 48px" required>
-    <select id="end">
-    <option value="AM">AM</option>
-    <option value="PM">PM</option>
-    </select>
-	<br>
-
+   <input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "48" required><br><br>
+		
     Recurring:
     <select id="occur">
     <option value="Once">Just Once</option>
@@ -87,7 +77,7 @@
 //	$day = $_POST['day'];
 	//$date = date("Y-m-d", strtotime("$day $month $year"));
 	//$date = date("Y-m-d", strtotime("12 Feb 2018"));    //test value
-	
+
 	$sql = " SELECT * FROM reservations WHERE startdate='$date' AND roomnumber= '$selectedRoom' ORDER BY starttime";
 
 	$results = $conn->query($sql);
@@ -114,7 +104,11 @@
 
 	//table vector
 	$table = array();
-	$blankCol= array(-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1);
+	$durationOfDay = $dayEnd - $dayStart;
+	$blankCol= array();
+	for($i = 0; $i <= $durationOfDay; $i++){
+		$blankCol[] = -1;
+	}
 	$table[] = $blankCol;
 	$labelID = array();
 	$colors = array("#d1ebff","#d7ffd1","#fff5d1", "#ffd1d1", "#edd1ff" , "#f4ffd1", "#ffd1d1", "#d1ffd2", "#d1fff8");
@@ -186,7 +180,9 @@
 		$labelMaintainCount = 0;
 		for($row = 0; $row < count($blankCol); $row++){	
 			echo "<tr>";	
-			echo "<td>" . ($row+7) . ":00</td>";
+			$timeBlock = (($row+7)>12) ? (($row+7)-12): ($row+7);
+			$timeColor = (false) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'"; // TODO: replace the hard coded false with a call to Luke's script function the returns true if the time is available
+			echo "<td " . $timeColor .">" . $timeBlock . ":00</td>";
 			for($col = 0; $col < count($table); $col++){
 				echo "<td";
 				if($table[$col][$row]== -1){
@@ -195,7 +191,6 @@
 				}
 				else
 				{
-
 
 					$newColor = $res[$table[$col][$row]]['color'];
 					echo " bgcolor ='$newColor'>";
@@ -211,121 +206,9 @@
 		}
 	}
 
-echo $selectedRoom . "is selected";
 
 	?>
-<?php
-/*
-    <tr>
-      <th style="width:10%">Time</th>
-      <th style="width:30%"></th>
-      <th style="width:30%">Bookings</th>
-      <th style="width:30%"></th>
-    </tr>
-    <tr>
-      <td>7:00AM</td>
-      <td bgcolor="#00FFFF">Roden@una.edu[7:00AM - 10:00AM]</td>
-      <td bgcolor="#00FFFF"></td>
-      <td bgcolor="#00FFFF"></td>
-    </tr>
-    <tr>
-      <td>8:00AM</td>
-      <td bgcolor="#00FFFF"></td>
-      <td bgcolor="#00FFFF"></td>
-      <td bgcolor="#00FFFF"></td>
-    </tr>
-    <tr>
-      <td>9:00AM</td>
-      <td bgcolor="#00FFFF"></td>
-      <td bgcolor="#00FFFF"></td>
-      <td bgcolor="#00FFFF"></td>
-    </tr>
-    <tr>
-      <td>10:00AM</td>
-      <td bgcolor="#00FFFF"></td>
-      <td bgcolor="#00FFFF"></td>
-      <td bgcolor="#00FFFF"></td>
-    </tr>
-    <tr>
-      <td>11:00AM</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>12:00PM</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>1:00PM</td>
-      <td bgcolor = "#FF9393">Jenkins@una.edu[1:00PM - 3:00PM]</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>2:00PM</td>
-      <td bgcolor = "#FF9393"></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>3:00PM</td>
-      <td bgcolor = "#FF9393"></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>4:00PM</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>5:00PM</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>6:00PM</td>
-      <td></td>
-      <td></td>
-      <td bgcolor = "#93FFB9">Crabtree@una.edu[6:00PM - 9:00PM]</td>
-    </tr>
-    <tr>
-      <td>7:00PM</td>
-      <td></td>
-      <td></td>
-      <td bgcolor = "#93FFB9"></td>
-    </tr>
-    <tr>
-      <td>8:00PM</td>
-      <td></td>
-      <td></td>
-      <td bgcolor = "#93FFB9"></td>
-    </tr>
-    <tr>
-      <td>9:00PM</td>
-      <td></td>
-      <td></td>
-      <td bgcolor = "#93FFB9"></td>
-    </tr>
-    <tr>
-      <td>10:00PM</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>11:00PM</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-*/
-?>
+
 
   </table>
 
