@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2018 at 10:54 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Mar 06, 2018 at 12:34 AM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -23,6 +23,28 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `cs455` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `cs455`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `email` varchar(100) NOT NULL,
+  `roomid` varchar(100) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`email`, `roomid`, `id`) VALUES
+('dbrown4@una.edu', 'Keller 133', 41),
+('dbrown4@una.edu', 'Keller 322', 42),
+('dbrown4@una.edu', 'Keller 227', 46),
+('dbrown4@una.edu', 'Keller 220', 47);
 
 -- --------------------------------------------------------
 
@@ -50,7 +72,9 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`roomnumber`, `owneremail`, `allowshare`, `headcount`, `startdate`, `enddate`, `starttime`, `endtime`, `occur`, `comment`, `id`, `res_email`) VALUES
-('Keller 333', 'dbrown4@una.edu', 1, '', '2018-02-12', '2018-02-12', '15:00:00', '17:30:00', 'Once', 'hi', 48, 'jcrabtree@una.edu');
+('Keller 333', 'dbrown4@una.edu', 1, '', '2018-02-12', '2018-02-12', '15:00:00', '17:30:00', 'Once', 'hi', 48, 'jcrabtree@una.edu'),
+('Keller 333', 'dbrown4@una.edu', 0, '', '2018-03-07', '2018-03-07', '08:00:00', '09:00:00', 'Once', 'sadsad', 67, 'dbrown4@una.edu'),
+('Keller 333', 'jborden2@una.edu', 0, '', '2018-03-07', '2018-03-07', '08:00:00', '12:00:00', 'Once', 'asdsad', 68, 'dbrown4@una.edu');
 
 -- --------------------------------------------------------
 
@@ -109,6 +133,12 @@ INSERT INTO `users` (`email`, `firstname`, `lastname`, `classification`, `permis
 --
 
 --
+-- Indexes for table `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `reservations`
 --
 ALTER TABLE `reservations`
@@ -131,11 +161,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `favorites`
+--
+ALTER TABLE `favorites`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+--
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
-COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
