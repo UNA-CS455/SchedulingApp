@@ -365,27 +365,41 @@ function createClicked(){
 	}
 	
 	var email = document.getElementById("owneremail").value;
-	var startHour = document.getElementById("startHour").value;
-	var startMin = document.getElementById("startMinute").value;
-	var endHour = document.getElementById("endHour").value;
-	var endMin = document.getElementById("endMinute").value;
+	var startTime = document.getElementById("timeStart").value;
+	var endTime = document.getElementById("timeEnd").value;
 	var startDate = document.getElementById("startdate").value;
 	var endDate = document.getElementById("enddate").value;
-	var sharing = document.getElementById("allowshare").checked;
+	var sharing = Number( document.getElementById("allowshare").checked);
 	console.log(sharing);
-	if (sharing == false){
+	/*if (sharing == false){			//sharing is typecasted above because we believe it will work that way. Keeping this just in case it doesn't				
 		sharing = 0;
 	}
-	else{
+	else{								
 		sharing = 1;
-	}
+	}*/
+	
+	var startHour = startTime.charAt(0) + startTime.charAt(1);
+	var startMin = startTime.charAt(3) + startTime.charAt(4);
+	var endHour = endTime.charAt(0) + endTime.charAt(1);
+	var endMin = endTime.charAt(3) + endTime.charAt(4);
+
+console.error(startTime);
+console.error(endTime);
+console.error(startHour);
+console.error(endHour);
+console.error(startMin);
+console.error(endMin);
+
+	
+	
+
 	var numSeats = document.getElementById("numberOfSeats").value;
 	var comment = document.getElementById("comment").value;
-	var start = document.getElementById("start");
-	var end = document.getElementById("end");
+	//var start = document.getElementById("start");
+	//var end = document.getElementById("end");
 	var occur = document.getElementById("occur");
-	end = end[end.selectedIndex].value;
-	start = start[start.selectedIndex].value;
+	//end = end[end.selectedIndex].value;
+	//start = start[start.selectedIndex].value;
 	occur = occur[occur.selectedIndex].value;
 	if (email == ""){
 		document.getElementById('responseText').style.color = "red";
@@ -486,7 +500,7 @@ function createClicked(){
 	};
 	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&startdate=" + startDate + "&enddate=" + endDate + "&endhour=" + endHour + "&endminute=" + endMin + "&start=" + start + "&end=" + end + "&occur=" + occur + "&comment=" + comment);
+	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&startdate=" + startDate + "&enddate=" + endDate + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
 }
 
 function calendarNavi(month, year){
