@@ -128,6 +128,7 @@
 		continue to the next $i. If we run out of columns to check, ie the new reservation we are placing runs into B and C, then we simply add a new column and continue.
 	
 	*/
+	include "ValidateReservation.php";
 	$resColumnArr = array();
 	$resColumnArr[] = array(0); // the first reservation will go in the first column $resColumnArr[0], so add it to the array.
 	for($i = 0; $i <= count($blankCol)-1; $i++ ){
@@ -181,7 +182,7 @@
 		for($row = 0; $row < count($blankCol); $row++){	
 			echo "<tr>";	
 			$timeBlock = (($row+7)>12) ? (($row+7)-12): ($row+7);
-			$timeColor = (false) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'"; // TODO: replace the hard coded false with a call to Luke's script function the returns true if the time is available
+			$timeColor = (checkValidTime(false,$row+7 , $row+8, $selectedRoom)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'"; // TODO: replace the hard coded false with a call to Luke's script function the returns true if the time is available
 			echo "<td " . $timeColor .">" . $timeBlock . ":00</td>";
 			for($col = 0; $col < count($table); $col++){
 				echo "<td";
