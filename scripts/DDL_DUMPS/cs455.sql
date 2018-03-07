@@ -102,10 +102,12 @@ INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcom
 ('Keller 220', 'Classroom', 2, 36, 0, NULL, NULL),
 ('Keller 222', 'Classroom', 2, 40, 0, NULL, NULL),
 ('Keller 227', 'Classroom', 2, 32, 0, NULL, NULL),
+('Keller 234', 'Computer Lab', 2, 25, 1, 25, NULL),
 ('Keller 320', 'Classroom', 3, 36, 0, NULL, NULL),
 ('Keller 322', 'Classroom', 3, 40, 0, NULL, NULL),
 ('Keller 327', 'Classroom', 3, 32, 0, NULL, NULL),
-('Keller 333', 'Classroom', 3, 48, 0, NULL, NULL);
+('Keller 333', 'Classroom', 3, 48, 0, NULL, NULL),
+('Keller 334', 'Computer Lab', 3, 25, 1, 25, NULL);
 
 -- --------------------------------------------------------
 
