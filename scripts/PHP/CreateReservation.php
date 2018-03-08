@@ -92,27 +92,32 @@ $comment = filter_var($comment, FILTER_VALIDATE_REGEXP, array("options"=>array("
 //probably don't need this?
 //$reserve = ($_POST['reserve']);
 
-//connect to database
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-//if connection to database fails, die
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-//if connection is success, insert data into database and echo to user result
-$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$startdate', '$enddate', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
-
-	if ($conn->query($sql) === TRUE) {
-                echo "Reservation made successfully";
-		//include 'mail.php'; uncomment when on deployed version
-            } else {
-                echo "Error making reservation: " . $conn->error;
-            }
-
-            $conn->close();
+//We must validate the times and constraints given 
+require_once 'ValidateReservation.php'; // gain access to validation functions
 
 
+if(checkValidTime(true, $starthour . ":" . $startminute, $endhour . ":" . $endminute, $roomnumber)){
+	//connect to database
+	$conn = new mysqli($servername, $username, $password, $dbname);
 
+	//if connection to database fails, die
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+
+	//if connection is success, insert data into database and echo to user result
+	$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$startdate', '$enddate', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
+		
+		if ($conn->query($sql) === TRUE) {
+			echo "Reservation made successfully";
+			//include 'mail.php'; uncomment when on deployed version
+			} else {
+				echo "Error making reservation: " . $conn->error;
+			}
+
+			$conn->close();
+
+
+		}
 }
 ?>

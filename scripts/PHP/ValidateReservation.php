@@ -1,7 +1,9 @@
 <?php
 
-$dayStart = 7;
-$dayEnd = 22;
+//to do: fix the functions below so they use these instead of having to locally define them
+$dayStart = DateTime::createFromFormat('H:i', '7:00');
+$dayEnd  = DateTime::createFromFormat('H:i', '23:00'); // checks up to this date. So if you want the 10 hour block to
+														// be open, then set this to 11 as closing time
 
 
 
@@ -19,16 +21,22 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 {
 	//msg variables to indicate the problem that occurred 
 	$returnVal = FALSE;
-	global $dayStart, $dayEnd;
-	$startDayErrMsg = "Your Reservation cannot be made before 7 AM!";
+
+	$dayStart = DateTime::createFromFormat('H:i', '7:00');
+	$dayEnd  = DateTime::createFromFormat('H:i', '23:00');
+	// use the dayStart and dayEnd times
+	$startToCheck = DateTime::createFromFormat('H:i', $startToCheck);
+	$endToCheck = DateTime::createFromFormat('H:i', $endToCheck);
+	$startDayErrMsg = "Your reservation cannot be made before 7 AM!";
 	$endDayErrMsg = "Your reservation cannot be made after 10 PM!";
 	$minuteErrMsg = "Your reservation must be made on 15 minute increments!";
 	$startTimeErrMsg = "Your reservation start time is occurring after your end time!";
-	$goodMsg = "Reservation Time Valid!";
+	//$goodMsg = "Reservation Time Valid!"; dont need this
 
 	
 
-	//returns false if reservation made is before the valid start day time equal to 7
+
+	//returns false if reservation made is before the valid start day time
 	if($startToCheck < $dayStart)
 	{
 		$retValue = FALSE;
@@ -38,9 +46,10 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 		}
 
 	}
-	//returns false if reservation made is after the valid end day time equal to 22 (10PM)
-	else if($endToCheck > $dayEnd+1)
+	//returns false if reservation made is after the valid end day time
+	else if($endToCheck > $dayEnd)
 	{
+		echo "$endToCheck is greater than $dayEnd";
 		$retValue = FALSE;
 		if($outputError)
 		{
@@ -48,7 +57,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 		}
 	}
 	//returns false if reservation made has a minute value that is not on the required fifteen minute interval
-	/*
+	/* Might need to be removed later, depending on how time is handled.
 	else if($startToCheck%15 != 0)
 	{
 		$retValue = FALSE;
@@ -73,7 +82,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 		$retValue = TRUE;
 		if($outputError)
 		{
-			echo $goodMsg;
+			//echo $goodMsg;
 		}
 	}
 	
@@ -100,10 +109,14 @@ function checkHeadcount()
 function checkAllowSharing($outputError, $newResStart, $newResEnd, $room)
 {
 	//error message diplayed when false
-	$errMsg = "This Reservation overlaps with another reservation who doesn't allow sharing";
+	$errMsg = "Given times overlap with another reservation made by a user who opted not to share the room.";
 	//default set to false
 	$returnVal=FALSE;
-	global $dayStart, $dayEnd;
+	//global $dayStart, $dayEnd; this doesn't work for some reason
+	$dayStart = DateTime::createFromFormat('H:i', '7:00');
+	$dayEnd  = DateTime::createFromFormat('H:i', '23:00');
+	$newResStart = DateTime::createFromFormat('H:i', $newResStart);
+	$newResEnd = DateTime::createFromFormat('H:i', $newResEnd);
 	require "db_conf.php";
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -113,10 +126,14 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room)
 	}
 
 	//Locates a conflicting reservation made that overlaps times of another reservation that doesn't allow sharing 
+
+	$newResStart = $newResStart->format('H:i');
+	$newResEnd = $newResEnd->format('H:i');
 	$sql = "SELECT * FROM reservations WHERE roomnumber = '$room' AND allowshare = '0'
-				AND((starttime > '$newResStart' AND endtime < '$newResEnd')
-				OR(endtime > '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime > '$newResStart'))";
+				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
+				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
+				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
+
 
 	$result = $conn->query($sql);
 
@@ -148,7 +165,7 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room)
 function checkValidTime($outputError, $newResStart, $newResEnd, $room)
 {
 	//Return the boolean value
-	return checkAllowSharing($outputError, $newResStart, $newResEnd, $room) && checkDateTime($outputError, $newResStart, $newResEnd);
+	return  checkDateTime($outputError, $newResStart, $newResEnd) && checkAllowSharing($outputError, $newResStart, $newResEnd, $room);
 
 }
 

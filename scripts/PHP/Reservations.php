@@ -71,13 +71,6 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-//	$room = $_POST['roomname'];
-//	$year = $_POST['year'];
-//	$month = $_POST['month'];
-//	$day = $_POST['day'];
-	//$date = date("Y-m-d", strtotime("$day $month $year"));
-	//$date = date("Y-m-d", strtotime("12 Feb 2018"));    //test value
-
 	$sql = " SELECT * FROM reservations WHERE startdate='$date' AND roomnumber= '$selectedRoom' ORDER BY starttime";
 
 	$results = $conn->query($sql);
@@ -181,8 +174,8 @@
 		$labelMaintainCount = 0;
 		for($row = 0; $row < count($blankCol); $row++){	
 			echo "<tr>";	
-			$timeBlock = (($row+7)>12) ? (($row+7)-12): ($row+7);
-			$timeColor = (checkValidTime(false,$row+7 , $row+8, $selectedRoom)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'"; // TODO: replace the hard coded false with a call to Luke's script function the returns true if the time is available
+			$timeBlock = (($row+7)>12) ? (($row+7)-12): ($row+7); // set time digits
+			$timeColor = (checkValidTime(false,$row+7 . ":00" , $row+8 . ":00", $selectedRoom)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'"; // TODO: replace the hard coded false with a call to Luke's script function the returns true if the time is available
 			echo "<td " . $timeColor .">" . $timeBlock . ":00</td>";
 			for($col = 0; $col < count($table); $col++){
 				echo "<td";
