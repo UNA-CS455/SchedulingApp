@@ -370,7 +370,7 @@ function createClicked(){
 	var startDate = document.getElementById("startdate").value;
 	var endDate = document.getElementById("enddate").value;
 	var sharing = Number( document.getElementById("allowshare").checked);
-	console.log(sharing);
+
 	/*if (sharing == false){			//sharing is typecasted above because we believe it will work that way. Keeping this just in case it doesn't				
 		sharing = 0;
 	}
@@ -383,14 +383,6 @@ function createClicked(){
 	var endHour = endTime.charAt(0) + endTime.charAt(1);
 	var endMin = endTime.charAt(3) + endTime.charAt(4);
 
-console.error(startTime);
-console.error(endTime);
-console.error(startHour);
-console.error(endHour);
-console.error(startMin);
-console.error(endMin);
-
-	
 	
 
 	var numSeats = document.getElementById("numberOfSeats").value;
@@ -456,7 +448,7 @@ console.error(endMin);
 
 	if (Number(startMin) > 59 || Number(endMin) > 59){
 		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Times cannot be bigger than 60 seconds!";
+		document.getElementById('responseText').innerHTML = "Times cannot be bigger than 60 minutes!";
 		return;
 	}
 	
@@ -485,15 +477,16 @@ console.error(endMin);
 			document.getElementById('responseText').innerHTML = this.responseText;
 			if (this.responseText == "Reservation made successfully"){
 				document.getElementById('responseText').style.color = "green";
+				setTimeout(function(){
+					document.getElementById('createRes').style.display = "none";
+					document.body.style.backgroundColor = "rgba(0,0,0,0)";
+					switchCreate = false;
+				}, 1500);
 			}
 			else{
 				document.getElementById('responseText').style.color = "red";
 			}
-			setTimeout(function(){
-				document.getElementById('createRes').style.display = "none";
-				document.body.style.backgroundColor = "rgba(0,0,0,0)";
-				switchCreate = false;
-			}, 1500);
+
 		}
 		getAgendaReservations();
 		loadCalendar(); // reload the calendar to reflect new reservations.
