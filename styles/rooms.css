@@ -4,6 +4,10 @@
     font-size: 1.6vmin;
 }
 
+html, body{
+	overflow: hidden;
+}
+
 br{
 	position: relative;	
 }
@@ -42,14 +46,13 @@ html, body{
 }
 
 #createRes{
-	width: 55%;
-	height: 85%;
-	left: 21.5%;
-	top: 13%;
-	z-index: 20;
-	display: none;
-	background-color: #f2f2f2;
-	border: 2px inset black;
+	width: 100%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+    z-index: 20;
+    background-color: #f2f2f2;
+    border-right: 3px inset #dddddd;
 }
 
 #delView{
@@ -105,23 +108,22 @@ html, body{
 }
 
 #roomMenu{
-	width: 90%;
-	height: 80%;
-	left: 5%;
-	top: 13%;
-	background-color: #DB9F11;
-	display: none;
-	border-radius: 0px 0px 12px 12px;
-	z-index: 7;
+	    width: 100%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+    background-color: white;
+    border-radius: 0px 0px 12px 12px;
+    z-index: 7;
 }
 
 #bookArea{
-	width: 90%;
-	height: 80%;
-	left: 5%;
-	top: 12.5%;
-	background-color: white;
-	overflow-y: scroll;
+	    width: 96%;
+    height: 85%;
+    left: 2%;
+    top: 7.5%;
+    background-color: white;
+    overflow-y: scroll;
 }
 
 #allRooms{
@@ -137,7 +139,7 @@ html, body{
 	    position: relative;
     width: 100%;
     height: 22%;
-    display: inline-flex;
+    display: table-row;
 }
 
 #allRooms tbody{
@@ -180,7 +182,7 @@ html, body{
 .room{
 	position: relative;
     border: 1px solid gray;
-    display: inline-block;
+    display: table-cell;
     width: 13.5%;
 }
 
@@ -200,50 +202,51 @@ html, body{
 	height: 10%;
 	top: 6.5%;
 	left: 4.5%;
+	position: relative;
 }
 
 #filtersText{
-	left: 4%;
-	top: 4%;
-	width: 8%;
+	left: -3%;
+    top: -60%;
+    width: 8%;
 }
 
 #typeText{
-	left: 12%;
-	top: 4%;
-	width: 8%;
+	left: -4%;
+    top: -12%;
+    width: 8%;
 }
 
 #typeSelect{
-	left: 15%;
-	top: 4.5%;
-	width: 12%;
-	height: 28%;
+	left: 7%;
+    top: -12.5%;
+    width: 24%;
+    height: 28%;
 }
 
 #floorText{
 	left: 34%;
-    top: 4%;
+    top: -12%;
     width: 8%;
 }
 
 #floorSelect{
-	left: 38%;
-    top: 4.5%;
-    width: 12%;
+	left: 22%;
+    top: -12.5%;
+    width: 24%;
     height: 28%;
 }
 
 #compText{
-	left: 56%;
-    top: 4%;
-    width: 8%;
+	    left: 74%;
+    top: -12%;
+    width: 50%;
 }
 
 #compSelect{
-	left: 64%;
-    top: 4.5%;
-    width: 12%;
+	left: 56%;
+    top: -12.5%;
+    width: 25%;
     height: 28%;
 }
 
@@ -330,7 +333,7 @@ html, body{
 
 .favoriteIcon{
 	right: 0%;
-    /* top: 0%; */
+    top: 0%; 
     width: 15%;
     height: 20%;
 

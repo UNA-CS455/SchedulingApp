@@ -17,7 +17,7 @@
 <body>
 
 <div class="dayview">
-	<font id="createLabel">08 March 2018 - Raburn 206</font>
+
 </div>
 
 <div class="makeReservation" id="createZone">
@@ -45,7 +45,29 @@
     <input type="checkbox" onclick="changeSheet()" id="allowshare">Allow room sharing<br><br>
 
     <span id="numseatstext" style="visibility:hidden"> Expected number of seats needed: <input type="text" id="numberOfSeats" style="width: 48px;"></span> <br><br>
-
+	<div id="filterArea">
+				<font id="filtersText">Filters</font>
+				<font id="typeText">Type: </font>
+				<select id="typeSelect" onchange="typeChanged(this.value)">
+					<option value="Any">Any</option>
+					<option value="Classroom">Classroom</option>
+					<option value="Conference">Conference Room</option>
+					<option value="Computer Lab">Computer Lab</option>
+				</select>
+				<font id="floorText">Floor: </font>
+				<select id="floorSelect" onchange="floorChanged(this.value)">
+					<option value="Any">Any</option>
+					<option value="first">First</option>
+					<option value="second">Second</option>
+					<option value="third">Third</option>
+				</select>
+				<font id="compText">Has Computers: </font>
+				<select id="compSelect" onchange="compChanged(this.value)">
+					<option value="Any">Any</option>
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+			</div>
     <!-- add css for this boi -->
     Comments<br>
     <textarea rows="10" cols="50" id="comment"></textarea><br><br><br><br><br><br><br><br><br>
