@@ -50,12 +50,7 @@ function changeSheet(){
 
 
 function selectRoom(id){
-	document.getElementById('selectedRoom').innerHTML = "<b>" + id + "</b>";
-	console.log(roomSelected);
-	if (roomSelected == null){
-		document.getElementById('No Room Preference/All').style.backgroundColor = "white";
-	}
-	else{
+	if (roomSelected != null){
 		document.getElementById(roomSelected).style.backgroundColor = "white";
 	}
 	
@@ -69,17 +64,8 @@ function selectRoom(id){
 	
 	document.getElementById(id).style.backgroundColor = "gray";
 	showrooms = false;
-	document.getElementById('roomMenu').style.display = "none";
-	document.getElementById('roomSelect').style.top = "14%";
-	document.getElementById('roomWrapper').style.display = "inline";
-	document.getElementById('selectedRoom').style.top = "14%";
-	document.getElementById('roomMenu').style.display = "none";
-	document.getElementById('roomSelect').src = "images/down_arrow.png";
 	
-	document.body.style.backgroundColor = "rgba(0,0,0,0)";
 
-	// HERE IS WHERE AJAX CALL TO MAIN CALENDAR GOES! updateCalendar()?
-	loadCalendar();
 }
 
 /*
@@ -125,27 +111,7 @@ var switchDelete = false;
 var switchCreate = false;
 
 function handleClick(e){
-	if (document.getElementById('deleteRes').style.display == "inline" && switchDelete == true){
-		if (!document.getElementById('deleteRes').contains(e.target)){
-			document.getElementById('deleteRes').style.display = "none";
-			document.body.style.backgroundColor = "rgba(0,0,0,0)";
-			switchDelete = false;
-		}
-	}
-	if (document.getElementById('createRes').style.display == "inline" && switchCreate == true){
-		if (!document.getElementById('createRes').contains(e.target)){
-			document.getElementById('createRes').style.display = "none";
-			document.body.style.backgroundColor = "rgba(0,0,0,0)";
-			switchCreate = false;
-		}
-		
-	}
-	if (document.getElementById('deleteRes').style.display == "inline"){
-		switchDelete = true;
-	}
-	if (document.getElementById('createRes').style.display == "inline"){
-		switchCreate = true;
-	}
+
 }
 
 function deleteClicked(id, id2){
@@ -256,24 +222,6 @@ function openCreateRes(id){
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	console.error(roomChoice);
 	xhttp.send("date=" + date + "&room=" + roomChoice);
-}
-
-
-loadCalendar();
-
-function loadCalendar(){
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("mainCalendar").innerHTML = this.responseText;
-		}
-	};
-
-	let temp = new Date();
-	//console.error(temp.getMonth() + " " + temp.getFullYear());
-
-	xmlhttp.open("GET", "scripts/PHP/calendarLoad.php?room=" + roomSelected, true);
-	xmlhttp.send();
 }
 
 function typeChanged(id){
@@ -511,37 +459,16 @@ function calendarNavi(month, year){
 function favoriteClicked(parentEle){
 	let star = document.getElementById(parentEle.id);
 	var xhttp = new XMLHttpRequest();
-	var id = document.getElementById('typeSelect');
-	id = id.options[id.selectedIndex].value;
-	var e = document.getElementById('floorSelect');
-	e = e.options[e.selectedIndex].value;
-	var f = document.getElementById('compSelect');
-	f = f.options[f.selectedIndex].value;
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			// if no filters set
-			if (id != "Any" || e != "Any" || f != "Any"){
-				// if filters set
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("roominsert").innerHTML = this.responseText;
 					}
 				};
-				xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + id + "&floor=" + e + "&comp=" + f, true);
+				xhttp.open("GET", "scripts/PHP/allrooms.php", true);
 				xhttp.send();
-			}
-			else{
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					document.getElementById("roominsert").innerHTML = this.responseText;
-				}
-			};
-			xhttp.open("GET", "scripts/PHP/allrooms.php", true);
-			xhttp.send();
-			}
-			
 		}
 	};
 	xhttp.open("POST", "scripts/PHP/favorite.php", true);

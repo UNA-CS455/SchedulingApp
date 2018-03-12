@@ -27,7 +27,7 @@
 		{
 			echo "<tr>";
 		}
-		if($i == 6)
+		if($i == 4)
 		{
 			$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
 			$result2 = $conn->query($sql);
@@ -118,12 +118,7 @@
 		{
 			echo "<tr>";
 		}
-		if ($firstPrinted == false){
-			$firstPrinted = true;
-			echo "<td onclick='selectRoom(this.id)' class='room' id='No Room Preference/All'><font class='roomText'><b>All Rooms/No Preference</b><br><br></font></td>";
-			$i++;
-		}
-		if($i == 6)
+		if($i == 4)
 		{
 			$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
 			$result2 = $conn->query($sql);
@@ -152,10 +147,6 @@
 		
 
 		
-	}
-	if ($firstPrinted == false){
-		$firstPrinted = true;
-		echo "<tr><td onclick='selectRoom(this.id)' class='room' id='No Room Preference/All'><font class='roomText'><b>All Rooms/No Preference</b><br><br></font></td></tr>";
 	}
 
 $conn->close();

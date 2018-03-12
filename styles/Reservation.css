@@ -9,48 +9,63 @@
 }
 
 .makeReservation {
-        position: absolute;
+    position: absolute;
     top: 15%;
     right: 0;
     width: 50%;
     height: 85%;
-    overflow: scroll;
+    /* overflow: scroll; */
+    z-index: 55;
 }
 
 .test{
-      padding-left: 15%;
+    padding-left: 22%;
     height: 100%;
+    top: 8%;
 }
 
-.calendar table{
-	width: 100%;
-	height: 100%;
+#roominsert font{
+	font-size: 1.25vmin;
 }
 
-.calendar tr{
-	position: relative;
-}
-
-.calendar td, .calendar th {
-    border: 1px solid #dddddd;
-	position: relative;
-    text-align: left;
-    padding: 8px;
+#roomInsert font b{
+	font-size: 1.5vmin;
 }
 
 .calendar{
-     border: 1px solid #dddddd;
+    border-right: 3px solid #DDDDDD;
     border-collapse: collapse;
     text-align: center;
     position: absolute;
     top: 15%;
-    left: 0;
+    left: 8%;
     width: 50%;
-    height: 84.5%;
-    overflow-y: scroll;
-    overflow-x: scroll;
+    height: 83.5%;
+    /* overflow-y: scroll; */
+    /* overflow-x: scroll; */
+    z-index: 55;
 }
 
+.test h1{
+	position: relative;
+	font-size: 3vmin;
+}
+
+.test input{
+position: relative;
+}
+
+.test p{
+	position: relative;
+}
+
+.test select{
+position: relative;
+}
+
+.test span{
+position: relative;
+}
 
 #createRes h1{
 	position: initial;

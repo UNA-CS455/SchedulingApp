@@ -73,12 +73,7 @@
 		{
 			echo "<tr>";
 		}
-		if ($firstPrinted == false){
-			$firstPrinted = true;
-			echo "<td onclick='selectRoom(this.id)' class='room' id='No Room Preference/All'><font class='roomText'><b>All Rooms/No Preference</b><br><br></font></td>";
-			$i++;
-		}
-		if($i == 6)
+		if($i == 4)
 		{
 			$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
 			$result2 = $conn->query($sql);
@@ -87,7 +82,7 @@
 				// there is a favorite.
 				$imgName = "images/fav-select.png";
 			}
-			echo "<td class = 'room' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement);' class='favoriteIcon'><font id = '".$row['roomid']."' onclick='selectRoom(this.id)' class='roomText'><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></td>";
+			echo "<td class = 'room' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement);' class='favoriteIcon'><font id = '".$row['roomid']."' onclick='selectRoom(this.id)' class='roomText'><b>" . $row['roomid'] ."</b><br><br>". $row['seats'] ."<br>" . $row['type'] . "</font></td>";
 			echo "</tr>";
 			$i = 0;
 		}
@@ -101,7 +96,7 @@
 				// there is a favorite.
 				$imgName = "images/fav-select.png";
 			}
-			echo "<td class = 'room' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement);' class='favoriteIcon'><font id = '".$row['roomid']."' onclick='selectRoom(this.id)' class='roomText'><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></td>";
+			echo "<td class = 'room' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement);' class='favoriteIcon'><font id = '".$row['roomid']."' onclick='selectRoom(this.id)' class='roomText'><b>" . $row['roomid'] ."</b><br><br>". $row['seats'] ."<br>" . $row['type'] . "</font></td>";
 			$i++;
 		}
 		
