@@ -303,6 +303,44 @@ function compChanged(id){
 	
 }
 
+
+function fieldChanged(){
+	//Get variables from fields
+
+	var type = document.getElementById('typeSelect');
+	var starttime = document.getElementById('timeStart');
+	var endtime = document.getElementById('timeEnd');
+	var recurring = document.getElementById('occur');
+	var seats = document.getElementById('numberOfSeats');
+	var date = document.getElementById('date');
+	var GETString = "?q=";
+	if(type !== null && type.selectedIndex != 0){
+		GETString += ("&type=" + type.options[type.selectedIndex].value);
+	}
+	if((starttime !== null && starttime.value.length > 0) && (endtime !== null && endtime.value.length > 0) && (date !== null && date.value.length > 0)){
+		GETString += ("&starttime='"+starttime.value+"'&endtime='"+endtime.value+"'&date='"+date.value+"'");
+	}
+	if(recurring !== null && recurring.selectedIndex != 0){
+		GETString += ("&recur=" + recurring.selectedIndex); // pass the index, which will be our enumerated type.
+	}
+	if(seats !== null && seats.value >0){
+		GETString += ("&headcount=" + seats.value);
+	}
+
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState === 4 && this.status === 200) {
+			document.getElementById("roominsert").innerHTML = this.responseText;
+		}
+	};
+	//console.error("scripts/PHP/retrieveRooms.php" + GETString);
+	xhttp.open("GET", "scripts/PHP/retrieveRooms.php" + GETString, true);
+	xhttp.send();
+	
+	
+}
+
 function createClicked(){
 	// sanity checks first.
 	if (roomSelected == null)
