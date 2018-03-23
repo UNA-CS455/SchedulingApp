@@ -66,12 +66,30 @@
 
 	$sql = "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms ";
 	$additional = "";
+
+
 	if($starttime != null || $endtime != null || $type != null || $headcount != null || $recur_enum != null){
+
+		//if user provides times
 		if($starttime != null && $endtime != null && $date != null){
+			//ensure user gives valid time first
+			if(!checkDateTime(true, substr($starttime,1,-1), substr($endtime,1,-1))){
+				
+				exit;
+			}
 
 			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
-				WHERE startdate = $date AND NOT (allowshare = '0' AND ((starttime > $starttime AND endtime <= $endtime) OR (endtime >= $endtime AND starttime < $endtime) 
-				OR(starttime < $starttime AND endtime >= $endtime)))) AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
+				WHERE startdate = $date AND (allowshare = '0' AND ((starttime > $starttime AND endtime <= $endtime) OR (endtime >= $endtime AND starttime < $endtime) 
+				OR(starttime < $starttime AND endtime <= $endtime)))) AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
+
+
+/*
+			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
+				WHERE startdate = $date AND (allowshare = '0' AND ((starttime > $starttime AND endtime <= $endtime) OR (endtime >= $endtime AND starttime < $endtime) 
+				OR(starttime < $starttime AND endtime <= $endtime)))) AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
+*/
+
+
 		} else {
 			$additional = "WHERE ";
 		}
@@ -138,7 +156,7 @@
 	*/
 	
 	$sql = $sql . $additional . " ORDER BY rooms.roomid";
-	//echo $sql;
+	// echo $sql; 
     $result = $conn->query($sql);
 	$i = 0;
 
@@ -189,4 +207,83 @@
 	}
 
 $conn->close();
+
+
+
+//*************************************************************************************
+//This function checks a number of requirements on a new reservation being made.
+//If the reservation being made is before or after the start day and end day time
+//it returns FALSE and the correct error message to the user. If the reservation 
+//made is not on a fifteen minute interval, then it returns FALSE and the correct 
+//message is displayed to the user. If the reservation start time occurs after the
+//end time then return FALSE and display correct message to the user. If the reser-
+//vation being made is good, the correct message is displayed and returnsVal = TRUE.
+//************************************************************************************
+function checkDateTime($outputError, $startToCheck, $endToCheck)
+{
+	//msg variables to indicate the problem that occurred 
+	$returnVal = FALSE;
+
+	$dayStart = DateTime::createFromFormat('H:i', '7:00');
+	$dayEnd  = DateTime::createFromFormat('H:i', '23:00');
+	// use the dayStart and dayEnd times
+	$startToCheck = DateTime::createFromFormat('H:i', $startToCheck);
+	$endToCheck = DateTime::createFromFormat('H:i', $endToCheck);
+	$startDayErrMsg = "Your reservation cannot be made before 7 AM!";
+	$endDayErrMsg = "Your reservation cannot be made after 10 PM!";
+	$minuteErrMsg = "Your reservation must be made on 15 minute increments!";
+	$startTimeErrMsg = "Your reservation start time is occurring after your end time!";
+
+	
+
+	//returns false if reservation made is before the valid start day time
+	if($startToCheck < $dayStart)
+	{
+		$retValue = FALSE;
+		if($outputError)
+		{
+			echo $startDayErrMsg;
+		}
+
+	}
+	//returns false if reservation made is after the valid end day time
+	else if($endToCheck > $dayEnd)
+	{
+		
+	//	echo $endToCheck->format('H:i') . " is greater than " . $dayEnd->format('H:i');
+		$retValue = FALSE;
+		if($outputError)
+		{
+			echo $endDayErrMsg;
+		}
+	}
+	//returns false if reservation made has a minute value that is not on the required fifteen minute interval
+	/* Might need to be removed later, depending on how time is handled.
+	else if($startToCheck%15 != 0)
+	{
+		$retValue = FALSE;
+		if($outputError)
+		{
+			echo $startToCheck%15;
+			echo $minuteErrMsg;
+		}
+	} */
+	//returns false if reservation made has a start time that is after the end time
+	else if($startToCheck > $endToCheck)
+	{
+		$retValue = FALSE;
+		if($outputError)
+		{
+			echo $startTimeErrMsg;
+		}
+	}
+	//returns true if reservation made has no conflicting reservations times already made
+	else
+	{
+		$retValue = TRUE;
+	}
+	
+	
+	return $retValue;
+}
 ?>
