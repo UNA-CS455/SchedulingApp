@@ -64,7 +64,7 @@
     }
 	
 
-	$sql = "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms ";
+	
 	$additional = "";
 
 
@@ -78,30 +78,51 @@
 				exit;
 			}
 
+			if($headcount == null){
+				$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
+					WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
+					AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
+			} else {
+				// if a headcount has been provided, then sharing is allowed. special conditions must be considered:
+				/*
+					1. if there exist a collision with another reservation, then we must check if that colliding reservation has its allow sharing bit set to 1.
+						if this is true, then we won't consider it a conflict. We must check the headcount of this reservation and any other conflicting reservation
+						and sum their headcount field. We then compare this to the room number of seats. If this sum is greater than the number of seats available in a room,
+						then the headcount is too large, and the reservation cannot be made for this particular room.
+					2. if the allow sharing bit is set to 0, then we know that we must treat that room as unavailable as we did above.
+				
+				
+				*/
+				
+				// condition 1:
+				$additional = $additional . "LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, allowshare, roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
+					WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
+					AS subquery ON rooms.roomid = subquery.roomid WHERE (subquery.allowshare != 1 AND subquery.roomid IS NULL) OR (subquery.allowshare != 0 AND NOT subquery.roomSUM < rooms.seats) AND ";
+				
+			}
+/*
+
 			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
 				WHERE startdate = $date AND (allowshare = '0' AND ((starttime > $starttime AND endtime <= $endtime) OR (endtime >= $endtime AND starttime < $endtime) 
 				OR(starttime < $starttime AND endtime <= $endtime)))) AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
 
 
-/*
 			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
 				WHERE startdate = $date AND (allowshare = '0' AND ((starttime > $starttime AND endtime <= $endtime) OR (endtime >= $endtime AND starttime < $endtime) 
 				OR(starttime < $starttime AND endtime <= $endtime)))) AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
 */
-
-
 		} else {
 			$additional = "WHERE ";
 		}
-		if($type != null){
+		
+		//user provided type for room
+		if($type != null){ 
 			$additional = $additional . "rooms.type = '$type' AND ";
 		}
-		if($headcount != null){
-		//	$additional = $additional . "
-		}
 
 
-		$additional = $additional . '1';
+
+		$additional = $additional . '1'; // we are done appending on clauses. All previous statements before this and with 'AND', so we terminate with '1'.
 	}
 
 
@@ -154,12 +175,12 @@
 		
 	}
 	*/
+	$sql = "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms "; // the final table columns that we want.
+	$sql = $sql . $additional . " ORDER BY rooms.roomid";						// construction of the full query along with ordering
+	echo $sql; // used for testing purposes 
 	
-	$sql = $sql . $additional . " ORDER BY rooms.roomid";
-	// echo $sql; 
-    $result = $conn->query($sql);
+    $result = $conn->query($sql); // run the query
 	$i = 0;
-
 
 	$firstPrinted = false;
 	
