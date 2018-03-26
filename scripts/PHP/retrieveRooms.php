@@ -94,13 +94,19 @@
 				
 				*/
 				
-				// condition 1:
+
 				$additional = $additional . "LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, allowshare, roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
 					WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
 					AS subquery ON rooms.roomid = subquery.roomid WHERE (subquery.allowshare != 1 AND subquery.roomid IS NULL) OR (subquery.allowshare != 0 AND NOT subquery.roomSUM < rooms.seats) AND ";
 				
 			}
 /*
+SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, reservations.allowshare, roomid, rooms.seats, rooms.type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber WHERE startdate = '2018-03-08' AND (('07:00' >= starttime AND '07:00' < endtime) OR ('07:00' < starttime AND '10:45' > starttime)) ) AS subquery ON rooms.roomid = subquery.roomid  WHERE (subquery.roomid IS NULL) 
+
+UNION 
+
+SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, reservations.allowshare, roomid, rooms.seats, rooms.type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber WHERE startdate = '2018-03-08' AND (('07:00' >= starttime AND '07:00' < endtime) OR ('07:00' < starttime AND '10:45' > starttime)) ) AS subquery ON rooms.roomid = subquery.roomid  WHERE (subquery.roomid IS NULL) OR (subquery.roomSUM < rooms.seats)
+
 
 			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
 				WHERE startdate = $date AND (allowshare = '0' AND ((starttime > $starttime AND endtime <= $endtime) OR (endtime >= $endtime AND starttime < $endtime) 
