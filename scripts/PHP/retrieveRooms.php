@@ -64,7 +64,7 @@
     }
 	
 
-	
+	$sql = "";
 	$additional = "";
 
 
@@ -94,31 +94,27 @@
 				
 				*/
 				
+				$sql = $sql . "SELECT t1.roomid, t1.seats, t1.type FROM (";
+				$additional = $additional . "LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, reservations.allowshare, roomid, rooms.seats,
+				rooms.type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber WHERE allowshare = 0 AND startdate = $date AND 
+				(($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime))) AS subquery ON rooms.roomid = 
+				subquery.roomid WHERE (subquery.roomid IS NULL)) AS t1
 
-				$additional = $additional . "LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, allowshare, roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
-					WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
-					AS subquery ON rooms.roomid = subquery.roomid WHERE (subquery.allowshare != 1 AND subquery.roomid IS NULL) OR (subquery.allowshare != 0 AND NOT subquery.roomSUM < rooms.seats) AND ";
+				INNER JOIN
+
+				(SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, 
+				reservations.allowshare, roomid, rooms.seats, rooms.type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
+				WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime))) AS 
+				subquery ON rooms.roomid = subquery.roomid WHERE (subquery.roomid IS NULL) OR ((subquery.roomSUM + $headcount) <= rooms.seats)) AS rooms
+
+				USING(roomid) WHERE ";
+				
 				
 			}
-/*
-SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, reservations.allowshare, roomid, rooms.seats, rooms.type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber WHERE startdate = '2018-03-08' AND (('07:00' >= starttime AND '07:00' < endtime) OR ('07:00' < starttime AND '10:45' > starttime)) ) AS subquery ON rooms.roomid = subquery.roomid  WHERE (subquery.roomid IS NULL) 
-
-UNION 
-
-SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, reservations.allowshare, roomid, rooms.seats, rooms.type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber WHERE startdate = '2018-03-08' AND (('07:00' >= starttime AND '07:00' < endtime) OR ('07:00' < starttime AND '10:45' > starttime)) ) AS subquery ON rooms.roomid = subquery.roomid  WHERE (subquery.roomid IS NULL) OR (subquery.roomSUM < rooms.seats)
-
-
-			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
-				WHERE startdate = $date AND (allowshare = '0' AND ((starttime > $starttime AND endtime <= $endtime) OR (endtime >= $endtime AND starttime < $endtime) 
-				OR(starttime < $starttime AND endtime <= $endtime)))) AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
-
-
-			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
-				WHERE startdate = $date AND (allowshare = '0' AND ((starttime > $starttime AND endtime <= $endtime) OR (endtime >= $endtime AND starttime < $endtime) 
-				OR(starttime < $starttime AND endtime <= $endtime)))) AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
-*/
 		} else {
 			$additional = "WHERE ";
+			
+
 		}
 		
 		//user provided type for room
@@ -181,9 +177,9 @@ SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms LEFT JOIN (SELE
 		
 	}
 	*/
-	$sql = "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms "; // the final table columns that we want.
-	$sql = $sql . $additional . " ORDER BY rooms.roomid";						// construction of the full query along with ordering
-	echo $sql; // used for testing purposes 
+	$sql = $sql . "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms "; // the final table columns that we want.
+	$sql = $sql . $additional ;//. " ORDER BY rooms.roomid";						// construction of the full query along with ordering
+	//echo $sql; // used for testing purposes 
 	
     $result = $conn->query($sql); // run the query
 	$i = 0;
