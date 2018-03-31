@@ -5,7 +5,7 @@ session_start();
 <html>
 	<head><link rel="stylesheet" href="styles/rooms.css">
 		<link rel="stylesheet" href="styles/Reservation.css">
-		<link rel="stylesheet" href="styles/links.css">
+		<link rel="stylesheet" href="styles/links.css"> <!--Taylor-->
 		<title></title>
 	
 	</head>
@@ -16,13 +16,14 @@ session_start();
 		</div>
 		</div>
 		<div class = "welcome">
+	<!--Adrianne-->
         <?php
 			if (isset($_SESSION['username'])) {
 				echo "Welcome, " . $_SESSION['username'] ."<br>";
 			}
         ?>
 		</div>
-
+	<!--Taylor-->
 	<a href="url" class="home" >Home</a>
 	<a href="url" class="myReservations" >My Reservations</a>
 	<a href="url" class="settings" >Settings</a>
