@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <html>
 	<head><link rel="stylesheet" href="styles/rooms.css">
 		<link rel="stylesheet" href="styles/Reservation.css">
@@ -10,6 +14,14 @@
 		<div id="banner">
 			<img src="images/una.png" id="logo">
 		</div>
+		</div>
+		<div class = "welcome">
+	<!--Adrianne-->
+        <?php
+			if (isset($_SESSION['username'])) {
+				echo "Welcome, " . $_SESSION['username'] ."<br>";
+			}
+        ?>
 		</div>
 	<!--Taylor-->
 	<a href="url" class="home" >Home</a>
