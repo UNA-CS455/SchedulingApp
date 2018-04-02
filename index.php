@@ -25,7 +25,33 @@ session_start();
 		</div>
 	<!--Taylor-->
 	<a href="url" class="home" >Home</a>
-	<a href="url" class="myReservations" >My Reservations</a>
+	<div class="dropdown">
+	  <button onclick="dropdownRes()" class="dropbtn">My Reservations</button>
+	  <div id="myDropdown" class="dropdown-content">
+
+	  
+
+	  
+
+	  
+	  			<div id="agenda">
+				<span id="agenda-head">
+					<h2 style="text-align:center; color:white; left:10px; font-size: 2.2vmin;"  > My Reservations</h2><br>
+				</span>
+				<br>
+				<span id="agendaReservations"></span>
+			</div>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  </div>
+	</div>
 	<a href="url" class="settings" >Settings</a>
 	<a href="url" class="signOut" >Sign Out</a>
 
@@ -68,8 +94,7 @@ session_start();
     <!-- add css for this boi -->
     Comments<br>
     <textarea rows="10" cols="50" id="comment"></textarea><br><br><br><br><br><br><br><br><br>
-	<input type="hidden" id = "startdate" value = <?php echo "'$date'"; ?>>
-	<input type="hidden" id = "enddate" value = <?php echo "'$date'"; ?>>
+
 	<br><br>
     <button onclick="createClicked()">Make reservation</button><br><br>
 	<font id="responseText"></font>
