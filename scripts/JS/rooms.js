@@ -1,6 +1,8 @@
 
 var showrooms = false;
 
+var showres = false;
+
 var roomSelected = null;
 
 var xhttp = new XMLHttpRequest();
@@ -81,7 +83,7 @@ function getAgendaReservations() {
 			//console.error(this.responseText);
 			var reservation = JSON.parse(this.responseText);
 			
-			var runString = ""//"<h2 style='text-align:center' >Agenda</h2><br><hr><br><h2>Your Active Reservations</h2>";
+			var runString = "<h2 style='text-align:center' >Agenda</h2>";
 			runString+= "<br><table id = 'agendaTable' >\n<th>Room</th><th>From</th><th>To</th><th>Details</th>\n";
 			for(var i = 0; i < reservation.length; i++){
 
@@ -151,7 +153,7 @@ function openConfirmDelete(ele){
 
 	lastDeleteClicked = ele;
 	document.getElementById('deleteRes').style.display = "inline";
-	document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
+	
 	document.getElementById('deleteRes').innerHTML = "<div id='delview'></div><br><br><h2>Are you sure you want to delete reservation:</h2><br><br><br><button id='yesDelete' onclick='deleteClicked(this.id," + String(ele.children[0].id) + ")'>Yes</button><button id='noDelete' onclick='deleteClicked(this.id, " + String(ele.children[0].id) + ")'>No</button>";
 	document.getElementById('deleteRes').innerHTML += "<h3>" + ele.children[0].innerHTML + "</h2>";
 	document.getElementById('deleteRes').innerHTML += "<h3>From:" + ele.children[1].innerHTML + "</h2>";
@@ -527,7 +529,19 @@ function favoriteClicked(parentEle){
 
 function dropdownRes() {
 	getAgendaReservations();
-    document.getElementById("myDropdown").classList.toggle("show");
+    //
+	if (showres == false){
+		showres = true;
+		//document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
+		document.getElementById('agendaReservations').style.display = "block";
+	}
+	else{
+		showres = false;
+		//document.body.style.backgroundColor = "rgba(0,0,0,1)";
+		document.getElementById('agendaReservations').style.display = "none";
+		document.getElementById('deleteRes').style.display = "none";
+	}
+	
 }
 
 // Close the dropdown menu if the user clicks outside of it
@@ -543,4 +557,9 @@ window.onclick = function(event) {
       }
     }
   }
+}
+
+function logoutUser(){
+	// AJAX call to php script
+	console.log('to be implemented....');
 }
