@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+	if (!isset($_SESSION['username'])){
+		header('location: login.html');
+	}
 ?>
 
 <html>
@@ -12,48 +16,29 @@ session_start();
 	<body>  	
 	<script src="scripts/JS/rooms.js"></script>
 		<div id="banner">
-			<img src="images/una.png" id="logo">
-		</div>
-		</div>
-		<div class = "welcome">
-	<!--Adrianne-->
-        <?php
-			if (isset($_SESSION['username'])) {
-				echo "Welcome, " . $_SESSION['username'] ."<br>";
-			}
-        ?>
-		</div>
-	<!--Taylor-->
-	<a href="url" class="home" >Home</a>
-	<div class="dropdown">
-	  <button onclick="dropdownRes()" class="dropbtn">My Reservations</button>
-	  <div id="myDropdown" class="dropdown-content">
+			<div class = "welcome">
+			<!--Adrianne-->
+				<?php
+					if (isset($_SESSION['username'])) {
+						echo "<p id='welcomeText'>Welcome, " . $_SESSION['username'] ."</p><br>";
+					}
+				?>
+			
+			<!--Taylor-->
+	
+	
+			<button onclick="logoutUser();" class="signOut" >Logout</button>
 
-	  
+		</div>
+			<img src="images/una.png" id="logo" onclick="window.location.href = '/'">
+			<button onclick="dropdownRes();"id="myResButton">My Reservations</button>
+			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/userSettings.php'">Settings</button>
+			
+		</div>
 
-	  
+<div id="agendaReservations"></div>
 
-	  
-	  			<div id="agenda">
-				<span id="agenda-head">
-					<h2 style="text-align:center; color:white; left:10px; font-size: 2.2vmin;"  > My Reservations</h2><br>
-				</span>
-				<br>
-				<span id="agendaReservations"></span>
-			</div>
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  </div>
-	</div>
-	<a href="url" class="settings" >Settings</a>
-	<a href="url" class="signOut" >Sign Out</a>
+<div id="deleteRes"></div>
 
 <div class="makeReservation" id="createZone">
   <div class="test">
