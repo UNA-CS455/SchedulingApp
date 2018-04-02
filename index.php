@@ -10,11 +10,14 @@ session_start();
 	<head><link rel="stylesheet" href="styles/rooms.css">
 		<link rel="stylesheet" href="styles/Reservation.css">
 		<link rel="stylesheet" href="styles/links.css"> <!--Taylor-->
+		<link rel="stylesheet" href="styles/popup.css">
 		<title></title>
 	
 	</head>
-	<body>  	
+	<body>
+	<?php include 'modal.php'; ?>
 	<script src="scripts/JS/rooms.js"></script>
+	<script src="scripts/JS/popup.js"></script>
 		<div id="banner">
 			<div class = "welcome">
 			<!--Adrianne-->
