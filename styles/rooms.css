@@ -252,7 +252,7 @@ html, body{
 
 #agenda{
 	text-align: center;
-    z-index: 4;
+    z-index: 40;
     border: 6px solid #5F6062;
     height: 100%;
     width: 22%;
@@ -280,10 +280,10 @@ html, body{
 }
 
 #agendaTable{
-	z-index:4;
+	z-index:40;
 	width:100%;
 	height:30%;
-	top:30px;
+
 }
 
 #agendaTable tbody{
@@ -299,7 +299,7 @@ html, body{
 	position: relative;
     width: 100%;
     height: 22%;
-    display: inline-flex;
+    display: block;
 
 }
 
@@ -338,3 +338,42 @@ html, body{
     height: 20%;
 
 }
+
+
+
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+

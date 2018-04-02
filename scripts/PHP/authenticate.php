@@ -1,7 +1,8 @@
 <?php
+//Adrianne
 session_start();
 
-require "db_conf.php"; // set servername, username, password, and dbname
+require "scripts\PHP\db_conf.php"; // set servername, username, password, and dbname
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
