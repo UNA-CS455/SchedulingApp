@@ -31,8 +31,8 @@ header('location: login.html');
                 <!--Adrianne-->
                 <?php
                 if (isset($_SESSION['username'])) {
-                echo "<p id='welcomeText'>Welcome, " . $_SESSION['username'] ."</p><br>";
-                $logged_in_user = $_SESSION['username']; //used for default in reserving email field.
+					echo "<p id='welcomeText'>Welcome, " . $_SESSION['username'] ."</p><br>";
+					$logged_in_user = $_SESSION['username']; //used for default in reserving email field.
                 }
                 ?>
 
@@ -56,7 +56,9 @@ header('location: login.html');
 
                 Reserving For*:
 					<?php 
-						echo "<input type='text' id='owneremail' value='$logged_in_user' required><br>"
+						if (isset($_SESSION['username'])) {
+							echo "<input type='text' id='owneremail' value='$logged_in_user' required><br>";
+						}
 					?>
                 <!--<div id="filterArea"> -->
                 <!--<font id="typeText">-->
