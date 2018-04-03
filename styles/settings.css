@@ -1,0 +1,30 @@
+#room {
+    left: 21%;
+    position: absolute;
+    top: 15%;
+    height: 100%;
+    width: 100%;
+}
+
+div.d {
+    height: 100%;
+    top: 4%;
+    position: absolute;
+    width: 20%;
+    background-color: lightgrey;
+}
+
+#pages {
+    margin-left: 0%;
+    margin-top: 8%;
+    font-size: 30px;
+    text-align: center;
+    background-color: lightgrey;
+    background-size: cover;
+}
+
+button.settingsButton{
+	background-color: white;
+	padding: 5% 5%;
+	font-size: 30px;
+}
