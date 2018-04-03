@@ -192,7 +192,7 @@ function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $dat
 
 	$newResStart = $newResStart->format('H:i');
 	$newResEnd = $newResEnd->format('H:i');
-	$sql = "SELECT * FROM reservations WHERE allowshare = '0' AND startdate = $date AND roomnumber = $room
+	$sql = "SELECT * FROM reservations WHERE allowshare = '0' AND startdate = '$date' AND roomnumber = '$room'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
 				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
@@ -239,7 +239,7 @@ function checkValidTime($outputError, $newResStart, $newResEnd, $room)
 function checkValidTime_overload($newResStart, $newResEnd, $date, $room)
 {
 	//Return the boolean value
-	return  checkDateTime(false, $newResStart, $newResEnd) && checkAllowSharing_overload(false, $newResStart, $newResEnd,$date, $room );
+	return  checkDateTime(false, $newResStart, $newResEnd) && checkAllowSharing_overload(true, $newResStart, $newResEnd,$date, $room );
 
 }
 

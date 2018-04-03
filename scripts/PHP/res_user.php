@@ -13,7 +13,7 @@
 ?>
 
         <?php
-        $sql = "SELECT * FROM reservations order by startdate, starttime";
+        $sql = "SELECT * FROM reservations WHERE startdate >= NOW() order by startdate, starttime";
         $result = $conn->query($sql);
 		$return_array = array();
         while ($row = $result->fetch_assoc()) {
