@@ -4,7 +4,7 @@
 		exit;
 	}*/
 
-	$user = $_POST['res_email'];
+	$room = $_REQUEST['q'];
 	require "db_conf.php"; // set servername,username,password,and dbname
 
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,9 +14,9 @@
 ?>
 
         <?php
-        $sql = "SELECT * FROM reservations WHERE startdate >= CURDATE() AND (res_email LIKE '%$user%' OR owneremail LIKE '%$user%' ) order by startdate, starttime";
+        $sql = "SELECT * FROM reservations WHERE startdate >= CURDATE() AND (roomid='$room' ) order by startdate, starttime";
         $result = $conn->query($sql);
-		$return_array = array();
+		//$return_array = array();
 		echo "<table><tr><th>res_email</th><th>owner_email</th><th>Room Number</th><th>allow_share</th><th>head_count</th>
 				<th>start_date</th><th>end_date</th><th>start_time</th><th>end_time</th><th>occur</th></tr>";
         while ($row = $result->fetch_assoc()) {

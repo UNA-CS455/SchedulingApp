@@ -47,6 +47,8 @@
 	$headcount = (isset($_GET['headcount'])) ? $_GET['headcount'] : null;
 	$recur_enum = (isset($_GET['recur'])) ? $_GET['recur'] : null;
 	$date = (isset($_GET['date'])) ? $_GET['date'] : null; // format as 'Y/d/m'
+	
+	//TODO: VALIDATION
 	//////////////////////////////////////////////////////////////////////////
 
 	//set username if not already set for testing
@@ -112,7 +114,15 @@
 				
 			}
 		} else {
+			
 			$additional = "WHERE ";
+			
+			
+			//if user doesn't provide times but wishes to query on headcount:
+			if($headcount != null){
+				//$additional TODO: add headcount query here
+			}
+			
 			
 
 		}
