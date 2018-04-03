@@ -10,11 +10,13 @@
 	$result = $conn->query($sql);
 	
 	if($result->num_rows > 0){
-		echo "<table><tr><th>Useremail</th><th>First Name</th><th>Last Name</th><th>role</th><th>Permissions</th></tr>";
+		echo "<table><tr><th>Useremail</th><th>Permissions</th><th></th><th></th></tr>";
 		while ($row = $result->fetch_assoc()) {
-			echo "<tr><td>" . $row['email'] . "</td><td>" . $row['firstname'] . "</td><td>" 
-				. $row['lastname'] . "</td><td>" . $row['classification'] . "</td><td>" . $row['permissions'] . "</td>";
+			echo "<tr><td>" . $row['email'] . "</td><td>" . $row['permissions'] . "</td>";
 			echo "<td><form action='updateUser.php' method='POST'>
+					<input type='hidden' name='user' value='". $row['email'] ."'>
+					<input type='submit' value='Submit'></form></td></tr>";
+			echo "<td><form action='deleteUser.php' method='POST'>
 					<input type='hidden' name='user' value='". $row['email'] ."'>
 					<input type='submit' value='Submit'></form></td></tr>";
 		}
