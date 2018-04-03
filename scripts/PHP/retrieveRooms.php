@@ -196,44 +196,20 @@
 
 	$firstPrinted = false;
 	
-	echo "<tr style='height: 7%;'><th style='font-size: 3vmin;'>All Rooms</th></tr>";
 	while ($row = $result->fetch_assoc()) 
 	{
 
 		$imgName = "images/fav-unselect.png";
-		if($i == 0)
-		{
-			echo "<tr>";
+		$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
+		$result2 = $conn->query($sql);
+		while ($row2 = $result2->fetch_assoc()) {
+			// there is a favorite.
+			$imgName = "images/fav-select.png"; //color in star if this room is a favorite 
 		}
-		if($i == 4)
-		{
-			$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
-			$result2 = $conn->query($sql);
-
-			while ($row2 = $result2->fetch_assoc()) {
-				// there is a favorite.
-				$imgName = "images/fav-select.png";
-			}
-			echo "<td class = 'room' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement);' class='favoriteIcon'><font id = '".$row['roomid']."' onclick='selectRoom(this.id)' class='roomText'><b>" . $row['roomid'] ."</b><br><br>". $row['seats'] ."<br>" . $row['type'] . "</font></td>";
-			echo "</tr>";
-			$i = 0;
-		}
-		
-		else
-		{	
-			$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
-			$result2 = $conn->query($sql);
-
-			while ($row2 = $result2->fetch_assoc()) {
-				// there is a favorite.
-				$imgName = "images/fav-select.png";
-			}
-			echo "<td class = 'room' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement);' class='favoriteIcon'><font id = '".$row['roomid']."' onclick='selectRoom(this.id)' class='roomText'><b>" . $row['roomid'] ."</b><br><br>". $row['seats'] ."<br>" . $row['type'] . "</font></td>";
-			$i++;
-		}
-		
 
 		
+		echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = '".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
+			
 	}
 	if($result->num_rows == 0){
 		echo "<h4> No Results </h4>";

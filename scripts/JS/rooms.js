@@ -6,15 +6,17 @@ var showrooms = false;
 var showres = false;
 var roomSelected = null;
 
-
+fieldChanged();
+/*
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-	document.getElementById("roominsert").innerHTML = this.responseText;
+	document.getElementById("bookArea").innerHTML = this.responseText;
    }
 };
-xhttp.open("GET", "scripts/PHP/allrooms.php", true);
-xhttp.send();
+console.error('test');
+xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
+xhttp.send(); */
 
 /*
 function toggleRoomView()
@@ -322,7 +324,10 @@ function compChanged(id){
 */
 function fieldChanged(){
 //Get variables from fields
-var checkbox = document.getElementById('allowshare').checked;
+var checkbox = false;
+if(document.getElementById('allowshare') != null){
+	var checkbox = document.getElementById('allowshare').checked;
+}
 var type = document.getElementById('typeSelect');
 var starttime = document.getElementById('timeStart');
 var endtime = document.getElementById('timeEnd');
@@ -348,7 +353,8 @@ if(seats !== null && seats.value >0 && checkbox == true){
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
 	if (this.readyState === 4 && this.status === 200) {
-		document.getElementById("roominsert").innerHTML = this.responseText;
+		document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 3vmin;'>All Rooms<h1><br>"
+		document.getElementById("bookArea").innerHTML = this.responseText;
 }
 };
 xhttp.open("GET", "scripts/PHP/retrieveRooms.php" + GETString, true);
@@ -513,10 +519,11 @@ function favoriteClicked(parentEle){
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("roominsert").innerHTML = this.responseText;
+						document.getElementById("bookArea").innerHTML = this.responseText;
 					}
 				};
-				xhttp.open("GET", "scripts/PHP/allrooms.php", true);
+				xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
+				xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
 				xhttp.send();
 		}
 	};
