@@ -1,7 +1,7 @@
 *{
 	position: absolute;
 	font-family: "Weiss Medium";
-    font-size: 1.6vmin;
+    	 font-size: 1.6vmin; 
 }
 
 html, body{
@@ -118,7 +118,7 @@ html, body{
 }
 
 #bookArea{
-	    width: 96%;
+	width: 96%;
     height: 85%;
     left: 2%;
     top: 7.5%;
@@ -127,7 +127,7 @@ html, body{
 }
 
 #allRooms{
-	    width: 98%;
+	width: 98%;
     height: 97%;
     left: 1%;
     top: 1.5%;
@@ -216,14 +216,14 @@ html, body{
     top: -12%;
     width: 8%;
 }
-
+/*
 #typeSelect{
 	left: 7%;
     top: -12.5%;
     width: 24%;
     height: 28%;
 }
-
+*/
 #floorText{
 	left: 34%;
     top: -12%;

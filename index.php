@@ -9,21 +9,22 @@ session_start();
 <html>
 	<head><link rel="stylesheet" href="styles/rooms.css">
 		<link rel="stylesheet" href="styles/Reservation.css">
-		<link rel="stylesheet" href="styles/links.css"> <!--Taylor-->
+		<!-- Add? <link rel="stylesheet" href="styles/links.css"> <!--Taylor-->
 		<link rel="stylesheet" href="styles/popup.css">
 		<title></title>
 	
 	</head>
 	<body>
 	<?php include 'modal.php'; ?>
-	<script src="scripts/JS/rooms.js"></script>
 	<script src="scripts/JS/popup.js"></script>
+	<script src="scripts/JS/rooms.js"></script>
 		<div id="banner">
 			<div class = "welcome">
 			<!--Adrianne-->
 				<?php
 					if (isset($_SESSION['username'])) {
 						echo "<p id='welcomeText'>Welcome, " . $_SESSION['username'] ."</p><br>";
+						$logged_in_user = $_SESSION['username']; //used for default in reserving email field.
 					}
 				?>
 			
@@ -46,22 +47,24 @@ session_start();
 <div class="makeReservation" id="createZone">
   <div class="test">
   <h1>Make Reservation</h1>
-    Reserving email*:
-    <input type="text" id="owneremail" required>
-
-	<div id="filterArea">
-		<font id="typeText">Type:  </font> 
+    Reserving For*:
+	<?php 
+    echo "<input type='text' id='owneremail' value='$logged_in_user' required><br>"
+	?>
+	<!--<div id="filterArea"> -->
+		<!--<font id="typeText">-->
+		<br>Type: <!--</font> -->
 		<select id="typeSelect" onchange="fieldChanged()">
 			<option value="Any">Any</option>
 			<option value="Classroom">Classroom</option>
 			<option value="Conference">Conference Room</option>
 			<option value="Computer Lab">Computer Lab</option>
 		</select>
-	</div>
+	<!--</div> -->
 
     <p>Duration*:</p>
 	Date:
-	<input id = 'date' name = 'date' type = 'date' onchange = "fieldChanged()"><br><br>
+	<input id = 'date' name = 'date' type = 'date' onchange = "fieldChanged()" value=<?php echo date('Y-m-d'); ?>><br><br>
     Start time:
     <input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" onchange = "fieldChanged()" required><br><br>
 
@@ -84,28 +87,26 @@ session_start();
     <textarea rows="10" cols="50" id="comment"></textarea><br><br><br><br><br><br><br><br><br>
 
 	<br><br>
-    <button onclick="createClicked()">Make reservation</button><br><br>
+    <button onclick="openConfirmCreate()">Make reservation</button><br><br>
 	<font id="responseText"></font>
 </div>
 </div>
 
-<div class="calendar">
-		<div id="createRes">
-		
-				<div id="roomMenu">
+    <div class="calendar"> 
+		    <!-- <div id="createRes"> -->
+			<div id="roomMenu">		
+				<div id="bookArea">
+					<table id="allRooms">
+						<tbody id="roominsert">
 					
-			<div id="bookArea">
-				<table id="allRooms">
-					<tbody id="roominsert">
-					
-					</tbody>
-				</table>
-			</div>
-		</div>
+						</tbody>
+					</table>
+				</div>
+			    <!-- </div> -->
 		</div>
 
-  <table style="width:100%">
-		</div>		
+		<table style="width:100%">
+	</div>		
 
 	</body>
 </html>

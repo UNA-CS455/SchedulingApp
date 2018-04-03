@@ -73,3 +73,8 @@ function showMessageBox(message,header,buttonhtml, allowClickOutsideClose){
 	
 
 }
+
+function closeModal(){
+	var modal = document.getElementById('myModal');
+	modal.style.display = "none";
+}

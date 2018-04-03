@@ -1,9 +1,13 @@
 
+
 var showrooms = false;
 
 var showres = false;
 
 var roomSelected = null;
+
+
+
 
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
@@ -83,7 +87,7 @@ function getAgendaReservations() {
 			//console.error(this.responseText);
 			var reservation = JSON.parse(this.responseText);
 			
-			var runString = "<h2 style='text-align:center' >Agenda</h2>";
+			var runString = "<h2 style='text-align:center' >Active Reservations</h2>";
 			runString+= "<br><table id = 'agendaTable' >\n<th>Room</th><th>From</th><th>To</th><th>Details</th>\n";
 			for(var i = 0; i < reservation.length; i++){
 
@@ -348,7 +352,7 @@ function createClicked(){
 	if (roomSelected == null)
 	{
 		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please choose a room first (at the top)!";
+		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
 		return;
 	}
 
@@ -463,27 +467,32 @@ sharing = 1;
 			document.getElementById('responseText').innerHTML = this.responseText;
 			if (this.responseText == "Reservation made successfully"){
 				document.getElementById('responseText').style.color = "green";
-/*
-setTimeout(function(){
-document.getElementById('createRes').style.display = "none";
-document.body.style.backgroundColor = "rgba(0,0,0,0)";
-switchCreate = false;
-}, 1500);
-*/
 			}
-		else{
+		else
+		{
 			document.getElementById('responseText').style.color = "red";
 		}
 
 		}
-//no longer neccesary
-//getAgendaReservations();
-//loadCalendar(); // reload the calendar to reflect new reservations.
 	};
 	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
 }
+
+function openConfirmCreate(){
+	if (roomSelected == null)
+	{
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
+		return;
+	}
+	var modal = document.getElementById('myModal');
+	buttonhtml = "<span><button onclick='createClicked()'>Book it</button></span> <span><button onclick='closeModal()'>Cancel</button></span>"
+	showMessageBox("Are you sure you want to reserve " + roomSelected + "?" ,"Confirm",buttonhtml, false);
+	
+}
+
 function calendarNavi(month, year){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
