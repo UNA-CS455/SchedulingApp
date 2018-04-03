@@ -24,7 +24,7 @@ header('location: login.html');
 
             <img src="images/una.png" id="logo" onclick="window.location.href = 'index.php'">
             <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/userSettings.php'">Settings</button> 
+			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/roomSettings.php'">Settings</button> 
 
 			
 			<div class = "welcome">
@@ -44,7 +44,7 @@ header('location: login.html');
             </div>
         </div>
 
-        <div id="agendaReservations"></div>
+        <div style="position:absolute" id="agendaReservations"></div>
 
         <div id="deleteRes"></div>
 
@@ -102,20 +102,11 @@ header('location: login.html');
 
         </div>
 
-        <div class="calendar"> 
-            <!-- <div id="createRes"> -->
-            <div id="roomMenu">		
-                <div id="bookArea">
-                    <table id="allRooms">
-                        <tbody id="roominsert">
-
-                        </tbody>
-                    </table>
-                </div>
-                <!-- </div> -->
-            </div>
-
-            <table style="width:100%">
+        <div class="outerBookArea"> 
+			<span id="favsheader"></span>	
+			<div id="favsbookArea"></div>
+			<span id="allroomsheader"></span>	
+			<div id="bookArea"></div>
         </div>		
 
     </body>
