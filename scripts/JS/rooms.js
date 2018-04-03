@@ -569,8 +569,8 @@ window.onclick = function(event) {
 }
 
 function logoutUser(){
-	// AJAX call to php script
-	console.log('to be implemented....');
+	window.location.href += './scripts/PHP/logout.php';
+	//console.log('to be implemented....');
 }
 
 /*
