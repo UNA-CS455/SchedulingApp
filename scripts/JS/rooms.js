@@ -50,6 +50,7 @@ function changeSheet(){
 	}
 	else {
 		document.getElementById('numseatstext').style.visibility = "hidden";
+		
 
 	}
 }
@@ -321,7 +322,7 @@ function compChanged(id){
 */
 function fieldChanged(){
 //Get variables from fields
-
+var checkbox = document.getElementById('allowshare').checked;
 var type = document.getElementById('typeSelect');
 var starttime = document.getElementById('timeStart');
 var endtime = document.getElementById('timeEnd');
@@ -339,7 +340,7 @@ if((starttime !== null && starttime.value.length > 0) && (endtime !== null && en
 if(recurring !== null && recurring.selectedIndex != 0){
 	GETString += ("&recur=" + recurring.selectedIndex); // pass the index, which will be our enumerated type.
 }
-if(seats !== null && seats.value >0){
+if(seats !== null && seats.value >0 && checkbox == true){
 	GETString += ("&headcount=" + seats.value);
 }
 
@@ -363,6 +364,7 @@ should also be checked on the server side for sanitation.
 */
 function createClicked(){
 // sanity checks first.
+	document.getElementById('responseText').innerHTML = "";
 	if (roomSelected == null)
 	{
 		document.getElementById('responseText').style.color = "red";
@@ -469,7 +471,10 @@ function createClicked(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById('responseText').innerHTML = this.responseText;
+			//document.getElementById('responseText').innerHTML = this.responseText;
+			showMessageBoxOK(this.responseText,"Make Reservation", false);
+			clearFields();
+			/*
 			if (this.responseText == "Reservation made successfully"){
 				document.getElementById('responseText').style.color = "green";
 			}
@@ -477,7 +482,7 @@ function createClicked(){
 		{
 			document.getElementById('responseText').style.color = "red";
 		}
-
+		*/
 		}
 	};
 	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
@@ -582,8 +587,28 @@ function openConfirmCreate(){
 		return;
 	}
 
-	buttonhtml =  "<button class='modal-button' onclick='createClicked()'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
+	buttonhtml =  "<button class='modal-button' onclick='closeModal(); createClicked();'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
 	showMessageBox("Are you sure you want to reserve " + roomSelected + "?" ,"Confirm",buttonhtml, false);
 
+	
+}
+
+/*
+Function to clear input fields under the Make Reservation section.
+Author: Derek Brown
+Date: 4/2/2018
+
+*/
+function clearFields(){
+	document.getElementById('responseText').innerHTML = "";
+	document.getElementById("occur").selectedIndex= 0;
+	document.getElementById("typeSelect").selectedIndex= 0;
+	document.getElementById("timeStart").value= '';
+	document.getElementById("timeEnd").value= '';
+	document.getElementById("date").value= '';
+	document.getElementById("allowshare").checked= false;
+	document.getElementById("numberOfSeats").value = '';
+	document.getElementById("comment").value= '';
+	fieldChanged();
 	
 }

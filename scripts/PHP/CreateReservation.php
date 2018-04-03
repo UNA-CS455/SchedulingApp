@@ -63,9 +63,6 @@ $startminute = ($_POST['startminute']);
 $startminute = trim($startminute);
 $startminute = filter_var($startminute, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
 
-//variable for start date of reservation
-$startdate = ($_POST['startdate']);
-
 //hour reservation ends
 $endhour = ($_POST['endhour']);
 $endhour = trim($endhour);
@@ -77,7 +74,7 @@ $endminute = trim($endminute);
 $endminute = filter_var($endminute, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
 
 //variable for end date of reservation
-$enddate = ($_POST['enddate']);
+$date = ($_POST['date']);
 
 //dropdown menu for how often the reservation should occur
 $occur = ($_POST['occur']);
@@ -86,11 +83,9 @@ $occur = ($_POST['occur']);
 $comment = ($_POST['comment']);
 $comment = trim($comment);
 $comment = filter_var($comment, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z''-'\s]{1,250}$/")));
-//$comment = str_replace("'","\'", $comment);
+$comment = str_replace("'","\'", $comment);
+// TODO: strip " character
 
-//submit button variable
-//probably don't need this?
-//$reserve = ($_POST['reserve']);
 
 //We must validate the times and constraints given 
 require_once 'ValidateReservation.php'; // gain access to validation functions
@@ -106,7 +101,7 @@ if(checkValidTime(true, $starthour . ":" . $startminute, $endhour . ":" . $endmi
 	}
 
 	//if connection is success, insert data into database and echo to user result
-	$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$startdate', '$enddate', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
+	$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$date', '$date', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
 		
 		if ($conn->query($sql) === TRUE) {
 			echo "Reservation made successfully";

@@ -11,6 +11,8 @@ header('location: login.html');
         <link rel="stylesheet" href="styles/Reservation.css">
         <!-- Add? <link rel="stylesheet" href="styles/links.css"> <!--Taylor-->
         <link rel="stylesheet" href="styles/popup.css">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+		
         <title></title>
 
     </head>
@@ -22,7 +24,8 @@ header('location: login.html');
 
             <img src="images/una.png" id="logo" onclick="window.location.href = 'index.php'">
             <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-            <button id="settingsButton" onclick="window.location.href += 'scripts/PHP/userSettings.php'">Settings</button>
+			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/userSettings.php'">Settings</button> 
+
 			
 			<div class = "welcome">
                 <!--Adrianne-->
@@ -82,7 +85,7 @@ header('location: login.html');
 						<option value="Monthly">Monthly</option>
 					</select><br><br>
 
-				<input type="checkbox" onclick="changeSheet()" id="allowshare">Allow room sharing<br><br>
+				<input type="checkbox" onclick="changeSheet(); fieldChanged();" id="allowshare">Allow room sharing<br><br>
 
 				<span id="numseatstext" style="visibility:hidden"> Expected number of seats needed: <input type="text" id="numberOfSeats" style="width: 48px;" onchange = "fieldChanged()"></span> <br><br>
 
@@ -91,7 +94,7 @@ header('location: login.html');
                 <br><br>
 				<input type="submit" value="Make Reservation">
                 <!-- <button onclick="openConfirmCreate()">Make reservation</button><br><br> -->
-
+				<br>
                 <font id="responseText"></font>
             </form>
 
