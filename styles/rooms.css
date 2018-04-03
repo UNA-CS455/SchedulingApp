@@ -1,7 +1,7 @@
 *{
 	position: absolute;
 	font-family: "Weiss Medium";
-    	 font-size: 1.6vmin; 
+    font-size: 1.6vmin; 
 }
 
 html, body{
@@ -38,7 +38,7 @@ html, body{
 
 
 #banner{
-	width: 99%;
+	width: 100%;
 	height: 13%;
 	left: 0%;
 	top: 0%;
@@ -265,7 +265,7 @@ html, body{
     height: 63%;
     top: 25%;
     width: 28%;
-    z-index: 200;
+    z-index: 99;
     display: none;
     left: 35%;
     background-color: ghostwhite;
@@ -273,8 +273,7 @@ html, body{
 }
 
 #agenda-head{
-		text-align: left;
-
+	text-align: left;
     height: 50px;
     width: 100%;
     left: 0;

@@ -47,6 +47,7 @@ function showMessageBox(message,header,buttonhtml, allowClickOutsideClose){
 	var modal = document.getElementById('myModal');
 	
 	// set content
+	document.getElementById('modal-header-text').innerHTML = header;
 	document.getElementById('modalMessage').innerHTML = message;
 	document.getElementById('buttonContent').innerHTML = buttonhtml;
 
@@ -58,7 +59,7 @@ function showMessageBox(message,header,buttonhtml, allowClickOutsideClose){
 
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
-		modal.style.display = "none";
+		closeModal();
 	}
 
 	// When the user clicks anywhere outside of the modal, close it

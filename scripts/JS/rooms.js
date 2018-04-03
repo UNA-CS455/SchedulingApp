@@ -1,12 +1,10 @@
 
-
+/*
+Needed globals
+*/
 var showrooms = false;
-
 var showres = false;
-
 var roomSelected = null;
-
-
 
 
 var xhttp = new XMLHttpRequest();
@@ -18,6 +16,7 @@ xhttp.onreadystatechange = function() {
 xhttp.open("GET", "scripts/PHP/allrooms.php", true);
 xhttp.send();
 
+/*
 function toggleRoomView()
 {
 	if (showrooms == false)
@@ -41,6 +40,7 @@ function toggleRoomView()
 		document.body.style.backgroundColor = "rgba(0,0,0,0)";
 	}
 }
+*/
 
 //Leaves the number of seats text box grey and disabled if allowshare is not checked.
 function changeSheet(){
@@ -120,13 +120,18 @@ function handleClick(e){
 
 }
 
+/*
+Function to perform the deletion of a reservation from the My Reservations table.
+*/
 function deleteClicked(id, id2){
 
 	if (id == "yesDelete"){
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				alert(this.responseText);
+				//alert(this.responseText);
+				buttonhtml =  "<button class='modal-button' onclick='closeModal()'>Ok</button>"
+				showMessageBox(this.responseText ,"Delete Reservation",buttonhtml, false);
 				document.getElementById('deleteRes').style.display = "none";
 				document.body.style.backgroundColor = "rgba(0,0,0,0)";
 				switchDelete = false;
@@ -140,7 +145,7 @@ function deleteClicked(id, id2){
 		xmlhttp.open("POST", "scripts/PHP/room_remove.php", true);
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("id=" + id2);
-		loadCalendar(); // reload the calendar to reflect new reservations.
+		//loadCalendar(); // reload the calendar to reflect new reservations.
 	}
 	else{
 		document.getElementById('deleteRes').style.display = "none";
@@ -156,6 +161,7 @@ function openConfirmDelete(ele){
 	// set id of info tag to append this info below.
 
 	lastDeleteClicked = ele;
+	/*
 	document.getElementById('deleteRes').style.display = "inline";
 	
 	document.getElementById('deleteRes').innerHTML = "<div id='delview'></div><br><br><h2>Are you sure you want to delete reservation:</h2><br><br><br><button id='yesDelete' onclick='deleteClicked(this.id," + String(ele.children[0].id) + ")'>Yes</button><button id='noDelete' onclick='deleteClicked(this.id, " + String(ele.children[0].id) + ")'>No</button>";
@@ -163,9 +169,13 @@ function openConfirmDelete(ele){
 	document.getElementById('deleteRes').innerHTML += "<h3>From:" + ele.children[1].innerHTML + "</h2>";
 	document.getElementById('deleteRes').innerHTML += "<h3>To:" + ele.children[2].innerHTML + "</h2>";
 	//alert(ele.children[0].innerHTML + " " + ele.children[1].innerHTML + " " + ele.children[2].innerHTML);
+	*/
+	buttonhtml =  "<button class='modal-button' onclick='closeModal()'>Ok</button>"
+	showMessageBox("<br><br>Are you sure you want to delete reservation:<br><br>" + ele.children[0].innerHTML + "<br>From:<br>" + ele.children[1].innerHTML + "<br>To:<br>" + ele.children[2].innerHTML + "<br><br><button class = 'modal-button' id='yesDelete' onclick='deleteClicked(this.id," + String(ele.children[0].id) + ")'>Yes</button><button class='modal-button' id='noDelete' onclick='closeModal()'>No</button>" ,"Delete Reservation","", false);
 
 }
 
+/*
 function findDay(dayNum){
 	switch (dayNum){
 		case "01":
@@ -308,7 +318,7 @@ function compChanged(id){
 	}
 	
 }
-
+*/
 function fieldChanged(){
 //Get variables from fields
 
@@ -340,13 +350,17 @@ xhttp.onreadystatechange = function() {
 		document.getElementById("roominsert").innerHTML = this.responseText;
 }
 };
-//console.error("scripts/PHP/retrieveRooms.php" + GETString);
 xhttp.open("GET", "scripts/PHP/retrieveRooms.php" + GETString, true);
 xhttp.send();
 
 
 }
 
+/*
+Function to be called when the intention is to perform an insert into the database of a new reservation.
+will perform sanity checks and acquire variables needed to pass to CreateReservation.php. Any values obtained here
+should also be checked on the server side for sanitation.
+*/
 function createClicked(){
 // sanity checks first.
 	if (roomSelected == null)
@@ -361,19 +375,10 @@ function createClicked(){
 	var endTime = document.getElementById("timeEnd").value;
 	var date = document.getElementById("date").value;
 	var sharing = Number( document.getElementById("allowshare").checked);
-
-/*if (sharing == false){	//sharing is typecasted above because we believe it will work that way. Keeping this just in case it doesn't
-sharing = 0;
-}
-else{
-sharing = 1;
-}*/
-
 	var startHour = startTime.charAt(0) + startTime.charAt(1);
 	var startMin = startTime.charAt(3) + startTime.charAt(4);
 	var endHour = endTime.charAt(0) + endTime.charAt(1);
 	var endMin = endTime.charAt(3) + endTime.charAt(4);
-
 	var numSeats = document.getElementById("numberOfSeats").value;
 	var comment = document.getElementById("comment").value;
 	//var start = document.getElementById("start");
@@ -480,19 +485,8 @@ sharing = 1;
 	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
 }
 
-function openConfirmCreate(){
-	if (roomSelected == null)
-	{
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
-		return;
-	}
-	var modal = document.getElementById('myModal');
-	buttonhtml = "<span><button onclick='createClicked()'>Book it</button></span> <span><button onclick='closeModal()'>Cancel</button></span>"
-	showMessageBox("Are you sure you want to reserve " + roomSelected + "?" ,"Confirm",buttonhtml, false);
-	
-}
 
+/*
 function calendarNavi(month, year){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -504,6 +498,7 @@ function calendarNavi(month, year){
 	xhttp.send();
 }
 
+*/
 
 function favoriteClicked(parentEle){
 	let star = document.getElementById(parentEle.id);
@@ -571,4 +566,24 @@ window.onclick = function(event) {
 function logoutUser(){
 	// AJAX call to php script
 	console.log('to be implemented....');
+}
+
+/*
+Function to be called when the make reservation button has been clicked. Opens a confirmation dialog to
+ask the user to confirm their reservation details.
+Author: Derek Brown
+Date: 4/2/2018
+
+*/
+function openConfirmCreate(){
+	if (roomSelected == null){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
+		return;
+	}
+
+	buttonhtml =  "<button class='modal-button' onclick='createClicked()'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
+	showMessageBox("Are you sure you want to reserve " + roomSelected + "?" ,"Confirm",buttonhtml, false);
+
+	
 }

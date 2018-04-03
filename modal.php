@@ -13,7 +13,7 @@ echo "
 
   <!-- Modal content -->
   <div class='modal-content'>
-	<div class='modal-content-header'><h1 class='modal-header-text'></h1> <span class='close'>&times;</span></div>
+	<div class='modal-content-header'><h1 style='color:white; left:3%;' id ='modal-header-text'></h1> <span class='close'>&times;</span></div>
 	<p class='modal-content-text' id = 'modalMessage'>Enter text</p>
 	<p class='modal-center-text' id = 'buttonContent'></p>
   </div>
