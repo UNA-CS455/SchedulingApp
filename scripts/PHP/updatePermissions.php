@@ -1,10 +1,6 @@
 <?php
 	
 	$currUser = $_POST['currUser'];
-	$user = $_POST['userEmail'];
-	$first = $_POST['first'];
-	$last = $_POST['last'];
-	$role = $_POST['role'];
 	$permissions = $_POST['permissions'];
 
 	require "db_conf.php";
@@ -21,6 +17,6 @@
 	}
 	else
 	{
-		echo "<p> failure </p>";
+		echo "<p> failure $currUser $sql </p>";
 	}
 	$conn->close();

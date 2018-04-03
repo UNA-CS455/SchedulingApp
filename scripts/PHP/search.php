@@ -1,26 +1,24 @@
 <?php
-	$user = $_POST['userid'];
+	$user = $_REQUEST['q'];
 	require "db_conf.php";
 				
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-	$sql = "SELECT * FROM users WHERE email LIKE '%$user%'";
+	$sql = "SELECT * FROM users WHERE email LIKE '$user%'";
 	$result = $conn->query($sql);
 	
-	if($result->num_rows > 0){
-		echo "<table><tr><th>Useremail</th><th>Permissions</th><th></th><th></th></tr>";
-		while ($row = $result->fetch_assoc()) {
-			echo "<tr><td>" . $row['email'] . "</td><td>" . $row['permissions'] . "</td>";
-			echo "<td><form action='updateUser.php' method='POST'>
-					<input type='hidden' name='user' value='". $row['email'] ."'>
-					<input type='submit' value='Submit'></form></td></tr>";
-			echo "<td><form action='deleteUser.php' method='POST'>
-					<input type='hidden' name='user' value='". $row['email'] ."'>
-					<input type='submit' value='Submit'></form></td></tr>";
-		}
-	} else {
-		echo "<p> Error: no users found. </p>";
-	}
-	$conn->close();
+	$return_array = array();
+	while ($row = $result->fetch_assoc()) {
+		$rowResult = array(
+		"firstname" => $row['firstname'],
+		"lastname" => $row['lastname'],
+		"email" => $row['email'],
+		"role" => $row['permissions']
+	);
+	$return_array[] = $rowResult; // append row to result.
+}
+$conn->close();
+
+echo json_encode($return_array);
