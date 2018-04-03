@@ -12,7 +12,10 @@
 	if ($result->num_rows === 1){
 		$row = $result->fetch_assoc();
 		$room = $row['roomid'];
+		//added to create space from room settings search bar
+		// ADD THIS AND STYLE TO YOUR LIKING 
 		echo "<form action='updateRoom.php' METHOD='POST'>";
+		//echo "<div class=\"roomContainer\">";
 		echo "<br> Current Room: " . $row['roomid'];
 		echo "<input type='text' value='" . $row['roomid'] . "' name='currRoom' hidden>";
 		echo "<br> New room number: <input type='text' value='" . $row['roomid'] . "'name='roomNumber'>";
@@ -27,7 +30,7 @@
 		echo "<br> Seats: <input type='text' value='" . $row['seats'] . "'name='seats'>";
 		echo "<br> Number of computers: <input type='text' value='" . $row['numcomputers'] . "' name='numcomputers'>";
 		echo "<br> <input type='submit' value='Save changes'></form>";
-		
+		// ADD THIS FOR STYLING echo "</div>";
 		$sql = "SELECT * FROM reservations WHERE startdate >= CURDATE() AND roomnumber='$room' order by startdate, starttime";
         $result = $conn->query($sql);
 		echo "<h1> <br> Current Bookings <br></h1>";
@@ -50,7 +53,7 @@
 	}
 	else if ($result->num_rows > 1) 
 	{
-		echo "<br>Continue entering room name.";
+		echo "<br><br><br>Continue entering room name.";
 	}
 	else {
 		echo "<br>Error: No room matching current name.";
