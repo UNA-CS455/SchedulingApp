@@ -9,8 +9,11 @@ if (!isset($_SESSION['username'])){
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="/styles/settings.css">
+ <link rel="stylesheet" href="/app/styles/rooms.css">
+ 
+	
 <script>
+
 function findRoom(str) {
     if (str.length == 0) {
         document.getElementById("roomInfo").innerHTML = "";
@@ -33,51 +36,47 @@ function findRoom(str) {
 <body>
 	<div id="banner">
 
-        <img src="/images/una.png" id="logo" onclick="window.location.href = 'index.php'">
+        <img src="/app/images/una.png" id="logo" onclick="window.location.href = '/app'">
         <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-		<button id="settingsButton" onclick="window.location.href = '/scripts/PHP/roomSettings.php'">Settings</button> 
+		<button id="settingsButton" onclick="window.location.href = '/app/scripts/PHP/roomSettings.php'">Settings</button> 
 		<div class = "welcome">
-            <!--Adrianne-->
             <?php
             if (isset($_SESSION['username'])) {
 				echo "<p id='welcomeText'>Welcome, " . $_SESSION['username'] ."</p><br>";
 				$logged_in_user = $_SESSION['username']; //used for default in reserving email field.
             }
             ?>
-		<button onclick="logoutUser();" class="welcome" >Logout</button>
-
-            <!--Taylor-->
-
-
-			<!-- <button onclick="logoutUser();" class="signOut" >Logout</button> -->
-
-        </div>
+		<button onclick="logoutUser();" class="signOut" >Logout</button>
+	</div>
     </div>
 	<div class = "d";
 	<table id = "pages">
 	  <tr>
-		<th>Pages<br></th>
+		<th>Pages</th>
 	  </tr>
 	  <tr>
-		<td><br><button class = "settingsButton">User Settings</button><br></td>
+		<td><br><button class = "settingsButton">User Settings</button></td>
 	  </tr>
 	  <tr>
-		<td><br><button class = "settingsButton">Room Settings</button><br></td>
+		<td><br><button class = "settingsButton">Room Settings</button></td>
 		<br>
 	  </tr>
 	</table>
 	</div>
 
-	<div id = "room"><h1> Room Settings </h1>
+	<div id = "room"><h2> Room Settings: </h2><br>
 	<form>
-		Search Room: <br>
+		<p><b>Search Room:</b></p><br> <br>
 		<input type="text" onkeyup="findRoom(this.value)">
 		</form>
 		<p>  <span id="roomInfo"></span></p>
+		<br><br>
 		<?php
 			if(isset($_SESSION['msg'])){
+				echo "<br>";
 				echo $_SESSION['msg'];
 				unset($_SESSION['msg']);
+				
 			}
 		?>
 	</div>
