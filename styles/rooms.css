@@ -1,7 +1,7 @@
 *{
 	/*position: absolute;*/
 	font-family: "Weiss Medium";
-    font-size: 1.6vmin; 
+    font-size: 1.65vmin; 
 }
 
 html, body{
@@ -90,7 +90,7 @@ html, body{
 	height: 50%;
 	left: 34.5%;
 	top: 13%;
-	z-index: 550;
+	z-index: 555;
 	display: none;
 	background-color: #f2f2f2;
 	border: 2px inset black;
@@ -278,7 +278,7 @@ html, body{
     height: 63%;
     top: 25%;
     width: 28%;
-    z-index: 99;
+    z-index: 550;
     display: none;
     left: 35%;
     background-color: ghostwhite;
@@ -413,18 +413,20 @@ html, body{
 
 
 #myResButton{
-	left: 20%;
-    bottom: 0.1%;
+	    left: 26%;
+    top: 10.8%;
     width: 10%;
-    height: 22%;
+    position: absolute;
+    height: 3%;
     border-radius: 8px 8px 0px 0px;
 }
 
 #settingsButton{
-	    left: 32%;
-    bottom: 0.1%;
+	    left: 39%;
+    top: 10.8%;
     width: 10%;
-    height: 22%;
+    height: 3%;
+    position: absolute;
     border-radius: 8px 8px 0px 0px;
 }
 
@@ -446,15 +448,28 @@ html, body{
 }
 
 #welcomeText{
-	color: white;
-	float: left;
+	    color: white;
+    /* float: right; */
+    position: absolute;
+    right: 27%;
+    top: 10%;
+}
+
+#shader{
+	background-color: rgb(0, 0, 0, 0.5);
+    z-index: 530;
+    position: absolute;
+    width: 100%;
+	display: none;
+    height: 100%;
 }
 
 .signOut{
-	    right: -30%;
-    bottom: -56.9%;
-    width: 41%;
-    height: 93%;
+	    right: 14%;
+    top: 11.3%;
+    width: 10%;
+    height: 2.5%;
+    position: absolute;
     border-radius: 8px 8px 0px 0px;
 }
 
@@ -480,23 +495,26 @@ html, body{
 
 div.d {
     height: 100%;
-    top:3%;
+    top: 13.9%;
     position: absolute;
     width: 20%;
     background-color: ghostwhite;
 }
 
 #logo{
-	width: 10%;
-	height: 75%;
-	left: 1%;
-	top: 12.5%;
+	    width: 9%;
+    height: 9%;
+    left: 1%;
+    top: 2.5%;
+    position: absolute;
+}
+
+#logo:hover{
+	cursor: pointer;
 }
 
 #pages {
-    margin-left: 0%;
-    margin-top: 5.4%;
-    font-size: 30px;
+    font-size: 2.8vmin;
     text-align: center;
     background-color: lightgrey;
     background-size: cover;
