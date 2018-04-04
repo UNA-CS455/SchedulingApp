@@ -17,12 +17,14 @@ header('location: login.html');
 
     </head>
     <body>
+		<div id="shader" onclick="shaderClicked()"></div>
+	
         <?php include 'modal.php'; ?>
         <script src="scripts/JS/popup.js"></script>
         <script src="scripts/JS/rooms.js"></script>
         <div id="banner">
 
-            <img src="images/una.png" id="logo" onclick="window.location.href = 'index.php'">
+            <img src="images/una.png" id="logo" onclick="window.location.href = ''">
             <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
 			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/roomSettings.php'">Settings</button> 
 
@@ -92,7 +94,7 @@ header('location: login.html');
 				<span id="numseatstext" style="visibility:hidden"> Expected number of seats needed: <input type="text" id="numberOfSeats" style="width: 48px;" onchange = "fieldChanged()"></span> <br><br>
 
                 Comments:<br>
-					<textarea rows="10" cols="50" id="comment"></textarea><br><br><br><br><br><br><br><br><br>
+					<textarea rows="10" cols="50" id="comment"></textarea><br><br><br>
                 <br><br>
 				<input type="submit" value="Make Reservation">
                 <!-- <button onclick="openConfirmCreate()">Make reservation</button><br><br> -->
