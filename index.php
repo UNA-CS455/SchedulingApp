@@ -26,7 +26,7 @@ header('location: login.html');
 
             <img src="images/una.png" id="logo" onclick="window.location.href = ''">
             <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-			<button id="settingsButton" onclick="window.location.href = '/scripts/PHP/roomSettings.php'">Settings</button> 
+			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/roomSettings.php'">Settings</button> 
 
 			
 			<div class = "welcome">
