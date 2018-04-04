@@ -192,9 +192,35 @@
 	//echo $sql; // used for testing purposes 
 	
     $result = $conn->query($sql); // run the query
-	$i = 0;
 
-	$firstPrinted = false;
+	///////////////////////////////////////////////////////////////////////////
+	// Generate favorites area
+	///////////////////////////////////////////////////////////////////////////
+	echo "<span id='favsheader'></span>";
+	echo "<div id='favsbookArea' class='bookArea'>";
+	
+	$favoritesSQL = "SELECT DISTINCT rooms.roomid,rooms.seats,rooms.type FROM favorites LEFT JOIN rooms on favorites.roomid = rooms.roomid WHERE email='" . $_SESSION['username'] . "' ORDER BY rooms.roomid";
+    $favoritesResult = $conn->query($favoritesSQL);
+	
+	while ($favRow = $favoritesResult->fetch_assoc()) 
+	{
+
+		$imgName = "images/fav-select.png";
+
+		echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = 'fav_".$favRow['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = 'p_".$favRow['roomid']."' ><br><b>" . $favRow['roomid'] ."</b><br>". $favRow['seats'] ."<br>" . $favRow['type'] . "</font></div>";
+			
+	}
+	if($result->num_rows == 0){
+		echo "<h4> No Results </h4>";
+	}
+	echo "</div>";
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Generate all rooms area
+	///////////////////////////////////////////////////////////////////////////
+
+	echo "<span id='allroomsheader'></span>";
+	echo "<div id='bookArea' class='bookArea'>";
 	
 	while ($row = $result->fetch_assoc()) 
 	{
@@ -208,13 +234,15 @@
 		}
 
 		
-		echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = '".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
+		echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = 'p_".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
 			
 	}
 	if($result->num_rows == 0){
 		echo "<h4> No Results </h4>";
 	}
-
+	
+	echo "</div>";
+	
 $conn->close();
 
 
@@ -266,17 +294,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 			echo $endDayErrMsg;
 		}
 	}
-	//returns false if reservation made has a minute value that is not on the required fifteen minute interval
-	/* Might need to be removed later, depending on how time is handled.
-	else if($startToCheck%15 != 0)
-	{
-		$retValue = FALSE;
-		if($outputError)
-		{
-			echo $startToCheck%15;
-			echo $minuteErrMsg;
-		}
-	} */
+
 	//returns false if reservation made has a start time that is after the end time
 	else if($startToCheck > $endToCheck)
 	{

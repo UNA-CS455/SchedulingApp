@@ -94,7 +94,7 @@ header('location: login.html');
 				<span id="numseatstext" style="visibility:hidden"> Expected number of seats needed: <input type="text" id="numberOfSeats" style="width: 48px;" onchange = "fieldChanged()"></span> <br><br>
 
                 Comments:<br>
-					<textarea rows="10" cols="50" id="comment"></textarea><br><br><br>
+					<textarea rows="10" cols="50" id="comment"></textarea><br>
                 <br><br>
 				<input type="submit" value="Make Reservation">
                 <!-- <button onclick="openConfirmCreate()">Make reservation</button><br><br> -->
@@ -104,7 +104,7 @@ header('location: login.html');
 
         </div>
 
-        <div class="outerBookArea"> 
+        <div class="outerBookArea" id="roomContainer"> 
 			<span id="favsheader"></span>	
 			<div id="favsbookArea"></div>
 			<span id="allroomsheader"></span>	

@@ -61,18 +61,24 @@ function changeSheet(){
 function selectRoom(id){
 	if (roomSelected != null){
 		document.getElementById(roomSelected).style.backgroundColor = "white";
+		var favoriteVersion = document.getElementById('fav_'+roomSelected);
+		if(favoriteVersion != null){
+			favoriteVersion.style.backgroundColor = "white";
+		}
 	}
 	
-	if (id == "No Room Preference/All"){
-		roomSelected = null;
-	}
-	else{
-		roomSelected = id;
-	}
+	roomSelected = id;
 	
+	if(id.substring(0, 4) == "fav_"){
+		id = id.substring(4);
+	}
 	
 	document.getElementById(id).style.backgroundColor = "gray";
-	showrooms = false;
+	var favoriteVersion = document.getElementById('fav_'+id);
+
+	if(favoriteVersion != null){
+		favoriteVersion.style.backgroundColor = "gray";
+	}
 	
 
 }
@@ -360,8 +366,10 @@ if(seats !== null && seats.value >0 && checkbox == true){
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
 	if (this.readyState === 4 && this.status === 200) {
-		document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 3vmin;'>All Rooms<h1><br>"
-		document.getElementById("bookArea").innerHTML = this.responseText;
+		document.getElementById("roomContainer").innerHTML = this.responseText;
+		document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 19;'>All Rooms<h1>"
+		document.getElementById("favsheader").innerHTML = "<h1 style='font-size: 19;'>Favorites<h1>"
+
 }
 };
 xhttp.open("GET", "scripts/PHP/retrieveRooms.php" + GETString, true);
@@ -523,15 +531,17 @@ function favoriteClicked(parentEle){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
+			/*
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("bookArea").innerHTML = this.responseText;
+						document.getElementById("roomContainer").innerHTML = this.responseText;
 					}
 				};
 				xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
-				xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
-				xhttp.send();
+				//xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
+				xhttp.send(); */
+			fieldChanged();
 		}
 	};
 	xhttp.open("POST", "scripts/PHP/favorite.php", true);
