@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])){
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/styles/settings.css">
+<link rel="stylesheet" href="../../styles/rooms.css">
 <script>
 /*
 Email search function
@@ -77,11 +77,15 @@ function setEmail(str){
 <title>Settings</title>
 </head>
 <body>
+<div id="shader" onclick="shaderClicked()"></div>
+	<script src="../JS/popup.js"></script>
+    <script src="../JS/rooms.js"></script>
+
 	<div id="banner">
 
-        <img src="images/una.png" id="logo" onclick="window.location.href = 'index.php'">
+        <img src="../../images/una.png" id="logo" onclick="window.location.href = '../../'">
         <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-		<button id="settingsButton" onclick="window.location.href = '/scripts/PHP/userSettings.php'">Settings</button> 
+		<button id="settingsButton" onclick="window.location.href = 'roomSettings.php'">Settings</button> 
 		<button onclick="logoutUser();" class="signOut" >Logout</button>
 			
 		<div class = "welcome">
@@ -100,6 +104,11 @@ function setEmail(str){
 
         </div>
     </div>
+	
+	        <div style="position:absolute" id="agendaReservations"></div>
+
+        <div id="deleteRes"></div>
+	
 	<h1>User Settings</h1>
 	<br>
 	<div class="dropdown">

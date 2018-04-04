@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])){
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="/app/styles/rooms.css">
+ <link rel="stylesheet" href="../../styles/rooms.css">
  
 	
 <script>
@@ -34,11 +34,15 @@ function findRoom(str) {
 <title>Settings</title>
 </head>
 <body>
+		<div id="shader" onclick="shaderClicked()"></div>
+	<script src="../JS/popup.js"></script>
+    <script src="../JS/rooms.js"></script>
+		
 	<div id="banner">
-
-        <img src="/app/images/una.png" id="logo" onclick="window.location.href = '/app'">
+	
+        <img src="../../images/una.png" id="logo" onclick="window.location.href = '../../'">
         <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-		<button id="settingsButton" onclick="window.location.href = '/app/scripts/PHP/roomSettings.php'">Settings</button> 
+		<button id="settingsButton" onclick="window.location.href = 'roomSettings.php'">Settings</button> 
 		<div class = "welcome">
             <?php
             if (isset($_SESSION['username'])) {
@@ -49,6 +53,11 @@ function findRoom(str) {
 		<button onclick="logoutUser();" class="signOut" >Logout</button>
 	</div>
     </div>
+	
+	        <div style="position:absolute" id="agendaReservations"></div>
+
+        <div id="deleteRes"></div>
+	
 	<div class = "d";
 	<table id = "pages">
 	  <tr>
