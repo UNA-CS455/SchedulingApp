@@ -60,15 +60,21 @@ function changeSheet(){
 
 function selectRoom(id){
 
+	var notAvailableColor = '#1e1e1e';
+	var availableUnselectedColor = "ghostwhite";
+	var availableSelectedColor = "gray";
 	if (roomSelected != null){
 		var normalVersion = document.getElementById(roomSelected);
 		var favoriteVersion = document.getElementById('fav_'+roomSelected);
 
 		if(favoriteVersion != null){
-			favoriteVersion.style.backgroundColor = "white";
+			if(favoriteVersion.className.includes("notfound")){
+				favoriteVersion.style.backgroundColor = notAvailableColor;
+			} else
+				favoriteVersion.style.backgroundColor = availableUnselectedColor;
 		}
 		if(normalVersion != null){
-			normalVersion.style.backgroundColor = "white";
+			normalVersion.style.backgroundColor = availableUnselectedColor;
 		}
 	} 
 	if(normalVersion == null){
@@ -95,10 +101,10 @@ function selectRoom(id){
 	var favoriteVersion = document.getElementById('fav_'+id);
 
 	if(favoriteVersion != null){
-		favoriteVersion.style.backgroundColor = "gray";
+		favoriteVersion.style.backgroundColor = availableSelectedColor;
 	}
 	if(normalVersion != null){
-		normalVersion.style.backgroundColor = "gray";
+		normalVersion.style.backgroundColor = availableSelectedColor;
 	}
 	
 

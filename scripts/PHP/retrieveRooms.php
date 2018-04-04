@@ -143,6 +143,19 @@
 	
     $result = $conn->query($sql); // run the query
 
+	//get all rooms first
+	$room_array = array();
+	while ($rowItem = $result->fetch_assoc()) {
+
+		$rowResult = array(
+			"roomid" => $rowItem['roomid'],
+			"seats" => $rowItem['seats'],
+			"type" => $rowItem['type']
+		);
+		$room_array[] = $rowResult; // append row to result.
+	}
+
+
 	///////////////////////////////////////////////////////////////////////////
 	// Generate favorites area
 	///////////////////////////////////////////////////////////////////////////
@@ -158,8 +171,20 @@
 		$imgName = "images/fav-select.png";
 
 		//TODO add code here to check $result to see if room is in it before placing room in this area.
-		echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = 'fav_".$favRow['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = 'p_".$favRow['roomid']."' ><br><b>" . $favRow['roomid'] ."</b><br>". $favRow['seats'] ."<br>" . $favRow['type'] . "</font></div>";
-			
+		$inArray = false;
+		foreach ($room_array as $row) 
+		{
+			if($row['roomid'] == $favRow['roomid']){
+				$inArray = true;
+				break;
+			}
+		}
+		if($inArray){
+			echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = 'fav_".$favRow['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = 'p_".$favRow['roomid']."' ><br><b>" . $favRow['roomid'] ."</b><br>". $favRow['seats'] ."<br>" . $favRow['type'] . "</font></div>";
+		} else {
+			// not found in all rooms, so cut favorites
+			echo "<div onclick='' class = 'roomboxnotfound' id = 'fav_".$favRow['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' style='color:white' id = 'p_".$favRow['roomid']."' ><br><b>" . $favRow['roomid'] ."</b><br>". $favRow['seats'] ."<br>" . $favRow['type'] . "</font></div>";
+		}
 	}
 	if($result->num_rows == 0){
 		echo "<h4> No Results </h4>";
@@ -173,9 +198,8 @@
 	echo "<span id='allroomsheader'></span>";
 	echo "<div id='bookArea' class='bookArea'>";
 	
-	while ($row = $result->fetch_assoc()) 
+	foreach ($room_array as $row) 
 	{
-
 		$imgName = "images/fav-unselect.png";
 		$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
 		$result2 = $conn->query($sql);
