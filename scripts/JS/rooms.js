@@ -612,8 +612,12 @@ window.onclick = function(event) {
 }
 
 function logoutUser(){
-	window.location.href += './scripts/PHP/logout.php';
-	//console.log('to be implemented....');
+	if(window.location.href.includes('scripts/PHP/')){
+		window.location.href = 'logout.php';
+	}
+	else{
+		window.location.href += '/scripts/PHP/logout.php';
+	}
 }
 
 /*
