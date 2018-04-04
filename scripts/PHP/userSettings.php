@@ -130,6 +130,14 @@ function setEmail(str){
 			</form>
 			<div id="userInfo" class="dropdown-content"></div>
 			<div id="userData"></div>
+			<?php
+				if(isset($_SESSION['msg'])){
+					echo "<br>";
+					echo $_SESSION['msg'];
+					unset($_SESSION['msg']);
+				
+				}
+			?>
 		</div>
 	</div>
 </body>
