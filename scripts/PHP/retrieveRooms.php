@@ -137,56 +137,6 @@
 		$additional = $additional . '1'; // we are done appending on clauses. All previous statements before this and with 'AND', so we terminate with '1'.
 	}
 
-
-
-	// show favorites 
-	/*
-	$sql = "SELECT * FROM favorites WHERE email='" . $_SESSION['username'] . "' ORDER BY roomid";
-    $result = $conn->query($sql);
-	$i = 0;
-	$headerPrinted = false;
-	while ($row = $result->fetch_assoc()) 
-	{
-		if ($headerPrinted == false){
-			echo "<tr style='height: 7%;'><th style='font-size: 3vmin;'>Favorites</th></tr>";
-			$headerPrinted = true;
-		}
-		$imgName = "images/fav-unselect.png";
-		if($i == 0)
-		{
-			echo "<tr>";
-		}
-		if($i == 6)
-		{
-			$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
-			$result2 = $conn->query($sql);
-
-			while ($row2 = $result2->fetch_assoc()) {
-				// there is a favorite.
-				$imgName = "images/fav-select.png";
-			}
-			echo "<td class = 'room' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement);' class='favoriteIcon'><font id = '".$row['roomid']."' onclick='selectRoom(this.id)' class='roomText'><b>" . $row['roomid'] ."</b><br></font></td>";
-			echo "</tr>";
-			$i = 0;
-		}
-		
-		else
-		{	
-			$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
-			$result2 = $conn->query($sql);
-
-			while ($row2 = $result2->fetch_assoc()) {
-				// there is a favorite.
-				$imgName = "images/fav-select.png";
-			}
-			echo "<td class = 'room' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement);' class='favoriteIcon'><font id = '".$row['roomid']."' onclick='selectRoom(this.id)' class='roomText'><b>" . $row['roomid'] ."</b><br></font></td>";
-			$i++;
-		}
-		
-
-		
-	}
-	*/
 	$sql = $sql . "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms "; // the final table columns that we want.
 	$sql = $sql . $additional ;//. " ORDER BY rooms.roomid";						// construction of the full query along with ordering
 	//echo $sql; // used for testing purposes 

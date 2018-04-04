@@ -2,7 +2,7 @@
 /*
 Needed globals
 */
-var showrooms = false;
+//var showrooms = false;
 var showres = false;
 var roomSelected = null;
 
@@ -59,7 +59,7 @@ function changeSheet(){
 
 
 function selectRoom(id){
-		console.error(roomSelected);
+
 	if (roomSelected != null){
 		var normalVersion = document.getElementById(roomSelected);
 		var favoriteVersion = document.getElementById('fav_'+roomSelected);
@@ -70,12 +70,23 @@ function selectRoom(id){
 		if(normalVersion != null){
 			normalVersion.style.backgroundColor = "white";
 		}
+	} 
+	if(normalVersion == null){
+		var bookAreaParent = document.getElementById("bookArea");
+		if(bookAreaParent != null){
+			var firstRoom = bookAreaParent.childNodes[0];
+			if(firstRoom != null)
+				id = firstRoom.id;
+		}
 	}
 	
-	
-	if(id.substring(0, 4) == "fav_"){
+	if(id != null && id.substring(0, 4) == "fav_"){
 		id = id.substring(4);
 	}
+	
+
+	
+
 	
 	roomSelected = id;
 
@@ -377,9 +388,11 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
 	if (this.readyState === 4 && this.status === 200) {
 		document.getElementById("roomContainer").innerHTML = this.responseText;
-		document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 19;'>All Rooms<h1>"
-		document.getElementById("favsheader").innerHTML = "<h1 style='font-size: 19;'>Favorites<h1>"
-
+		if(document.getElementById("allroomsheader") != null && document.getElementById("favsheader") != null){
+			document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 19;'>All Rooms<h1>"
+			document.getElementById("favsheader").innerHTML = "<h1 style='font-size: 19;'>Favorites<h1>"
+		}
+		selectRoom(roomSelected);
 }
 };
 xhttp.open("GET", "scripts/PHP/retrieveRooms.php" + GETString, true);
@@ -538,19 +551,13 @@ function calendarNavi(month, year){
 
 function favoriteClicked(parentEle){
 	let star = document.getElementById(parentEle.id);
+	var roomId = parentEle.id;
+	if(roomId.substring(0,4) == "fav_"){
+		roomId = roomId.substring(4);
+	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			/*
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("roomContainer").innerHTML = this.responseText;
-					}
-				};
-				xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
-				//xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
-				xhttp.send(); */
 			fieldChanged();
 		}
 	};
@@ -559,11 +566,11 @@ function favoriteClicked(parentEle){
 	
 	if (star.children[0].src.includes("images/fav-unselect.png")){
 		// add a favorite.
-		xhttp.send("add=yes&roomid=" + parentEle.id);
+		xhttp.send("add=yes&roomid=" + roomId);
 	}
 	else{
 		// remove a favorite.
-		xhttp.send("add=no&roomid=" + parentEle.id);
+		xhttp.send("add=no&roomid=" + roomId);
 	}
 }
 

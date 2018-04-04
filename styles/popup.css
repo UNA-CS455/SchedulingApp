@@ -84,6 +84,7 @@ if more are needed */
     font-weight: bold;
 	right: 10px;
 	top: 2px;
+	position:absolute;
 }
 
 .close:hover,
