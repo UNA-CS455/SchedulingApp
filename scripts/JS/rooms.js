@@ -629,7 +629,7 @@ function logoutUser(){
 		window.location.href = 'logout.php';
 	}
 	else{
-		window.location.href = '/scripts/PHP/logout.php';
+		window.location.href += 'scripts/PHP/logout.php';
 	}
 }
 
