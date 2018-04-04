@@ -106,7 +106,14 @@ function getAgendaReservations() {
 		}
 	};
 
-	xmlhttp.open("GET", "./scripts/PHP/res_user.php", true);
+	if (window.location.href.includes('PHP')){
+		xmlhttp.open("GET", "res_user.php", true);
+	}
+	else{
+		xmlhttp.open("GET", "./scripts/PHP/res_user.php", true);
+	}
+	
+	
 	xmlhttp.send();
 
     
@@ -540,9 +547,16 @@ function favoriteClicked(parentEle){
 	}
 }
 
+// Dillon Borden
+function shaderClicked(){
+	showres = false;
+		//document.body.style.backgroundColor = "rgba(0,0,0,1)";
+		document.getElementById('agendaReservations').style.display = "none";
+		document.getElementById('deleteRes').style.display = "none";
+		document.getElementById('shader').style.display = "none";
+}	
 
-
-
+// Dillon Borden
 function dropdownRes() {
 	getAgendaReservations();
     //
@@ -550,12 +564,14 @@ function dropdownRes() {
 		showres = true;
 		//document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
 		document.getElementById('agendaReservations').style.display = "block";
+		document.getElementById('shader').style.display = "block";
 	}
 	else{
 		showres = false;
 		//document.body.style.backgroundColor = "rgba(0,0,0,1)";
 		document.getElementById('agendaReservations').style.display = "none";
 		document.getElementById('deleteRes').style.display = "none";
+		document.getElementById('shader').style.display = "none";
 	}
 	
 }
