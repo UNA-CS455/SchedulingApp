@@ -108,15 +108,29 @@ function setEmail(str){
 	        <div style="position:absolute" id="agendaReservations"></div>
 
         <div id="deleteRes"></div>
-	
-	<h1>User Settings</h1>
-	<br>
-	<div class="dropdown">
-	<form> 
-	Email: <input id="emailInput" type="text" onkeyup="search(this.value)"> 
-	</form>
-	<div id="userInfo" class="dropdown-content"></div>
-	<div id="userData"></div>
-</div>
+	<div class = "d";
+	<table id = "pages">
+	  <tr>
+		<th>Pages</th>
+	  </tr>
+	  <tr>
+		<td><br><button class = "settingsButton" onclick="location.href='/scripts/PHP/userSettings.php';">User Settings</button></td>
+	  </tr>
+	  <tr>
+		<td><br><button class = "settingsButton" onclick="location.href='/scripts/PHP/roomSettings.php';">Room Settings</button></td>
+		<br>
+	  </tr>
+	</table>
+	</div>
+	<div id = "room"><h1>User Settings</h1>
+		<br>
+		<div class="dropdown">
+			<form> 
+			Email: <input id="emailInput" type="text" onkeyup="search(this.value)"> 
+			</form>
+			<div id="userInfo" class="dropdown-content"></div>
+			<div id="userData"></div>
+		</div>
+	</div>
 </body>
 </html>
