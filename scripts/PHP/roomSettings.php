@@ -64,10 +64,10 @@ function findRoom(str) {
 		<th>Pages</th>
 	  </tr>
 	  <tr>
-		<td><br><button class = "settingsButton" onclick="location.href='/scripts/PHP/userSettings.php';">User Settings</button></td>
+		<td><br><button class = "settingsButton" onclick="location.href='userSettings.php';">User Settings</button></td>
 	  </tr>
 	  <tr>
-		<td><br><button class = "settingsButton" onclick="location.href='/scripts/PHP/roomSettings.php';">Room Settings</button></td>
+		<td><br><button class = "settingsButton" onclick="location.href='roomSettings.php';">Room Settings</button></td>
 		<br>
 	  </tr>
 	</table>
