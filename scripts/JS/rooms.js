@@ -59,25 +59,35 @@ function changeSheet(){
 
 
 function selectRoom(id){
+		console.error(roomSelected);
 	if (roomSelected != null){
-		document.getElementById(roomSelected).style.backgroundColor = "white";
+		var normalVersion = document.getElementById(roomSelected);
 		var favoriteVersion = document.getElementById('fav_'+roomSelected);
+
 		if(favoriteVersion != null){
 			favoriteVersion.style.backgroundColor = "white";
 		}
+		if(normalVersion != null){
+			normalVersion.style.backgroundColor = "white";
+		}
 	}
 	
-	roomSelected = id;
 	
 	if(id.substring(0, 4) == "fav_"){
 		id = id.substring(4);
 	}
 	
-	document.getElementById(id).style.backgroundColor = "gray";
+	roomSelected = id;
+
+	
+	var normalVersion = document.getElementById(id);
 	var favoriteVersion = document.getElementById('fav_'+id);
 
 	if(favoriteVersion != null){
 		favoriteVersion.style.backgroundColor = "gray";
+	}
+	if(normalVersion != null){
+		normalVersion.style.backgroundColor = "gray";
 	}
 	
 
@@ -638,7 +648,7 @@ function clearFields(){
 	document.getElementById("typeSelect").selectedIndex= 0;
 	document.getElementById("timeStart").value= '';
 	document.getElementById("timeEnd").value= '';
-	document.getElementById("date").value= '';
+	//document.getElementById("date").value= '';
 	document.getElementById("allowshare").checked= false;
 	document.getElementById("numberOfSeats").value = '';
 	document.getElementById("comment").value= '';

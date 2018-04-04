@@ -207,6 +207,7 @@
 
 		$imgName = "images/fav-select.png";
 
+		//TODO add code here to check $result to see if room is in it before placing room in this area.
 		echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = 'fav_".$favRow['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = 'p_".$favRow['roomid']."' ><br><b>" . $favRow['roomid'] ."</b><br>". $favRow['seats'] ."<br>" . $favRow['type'] . "</font></div>";
 			
 	}

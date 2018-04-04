@@ -20,6 +20,7 @@
     border: 1px solid #888;
     width: 30%; /* Could be more or less, depending on screen size */
 	left: 29%;
+	position:absolute;
 	
 }
 
@@ -41,11 +42,19 @@
     width: 100%;
     text-align: center;
 }
-
+/*
 .modal-header-text{
 	left:10px;
 	color:white;
 	height:auto;
+	position:relative;
+}*/
+
+.modal-content-header h1{
+	left:10px;
+	color:white;
+	height:auto;
+	position:relative;
 }
 
 /*any button that will appear in the modal. There are a max of 2 that will fit. Adjust width

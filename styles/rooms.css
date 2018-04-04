@@ -311,7 +311,7 @@ html, body{
     height: 63%;
     top: 25%;
     width: 28%;
-    z-index: 550;
+    z-index: 99;
     display: none;
     left: 35%;
     background-color: ghostwhite;
@@ -465,7 +465,7 @@ html, body{
 
 #shader{
 	background-color: rgb(0, 0, 0, 0.5);
-    z-index: 530;
+    z-index: 95;
     position: absolute;
     width: 100%;
 	display: none;
