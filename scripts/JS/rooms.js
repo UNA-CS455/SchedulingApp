@@ -79,10 +79,15 @@ function selectRoom(id){
 	} 
 	if(normalVersion == null){
 		var bookAreaParent = document.getElementById("bookArea");
+		id = null;
 		if(bookAreaParent != null){
 			var firstRoom = bookAreaParent.childNodes[0];
-			if(firstRoom != null)
-				id = firstRoom.id;
+			if(firstRoom != null){
+				id = (firstRoom.className.includes("roombox")) ? firstRoom.id : null; 
+				// only set the id if the firstRoom is in fact a room, not some other item such as the "No Results" text.
+			}
+				
+
 		}
 	}
 	
@@ -95,7 +100,7 @@ function selectRoom(id){
 
 	
 	roomSelected = id;
-
+	console.error(roomSelected);
 	
 	var normalVersion = document.getElementById(id);
 	var favoriteVersion = document.getElementById('fav_'+id);
@@ -364,6 +369,8 @@ function compChanged(id){
 */
 function fieldChanged(){
 //Get variables from fields
+if(document.getElementById('responseText')!= null)
+	document.getElementById('responseText').innerHTML = "";
 var checkbox = false;
 if(document.getElementById('allowshare') != null){
 	var checkbox = document.getElementById('allowshare').checked;
@@ -479,12 +486,13 @@ function createClicked(){
 		return;
 	}
 	}
-
+	/*
 	if (Number(numSeats) > 60){
 		document.getElementById('responseText').style.color = "red";
 		document.getElementById('responseText').innerHTML = "Headcount cannot be bigger than 60!";
 		return;
 	}
+	*/
 
 	if (startMin.length > 2 || endMin.length > 2){
 		document.getElementById('responseText').style.color = "red";
@@ -492,11 +500,7 @@ function createClicked(){
 		return;
 	}
 
-	if (Number(startMin) > 59 || Number(endMin) > 59){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Times cannot be bigger than 60 minutes!";
-		return;
-	}
+
 
 	if (/^\d+$/.test(endHour) && /^\d+$/.test(endMin)) {
 	// Contain numbers only

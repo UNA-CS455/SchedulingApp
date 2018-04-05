@@ -109,19 +109,14 @@
 				WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime))) AS 
 				subquery ON rooms.roomid = subquery.roomid WHERE (subquery.roomid IS NULL) OR ((subquery.roomSUM + $headcount) <= rooms.seats)) AS rooms
 
-				USING(roomid) WHERE ";
+				USING(roomid) WHERE $headcount <= rooms.seats AND ";
 				
 				
 			}
 		} else {
 			
+			
 			$additional = "WHERE ";
-			
-			
-			//if user doesn't provide times but wishes to query on headcount:
-			if($headcount != null){
-				//$additional TODO: add headcount query here
-			}
 			
 			
 
@@ -132,6 +127,11 @@
 			$additional = $additional . "rooms.type = '$type' AND ";
 		}
 
+		//if user doesn't provide times but wishes to query on headcount:
+		if($headcount != null){
+			//$additional TODO: add headcount query here
+			$additional = $additional . "$headcount <= rooms.seats AND ";
+		}
 
 
 		$additional = $additional . '1'; // we are done appending on clauses. All previous statements before this and with 'AND', so we terminate with '1'.
@@ -186,9 +186,10 @@
 			echo "<div onclick='' class = 'roomboxnotfound' id = 'fav_".$favRow['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' style='color:white' id = 'p_".$favRow['roomid']."' ><br><b>" . $favRow['roomid'] ."</b><br>". $favRow['seats'] ."<br>" . $favRow['type'] . "</font></div>";
 		}
 	}
+	/*
 	if($result->num_rows == 0){
 		echo "<h4> No Results </h4>";
-	}
+	} */
 	echo "</div>";
 	
 	///////////////////////////////////////////////////////////////////////////
