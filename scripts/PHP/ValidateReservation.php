@@ -247,6 +247,70 @@ function checkValidTime_overload($newResStart, $newResEnd, $date, $room)
 
 
 
+function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $room, $givenHeadcount){
+	//error message diplayed when false
+	$errMsg = "There aren't enough seats left";
+	//default set to false
+	$returnVal=FALSE;
+	//global $dayStart, $dayEnd; this doesn't work for some reason
+	$dayStart = DateTime::createFromFormat('H:i', '7:00');
+	$dayEnd  = DateTime::createFromFormat('H:i', '23:00');
+	$newResStart = DateTime::createFromFormat('H:i', $newResStart);
+	$newResEnd = DateTime::createFromFormat('H:i', $newResEnd);
+	require "db_conf.php";
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+
+	//Locates a conflicting reservation made that overlaps times of another reservation that doesn't allow sharing 
+
+
+	$newResStart = $newResStart->format('H:i');
+	$newResEnd = $newResEnd->format('H:i');
+	$sql = "SELECT rooms.roomid, reservations.id, sum(headcount) AS seats_taken, rooms.seats - sum(headcount) AS seats_remaining 
+				FROM reservations LEFT JOIN rooms ON rooms.roomid = reservations.roomnumber WHERE allowshare = '1' AND 
+				startdate = '$newResDate' AND roomnumber = '$room'
+				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
+				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
+				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
+
+	//echo $sql;
+	$result = $conn->query($sql);
+	$row = $result->fetch_assoc();
+
+	if($result->num_rows == 0)
+	{
+		// there are no overlapping reservations to begin with, so return true.
+		$returnVal = TRUE;
+
+	}
+	else if($givenHeadcount > $row['seats_remaining'])
+	{
+		// too many seats taken.
+		$returnVal = FALSE;
+		if($outputError)
+		{
+			echo $errMsg;
+		}
+	} else {
+		return TRUE;
+	}
+	
+	//close database connection
+	$conn->close();
+
+	//Return the boolean value
+	return $returnVal;
+
+}
+
+
+
+
+
 
 
 
