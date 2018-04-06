@@ -94,13 +94,10 @@ function selectRoom(id){
 	if(id != null && id.substring(0, 4) == "fav_"){
 		id = id.substring(4);
 	}
-	
 
-	
 
 	
 	roomSelected = id;
-	console.error(roomSelected);
 	
 	var normalVersion = document.getElementById(id);
 	var favoriteVersion = document.getElementById('fav_'+id);
@@ -392,8 +389,17 @@ if((starttime !== null && starttime.value.length > 0) && (endtime !== null && en
 if(recurring !== null && recurring.selectedIndex != 0){
 	GETString += ("&recur=" + recurring.selectedIndex); // pass the index, which will be our enumerated type.
 }
-if(seats !== null && seats.value >0 && checkbox == true){
-	GETString += ("&headcount=" + seats.value);
+
+if(seats !== null && seats.value.length > 0 && checkbox == true){
+	if (!(/^\+?(0|[1-9]\d*)$/.test(seats.value)) || seats.value <=0) {
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
+		return;
+	}
+	else {
+		GETString += ("&headcount=" + seats.value);
+	}
+
 }
 
 
@@ -474,25 +480,12 @@ function createClicked(){
 		return;
 	}
 
-	if (/^\d+$/.test(numSeats)) {
-	// Contain numbers only
-	}
-	else {
-	// Contain other characters also
-	if (sharing){
-	// Contain other characters also
+	// check headcount
+	if (!(/^\+?(0|[1-9]\d*)$/.test(numSeats)) || numSeats <=0) {
 		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please only enter numbers as a headcount!";
+		document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
 		return;
 	}
-	}
-	/*
-	if (Number(numSeats) > 60){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Headcount cannot be bigger than 60!";
-		return;
-	}
-	*/
 
 	if (startMin.length > 2 || endMin.length > 2){
 		document.getElementById('responseText').style.color = "red";
@@ -670,7 +663,8 @@ function clearFields(){
 	document.getElementById("timeStart").value= '';
 	document.getElementById("timeEnd").value= '';
 	//document.getElementById("date").value= '';
-	document.getElementById("allowshare").checked= false;
+	changeSheet();
+	//document.getElementById("allowshare").checked= false;
 	document.getElementById("numberOfSeats").value = '';
 	document.getElementById("comment").value= '';
 	fieldChanged();
