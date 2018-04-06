@@ -34,7 +34,21 @@ b{
 	width: 99%;
     left: 2%;
     top: 7.5%;
-	max-height:35%;
+	max-height:45%;
+    background-color: white;
+    overflow-y: scroll;
+    border: solid;
+    border-color: silver;
+	display:flex;
+	flex-wrap: wrap;
+}
+
+.favBookArea{
+	width: 99%;
+    left: 2%;
+    top: 7.5%;
+	/* max-height:35%; */
+	max-height: 26%;
     background-color: white;
     overflow-y: scroll;
     border: solid;

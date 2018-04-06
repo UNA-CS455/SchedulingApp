@@ -160,7 +160,7 @@
 	// Generate favorites area
 	///////////////////////////////////////////////////////////////////////////
 	echo "<span id='favsheader'></span>";
-	echo "<div id='favsbookArea' class='bookArea'>";
+	echo "<div id='favsbookArea' class='favBookArea'>";
 	
 	$favoritesSQL = "SELECT DISTINCT rooms.roomid,rooms.seats,rooms.type FROM favorites LEFT JOIN rooms on favorites.roomid = rooms.roomid WHERE email='" . $_SESSION['username'] . "' ORDER BY rooms.roomid";
     $favoritesResult = $conn->query($favoritesSQL);
