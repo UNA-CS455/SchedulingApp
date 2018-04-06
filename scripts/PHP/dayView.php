@@ -15,11 +15,11 @@ March 2018
 	$selectedRoom = $_GET['room'];
 	$dayStart = 7;
 	$dayEnd = 22;
-?>
 
-  <table style="width:100%">
-
-	<?php
+	if($date == null || $selectedRoom == null || $date == "null" || $selectedRoom == "null"){
+		echo "<h1>Please select a date and a room to check its availability.</h1>";
+		return;
+	}
 	//Script to fill in the table with reservations
 	require 'db_conf.php';
 
@@ -30,8 +30,10 @@ March 2018
 
 	$sql = " SELECT * FROM reservations WHERE startdate='$date' AND roomnumber= '$selectedRoom' ORDER BY starttime";
 	$results = $conn->query($sql);
+
 	$res = array();
-	//places each 
+	
+
 	while ($row = $results->fetch_assoc()) {
 
 	$rowResult = array(
@@ -52,6 +54,12 @@ March 2018
 			$res[] = $rowResult; // append row to result.
 	}
 
+	if(count($res) > 0){
+		echo "<table style='width:100%'>";
+	} else{
+		echo "<h1> There are currently no active reservations for $selectedRoom on $date.</h1>";
+		return;
+	}
 	//table vector
 	$table = array();
 	$durationOfDay = $dayEnd - $dayStart;
@@ -125,7 +133,13 @@ March 2018
 			$res[$resCounter]['color'] = $colors[$resCounter % count($colors)];
 		}
 
-		
+		$sql = "SELECT seats FROM rooms WHERE roomid='$selectedRoom' LIMIT 1";
+		$roomresult = $conn->query($sql);
+		$row = $results->fetch_assoc();
+		$numSeats = 0;
+		if(count($row) > 0){
+			$numSeats = $row['seats'];
+		}
 
 		//the table is now full
 		$labelMaintainCount = 0;
@@ -147,7 +161,8 @@ March 2018
 					echo " bgcolor ='$newColor'>";
 					if($table[$col][$row] == $labelID[$labelMaintainCount]){
 						$labelMaintainCount++;
-						echo $res[$table[$col][$row]]['start_to_end_str'];
+						
+						echo $res[$table[$col][$row]]['start_to_end_str'] . " [will share]";
 					}
 				}
 				

@@ -1,7 +1,18 @@
 <?php session_start();
+/******************************************************************************
+Create Reservation Script
 
+Description: Script that, when POST to, will pull variables from POST array
+and use these to insert into the reservations table.
+roomnumber, owneremail,numberOfSeats(as in headcount field),starthour, startminute,
+endhour,endminute, allowshare, date, and occur (as in recurring enumerated type)
+should be sent via POST.
+
+Spring 2018
+******************************************************************************/
 	if (!isset($_SESSION['username'])){
-			$_SESSION['username'] = "jcrabtree@una.edu";
+		//TODO redirect to login.
+			$_SESSION['username'] = "admin@una.edu";
 	}
 	//$_SESSION['logged_in_useremail']
     //$roomnumber = $_POST['roomnumber'];

@@ -16,33 +16,9 @@ xhttp.onreadystatechange = function() {
 };
 console.error('test');
 xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
-xhttp.send(); */
+xhttp.send(); 
+*/ 
 
-/*
-function toggleRoomView()
-{
-	if (showrooms == false)
-	{
-		showrooms = true;
-		document.getElementById('roomMenu').style.display = "inline";
-		document.getElementById('roomSelect').style.top = "88%";
-		document.getElementById('roomWrapper').style.display = "none";
-		document.getElementById('selectedRoom').style.top = "88%";
-		document.getElementById('roomSelect').src = "images/up_arrow.png";
-		document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
-	}
-	else
-	{
-		showrooms = false;
-		document.getElementById('roomMenu').style.display = "none";
-		document.getElementById('roomSelect').style.top = "14%";
-		document.getElementById('roomWrapper').style.display = "inline";
-		document.getElementById('selectedRoom').style.top = "14%";
-		document.getElementById('roomSelect').src = "images/down_arrow.png";
-		document.body.style.backgroundColor = "rgba(0,0,0,0)";
-	}
-}
-*/
 
 //Leaves the number of seats text box grey and disabled if allowshare is not checked.
 function changeSheet(){
@@ -113,9 +89,10 @@ function selectRoom(id){
 }
 
 /*
-	A function whose purpose is to populate the agenda table with the user's
-	current reservations with a given email address.
-	Author: Derek Brown
+A function whose purpose is to populate the agenda table with the user's
+current reservations with a given email address.
+Author: Derek Brown
+Spring 2018
 */
 function getAgendaReservations() {
 
@@ -220,7 +197,346 @@ function openConfirmDelete(ele){
 
 }
 
+
+
 /*
+Handles any change of input field for the "Make Reservation" area. Should be called as the onchange event
+for each input field. This function will filter the rooms based on the content currently in all fields.
+
+Author: Derek Brown
+March 2018
+*/
+function fieldChanged(){
+	//Get variables from fields
+	if(document.getElementById('responseText')!= null)
+		document.getElementById('responseText').innerHTML = "";
+	var checkbox = false;
+	if(document.getElementById('allowshare') != null){
+		var checkbox = document.getElementById('allowshare').checked;
+	}
+	var type = document.getElementById('typeSelect');
+	var starttime = document.getElementById('timeStart');
+	var endtime = document.getElementById('timeEnd');
+	var recurring = document.getElementById('occur');
+	var seats = document.getElementById('numberOfSeats');
+	var date = document.getElementById('date');
+	var GETString = "?q=";
+
+	if(type !== null && type.selectedIndex != 0){
+		GETString += ("&type=" + type.options[type.selectedIndex].value);
+	}
+	if((starttime !== null && starttime.value.length > 0) && (endtime !== null && endtime.value.length > 0) && (date !== null && date.value.length > 0)){
+		GETString += ("&starttime='"+starttime.value+"'&endtime='"+endtime.value+"'&date='"+date.value+"'");
+	}
+	if(recurring !== null && recurring.selectedIndex != 0){
+		GETString += ("&recur=" + recurring.selectedIndex); // pass the index, which will be our enumerated type.
+	}
+
+	if(seats !== null && seats.value.length > 0 && checkbox == true){
+		if (!(/^\+?(0|[1-9]\d*)$/.test(seats.value)) || seats.value <=0) {
+			document.getElementById('responseText').style.color = "red";
+			document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
+			return;
+		}
+		else {
+			GETString += ("&headcount=" + seats.value);
+		}
+
+	}
+
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState === 4 && this.status === 200) {
+			document.getElementById("roomContainer").innerHTML = this.responseText;
+			if(document.getElementById("allroomsheader") != null && document.getElementById("favsheader") != null){
+				document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 19;'>All Rooms<h1>"
+				document.getElementById("favsheader").innerHTML = "<h1 style='font-size: 19;'>Favorites<h1>"
+			}
+			selectRoom(roomSelected);
+		}
+	};
+	xhttp.open("GET", "scripts/PHP/retrieveRooms.php" + GETString, true);
+	xhttp.send();
+
+
+}
+
+/*
+Function to be called when the intention is to perform an insert into the database of a new reservation.
+will perform sanity checks and acquire variables needed to pass to CreateReservation.php. Any values obtained here
+should also be checked on the server side for sanitation.
+*/
+function createClicked(){
+// sanity checks first.
+	document.getElementById('responseText').innerHTML = "";
+	if (roomSelected == null)
+	{
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
+		return;
+	}
+
+	var email = document.getElementById("owneremail").value;
+	var startTime = document.getElementById("timeStart").value;
+	var endTime = document.getElementById("timeEnd").value;
+	var date = document.getElementById("date").value;
+	var sharing = Number( document.getElementById("allowshare").checked);
+	console.error(sharing);
+	var startHour = startTime.charAt(0) + startTime.charAt(1);
+	var startMin = startTime.charAt(3) + startTime.charAt(4);
+	var endHour = endTime.charAt(0) + endTime.charAt(1);
+	var endMin = endTime.charAt(3) + endTime.charAt(4);
+	var numSeats = document.getElementById("numberOfSeats").value;
+	var comment = document.getElementById("comment").value;
+	//var start = document.getElementById("start");
+	//var end = document.getElementById("end");
+	var occur = document.getElementById("occur");
+	//end = end[end.selectedIndex].value;
+	//start = start[start.selectedIndex].value;
+	occur = occur[occur.selectedIndex].value;
+	if (email == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please enter an email first!";
+		return;
+	}
+
+	if (startHour == "" || startMin == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please enter a full start time first!";
+		return;
+	}
+
+	if (endHour == "" || endMin == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
+		return;
+	}
+
+	if (/^\d+$/.test(startHour) && /^\d+$/.test(startMin)) {
+	// Contain numbers only
+	}
+	else {
+	// Contain other characters also
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please only enter numbers in start time boxes!";
+		return;
+	}
+
+	// check headcount
+	if(sharing){
+		if (!(/^\+?(0|[1-9]\d*)$/.test(numSeats)) || numSeats <=0) {
+			document.getElementById('responseText').style.color = "red";
+			document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
+			return;
+		}
+	}
+
+	if (startMin.length > 2 || endMin.length > 2){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Times can only be 2 numbers in length!";
+		return;
+	}
+
+
+
+	if (/^\d+$/.test(endHour) && /^\d+$/.test(endMin)) {
+	// Contain numbers only
+	}
+	else {
+	// Contain other characters also
+	document.getElementById('responseText').style.color = "red";
+	document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
+	return;
+	}
+
+	if (document.getElementById('allowshare').checked == true && numSeats == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please specifiy a number of seats needed, or disable sharing.";
+		return;
+	}
+
+	// ajax call to create script.
+	console.log('here');
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			//document.getElementById('responseText').innerHTML = this.responseText;
+			showMessageBoxOK(this.responseText,"Make Reservation", false);
+			clearFields();
+		}
+	};
+	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
+
+}
+
+
+
+/*
+Should be called whenever a star is clicked, will update UI and perform necessary insertions or removals
+from the favorites table for the currently logged in user.
+*/
+function favoriteClicked(parentEle){
+	let star = document.getElementById(parentEle.id);
+	var roomId = parentEle.id;
+	if(roomId.substring(0,4) == "fav_"){
+		roomId = roomId.substring(4);
+	}
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			fieldChanged();
+		}
+	};
+	xhttp.open("POST", "scripts/PHP/favorite.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	
+	if (star.children[0].src.includes("images/fav-unselect.png")){
+		// add a favorite.
+		xhttp.send("add=yes&roomid=" + roomId);
+	}
+	else{
+		// remove a favorite.
+		xhttp.send("add=no&roomid=" + roomId);
+	}
+}
+
+// Dillon Borden
+function shaderClicked(){
+	showres = false;
+		//document.body.style.backgroundColor = "rgba(0,0,0,1)";
+		document.getElementById('agendaReservations').style.display = "none";
+		document.getElementById('deleteRes').style.display = "none";
+		document.getElementById('shader').style.display = "none";
+}	
+
+// Dillon Borden
+function dropdownRes() {
+	getAgendaReservations();
+    //
+	if (showres == false){
+		showres = true;
+		//document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
+		document.getElementById('agendaReservations').style.display = "block";
+		document.getElementById('shader').style.display = "block";
+	}
+	else{
+		showres = false;
+		//document.body.style.backgroundColor = "rgba(0,0,0,1)";
+		document.getElementById('agendaReservations').style.display = "none";
+		document.getElementById('deleteRes').style.display = "none";
+		document.getElementById('shader').style.display = "none";
+	}
+	
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+/*
+Funciton to be called when the user desires to log out manually.
+
+*/
+function logoutUser(){
+	if(window.location.href.includes('scripts/PHP/')){
+		window.location.href = 'logout.php';
+	}
+	else{
+		window.location.href += 'scripts/PHP/logout.php';
+	}
+}
+
+/*
+Function to be called when the make reservation button has been clicked. Opens a confirmation dialog to
+ask the user to confirm their reservation details.
+Author: Derek Brown
+Date: 4/2/2018
+
+*/
+function openConfirmCreate(){
+	if (roomSelected == null){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
+		return;
+	}
+
+	buttonhtml =  "<button class='modal-button' onclick='closeModal(); createClicked();'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
+	showMessageBox("Are you sure you want to reserve " + roomSelected + "?" ,"Confirm",buttonhtml, false);
+
+	
+}
+
+/*
+Function to clear input fields under the Make Reservation section.
+Author: Derek Brown
+Date: 4/2/2018
+
+*/
+function clearFields(){
+	document.getElementById('responseText').innerHTML = "";
+	document.getElementById("occur").selectedIndex= 0;
+	document.getElementById("typeSelect").selectedIndex= 0;
+	document.getElementById("timeStart").value= '';
+	document.getElementById("timeEnd").value= '';
+	//document.getElementById("date").value= '';
+	changeSheet();
+	//document.getElementById("allowshare").checked= false;
+	document.getElementById("numberOfSeats").value = '';
+	document.getElementById("comment").value= '';
+	fieldChanged();
+	
+}
+
+
+function showDayViewModal(date, room){
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			//document.getElementById("").innerHTML = this.responseText;
+			showMessageBox(this.responseText,"Day View","", true);
+		}
+	};
+	xhttp.open("GET", "scripts/PHP/dayView.php?date=" + date + "&room=" + room, true);
+	xhttp.send();
+
+}
+
+
+
+
+
+
+
+
+/*
+function calendarNavi(month, year){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("mainCalendar").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + month + "&year=" + year + "&room=" + roomSelected, true);
+	xhttp.send();
+}
+
+
 function findDay(dayNum){
 	switch (dayNum){
 		case "01":
@@ -363,310 +679,32 @@ function compChanged(id){
 	}
 	
 }
-*/
-function fieldChanged(){
-//Get variables from fields
-if(document.getElementById('responseText')!= null)
-	document.getElementById('responseText').innerHTML = "";
-var checkbox = false;
-if(document.getElementById('allowshare') != null){
-	var checkbox = document.getElementById('allowshare').checked;
-}
-var type = document.getElementById('typeSelect');
-var starttime = document.getElementById('timeStart');
-var endtime = document.getElementById('timeEnd');
-var recurring = document.getElementById('occur');
-var seats = document.getElementById('numberOfSeats');
-var date = document.getElementById('date');
-var GETString = "?q=";
 
-if(type !== null && type.selectedIndex != 0){
-	GETString += ("&type=" + type.options[type.selectedIndex].value);
-}
-if((starttime !== null && starttime.value.length > 0) && (endtime !== null && endtime.value.length > 0) && (date !== null && date.value.length > 0)){
-	GETString += ("&starttime='"+starttime.value+"'&endtime='"+endtime.value+"'&date='"+date.value+"'");
-}
-if(recurring !== null && recurring.selectedIndex != 0){
-	GETString += ("&recur=" + recurring.selectedIndex); // pass the index, which will be our enumerated type.
-}
-
-if(seats !== null && seats.value.length > 0 && checkbox == true){
-	if (!(/^\+?(0|[1-9]\d*)$/.test(seats.value)) || seats.value <=0) {
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
-		return;
-	}
-	else {
-		GETString += ("&headcount=" + seats.value);
-	}
-
-}
-
-
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-	if (this.readyState === 4 && this.status === 200) {
-		document.getElementById("roomContainer").innerHTML = this.responseText;
-		if(document.getElementById("allroomsheader") != null && document.getElementById("favsheader") != null){
-			document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 19;'>All Rooms<h1>"
-			document.getElementById("favsheader").innerHTML = "<h1 style='font-size: 19;'>Favorites<h1>"
-		}
-		selectRoom(roomSelected);
-}
-};
-xhttp.open("GET", "scripts/PHP/retrieveRooms.php" + GETString, true);
-xhttp.send();
-
-
-}
-
-/*
-Function to be called when the intention is to perform an insert into the database of a new reservation.
-will perform sanity checks and acquire variables needed to pass to CreateReservation.php. Any values obtained here
-should also be checked on the server side for sanitation.
-*/
-function createClicked(){
-// sanity checks first.
-	document.getElementById('responseText').innerHTML = "";
-	if (roomSelected == null)
+function toggleRoomView()
+{
+	if (showrooms == false)
 	{
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
-		return;
+		showrooms = true;
+		document.getElementById('roomMenu').style.display = "inline";
+		document.getElementById('roomSelect').style.top = "88%";
+		document.getElementById('roomWrapper').style.display = "none";
+		document.getElementById('selectedRoom').style.top = "88%";
+		document.getElementById('roomSelect').src = "images/up_arrow.png";
+		document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
 	}
-
-	var email = document.getElementById("owneremail").value;
-	var startTime = document.getElementById("timeStart").value;
-	var endTime = document.getElementById("timeEnd").value;
-	var date = document.getElementById("date").value;
-	var sharing = Number( document.getElementById("allowshare").checked);
-	var startHour = startTime.charAt(0) + startTime.charAt(1);
-	var startMin = startTime.charAt(3) + startTime.charAt(4);
-	var endHour = endTime.charAt(0) + endTime.charAt(1);
-	var endMin = endTime.charAt(3) + endTime.charAt(4);
-	var numSeats = document.getElementById("numberOfSeats").value;
-	var comment = document.getElementById("comment").value;
-	//var start = document.getElementById("start");
-	//var end = document.getElementById("end");
-	var occur = document.getElementById("occur");
-	//end = end[end.selectedIndex].value;
-	//start = start[start.selectedIndex].value;
-	occur = occur[occur.selectedIndex].value;
-	if (email == ""){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please enter an email first!";
-		return;
+	else
+	{
+		showrooms = false;
+		document.getElementById('roomMenu').style.display = "none";
+		document.getElementById('roomSelect').style.top = "14%";
+		document.getElementById('roomWrapper').style.display = "inline";
+		document.getElementById('selectedRoom').style.top = "14%";
+		document.getElementById('roomSelect').src = "images/down_arrow.png";
+		document.body.style.backgroundColor = "rgba(0,0,0,0)";
 	}
-
-	if (startHour == "" || startMin == ""){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please enter a full start time first!";
-		return;
-	}
-
-	if (endHour == "" || endMin == ""){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
-		return;
-	}
-
-	if (/^\d+$/.test(startHour) && /^\d+$/.test(startMin)) {
-	// Contain numbers only
-	}
-	else {
-	// Contain other characters also
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please only enter numbers in start time boxes!";
-		return;
-	}
-
-	// check headcount
-	if (!(/^\+?(0|[1-9]\d*)$/.test(numSeats)) || numSeats <=0) {
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
-		return;
-	}
-
-	if (startMin.length > 2 || endMin.length > 2){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Times can only be 2 numbers in length!";
-		return;
-	}
-
-
-
-	if (/^\d+$/.test(endHour) && /^\d+$/.test(endMin)) {
-	// Contain numbers only
-	}
-	else {
-	// Contain other characters also
-	document.getElementById('responseText').style.color = "red";
-	document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
-	return;
-	}
-
-	if (document.getElementById('allowshare').checked == true && numSeats == ""){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please enter number of seats or do not share!";
-		return;
-	}
-
-// ajax call to create script.
-
-	console.log('here');
-
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			//document.getElementById('responseText').innerHTML = this.responseText;
-			showMessageBoxOK(this.responseText,"Make Reservation", false);
-			clearFields();
-			/*
-			if (this.responseText == "Reservation made successfully"){
-				document.getElementById('responseText').style.color = "green";
-			}
-		else
-		{
-			document.getElementById('responseText').style.color = "red";
-		}
-		*/
-		}
-	};
-	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
 }
 
-
-/*
-function calendarNavi(month, year){
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("mainCalendar").innerHTML = this.responseText;
-		}
-	};
-	xhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + month + "&year=" + year + "&room=" + roomSelected, true);
-	xhttp.send();
-}
 
 */
 
-function favoriteClicked(parentEle){
-	let star = document.getElementById(parentEle.id);
-	var roomId = parentEle.id;
-	if(roomId.substring(0,4) == "fav_"){
-		roomId = roomId.substring(4);
-	}
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			fieldChanged();
-		}
-	};
-	xhttp.open("POST", "scripts/PHP/favorite.php", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	
-	if (star.children[0].src.includes("images/fav-unselect.png")){
-		// add a favorite.
-		xhttp.send("add=yes&roomid=" + roomId);
-	}
-	else{
-		// remove a favorite.
-		xhttp.send("add=no&roomid=" + roomId);
-	}
-}
 
-// Dillon Borden
-function shaderClicked(){
-	showres = false;
-		//document.body.style.backgroundColor = "rgba(0,0,0,1)";
-		document.getElementById('agendaReservations').style.display = "none";
-		document.getElementById('deleteRes').style.display = "none";
-		document.getElementById('shader').style.display = "none";
-}	
-
-// Dillon Borden
-function dropdownRes() {
-	getAgendaReservations();
-    //
-	if (showres == false){
-		showres = true;
-		//document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
-		document.getElementById('agendaReservations').style.display = "block";
-		document.getElementById('shader').style.display = "block";
-	}
-	else{
-		showres = false;
-		//document.body.style.backgroundColor = "rgba(0,0,0,1)";
-		document.getElementById('agendaReservations').style.display = "none";
-		document.getElementById('deleteRes').style.display = "none";
-		document.getElementById('shader').style.display = "none";
-	}
-	
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-
-function logoutUser(){
-	if(window.location.href.includes('scripts/PHP/')){
-		window.location.href = 'logout.php';
-	}
-	else{
-		window.location.href += 'scripts/PHP/logout.php';
-	}
-}
-
-/*
-Function to be called when the make reservation button has been clicked. Opens a confirmation dialog to
-ask the user to confirm their reservation details.
-Author: Derek Brown
-Date: 4/2/2018
-
-*/
-function openConfirmCreate(){
-	if (roomSelected == null){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
-		return;
-	}
-
-	buttonhtml =  "<button class='modal-button' onclick='closeModal(); createClicked();'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
-	showMessageBox("Are you sure you want to reserve " + roomSelected + "?" ,"Confirm",buttonhtml, false);
-
-	
-}
-
-/*
-Function to clear input fields under the Make Reservation section.
-Author: Derek Brown
-Date: 4/2/2018
-
-*/
-function clearFields(){
-	document.getElementById('responseText').innerHTML = "";
-	document.getElementById("occur").selectedIndex= 0;
-	document.getElementById("typeSelect").selectedIndex= 0;
-	document.getElementById("timeStart").value= '';
-	document.getElementById("timeEnd").value= '';
-	//document.getElementById("date").value= '';
-	changeSheet();
-	//document.getElementById("allowshare").checked= false;
-	document.getElementById("numberOfSeats").value = '';
-	document.getElementById("comment").value= '';
-	fieldChanged();
-	
-}
