@@ -281,7 +281,7 @@ function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $
 	$result = $conn->query($sql);
 	$row = $result->fetch_assoc();
 
-	if($result->num_rows == 0)
+	if($result->num_rows == 0 || $row['seats_remaining'] == null)
 	{
 		// there are no overlapping reservations to begin with, so return true.
 		$returnVal = TRUE;
@@ -296,7 +296,7 @@ function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $
 			echo $errMsg;
 		}
 	} else {
-		return TRUE;
+		$returnVal = TRUE;
 	}
 	
 	//close database connection

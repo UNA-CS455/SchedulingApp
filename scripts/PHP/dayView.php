@@ -149,7 +149,7 @@ March 2018
 		for($row = 0; $row < count($blankCol); $row++){	
 			echo "<tr>";	
 			$timeBlock = (($row+7)>12) ? (($row+7)-12): ($row+7); // set time digits
-			$timeColor = (checkValidTime(false,$row+7 . ":00" , $row+8 . ":00", $selectedRoom) && !checkEnoughSeats(false, $row+7 . ":00", $row+8 . ":00", $date, $selectedRoom, 1)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'";
+			$timeColor = (checkValidTime(false,$row+7 . ":00" , $row+8 . ":00", $selectedRoom) && checkEnoughSeats(false, $row+7 . ":00", $row+8 . ":00", $date, $selectedRoom, 1)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'";
 			echo "<td " . $timeColor .">" . $timeBlock . ":00</td>";
 			for($col = 0; $col < count($table); $col++){
 				echo "<td";
