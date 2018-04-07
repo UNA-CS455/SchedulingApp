@@ -1,7 +1,8 @@
 <?php
 	include 'calendar.php';
 	
-	$calendar = new Calendar();
+	$room = $_GET['room'];
+	$calendar = new Calendar($room);
 	
 	echo $calendar->show();
 			

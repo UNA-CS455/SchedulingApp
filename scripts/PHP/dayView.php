@@ -17,6 +17,8 @@ March 2018
 	$dayEnd = 22;
 
 	if($date == null || $selectedRoom == null || $date == "null" || $selectedRoom == "null"){
+		echo "date is " . $date;
+		echo "room is " . $selectedRoom;
 		echo "<h1>Please select a date and a room to check its availability.</h1>";
 		return;
 	}

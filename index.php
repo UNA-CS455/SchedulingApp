@@ -1,29 +1,48 @@
 <?php
-session_start();
+	session_start();
 
-if (!isset($_SESSION['username'])){
-header('location: login.html');
-}
+	if (!isset($_SESSION['username'])){
+		$_SESSION['username'] = "admin@una.edu"; // for development, we will uncomment the call to header below.
+		//header('location: login.html'); exit();
+	}
 ?>
 
 <html>
-    <head><link rel="stylesheet" href="styles/rooms.css">
+    <head>
+	
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="styles/rooms.css">
         <link rel="stylesheet" href="styles/Reservation.css">
+		<link rel="stylesheet" href="styles/calendar.css">
         <!-- Add? <link rel="stylesheet" href="styles/links.css"> <!--Taylor-->
         <link rel="stylesheet" href="styles/popup.css">
+		
+		<!-- Jquery -->
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 		
-        <title></title>
-
+        <title>LeoBook</title>
     </head>
-    <body>
+	
+	
+	
+    <body onload="/*showCreateResForm();*/showCalendarView();fieldChanged();"> <!-- By default, load the make reservation screen into createZone -->
 		<div id="shader" onclick="shaderClicked()"></div>
 	
         <?php include 'modal.php'; ?>
         <script src="scripts/JS/popup.js"></script>
         <script src="scripts/JS/rooms.js"></script>
+		
+		
+		
+		
         <div id="banner">
-
+			<!--
+				This is the banner of the page. It contains the links and the content of the topmost portion
+				of the page.
+			
+			-->
+			
+			
             <img src="images/una.png" id="logo" onclick="window.location.href = ''">
             <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
 			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/roomSettings.php'">Settings</button> 
@@ -37,74 +56,45 @@ header('location: login.html');
 					$logged_in_user = $_SESSION['username']; //used for default in reserving email field.
                 }
                 ?>
-
                 <!--Taylor-->
-
-
                 <button onclick="logoutUser();" class="signOut" >Logout</button>
-
             </div>
+			
         </div>
 
-        <div style="position:absolute" id="agendaReservations"></div>
+		
+		
+        <div style="position:absolute" id="agendaReservations">
+			<!--
+				The "My Reservations" agenda dropdown area. Content will be given to this via a call to the dropdownRes()
+				function which is called when the "My Reservations" link in the banner is clicked.
+			-->
+		</div>
 
         <div id="deleteRes"></div>
 
         <div class="makeReservation" id="createZone">
-
-            <form class="test" onsubmit='openConfirmCreate(); return false;'>
-
-                <h1>Make Reservation</h1>
-
-                Reserving For*:
-					<?php 
-						if (isset($_SESSION['username'])) {
-							echo "<input type='text' id='owneremail' value='$logged_in_user' required><br>";
-						}
-					?>
-                <!--<div id="filterArea"> -->
-                <!--<font id="typeText">-->
-                <br>Type: <!--</font> -->
-					<select id="typeSelect" onchange="fieldChanged()">
-						<option value="Any">Any</option>
-						<option value="Classroom">Classroom</option>
-						<option value="Conference">Conference Room</option>
-						<option value="Computer Lab">Computer Lab</option>
-					</select>
-                <!--</div> -->
-
-                <p>Duration*:</p>
-					Date:
-					<input id = 'date' name = 'date' type = 'date' onchange = "fieldChanged()" value=<?php echo date('Y-m-d'); ?>> <button onclick='showDayViewModal(document.getElementById("date").value, roomSelected);'>Check</button><br><br>
-					Start time:
-					<input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" onchange = "fieldChanged()" required><br><br>
-
-					End time:	
-					<input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "48" onchange = "fieldChanged()" required><br><br>
-
-                Recurring:
-					<select id="occur">
-						<option value="Once">Just Once</option>
-						<option value="Weekly">Weekly</option>
-						<option value="Monthly">Monthly</option>
-					</select><br><br>
-
-				<input type="checkbox" onclick="changeSheet(); fieldChanged();" id="allowshare">Allow room sharing<br><br>
-
-				<span id="numseatstext" style="visibility:hidden"> Expected number of seats needed: <input type="text" id="numberOfSeats" style="width: 48px;" onchange = "fieldChanged()"></span> <br><br>
-
-                Comments:<br>
-					<textarea rows="4" cols="50" id="comment" style="resize:none; width:80%"></textarea><br>
-                <br><br>
-				<input type="submit" value="Make Reservation">
-                <!-- <button onclick="openConfirmCreate()">Make reservation</button><br><br> -->
-				<br>
-                <font id="responseText"></font>
-            </form>
-
+			<!--
+				This is the rightmost area of the page. Content is provided by function calls:
+				
+				showCreateResForm() - will update the content of this div with the Make Reservation
+				form. This is intended to be the default view, and is also called at the top of this
+				file in the onload attribute of the body tag. 
+				
+				showCalendarView() - will update the content of this div with a calendar showing reservations
+				on each day of the month for the room selected in the roomselector (which is the div with id of
+				"roomContainer" at the bottom of this page). 
+			
+			
+			-->
         </div>
 
+		
         <div class="outerBookArea" id="roomContainer"> 
+			<!--
+				This is the leftmost area of the page. Content is updated upon page load with the function fieldChanged().
+				This area serves as the room selector.
+			-->
 			<span id="favsheader"></span>	
 			<div id="favsbookArea"></div>
 			<span id="allroomsheader"></span>	

@@ -9,17 +9,28 @@
 }
 
 .makeReservation {
+	/*
     position: absolute;
     top: 15%;
     right: 0;
     width: 50%;
     height: 85%;
-    /* overflow: scroll; */
+    z-index: 55;
+	*/
+	position: absolute;
+    top: 15%;
+    right: 0px;
+    left: 54%;
+    width: 50%;
+    height: 85%;
+    overflow: scroll;
     z-index: 55;
 }
 
+
+
 .test{
-    margin-left: 20%;
+    margin-left: 2%;
     height: 100%;
     top: 0%;
     overflow-y: scroll;

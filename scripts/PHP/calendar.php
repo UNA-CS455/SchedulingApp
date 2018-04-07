@@ -5,8 +5,9 @@ class Calendar {
     /**
      * Constructor
      */
-    public function __construct(){     
+    public function __construct($param){     
         $this->naviHref = htmlentities($_SERVER['PHP_SELF']);
+		$this->room = $param;
     }
      
     /********************* PROPERTY ********************/  
@@ -23,13 +24,17 @@ class Calendar {
     private $daysInMonth=0;
      
     private $naviHref= NULL;
+	
+	private $room = NULL;
      
     /********************* PUBLIC **********************/  
         
+	
     /**
     * print out the calendar
     */
     public function show() {
+
 		$startYear = date('y');
         $year=$startYear;
          
@@ -154,8 +159,7 @@ class Calendar {
 			}
 		}
 		$conn->close();
-         
-        return '<li onclick="openCreateRes(this.id)" id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
+        return '<li onclick="calendarDateClicked(this.id)" id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
                 ($cellContent==NULL?'mask':'').'">'.$cellContent. '<br><br>' . ($numRes==0?'':$numRes . ' Reservation(s)') . '</li>';
     }
      

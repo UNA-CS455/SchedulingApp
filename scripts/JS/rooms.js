@@ -2,22 +2,11 @@
 /*
 Needed globals
 */
-//var showrooms = false;
+
 var showres = false;
 var roomSelected = null;
-
-fieldChanged();
-/*
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-	document.getElementById("bookArea").innerHTML = this.responseText;
-   }
-};
-console.error('test');
-xhttp.open("GET", "scripts/PHP/retrieveRooms.php", true);
-xhttp.send(); 
-*/ 
+selectRoom(null);
+var view = "res"; // or "cal" for calendar view.
 
 
 //Leaves the number of seats text box grey and disabled if allowshare is not checked.
@@ -33,7 +22,14 @@ function changeSheet(){
 	}
 }
 
+/*
+Function that will update the room currently selected. Updates include changing the coloration of the 
+respective box in the room selection area of the page to reflect the changes.
 
+Authors: Derek, Dillon, Earl
+April 2018
+
+*/
 function selectRoom(id){
 
 	var notAvailableColor = '#1e1e1e';
@@ -84,7 +80,11 @@ function selectRoom(id){
 	if(normalVersion != null){
 		normalVersion.style.backgroundColor = availableSelectedColor;
 	}
-	
+	if(view == "cal")
+		showCalendarView();
+	else
+		updateReserveButtonText();
+
 
 }
 
@@ -197,7 +197,53 @@ function openConfirmDelete(ele){
 
 }
 
+/*
+Function that will update the reserve button to display text that reflects the currently selected room.
 
+Author: Derek Brown
+April 7, 2018
+*/
+function updateReserveButtonText(){
+	if(document.getElementById('reserveButton') != null){
+		if(roomSelected != null){
+			document.getElementById('reserveButton').disabled = false;
+			document.getElementById('reserveButton').value = "Reserve " + roomSelected;
+		} else {
+			document.getElementById('reserveButton').value = "No Room Selected";
+			document.getElementById('reserveButton').disabled = true;
+		}
+	}
+}
+
+
+function showCalendarView(){
+	var area = document.getElementById('createZone');
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			area.innerHTML = this.responseText;
+			view = "cal";
+		}
+	};
+	xhttp.open("GET", "scripts/PHP/calendarLoad.php?room="+roomSelected, true);
+	xhttp.send();
+	
+}
+
+function showCreateResForm(){
+	var area = document.getElementById('createZone');
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			area.innerHTML = this.responseText;
+			updateReserveButtonText();
+			view = "res";
+		}
+	};
+	xhttp.open("GET", "scripts/PHP/resFormView.php", true);
+	xhttp.send();
+	
+}
 
 /*
 Handles any change of input field for the "Make Reservation" area. Should be called as the onchange event
@@ -210,6 +256,7 @@ function fieldChanged(){
 	//Get variables from fields
 	if(document.getElementById('responseText')!= null)
 		document.getElementById('responseText').innerHTML = "";
+	updateReserveButtonText();
 	var checkbox = false;
 	if(document.getElementById('allowshare') != null){
 		var checkbox = document.getElementById('allowshare').checked;
@@ -488,6 +535,7 @@ Date: 4/2/2018
 
 */
 function clearFields(){
+
 	document.getElementById('responseText').innerHTML = "";
 	document.getElementById("occur").selectedIndex= 0;
 	document.getElementById("typeSelect").selectedIndex= 0;
@@ -509,7 +557,7 @@ function showDayViewModal(date, room){
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			//document.getElementById("").innerHTML = this.responseText;
-			showMessageBox(this.responseText,"Day View","", true);
+			showMessageBox(this.responseText,"Day View - " + roomSelected + " for " + date,"", true);
 		}
 	};
 	xhttp.open("GET", "scripts/PHP/dayView.php?date=" + date + "&room=" + room, true);
@@ -517,6 +565,9 @@ function showDayViewModal(date, room){
 
 }
 
+function calendarDateClicked(date){
+	showDayViewModal(date.substring(3),roomSelected);
+}
 
 
 

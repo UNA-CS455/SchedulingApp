@@ -5,9 +5,6 @@ $dayStart = DateTime::createFromFormat('H:i', '7:00');
 $dayEnd  = DateTime::createFromFormat('H:i', '23:00'); // checks up to this date. So if you want the 10 hour block to
 														// be open, then set this to 11 as closing time
 
-
-
-
 //*************************************************************************************
 //This function checks a number of requirements on a new reservation being made.
 //If the reservation being made is before or after the start day and end day time
@@ -90,14 +87,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 	return $retValue;
 }
 
-/*
-function checkHeadcount()
-{
 
-
-
-}
-*/
 
 //****************************************************************************
 //This function checks the database for reservations that are made or
