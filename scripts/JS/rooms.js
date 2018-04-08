@@ -209,13 +209,28 @@ function updateReserveButtonText(){
 	}
 }
 
+/*
+Function that will be called when a desire to swap views to calendar view exists.
+We call this function when swapping to the view because if you just called updateCalendar()
+by itself, the calendar shown would not have the correct data within it, since at the point of
+swapping between some views, such as redirection from the settings page, roomSelected might be
+null before the updateCalendar function is called and the calendar will instead show all reservations
+while incorrectly having a specific room selected.
 
+Author: Derek Brown.
+Date: 4/7/2018
+*/
 function showCalendarView(){
 	view = "cal"; // change views
 	fieldChanged(true); // load all rooms
 	updateCalendar(); // produce the calendar.
 }
 
+/*
+AJAX call to display and update the calendar within the rightmost area of index.php.
+Author: Derek Brown
+Date: 4/7/2018
+*/
 function updateCalendar(){
 	var area = document.getElementById('createZone');
 	var xhttp = new XMLHttpRequest();
@@ -228,6 +243,16 @@ function updateCalendar(){
 	xhttp.send();
 }
 
+/*
+AJAX call to update rightmost area of index.php with the create reservation form fields.
+Author: Derek Brown
+Date: 4/7/2018
+Edits: 
+	-4/8/2018 by Dillon Borden
+		- add a check to determine if a redirect to index.php should instead display the 
+		calendar view, such as redirecting from settings.php.
+
+*/
 function showCreateResForm(){
 	if (window.location.hash === "#calView"){
 		showCalendarView();
@@ -262,9 +287,10 @@ function fieldChanged(getAll){
 	var GETString = "?q=";
 	
 	//Get variables from fields
-	console.error(getAll);
+	// if getAll is true, then we skip this part and just return all rooms. Otherwise a call to
+	// fieldChanged() or fieldChanged(false) will assume we are looking at the make reservation
+	// screen and will probe those fields for data to use during the room retrieval.
 	if(getAll == null || !getAll){
-			console.error(getAll);
 		if(document.getElementById('responseText')!= null)
 			document.getElementById('responseText').innerHTML = "";
 		updateReserveButtonText();
