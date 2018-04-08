@@ -41,8 +41,8 @@ function findRoom(str) {
 	<div id="banner">
 	
         <img src="../../images/una.png" id="logo" onclick="window.location.href = '../../'">
-		<button id="makeResButton" onclick="window.location.href = '../../#makeRes'; showCreateResForm();">Make Reservation</button>
-		<button id="monthViewButton" onclick="window.location.href = '../../'; showCalendarView();">Month View</button>
+		<button id="makeResButton" onclick="window.location.href = '../../'; showCreateResForm();">Make Reservation</button>
+		<button id="monthViewButton" onclick="window.location.href = '../../#calView'; showCalendarView();">Month View</button>
         <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
 		<button id="settingsButton" onclick="window.location.href = 'roomSettings.php'">Settings</button> 
 		<div class = "welcome">

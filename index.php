@@ -25,7 +25,7 @@
 	
 	
 	
-    <body onload="/*showCreateResForm();*/showCalendarView();fieldChanged();"> <!-- By default, load the make reservation screen into createZone -->
+    <body onload="showCreateResForm();fieldChanged();"> <!-- By default, load the make reservation screen into createZone -->
 		<div id="shader" onclick="shaderClicked()"></div>
 	
         <?php include 'modal.php'; ?>
