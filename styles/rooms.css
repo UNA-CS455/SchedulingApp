@@ -448,7 +448,7 @@ html, body{
 
 
 #myResButton{
-	    left: 26%;
+	    left: 35%;
     top: 10.8%;
     width: 10%;
     position: absolute;
@@ -457,7 +457,25 @@ html, body{
 }
 
 #settingsButton{
-	    left: 39%;
+	    left: 46%;
+    top: 10.8%;
+    width: 10%;
+    height: 3%;
+    position: absolute;
+    border-radius: 8px 8px 0px 0px;
+}
+
+#makeResButton{
+	    left: 13%;
+    top: 10.8%;
+    width: 10%;
+    height: 3%;
+    position: absolute;
+    border-radius: 8px 8px 0px 0px;
+}
+
+#monthViewButton{
+	    left: 24%;
     top: 10.8%;
     width: 10%;
     height: 3%;
@@ -475,6 +493,20 @@ html, body{
 	cursor: pointer;
 }
 
+#makeResButton:hover{
+	border: 1px solid red;
+	cursor: pointer;
+}
+
+#monthViewButton:hover{
+	border: 1px solid red;
+	cursor: pointer;
+}
+
+#banner button{
+	font-size: 1.58vmin;
+}
+
 .welcome{
 	    right: 13%;
     bottom: 12%;
@@ -483,11 +515,15 @@ html, body{
 }
 
 #welcomeText{
-	    color: white;
+	color: white;
     /* float: right; */
     position: absolute;
-    right: 27%;
-    top: 10%;
+    right: 23%;
+    left: 61%;
+    top: 11.5%;
+    padding: 0;
+    margin: 0;
+    font-size: 1.75vmin;
 }
 
 #shader{
