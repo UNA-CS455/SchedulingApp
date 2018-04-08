@@ -217,6 +217,14 @@ function updateReserveButtonText(){
 
 
 function showCalendarView(){
+	if (window.location.hash === "#makeRes"){
+		showCreateResForm();
+		window.location.hash = "";
+		var clean_uri = location.protocol + "//" + location.host + location.pathname;
+		window.history.replaceState({}, document.title, clean_uri);
+		return;
+	}
+	
 	var area = document.getElementById('createZone');
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -500,11 +508,19 @@ Funciton to be called when the user desires to log out manually.
 
 */
 function logoutUser(){
+	
+	
 	if(window.location.href.includes('scripts/PHP/')){
 		window.location.href = 'logout.php';
 	}
 	else{
-		window.location.href += 'scripts/PHP/logout.php';
+		if (window.location.href.includes('index.php')){
+			window.location.href += '/scripts/PHP/logout.php';
+		}
+		else{
+			window.location.href += 'scripts/PHP/logout.php';
+		}
+		
 	}
 }
 
