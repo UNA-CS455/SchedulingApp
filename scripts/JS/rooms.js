@@ -560,9 +560,10 @@ function logoutUser(){
 Function to be called when the make reservation button has been clicked. Opens a confirmation dialog to
 ask the user to confirm their reservation details.
 Author: Derek Brown
-Date: 4/2/2018
-
+Date: 4/2/2018 
 */
+
+
 function openConfirmCreate(){
 	if (roomSelected == null){
 		document.getElementById('responseText').style.color = "red";
@@ -575,6 +576,43 @@ function openConfirmCreate(){
 
 	
 }
+
+
+
+/*
+Function to be called when the make reservation button has been clicked. Opens a confirmation dialog to
+ask the user to confirm their reservation details.
+Author: Derek Brown
+Date: 4/2/2018
+
+
+function openConfirmCreate(){
+	if (roomSelected == null){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
+		return;
+	}
+	
+	var details = "";
+	var xhttp = new XMLHttpRequest();
+	console.error("here");
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			
+			details = this.responseText;
+				buttonhtml =  "<button class='modal-button' onclick='closeModal(); createClicked();'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
+				showMessageBox("Are you sure you want to reserve " + roomSelected + "?<br>" + details ,"Confirm",buttonhtml, false);
+		}
+		console.error(this);
+	};
+	
+	xhttp.open("GET", "scripts/PHP/Confirmation.php?resEmail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&timeStart=" + startHour + ":" + startMin + "&date=" + date + "&timeEnd=" + endHour + ":" + endMin + "&occur=" + occur + "&comment=" + comment);
+	xhttp.send();
+
+	
+}
+
+*/
 
 /*
 Function to clear input fields under the Make Reservation section.
@@ -612,6 +650,7 @@ function showDayViewModal(date, room){
 	xhttp.send();
 
 }
+
 
 function calendarDateClicked(date){
 	showDayViewModal(date.substring(3),roomSelected);

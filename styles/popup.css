@@ -21,6 +21,7 @@
     width: 30%; /* Could be more or less, depending on screen size */
 	left: 29%;
 	position:absolute;
+	min-width: 250px;
 	
 }
 
