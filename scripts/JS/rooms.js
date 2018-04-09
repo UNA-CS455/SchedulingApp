@@ -8,6 +8,10 @@ var roomSelected = null;
 selectRoom(null);
 var view = "res"; // or "cal" for calendar view.
 
+if (window.location.href.includes('index.php')){
+	var clean_uri = location.protocol + "//" + location.host + location.pathname;
+	window.history.replaceState({}, document.title, clean_uri);
+}
 
 //Leaves the number of seats text box grey and disabled if allowshare is not checked.
 function changeSheet(){
