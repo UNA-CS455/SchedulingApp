@@ -87,7 +87,7 @@ function setEmail(str){
 		<button id="makeResButton" onclick="window.location.href = '../../'; showCreateResForm();">Make Reservation</button>
 		<button id="monthViewButton" onclick="window.location.href = '../../#calView'; showCalendarView();">Month View</button>
         <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-		<button id="settingsButton" onclick="window.location.href = 'roomSettings.php'">Settings</button> 
+		<button id="settingsButton" onclick="window.location.href = 'userSettings.php'">Settings</button> 
 		<button onclick="logoutUser();" class="signOut" >Logout</button>
 			
 		<div class = "welcome">

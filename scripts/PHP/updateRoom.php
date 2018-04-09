@@ -6,6 +6,9 @@
 	$floor = $_POST['floor'];
 	$seats = $_POST['seats'];
 	$numcomputers = $_POST['numcomputers'];
+	if (trim($numcomputers) === ""){
+		$numcomputers = 0;
+	}
 
 	require "db_conf.php";
 
@@ -24,7 +27,7 @@
 	}
 	else
 	{
-		$_SESSION['msg'] = "<p> failure </p>";
+		$_SESSION['msg'] = "<p> failure $sql </p>";
 	}
 	$conn->close();
 	header("location:roomSettings.php");
