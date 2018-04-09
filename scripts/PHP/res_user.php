@@ -1,8 +1,8 @@
 <?php session_start();
-	/*if (!isset($_SESSION['username'])) {
+	if (!isset($_SESSION['username'])) {
 		header("location:index.php");
 		exit;
-	}*/
+	}
 
 	require "db_conf.php"; // set servername,username,password,and dbname
 
@@ -13,7 +13,11 @@
 ?>
 
         <?php
-        $sql = "SELECT * FROM reservations WHERE startdate >= NOW() order by startdate, starttime";
+
+		$user = $_SESSION['username'];
+	
+        $sql = "SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND owneremail = '$user' order by startdate, starttime";
+
         $result = $conn->query($sql);
 		$return_array = array();
         while ($row = $result->fetch_assoc()) {
