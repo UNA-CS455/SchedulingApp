@@ -44,7 +44,7 @@ function findRoom(str) {
 		<button id="makeResButton" onclick="window.location.href = '../../'; showCreateResForm();">Make Reservation</button>
 		<button id="monthViewButton" onclick="window.location.href = '../../#calView'; showCalendarView();">Month View</button>
         <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-		<button id="settingsButton" onclick="window.location.href = 'roomSettings.php'">Settings</button> 
+		<button id="settingsButton" onclick="window.location.href = 'userSettings.php'">Settings</button> 
 		<div class = "welcome">
             <?php
             if (isset($_SESSION['username'])) {
@@ -75,9 +75,9 @@ function findRoom(str) {
 	</table>
 	</div>
 
-	<div id = "room"><h2> Room Settings: </h2><br>
+	<div id = "room"><h1> Room Settings </h1><br>
 	<form>
-		<p><b>Search Room:</b></p><br> <br>
+		<p><b>Search Room:</b></p>
 		<input type="text" onkeyup="findRoom(this.value)">
 		</form>
 		<p>  <span id="roomInfo"></span></p>

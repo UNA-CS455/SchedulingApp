@@ -7,7 +7,7 @@
 	echo "Current user: $user </br>";
 	echo "Group:<input type='text' name='permissions'></br>";
 	echo "<input type='hidden' name='currUser' value='$user'></br>";
-	echo "<input type='submit' name='submit'>";
+	echo "<input type='submit' value='save changes'>";
 	echo "</form>";
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
@@ -17,7 +17,7 @@
 	echo "<h1> <br> Current Bookings <br></h1>";
 
 	if ($result->num_rows < 1){
-		echo "There are no current bookings for this room";
+		echo "There are no current bookings for this user";
 	} else{
 		echo "<table><tr><th>Reserving Email</th><th>Owner Email</th><th>Room Number</th><th>Sharing Allowed</th><th>Head Count</th>
 			<th>Start Date</th><th>End Date</th><th>Start Time</th><th>End Time</th><th>Occurrance</th></tr>";

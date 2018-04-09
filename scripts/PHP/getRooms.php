@@ -15,22 +15,24 @@
 		//added to create space from room settings search bar
 		// ADD THIS AND STYLE TO YOUR LIKING 
 		echo "<form action='updateRoom.php' METHOD='POST'>";
+		echo "<table>";
+		echo "<tr><th></th><th></th></tr>";
 		//echo "<div class=\"roomContainer\">";
-		echo "<br> Current Room: " . $row['roomid'];
+		echo "<tr><td>Current Room: </td><td>" . $row['roomid'] . "</td></tr>";
 		echo "<input type='text' value='" . $row['roomid'] . "' name='currRoom' hidden>";
-		echo "<br> New room number: <input type='text' value='" . $row['roomid'] . "'name='roomNumber'>";
-		echo "<br><font id='typeText'>Type:  </font> 
-			<select name='type' placeholder='" . $row['type'] . "'>
-				<option value='Any'>Any</option>
+		echo "<tr><td> New room number: </td><td><input type='text' value='" . $row['roomid'] . "'name='roomNumber'></td></tr>";
+		echo "<tr><td><font id='typeText'>Type: </font> 
+			</td><td><select name='type' placeholder='" . $row['type'] . "'>
 				<option value='Classroom'>Classroom</option>
 				<option value='Conference'>Conference Room</option>
 				<option value='Computer Lab'>Computer Lab</option>
-			</select>";
-		echo "<br> New floor number: <input type='text' value='" . $row['floor'] . "'name='floor'>";
-		echo "<br> Seats: <input type='text' value='" . $row['seats'] . "'name='seats'>";
-		echo "<br> Number of computers: <input type='text' value='" . $row['numcomputers'] . "' name='numcomputers'>";
-		echo "<br> <input type='submit' value='Save changes'></form>";
-		// ADD THIS FOR STYLING echo "</div>";
+			</select></td></tr>";
+		echo "<tr><td> New floor number: </td><td><input type='text' value='" . $row['floor'] . "'name='floor'></td></tr>";
+		echo "<tr><td> Seats: </td><td><input type='text' value='" . $row['seats'] . "'name='seats'></td></tr>";
+		echo "<tr><td> Number of computers: </td><td><input type='text' value='" . $row['numcomputers'] . "' name='numcomputers'></td></tr>";
+		echo "<tr><td> <input type='submit' value='Save changes'></form></td></tr></table>";
+		// ADD THIS FOR STYLING 
+		//echo "</div>";
 		$sql = "SELECT * FROM reservations WHERE startdate >= CURDATE() AND roomnumber='$room' order by startdate, starttime";
         $result = $conn->query($sql);
 		echo "<h1> <br> Current Bookings <br></h1>";
