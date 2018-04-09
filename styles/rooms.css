@@ -556,7 +556,7 @@ html, body{
 
 /* Start Setting Page CSS  */
 #room {
-    left: 21%;
+    left: 15%;
     position: absolute;
     top: 17%;
     height: 100%;
@@ -568,7 +568,7 @@ div.d {
     height: 100%;
     top: 13.9%;
     position: absolute;
-    width: 20%;
+    width: 12.5%;
     background-color: ghostwhite;
 }
 
@@ -597,7 +597,7 @@ button.settingsButton{
 	font-size: 30px;
     position: relative;
     width: 100%;
-    height: 10%;
+    height: 4%;
 }
 
 .roomContainer{
