@@ -47,7 +47,7 @@
 			<button id="makeResButton" onclick="showCreateResForm();">Make Reservation</button>
 			<button id="monthViewButton" onclick="showCalendarView();">Month View</button>
             <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/roomSettings.php'">Settings</button> 
+			<button id="settingsButton" onclick="window.location.href += 'scripts/PHP/userSettings.php'">Settings</button> 
 
 			
 			<div class = "welcome">

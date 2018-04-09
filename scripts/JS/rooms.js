@@ -331,6 +331,9 @@ function fieldChanged(getAll){
 			}
 
 		}
+		else if (checkbox == true){
+			GETString += ("&headcount=" + 1);
+		}
 	}
 
 	var xhttp = new XMLHttpRequest();
