@@ -369,18 +369,14 @@ function createClicked(){
 	var endTime = document.getElementById("timeEnd").value;
 	var date = document.getElementById("date").value;
 	var sharing = Number( document.getElementById("allowshare").checked);
-	console.error(sharing);
 	var startHour = startTime.charAt(0) + startTime.charAt(1);
 	var startMin = startTime.charAt(3) + startTime.charAt(4);
 	var endHour = endTime.charAt(0) + endTime.charAt(1);
 	var endMin = endTime.charAt(3) + endTime.charAt(4);
 	var numSeats = document.getElementById("numberOfSeats").value;
 	var comment = document.getElementById("comment").value;
-	//var start = document.getElementById("start");
-	//var end = document.getElementById("end");
 	var occur = document.getElementById("occur");
-	//end = end[end.selectedIndex].value;
-	//start = start[start.selectedIndex].value;
+
 	occur = occur[occur.selectedIndex].value;
 	if (email == ""){
 		document.getElementById('responseText').style.color = "red";
@@ -659,15 +655,12 @@ function calendarDateClicked(date){
 
 
 
-
-
-
-/*
 function calendarNavi(month, year){
+	var area = document.getElementById('createZone');
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("mainCalendar").innerHTML = this.responseText;
+			area.innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("GET", "scripts/PHP/calendarLoad.php?month=" + month + "&year=" + year + "&room=" + roomSelected, true);
@@ -704,6 +697,7 @@ function findDay(dayNum){
 	}
 }
 
+/*
 function openCreateRes(id){
 	if (id.length < 5){
 		return;

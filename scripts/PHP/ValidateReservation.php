@@ -28,7 +28,6 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 	$endDayErrMsg = "Your reservation cannot be made after 10 PM!";
 	$minuteErrMsg = "Your reservation must be made on 15 minute increments!";
 	$startTimeErrMsg = "Your reservation start time is occurring after your end time!";
-	//$goodMsg = "Reservation Time Valid!"; dont need this
 
 	
 
@@ -233,9 +232,23 @@ function checkValidTime_overload($newResStart, $newResEnd, $date, $room)
 
 }
 
+//TODO:
+/*
+Refactor, add a boolean value to the checkValidTime_overload function $outputError, similar
+to the boolean parameter in checkValidTime. I just added the function below to pass false to
+checkallowSharing_overload since I needed it for the day view, this was after writing the above one
+so we need to go back and just add that outputError parameter above and go to dayView.php and get rid
+of the below redundant function.
+*/
+//****************************************************************************
+//Overload Performs all checks to see if the particualar time slot is open.
+//****************************************************************************
+function checkValidTime_overload_noerr($newResStart, $newResEnd, $date, $room)
+{
+	//Return the boolean value
+	return  checkDateTime(false, $newResStart, $newResEnd) && checkAllowSharing_overload(false, $newResStart, $newResEnd,$date, $room );
 
-
-
+}
 
 function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $room, $givenHeadcount){
 	//error message diplayed when false
