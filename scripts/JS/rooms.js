@@ -356,12 +356,117 @@ function fieldChanged(getAll){
 
 
 
-
 /*
 Function to be called when the intention is to perform an insert into the database of a new reservation.
 will perform sanity checks and acquire variables needed to pass to CreateReservation.php. Any values obtained here
 should also be checked on the server side for sanitation.
 */
+function createClicked(){
+// sanity checks first.
+
+	if (roomSelected == null)
+	{
+		showMessageBoxOK("Select a room to the left and ensure all fields are complete.","Error", false);
+		return;
+	}
+
+	var email = document.getElementById("owneremail").value;
+	var startTime = document.getElementById("timeStart").value;
+	var endTime = document.getElementById("timeEnd").value;
+	var date = document.getElementById("date").value;
+	var sharing = Number( document.getElementById("allowshare").checked);
+	var startHour = startTime.charAt(0) + startTime.charAt(1);
+	var startMin = startTime.charAt(3) + startTime.charAt(4);
+	var endHour = endTime.charAt(0) + endTime.charAt(1);
+	var endMin = endTime.charAt(3) + endTime.charAt(4);
+	var numSeats = document.getElementById("numberOfSeats").value;
+	var comment = document.getElementById("comment").value;
+	var occur = document.getElementById("occur");
+
+	occur = occur[occur.selectedIndex].value;
+	if (email == ""){
+		showMessageBoxOK("Please enter an email first!","Error", false);
+		return;
+	}
+
+	if (startHour == "" || startMin == ""){
+		showMessageBoxOK("Please enter a full start time first!","Error", false);
+		return;
+	}
+
+	if (endHour == "" || endMin == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
+		return;
+	}
+
+	if (/^\d+$/.test(startHour) && /^\d+$/.test(startMin)) {
+	// Contain numbers only
+	}
+	else {
+	// Contain other characters also
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please only enter numbers in start time boxes!";
+		return;
+	}
+
+	// check headcount
+	if(sharing){
+		if (!(/^\+?(0|[1-9]\d*)$/.test(numSeats)) || numSeats <=0) {
+			document.getElementById('responseText').style.color = "red";
+			document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
+			return;
+		}
+	}
+
+	if (startMin.length > 2 || endMin.length > 2){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Times can only be 2 numbers in length!";
+		return;
+	}
+
+
+
+	if (/^\d+$/.test(endHour) && /^\d+$/.test(endMin)) {
+	// Contain numbers only
+	}
+	else {
+	// Contain other characters also
+	document.getElementById('responseText').style.color = "red";
+	document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
+	return;
+	}
+
+	if (document.getElementById('allowshare').checked == true && numSeats == ""){
+		document.getElementById('responseText').style.color = "red";
+		document.getElementById('responseText').innerHTML = "Please specifiy a number of seats needed, or disable sharing.";
+		return;
+	}
+
+	// ajax call to create script.
+	console.log('here');
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			//document.getElementById('responseText').innerHTML = this.responseText;
+			showMessageBoxOK(this.responseText,"Make Reservation", false);
+			clearFields();
+		}
+	};
+	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
+
+}
+
+
+
+/*
+Function to be called when the intention is to perform an insert into the database of a new reservation.
+will perform sanity checks and acquire variables needed to pass to CreateReservation.php. Any values obtained here
+should also be checked on the server side for sanitation.
+
 function createClicked(){
 // sanity checks first.
 	document.getElementById('responseText').innerHTML = "";
@@ -464,7 +569,7 @@ function createClicked(){
 
 }
 
-
+*/
 
 /*
 Should be called whenever a star is clicked, will update UI and perform necessary insertions or removals
@@ -569,9 +674,10 @@ Date: 4/2/2018
 
 
 function openConfirmCreate(){
-	if (roomSelected == null){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
+	var response = document.getElementById('responseText');
+	if (roomSelected == null && response != null){
+		response.style.color = "red";
+		response.innerHTML = "Select a room to the left and ensure all fields are complete.";
 		return;
 	}
 
@@ -641,13 +747,20 @@ function clearFields(){
 }
 
 
-function showDayViewModal(date, room){
-
+function showDayViewModal(date, room, showQuickBook){
+	var quickBook = "";
+	if(showQuickBook){
+		console.error("test");
+		quickBook='<hr><h1>Quick Reserve</h1><form onsubmit="openConfirmCreate(); return false;">Duration*:<input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" onchange = "" required>\
+		-<input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "48" onchange = "" required><br> \
+		Reserving for*:<input type="text" id="owneremail" required><br>\
+		Brief Comment: <input type="text" id="comment"><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
+	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			//document.getElementById("").innerHTML = this.responseText;
-			showMessageBox(this.responseText,"Day View - " + roomSelected + " for " + date,"", true);
+			showMessageBox(this.responseText,"Day View - " + roomSelected + " for " + date,quickBook, true);
 		}
 	};
 	xhttp.open("GET", "scripts/PHP/dayView.php?date=" + date + "&room=" + room, true);
@@ -657,7 +770,7 @@ function showDayViewModal(date, room){
 
 
 function calendarDateClicked(date){
-	showDayViewModal(date.substring(3),roomSelected);
+	showDayViewModal(date.substring(3),roomSelected,true);
 }
 
 
