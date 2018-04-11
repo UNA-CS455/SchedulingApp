@@ -356,6 +356,26 @@ function fieldChanged(getAll){
 
 
 
+function getResFormData(){
+
+	var email = document.getElementById("owneremail").value;
+	var startTime = document.getElementById("timeStart").value;
+	var endTime = document.getElementById("timeEnd").value;
+	var date = document.getElementById("date").value;
+	var sharing = Number( document.getElementById("allowshare").checked);
+	var startHour = startTime.charAt(0) + startTime.charAt(1);
+	var startMin = startTime.charAt(3) + startTime.charAt(4);
+	var endHour = endTime.charAt(0) + endTime.charAt(1);
+	var endMin = endTime.charAt(3) + endTime.charAt(4);
+	var numSeats = document.getElementById("numberOfSeats").value;
+	var comment = document.getElementById("comment").value;
+	var occur = document.getElementById("occur");
+	occur = occur[occur.selectedIndex].value;
+
+	return {email:email, date:date, sharing:sharing, startHour:startHour, startMin:startMin, endHour:endHour, endMin:endMin, numSeats:numSeats, comment:comment, occur:occur};
+}
+
+
 /*
 Function to be called when the intention is to perform an insert into the database of a new reservation.
 will perform sanity checks and acquire variables needed to pass to CreateReservation.php. Any values obtained here
@@ -370,6 +390,19 @@ function createClicked(){
 		return;
 	}
 
+	var data = getResFormData();
+
+	var email = data.email;
+	var date = data.date;
+	var sharing = data.sharing;
+	var startHour = data.startHour;
+	var startMin = data.startMin;
+	var endHour = data.endHour;
+	var endMin = data.endMin;
+	var numSeats = data.numSeats;
+	var comment = data.comment;
+	var occur = data.occur;
+/*
 	var email = document.getElementById("owneremail").value;
 	var startTime = document.getElementById("timeStart").value;
 	var endTime = document.getElementById("timeEnd").value;
@@ -384,6 +417,8 @@ function createClicked(){
 	var occur = document.getElementById("occur");
 
 	occur = occur[occur.selectedIndex].value;
+
+*/
 	if (email == ""){
 		showMessageBoxOK("Please enter an email first!","Error", false);
 		return;
@@ -395,8 +430,8 @@ function createClicked(){
 	}
 
 	if (endHour == "" || endMin == ""){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
+
+		showMessageBoxOK("Please enter a full end time first!","Error", false);
 		return;
 	}
 
@@ -405,23 +440,20 @@ function createClicked(){
 	}
 	else {
 	// Contain other characters also
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please only enter numbers in start time boxes!";
+		showMessageBoxOK("Please only enter numbers in start time boxes!","Error", false);
 		return;
 	}
 
 	// check headcount
 	if(sharing){
 		if (!(/^\+?(0|[1-9]\d*)$/.test(numSeats)) || numSeats <=0) {
-			document.getElementById('responseText').style.color = "red";
-			document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
+			showMessageBoxOK("Please only enter positive numbers as a headcount!","Error", false);
 			return;
 		}
 	}
 
 	if (startMin.length > 2 || endMin.length > 2){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Times can only be 2 numbers in length!";
+		showMessageBoxOK("Times can only be 2 numbers in length!","Error", false);
 		return;
 	}
 
@@ -432,14 +464,12 @@ function createClicked(){
 	}
 	else {
 	// Contain other characters also
-	document.getElementById('responseText').style.color = "red";
-	document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
+	showMessageBoxOK("Please only enter numbers in end time boxes!","Error", false);
 	return;
 	}
 
 	if (document.getElementById('allowshare').checked == true && numSeats == ""){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Please specifiy a number of seats needed, or disable sharing.";
+		showMessageBoxOK("Please specifiy a number of seats needed, or disable sharing.","Error", false);
 		return;
 	}
 
