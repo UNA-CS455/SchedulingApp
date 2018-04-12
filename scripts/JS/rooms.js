@@ -15,7 +15,8 @@ if (window.location.href.includes('index.php')){
 
 //Leaves the number of seats text box grey and disabled if allowshare is not checked.
 function changeSheet(){
-	var checkbox = document.getElementById('allowshare').checked;
+	var checkbox = document.getElementById('allowshare');
+	checkbox = (checkbox == null) ? false : checkbox.checked;
 	if(checkbox == true){
 		document.getElementById('numseatstext').style.visibility = "visible";
 	}
@@ -164,6 +165,7 @@ function deleteClicked(id, id2){
 				document.body.style.backgroundColor = "rgba(0,0,0,0)";
 				switchDelete = false;
 				getAgendaReservations();
+				updateCalendar();
 			}
 		};
 
@@ -237,15 +239,17 @@ Author: Derek Brown
 Date: 4/7/2018
 */
 function updateCalendar(){
-	var area = document.getElementById('createZone');
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			area.innerHTML = this.responseText;
-		}
-	};
-	xhttp.open("GET", "scripts/PHP/calendarLoad.php?room="+roomSelected, true);
-	xhttp.send();
+	if(view == "cal"){
+		var area = document.getElementById('createZone');
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				area.innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "scripts/PHP/calendarLoad.php?room="+roomSelected, true);
+		xhttp.send();
+	}
 }
 
 /*
@@ -362,15 +366,15 @@ function getResFormData(){
 	var startTime = document.getElementById("timeStart").value;
 	var endTime = document.getElementById("timeEnd").value;
 	var date = document.getElementById("date").value;
-	var sharing = Number( document.getElementById("allowshare").checked);
+	var sharing = (document.getElementById("allowshare") == null) ? 0 : Number( document.getElementById("allowshare").checked);
 	var startHour = startTime.charAt(0) + startTime.charAt(1);
 	var startMin = startTime.charAt(3) + startTime.charAt(4);
 	var endHour = endTime.charAt(0) + endTime.charAt(1);
 	var endMin = endTime.charAt(3) + endTime.charAt(4);
-	var numSeats = document.getElementById("numberOfSeats").value;
-	var comment = document.getElementById("comment").value;
+	var numSeats = (document.getElementById("numberOfSeats") == null) ? null : document.getElementById("numberOfSeats").value;
+	var comment = (document.getElementById("comment") == null) ? null : document.getElementById("comment").value;
 	var occur = document.getElementById("occur");
-	occur = occur[occur.selectedIndex].value;
+	occur = (occur == null) ? null : occur[occur.selectedIndex].value;
 
 	return {email:email, date:date, sharing:sharing, startHour:startHour, startMin:startMin, endHour:endHour, endMin:endMin, numSeats:numSeats, comment:comment, occur:occur};
 }
@@ -380,9 +384,15 @@ function getResFormData(){
 Function to be called when the intention is to perform an insert into the database of a new reservation.
 will perform sanity checks and acquire variables needed to pass to CreateReservation.php. Any values obtained here
 should also be checked on the server side for sanitation.
+
+data - an optional parameter containing the data to be used in the creation of the new reservation.
+this is used on the quick reserve to facilitate passing of form data between modals that change content.
+If left null or empty, then we can assume that there exists form data that can be obtained by looking for 
+the document element by id with a call to getResFormData.
 */
-function createClicked(){
+function createClicked(data){
 // sanity checks first.
+
 
 	if (roomSelected == null)
 	{
@@ -390,7 +400,8 @@ function createClicked(){
 		return;
 	}
 
-	var data = getResFormData();
+	if(data == null)
+		data = getResFormData();
 
 	var email = data.email;
 	var date = data.date;
@@ -402,7 +413,9 @@ function createClicked(){
 	var numSeats = data.numSeats;
 	var comment = data.comment;
 	var occur = data.occur;
-/*
+	
+	/*
+	console.error("got here");
 	var email = document.getElementById("owneremail").value;
 	var startTime = document.getElementById("timeStart").value;
 	var endTime = document.getElementById("timeEnd").value;
@@ -415,10 +428,10 @@ function createClicked(){
 	var numSeats = document.getElementById("numberOfSeats").value;
 	var comment = document.getElementById("comment").value;
 	var occur = document.getElementById("occur");
-
+	
 	occur = occur[occur.selectedIndex].value;
-
 */
+
 	if (email == ""){
 		showMessageBoxOK("Please enter an email first!","Error", false);
 		return;
@@ -468,20 +481,22 @@ function createClicked(){
 	return;
 	}
 
-	if (document.getElementById('allowshare').checked == true && numSeats == ""){
+	if (sharing == 1 && numSeats == ""){
 		showMessageBoxOK("Please specifiy a number of seats needed, or disable sharing.","Error", false);
 		return;
 	}
 
 	// ajax call to create script.
-	console.log('here');
+
 
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			//document.getElementById('responseText').innerHTML = this.responseText;
 			showMessageBoxOK(this.responseText,"Make Reservation", false);
+			updateCalendar();
 			clearFields();
+			
 		}
 	};
 	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
@@ -695,27 +710,7 @@ function logoutUser(){
 	}
 }
 
-/*
-Function to be called when the make reservation button has been clicked. Opens a confirmation dialog to
-ask the user to confirm their reservation details.
-Author: Derek Brown
-Date: 4/2/2018 
-*/
 
-
-function openConfirmCreate(){
-	var response = document.getElementById('responseText');
-	if (roomSelected == null && response != null){
-		response.style.color = "red";
-		response.innerHTML = "Select a room to the left and ensure all fields are complete.";
-		return;
-	}
-
-	buttonhtml =  "<button class='modal-button' onclick='closeModal(); createClicked();'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
-	showMessageBox("Are you sure you want to reserve " + roomSelected + "?" ,"Confirm",buttonhtml, false);
-
-	
-}
 
 
 
@@ -762,16 +757,23 @@ Date: 4/2/2018
 */
 function clearFields(){
 
-	document.getElementById('responseText').innerHTML = "";
-	document.getElementById("occur").selectedIndex= 0;
-	document.getElementById("typeSelect").selectedIndex= 0;
-	document.getElementById("timeStart").value= '';
-	document.getElementById("timeEnd").value= '';
+	if(document.getElementById('responseText') != null)
+		document.getElementById('responseText').innerHTML = "";
+	if(document.getElementById('occur') != null)
+		document.getElementById("occur").selectedIndex= 0;
+	if(document.getElementById('typeSelect') != null)
+		document.getElementById("typeSelect").selectedIndex= 0;
+	if(document.getElementById('timeStart') != null)
+		document.getElementById("timeStart").value= '';
+	if(document.getElementById('timeEnd') != null)
+		document.getElementById("timeEnd").value= '';
 	//document.getElementById("date").value= '';
 	changeSheet();
 	//document.getElementById("allowshare").checked= false;
-	document.getElementById("numberOfSeats").value = '';
-	document.getElementById("comment").value= '';
+	if(document.getElementById('numberOfSeats') != null)
+		document.getElementById("numberOfSeats").value = '';
+	if(document.getElementById('comment') != null)
+		document.getElementById("comment").value= '';
 	fieldChanged();
 	
 }
@@ -780,11 +782,11 @@ function clearFields(){
 function showDayViewModal(date, room, showQuickBook){
 	var quickBook = "";
 	if(showQuickBook){
-		console.error("test");
-		quickBook='<hr><h1>Quick Reserve</h1><form onsubmit="openConfirmCreate(); return false;">Duration*:<input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" onchange = "" required>\
-		-<input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "48" onchange = "" required><br> \
-		Reserving for*:<input type="text" id="owneremail" required><br>\
-		Brief Comment: <input type="text" id="comment"><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
+		quickBook='<hr><h1>Quick Reserve</h1><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;">Duration*:<input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" onchange = "" required>\
+		- <input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "48" onchange = "" required><br> \
+		Reserving for*:<input type="text" id="owneremail" value="" required><br>\
+		Brief Comment: <input type="text" id="comment"><br><input type="hidden" id="date" value="'+date+'"><input type="hidden" id="allowshare" value="0" >\
+		<input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
 	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -796,6 +798,40 @@ function showDayViewModal(date, room, showQuickBook){
 	xhttp.open("GET", "scripts/PHP/dayView.php?date=" + date + "&room=" + room, true);
 	xhttp.send();
 
+}
+
+/*
+Function to be called when the make reservation button has been clicked. Opens a confirmation dialog to
+ask the user to confirm their reservation details.
+
+data - an optional parameter containing the data to be used in the creation of the new reservation.
+this is used on the quick reserve to facilitate passing of form data between modals that change content.
+If left null or empty, then we can assume that there exists form data that can be obtained by looking for 
+the document element by id with a call to getResFormData.
+
+
+Author: Derek Brown
+Date: 4/2/2018 
+*/
+
+
+function openConfirmCreate(data){
+	var response = document.getElementById('responseText');
+	if (roomSelected == null && response != null){
+		response.style.color = "red";
+		response.innerHTML = "Select a room to the left and ensure all fields are complete.";
+		return;
+	}
+
+	//buttonhtml =  "<button class='modal-button' onclick='closeModal(); createClicked(data);'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
+	buttonhtml =  "<button id='ConfirmClickCreateButton' class='modal-button'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
+	showMessageBox("Are you sure you want to reserve " + roomSelected + "?" ,"Confirm",buttonhtml, false);
+	// to pass data, we have to use an anon function.
+	document.getElementById('ConfirmClickCreateButton').onclick = function () {
+		closeModal();
+		createClicked(data);
+	};
+	
 }
 
 

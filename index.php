@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="styles/popup.css">
 		
 		<!-- Jquery -->
-		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 		
         <title>LeoBook</title>
     </head>
