@@ -16,7 +16,7 @@
 
 		$user = $_SESSION['username'];
 	
-        $sql = "SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND owneremail = '$user' order by startdate, starttime";
+        $sql = "SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND (owneremail = '$user' OR res_email = '$user') order by startdate, starttime";
 
         $result = $conn->query($sql);
 		$return_array = array();
