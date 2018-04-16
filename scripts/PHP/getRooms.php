@@ -22,11 +22,23 @@
 		echo "<input type='text' value='" . $row['roomid'] . "' name='currRoom' hidden>";
 		echo "<tr><td> New room number: </td><td><input type='text' value='" . $row['roomid'] . "'name='roomNumber'></td></tr>";
 		echo "<tr><td><font id='typeText'>Type: </font> 
-			</td><td><select name='type' placeholder='" . $row['type'] . "'>
-				<option value='Classroom'>Classroom</option>
+			</td><td><select name='type'>";
+		if ($row['type'] == "Classroom"){
+			echo "<option value='Classroom' selected='selected' >Classroom</option>
 				<option value='Conference'>Conference Room</option>
 				<option value='Computer Lab'>Computer Lab</option>
-			</select></td></tr>";
+				</select></td></tr>";
+		} else if ($row['type'] == "Computer Lab"){
+			echo "<option value='Classroom' >Classroom</option>
+				<option value='Conference'>Conference Room</option>
+				<option value='Computer Lab' selected='selected'>Computer Lab</option>
+				</select></td></tr>";
+		} else {
+			echo "<option value='Classroom' >Classroom</option>
+				<option value='Conference' selected='selected'>Conference Room</option>
+				<option value='Computer Lab'>Computer Lab</option>
+				</select></td></tr>";
+		}
 		echo "<tr><td> New floor number: </td><td><input type='text' value='" . $row['floor'] . "'name='floor'></td></tr>";
 		echo "<tr><td> Seats: </td><td><input type='text' value='" . $row['seats'] . "'name='seats'></td></tr>";
 		echo "<tr><td> Number of computers: </td><td><input type='text' value='" . $row['numcomputers'] . "' name='numcomputers'></td></tr>";
