@@ -8,8 +8,16 @@ var roomSelected = null;
 selectRoom(null);
 var view = "res"; // or "cal" for calendar view.
 
+/*
+* Code added to ensure that the url always "appears" as directory/ for the index
+* but no effect is ever taken.  This is done so the interaction, redirection, and navigation
+* is consistent and offers no problems.
+*
+* Author: Dillon Borden, Derek Brown
+*/
 if (window.location.href.includes('index.php')){
 	var clean_uri = location.protocol + "//" + location.host + location.pathname;
+	clean_uri = clean_uri.replace('index.php', '');
 	window.history.replaceState({}, document.title, clean_uri);
 }
 
@@ -138,22 +146,17 @@ function getAgendaReservations() {
     
 }
 
-window.addEventListener('click', function(e){
-	handleClick(e);
-});
-
 var switchDelete = false;
 var switchCreate = false;
 
-function handleClick(e){
-
-}
-
 /*
-Function to perform the deletion of a reservation from the My Reservations table.
+* A function that handles the user choice on the popup after clicking the delete on agenda.
+* it has a yes and no button, which has two unique behaviors associated with choosing either.
+* Author: Dillon Borden, Derek Brown
 */
 function deleteClicked(id, id2){
 
+	// using the ID, we can tell which was clicked.
 	if (id == "yesDelete"){
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
@@ -186,6 +189,11 @@ function deleteClicked(id, id2){
 
 let lastDeleteClicked = null;
 
+/*
+* A front-end function that opens a modal popup asking the user to confirm the deletion of their
+*	selected reservation. Originally created by @Dillon Borden, modified by @Derek Brown
+* Author: Derek Brown
+*/
 function openConfirmDelete(ele){
 	// first display the modal using display: block (by default should be none)
 	// set id of info tag to append this info below.
@@ -617,8 +625,11 @@ function createClicked(){
 */
 
 /*
-Should be called whenever a star is clicked, will update UI and perform necessary insertions or removals
-from the favorites table for the currently logged in user.
+* A function implemented with the favorites feature that handles a click on the star of a room div.
+* If the star is already an image representing a favorite, it will unfavorite that room and changes
+* will be reflected in the database. It acts like a toggle switch between fav and unfav.
+* Original implementation by @Dillon Borden, modification by @Derek Brown for flexboxes.
+* Author: Dillon Borden, Derek Brown
 */
 function favoriteClicked(parentEle){
 	let star = document.getElementById(parentEle.id);
@@ -645,7 +656,11 @@ function favoriteClicked(parentEle){
 	}
 }
 
-// Dillon Borden
+/*
+* Handles the onclick event for the "shader" div.  the shader div is used to make the background behind
+* a popup window look darker.  If the user clicks outside of the popup then the popup should minimize.
+* Author: Dillon Borden
+*/
 function shaderClicked(){
 	showres = false;
 		//document.body.style.backgroundColor = "rgba(0,0,0,1)";
@@ -654,7 +669,10 @@ function shaderClicked(){
 		document.getElementById('shader').style.display = "none";
 }	
 
-// Dillon Borden
+/*
+* Front-end UI function to toggle on and off the showing of "My Agenda" reservations popup.
+* Author: Dillon Borden
+*/
 function dropdownRes() {
 	getAgendaReservations();
     //
@@ -691,7 +709,7 @@ window.onclick = function(event) {
 
 /*
 Funciton to be called when the user desires to log out manually.
-
+* Author(s): Dillon Borden, Derek Brown, Earl Clark, 
 */
 function logoutUser(){
 	
@@ -839,9 +857,11 @@ function calendarDateClicked(date){
 	showDayViewModal(date.substring(3),roomSelected,true);
 }
 
-
-
-
+/*
+* Handles the event for calendar navigation between months based on the selected room.
+* Can be either forward or backward by month when clicked.
+* Author: Dillon Borden
+*/
 function calendarNavi(month, year){
 	var area = document.getElementById('createZone');
 	var xhttp = new XMLHttpRequest();
@@ -854,7 +874,11 @@ function calendarNavi(month, year){
 	xhttp.send();
 }
 
-
+/*
+* A switch function which takes a month number 01-12 and returns a string for the month.
+*
+* Author: Dillon Borden
+*/
 function findDay(dayNum){
 	switch (dayNum){
 		case "01":
