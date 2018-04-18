@@ -24,7 +24,7 @@
 
 	<p>Duration*:</p>
 		Date:
-		<input id = 'date' name = 'date' type = 'date' onchange = "fieldChanged()" value=<?php echo date('Y-m-d'); ?>> <button onclick='showDayViewModal(document.getElementById("date").value, roomSelected);'>Check</button><br><br>
+		<input id = 'date' name = 'date' type = 'date' onchange = "fieldChanged()" value=<?php echo date('Y-m-d'); ?>> <button type='button' onclick='showDayViewModal(document.getElementById("date").value, roomSelected);'>Check</button><br><br>
 		Start time:
 		<input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" onchange = "fieldChanged()" required><br><br>
 
