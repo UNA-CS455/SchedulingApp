@@ -115,6 +115,7 @@ function getAgendaReservations() {
 		if (this.readyState == 4 && this.status == 200) {
 			//console.error(this.responseText);
 
+			console.error(this.responseText);
 			var reservation = JSON.parse(this.responseText);
 			
 			var runString = "<h2 style='text-align:center' >Active Reservations</h2>";
