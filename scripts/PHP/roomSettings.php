@@ -1,10 +1,10 @@
 <?php
 session_start();
-/*
+
 if (!isset($_SESSION['username'])){
-	header('location: login.html');
+	header('location: ../../login.html');
 }
-*/
+
 ?>
 <!DOCTYPE html>
 <html>
