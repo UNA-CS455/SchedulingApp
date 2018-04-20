@@ -800,10 +800,10 @@ function clearFields(){
 function showDayViewModal(date, room, showQuickBook){
 	var quickBook = "";
 	if(showQuickBook){
-		quickBook='<hr><h1>Quick Reserve</h1><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;">Duration*:<input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" onchange = "" required>\
-		- <input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "48" onchange = "" required><br> \
-		Reserving for*:<input type="text" id="owneremail" value="" required><br>\
-		Brief Comment: <input type="text" id="comment"><br><input type="hidden" id="date" value="'+date+'"><input type="hidden" id="allowshare" value="0" >\
+		quickBook='<hr><h1>Quick Reserve</h1><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;"><table width="100%" style= "margin-top:-5%"><tr><td>Duration*:</td><td><input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "50" onchange = "" required>\
+		<input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "50" onchange = "" required></td></tr><br> \
+		<tr><td>Reserving for*:</td><td><input type="text" width="100%" id="owneremail" value="" required></td></tr><br>\
+		<tr><td>Brief Comment: </td><td><input type="text" width="100%" id="comment"><br><input type="hidden" id="date" value="'+date+'"><input type="hidden" id="allowshare" value="0" ></td><tr></table><br>\
 		<input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
 	}
 	var xhttp = new XMLHttpRequest();
