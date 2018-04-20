@@ -43,17 +43,18 @@ function processReservation()
 	$owneremail = ($_POST['owneremail']);
 	$owneremail = trim($owneremail);
 	$owneremail = filter_var($owneremail, FILTER_SANITIZE_EMAIL);
-	//$owneremail = filter_var($owneremail, FILTER_VALIDATE_EMAIL, array("options"=>array("regexp"=>"/^[a-zA-Z \.\-!,]{1,64}$/")));
+	$owneremail = filter_var($owneremail, FILTER_VALIDATE_EMAIL, array("options"=>array("regexp"=>"/^[a-zA-Z \.\-!,]{1,64}$/")));
+	//TODO: sanitize email to prevent script jacking if email is ever displayed on the page
 
-	//if($owneremail = filter_var($owneremail, FILTER_VALIDATE_EMAIL)) {
-	//	echo "Valid email accepted";
-	//}
+	/*
+	if($owneremail = filter_var($owneremail, FILTER_VALIDATE_EMAIL)) {
+		echo "Valid email accepted";
+	}
 
-	//else {
-	//	echo "Error making reservation: Invalid email " . $conn->error;
-	//	exit;
-	//	$conn->close();
-	//}
+	else {
+		echo "Error making reservation: Invalid email ";
+		exit;
+	}*/
 
 	//checkbox type
 	$allowshare=($_POST['allowshare']);
@@ -112,15 +113,27 @@ function processReservation()
 		}
 
 		//if connection is success, insert data into database and echo to user result
-		$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$date', '$date', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
-			
+		//$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$date', '$date', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
+		$stmt = $conn->prepare("INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$startAssist = date('H:i', strtotime($starthour . ":" . $startminute));
+		$endAssist = date('H:i', strtotime($endhour . ":" . $endminute));
+		$stmt->bind_param("ssissssssss", $roomnumber, $owneremail, $allowshare, $numberOfSeats, $date, $date, $startAssist, $endAssist, $occur, $comment, $logged_in_user);
+        $check = $stmt->execute();
+		//$mResult = $stmt->get_result();
+		/*
 		if ($conn->query($sql) === TRUE) {
 			echo "Reservation made successfully";
 			//include 'mail.php'; uncomment when on deployed version
 		} else {
 			echo "Error making reservation: " . $conn->error;
 		}
-
+		*/
+		if (!$check) {
+			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+		}
+		else{
+			echo "Reservation made successfully";
+		}
 		$conn->close();
 	
 

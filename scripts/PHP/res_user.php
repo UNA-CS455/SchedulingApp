@@ -16,10 +16,37 @@
 
 		$user = $_SESSION['username'];
 	
-        $sql = "SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND (owneremail = '$user' OR res_email = '$user') order by startdate, starttime";
+        //$sql = "SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND (owneremail = '$user' OR res_email = '$user') order by startdate, starttime";
+		$stmt = $conn->prepare("SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND (owneremail =? OR res_email =?) order by startdate, starttime");
+        //$result = $conn->query($sql);
+		//$return_array = array();
+		$stmt->bind_param("ss", $user, $user);
+        $stmt->execute();
+		$mResult = $stmt->get_result();
+		
+		while ($row = $mResult->fetch_assoc()){
+			$rowResult = array(
+				"roomnumber" => $row['roomnumber'],
+				"owneremail" => $row['owneremail'],
+				"headcount" => $row['headcount'],
+				"startdate" => $row['startdate'],
+				"starttime" => date('h:i',strtotime($row['starttime'])),
 
-        $result = $conn->query($sql);
-		$return_array = array();
+				"enddate" => $row['enddate'],
+				"endtime" => date('h:i',strtotime($row['endtime'])),
+				"comment" => $row['comment'],
+				"id" => $row['id'],
+				
+				"start" => date('A',strtotime($row['starttime'])),
+				"end" => date('A',strtotime($row['endtime'])),
+				"occur" => $row['occur'],
+				#"repeat_id" => $row['repeat_id'],
+				"allowshare" => $row['allowshare'],
+				"res_email" => $row['res_email']
+			);
+			$return_array[] = $rowResult; // append row to result.
+		}
+/*
         while ($row = $result->fetch_assoc()) {
 	
 			$rowResult = array(
@@ -42,7 +69,7 @@
 				"res_email" => $row['res_email']
 			);
 			$return_array[] = $rowResult; // append row to result.
-		}
+		}*/
         $conn->close();
 		
 		echo json_encode($return_array); // return an array of reservations.

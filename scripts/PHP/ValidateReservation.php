@@ -121,7 +121,7 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room)
 	$sql = "SELECT * FROM reservations WHERE roomnumber = '$room' AND allowshare = '0'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
+				OR(starttime < '$newResStart' AND endtime > '$newResStart'))";
 
 
 	$result = $conn->query($sql);
@@ -184,7 +184,7 @@ function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $dat
 	$sql = "SELECT * FROM reservations WHERE allowshare = '0' AND startdate = '$date' AND roomnumber = '$room'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
+				OR(starttime < '$newResStart' AND endtime > '$newResStart'))";
 
 
 	$result = $conn->query($sql);
@@ -278,9 +278,8 @@ function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $
 				startdate = '$newResDate' AND roomnumber = '$room'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
+				OR(starttime < '$newResStart' AND endtime > '$newResStart'))";
 
-	//echo $sql;
 	$result = $conn->query($sql);
 	$row = $result->fetch_assoc();
 
