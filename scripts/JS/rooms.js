@@ -719,7 +719,7 @@ function logoutUser(){
 	}
 	else{
 		if (window.location.href.includes('index.php')){
-			window.location.href += '/scripts/PHP/logout.php';
+			window.location.href += 'scripts/PHP/logout.php';
 		}
 		else{
 			window.location.href += 'scripts/PHP/logout.php';
