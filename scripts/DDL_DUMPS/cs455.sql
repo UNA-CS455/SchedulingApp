@@ -119,7 +119,6 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `firstname` varchar(100) DEFAULT NULL,
   `lastname` varchar(100) DEFAULT NULL,
-  `classification` varchar(200) NOT NULL,
   `permissions` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -127,8 +126,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `firstname`, `lastname`, `classification`, `permissions`) VALUES
-('dbrown4@una.edu', 'Derek', 'Brown', 'ADMIN', 'AA');
+INSERT INTO `users` (`email`, `firstname`, `lastname`, `permissions`) VALUES
+('dbrown4@una.edu', 'Derek', 'Brown', 'A');
 
 --
 -- Indexes for dumped tables
