@@ -1,6 +1,6 @@
 <?php session_start();
 /**************************************************************************
-Retrive Day View Script
+Retrieve Day View Script
 
 Description: A php script that will accept GET requests containing parameters
 'date', which is a string YYYY-MM-DD and 'room' which is a string representing
@@ -11,6 +11,52 @@ $dayStart to $dayEnd on the date given in the GET request.
 Authors: Derek Brown, Matthew Foster
 March 2018
 **************************************************************************/
+	echo '<style>/* Tooltip container */
+			.tooltip {
+				position: relative;
+				display: inline-block;
+				height:100%;
+				width:99%;
+			}
+
+			/* Tooltip text */
+			.tooltip .tooltiptext {
+				visibility: hidden;
+				width: 100%;
+				background-color: #555;
+				color: #fff;
+				text-align: center;
+
+				/* Position the tooltip text */
+				position: absolute;
+				z-index: 100;
+				bottom: 125%;
+				left: 50%;
+				margin-left: -60px;
+
+				/* Fade in tooltip */
+				opacity: 0;
+				transition: opacity 0.3s;
+			}
+
+			/* Tooltip arrow */
+			.tooltip .tooltiptext::after {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				margin-left: -5px;
+				border-width: 5px;
+				border-style: solid;
+				border-color: #555 transparent transparent transparent;
+			}
+
+			/* Show the tooltip text when you mouse over the tooltip container */
+			.tooltip:hover .tooltiptext {
+				visibility: visible;
+				opacity: 1;
+			}
+			</style>';
     $date = $_GET['date'];
 	$selectedRoom = $_GET['room'];
 	$dayStart = 7;
@@ -108,7 +154,8 @@ March 2018
 				$isOverlapping = true;
 				for($i = 0; $i < count($resColumnArr); $i++){
 					for($j = 0; $j < count($resColumnArr[$i]); $j++){
-						if(!($res[(int)$resCounter]['starthour'] <= $resColumnArr[$i][$j]['endhour'])){
+					if(!($res[(int)$resCounter]['starthour'] <= $resColumnArr[$i][$j]['endhour'])){
+					//	if($res[(int)$resCounter]['starthour']+1 < $res[(int)$resCounter]['endhour'] && checkValidTime_overload_noerr($res[(int)$resCounter]['starthour'] . ":00" , $res[(int)$resCounter]['starthour']+1 . ":00", $date, $selectedRoom)) {
 							//the current reservation we are looking at to place is not overlapping with the one in this column, so place it in this column
 							break;
 							$isOverlapping = false;
@@ -149,29 +196,34 @@ March 2018
 		//the table is now full
 		$labelMaintainCount = 0;
 		for($row = 0; $row < count($blankCol); $row++){	
+			
 			echo "<tr>";	
 			$timeBlock = (($row+7)>12) ? (($row+7)-12): ($row+7); // set time digits
 			$timeColor = (checkValidTime_overload_noerr($row+7 . ":00" , $row+8 . ":00", $date, $selectedRoom) && checkEnoughSeats(false, $row+7 . ":00", $row+8 . ":00", $date, $selectedRoom, 1)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'";
 			echo "<td " . $timeColor .">" . $timeBlock . ":00</td>";
+			
 			for($col = 0; $col < count($table); $col++){
+				
 				echo "<td";
 				if($table[$col][$row]== -1){
-					echo "> ";
-
+					echo ">";
+					
 				}
 				else
 				{
-
+					$resIDForToolTip = $res[$table[$col][$row]]['id'];
 					$newColor = $res[$table[$col][$row]]['color'];
-					echo " bgcolor ='$newColor'>";
+					
+					echo " bgcolor ='$newColor' onmouseover='openTooltip($resIDForToolTip,$row)' class='tooltip'><span style='visibility:hidden'>|</span><span id='tooltipContent_$resIDForToolTip $row' class='tooltiptext'></span>";
 					if($table[$col][$row] == $labelID[$labelMaintainCount]){
+						
 						$labelMaintainCount++;
 						if(checkValidTime_overload_noerr($row+7 . ":00" , $row+8 . ":00",$date, $selectedRoom)){
 							echo $res[$table[$col][$row]]['start_to_end_str'] . " [" . $res[$table[$col][$row]]['headcount'] . "/$numSeats]";
 						} else {
 							echo $res[$table[$col][$row]]['start_to_end_str'];
-						}
-					}
+						} 
+					} 
 				}
 				
 				echo " </td>";

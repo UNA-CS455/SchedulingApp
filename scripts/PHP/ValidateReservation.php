@@ -82,6 +82,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 		}
 	}
 	
+
 	
 	return $retValue;
 }

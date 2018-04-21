@@ -10,20 +10,26 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-?>
 
-        <?php
 
 		$user = $_SESSION['username'];
 	
         //$sql = "SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND (owneremail = '$user' OR res_email = '$user') order by startdate, starttime";
-		$stmt = $conn->prepare("SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND (owneremail =? OR res_email =?) order by startdate, starttime");
+		if (isset($_GET['id'])) {
+			$idval = $_GET['id'];
+			$stmt = $conn->prepare("SELECT * FROM reservations WHERE id =?");
+			$stmt->bind_param("i", $idval);
+		} else{
+			$stmt = $conn->prepare("SELECT * FROM reservations WHERE concat(startdate,' 23:59:59') >= NOW() AND (owneremail =? OR res_email =?) order by startdate, starttime");	
+			$stmt->bind_param("ss", $user, $user);			
+		}
+
         //$result = $conn->query($sql);
 		//$return_array = array();
-		$stmt->bind_param("ss", $user, $user);
+
         $stmt->execute();
 		$mResult = $stmt->get_result();
-		
+		$return_array = [];
 		while ($row = $mResult->fetch_assoc()){
 			$rowResult = array(
 				"roomnumber" => $row['roomnumber'],

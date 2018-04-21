@@ -1051,4 +1051,36 @@ function toggleRoomView()
 
 */
 
+function openTooltip(id,row){
+
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+
+			console.error(this.responseText);
+			var reservation = JSON.parse(this.responseText);
+			var runString = "<h2 style='text-align:left; margin-top: 3%; margin-bottom: 0%;' >Details</h2><hr>";
+				runString += "<p style='text-align:left'>Starttime:" + reservation[0].starttime + reservation[0].start;
+				runString += "<br>Endtime:" + reservation[0].endtime + reservation[0].end;
+				runString += "<br>Owner: " + reservation[0].res_email;
+				runString += "<br>Comments:" + reservation[0].comment;
+				runString += (reservation[0].allowshare == 1) ? "<br>Note: This room is available for sharing timeslots. Current headcount is " + reservation[0].headcount + "</p>" : "</p>";
+				
+
+			document.getElementById('tooltipContent_'+id + ' '+row).innerHTML = runString;
+		}
+	};
+
+	if (window.location.href.includes('PHP')){
+		xmlhttp.open("GET", "res_user.php?id=" + id, true);
+	}
+	else{
+		xmlhttp.open("GET", "./scripts/PHP/res_user.php?id=" + id, true);
+	}
+	
+	
+	xmlhttp.send();
+
+}
+
 

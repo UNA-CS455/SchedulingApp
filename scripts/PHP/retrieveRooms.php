@@ -1,7 +1,7 @@
 <?php session_start();
 
 	/*=========================================================================
-		Retrive Rooms PHP Script
+		Retrieve Rooms PHP Script
 		Purpose: Generates the rooms table that is shown on the primary page.
 		constraints are given via GET, and the table generated will provide only
 		those rooms who meet those constraints.
