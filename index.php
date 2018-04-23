@@ -71,6 +71,7 @@
 		
 		
         <div style="position:absolute" id="agendaReservations">
+			
 			<!--
 				The "My Reservations" agenda dropdown area. Content will be given to this via a call to the dropdownRes()
 				function which is called when the "My Reservations" link in the banner is clicked.
