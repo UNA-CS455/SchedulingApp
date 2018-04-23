@@ -1,6 +1,9 @@
 <?php session_start();
+
+include "ValidateReservation.php";
+
 /**************************************************************************
-Retrive Day View Script
+Retrieve Day View Script
 
 Description: A php script that will accept GET requests containing parameters
 'date', which is a string YYYY-MM-DD and 'room' which is a string representing
@@ -11,10 +14,54 @@ $dayStart to $dayEnd on the date given in the GET request.
 Authors: Derek Brown, Matthew Foster
 March 2018
 **************************************************************************/
+	echo '<style>/* Tooltip container */
+			.tooltip {
+				position: relative;
+				display: inline-block;
+				height:100%;
+				width:99%;
+			}
+
+			/* Tooltip text */
+			.tooltip .tooltiptext {
+				visibility: hidden;
+				width: 100%;
+				background-color: #555;
+				color: #fff;
+				text-align: center;
+
+				/* Position the tooltip text */
+				position: absolute;
+				z-index: 100;
+				bottom: 125%;
+				left: 50%;
+				margin-left: -60px;
+
+				/* Fade in tooltip */
+				opacity: 0;
+				transition: opacity 0.3s;
+			}
+
+			/* Tooltip arrow */
+			.tooltip .tooltiptext::after {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				margin-left: -5px;
+				border-width: 5px;
+				border-style: solid;
+				border-color: #555 transparent transparent transparent;
+			}
+
+			/* Show the tooltip text when you mouse over the tooltip container */
+			.tooltip:hover .tooltiptext {
+				visibility: visible;
+				opacity: 1;
+			}
+			</style>';
     $date = $_GET['date'];
 	$selectedRoom = $_GET['room'];
-	$dayStart = 7;
-	$dayEnd = 22;
 
 	if($date == null || $selectedRoom == null || $date == "null" || $selectedRoom == "null"){
 		echo "date is " . $date;
@@ -42,8 +89,8 @@ March 2018
 				"owneremail" => $row['owneremail'],
 				"headcount" => $row['headcount'],
 				"startdate" => $row['startdate'],
-				"starthour" => date('H',strtotime($row['starttime'])),
-				"endhour" => date('H',strtotime($row['endtime'])),
+				"starthour" => DateTime::createFromFormat('H:i', date('H:i',strtotime($row['starttime']))),
+				"endhour" => DateTime::createFromFormat('H:i', date('H:i',strtotime($row['endtime']))),
 				"start_to_end_str" => date('g:i',strtotime($row['starttime'])) . "-" . date('g:i',strtotime($row['endtime'])),
 				"comment" => $row['comment'],
 				"id" => $row['id'],
@@ -64,10 +111,13 @@ March 2018
 	}
 	//table vector
 	$table = array();
-	$durationOfDay = $dayEnd - $dayStart;
+	
+	//$durationOfDay = $dayEnd->diff($dayStart);
 	$blankCol= array();
-	for($i = 0; $i <= $durationOfDay; $i++){
-		$blankCol[] = -1;
+
+	for($i = clone $dayStart; $i <= $dayEnd; $i = $i->add(new DateInterval('PT60M'))){
+		
+		$blankCol[$i->format('H:i')] = -1;
 	}
 	$table[] = $blankCol;
 	$labelID = array();
@@ -88,17 +138,16 @@ March 2018
 		continue to the next $i. If we run out of columns to check, ie the new reservation we are placing runs into B and C, then we simply add a new column and continue.
 	
 	*/
-	include "ValidateReservation.php";
 	$resColumnArr = array();
-	$resColumnArr[] = array(0); // the first reservation will go in the first column $resColumnArr[0], so add it to the array.
+	$resColumnArr[0] = array(0); // the first reservation will go in the first column $resColumnArr[0], so add it to the array.
 	for($i = 0; $i <= count($blankCol)-1; $i++ ){
 		$labelID[] = $i;
 	}
 	
 	if(count($res) > 0){
 		// handle initial reservation
-		for($rowPlacementCounter = (int)$res[0]['starthour'] - 7; $rowPlacementCounter <= (int)$res[0]['endhour'] - 7;$rowPlacementCounter++){
-			$table[0][$rowPlacementCounter] = 0;
+		for($rowPlacementCounter = clone $res[0]['starthour']; $rowPlacementCounter <= $res[0]['endhour'];$rowPlacementCounter->add(new DateInterval('PT60M'))){
+			$table[0][$rowPlacementCounter->format('H:00')] = 0;
 		}
 
 		//iterate through reservations
@@ -107,29 +156,54 @@ March 2018
 				$columnToPlaceIn = -1;
 				$isOverlapping = true;
 				for($i = 0; $i < count($resColumnArr); $i++){
-					for($j = 0; $j < count($resColumnArr[$i]); $j++){
-						if(!($res[(int)$resCounter]['starthour'] <= $resColumnArr[$i][$j]['endhour'])){
-							//the current reservation we are looking at to place is not overlapping with the one in this column, so place it in this column
-							break;
-							$isOverlapping = false;
-						}
-						$columnToPlaceIn = $j;
+
+					if(!($res[(int)$resCounter]['starthour'] < $res[$resColumnArr[$i][count($resColumnArr[$i])-1]]['endhour'])){
+						//the current reservation we are looking at to place is not overlapping with the one in this column, so place it in this column
+						
+						$isOverlapping = false;
+						$columnToPlaceIn = $i;
+						$i = count($resColumnArr)+1;
+						break;
 					}
+					/*
+					for($j = count($resColumnArr[$i])-1; $j >= 0; $j--){
+						echo "Is $resCounter overlapping:" . $res[(int)$resCounter]['starthour']->format("H:i") . "<" . $res[$resColumnArr[$i][$j]]['endhour']->format("H:i"). "<br>";
+						if(!($res[(int)$resCounter]['starthour'] < $res[$resColumnArr[$i][$j]]['endhour'])){
+							echo "No overlap for $resCounter in column $i, placing... <br>";
+							//the current reservation we are looking at to place is not overlapping with the one in this column, so place it in this column
+							
+							$isOverlapping = false;
+							$columnToPlaceIn = $i;
+							$i = count($resColumnArr)+1;
+							break;
+						}
+
+						echo "Yes. Trying next column. <br>";
+
+						break;
+					}
+					*/
 				}
 				if($isOverlapping){
 					// all columns are full, so add a new column in the table
+					//echo "$resCounter is overlapping on all columns., time to add another column...<br>";
 					$table[] = $blankCol;
+					$resColumnArr[] = array();
+					
 					$columnToPlaceIn = count($table) - 1; // place in the newest column.
+					
 				}
 				$res[$resCounter]['columnPOS'] = $columnToPlaceIn; // column set
 
 
 			// We now place the reservation into the table.
-			for($rowPlacementCounter = (int)$res[$resCounter]['starthour'] - 7; $rowPlacementCounter <= (int)$res[$resCounter]['endhour'] - 7; $rowPlacementCounter++){
-				$table[$res[$resCounter]['columnPOS']][$rowPlacementCounter] = $resCounter; // change the index value of the table cell.
+			for($rowPlacementCounter = clone $res[$resCounter]['starthour']; $rowPlacementCounter <= $res[$resCounter]['endhour'];$rowPlacementCounter->add(new DateInterval('PT60M'))){
+				$table[$res[$resCounter]['columnPOS']][$rowPlacementCounter->format('H:00')] = $resCounter;
+				
 			}
+
 			// we need to add it to the column array
-			$resColumnArr[$res[$resCounter]['columnPOS']] = $resCounter;
+			$resColumnArr[$res[$resCounter]['columnPOS']][] = $resCounter;
 
 			// add a color
 			$res[$resCounter]['color'] = $colors[$resCounter % count($colors)];
@@ -137,7 +211,7 @@ March 2018
 
 		// get the number of seats this room can hold.
 		$sql = "SELECT seats FROM rooms WHERE roomid='$selectedRoom' LIMIT 1";
-;
+
 		$roomresult = $conn->query($sql);
 		$row_room_seats = $roomresult->fetch_assoc();
 		$numSeats = 0;
@@ -148,30 +222,36 @@ March 2018
 
 		//the table is now full
 		$labelMaintainCount = 0;
-		for($row = 0; $row < count($blankCol); $row++){	
+		
+		for($row = clone $dayStart; $row < $dayEnd; $row = $row->add(new DateInterval('PT60M'))){	
+			
 			echo "<tr>";	
-			$timeBlock = (($row+7)>12) ? (($row+7)-12): ($row+7); // set time digits
-			$timeColor = (checkValidTime_overload_noerr($row+7 . ":00" , $row+8 . ":00", $date, $selectedRoom) && checkEnoughSeats(false, $row+7 . ":00", $row+8 . ":00", $date, $selectedRoom, 1)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'";
-			echo "<td " . $timeColor .">" . $timeBlock . ":00</td>";
+			$timeBlock = $row->format('h:i'); // set time digits
+			$timeColor = (checkValidTime_overload_noerr($row->format('H:i') , DateTime::createFromFormat('H:i',$row->format('H:i'))->add(new DateInterval('PT60M'))->format('H:i'), $date, $selectedRoom) && checkEnoughSeats(false, $row->format('H:i') , DateTime::createFromFormat('H:i',$row->format('H:i'))->add(new DateInterval('PT60M'))->format('H:i'), $date, $selectedRoom, 1)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'";
+			echo "<td " . $timeColor .">" . $timeBlock . "</td>";
+			
 			for($col = 0; $col < count($table); $col++){
+				
 				echo "<td";
-				if($table[$col][$row]== -1){
-					echo "> ";
-
+				if($table[$col][$row->format('H:i')]== -1){
+					echo ">";
+					
 				}
 				else
 				{
-
-					$newColor = $res[$table[$col][$row]]['color'];
-					echo " bgcolor ='$newColor'>";
-					if($table[$col][$row] == $labelID[$labelMaintainCount]){
+					$resIDForToolTip = $res[$table[$col][$row->format('H:i')]]['id'];
+					$newColor = $res[$table[$col][$row->format('H:i')]]['color'];
+					$rowID = $row->format('H:i');
+					echo " bgcolor ='$newColor' onmouseover='openTooltip($resIDForToolTip,$rowID)'> <span style='visibility:hidden'>|</span><span id='tooltipContent_$resIDForToolTip $rowID' class='tooltiptext'></span>";
+					if($table[$col][$row->format('H:i')] == $labelID[$labelMaintainCount]){
+						
 						$labelMaintainCount++;
-						if(checkValidTime_overload_noerr($row+7 . ":00" , $row+8 . ":00",$date, $selectedRoom)){
-							echo $res[$table[$col][$row]]['start_to_end_str'] . " [" . $res[$table[$col][$row]]['headcount'] . "/$numSeats]";
+						if(checkValidTime_overload_noerr($row->format('H:i') , DateTime::createFromFormat('H:i',$row->format('H:i'))->add(new DateInterval('PT60M'))->format('H:i'),$date, $selectedRoom)){
+							echo $res[$table[$col][$row->format('H:i')]]['start_to_end_str'] . " [" . $res[$table[$col][$row->format('H:i')]]['headcount'] . "/$numSeats]";
 						} else {
-							echo $res[$table[$col][$row]]['start_to_end_str'];
+							echo $res[$table[$col][$row->format('H:i')]]['start_to_end_str'];
 						}
-					}
+					} 
 				}
 				
 				echo " </td>";
@@ -184,3 +264,5 @@ March 2018
 	?>
 
   </table>
+
+  

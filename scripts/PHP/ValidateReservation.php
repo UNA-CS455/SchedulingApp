@@ -45,7 +45,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 	//returns false if reservation made is after the valid end day time
 	else if($endToCheck > $dayEnd)
 	{
-		echo "$endToCheck is greater than $dayEnd";
+
 		$retValue = FALSE;
 		if($outputError)
 		{
@@ -82,6 +82,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 		}
 	}
 	
+
 	
 	return $retValue;
 }
@@ -91,7 +92,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 //****************************************************************************
 //This function checks the database for reservations that are made or
 //updated to the system that conflict with another reservation already
-//made and doesnt allow roomsharing. It will also be used to give the 
+//made and doesn't allow roomsharing. It will also be used to give the 
 //user a visual representation of the rooms that are allowing sharing
 //and the rooms who do not on the Agenda screen (red and green highlight)
 //****************************************************************************
@@ -154,7 +155,7 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room)
 // Overload
 //This function checks the database for reservations that are made or
 //updated to the system that conflict with another reservation already
-//made and doesnt allow roomsharing. It will also be used to give the 
+//made and doesn't allow roomsharing. It will also be used to give the 
 //user a visual representation of the rooms that are allowing sharing
 //and the rooms who do not on the Agenda screen (red and green highlight)
 //****************************************************************************
@@ -212,7 +213,7 @@ function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $dat
 }
 
 //****************************************************************************
-//Performs all checks to see if the particualar time slot is open.
+//Performs all checks to see if the particular time slot is open.
 //****************************************************************************
 function checkValidTime($outputError, $newResStart, $newResEnd, $room)
 {
@@ -223,7 +224,7 @@ function checkValidTime($outputError, $newResStart, $newResEnd, $room)
 
 
 //****************************************************************************
-//Overload Performs all checks to see if the particualar time slot is open.
+//Overload Performs all checks to see if the particular time slot is open.
 //****************************************************************************
 function checkValidTime_overload($newResStart, $newResEnd, $date, $room)
 {
@@ -241,7 +242,7 @@ so we need to go back and just add that outputError parameter above and go to da
 of the below redundant function.
 */
 //****************************************************************************
-//Overload Performs all checks to see if the particualar time slot is open.
+//Overload Performs all checks to see if the particular time slot is open.
 //****************************************************************************
 function checkValidTime_overload_noerr($newResStart, $newResEnd, $date, $room)
 {
