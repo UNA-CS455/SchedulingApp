@@ -8,7 +8,7 @@
 		<?php 
 			if (isset($_SESSION['username'])) {
 				$logged_in_user = $_SESSION['username']; //used for default in reserving email field.
-				echo "<input type='text' id='owneremail' value='$logged_in_user' required><br>";
+				echo "<input type='email' id='owneremail' value='$logged_in_user' required><br>";
 			}
 		?>
 	<!--<div id="filterArea"> -->
@@ -44,10 +44,8 @@
 
 	Comments:<br>
 		<textarea rows="4" cols="50" id="comment" style="resize:none; width:55%"></textarea><br>
-	<br>
-	<input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br>
+	<br><br>
 	<input id="reserveButton" type="submit" value="Reserve">
-	
 	<!-- <button onclick="openConfirmCreate()">Make reservation</button><br><br> -->
 	<br>
 	<font id="responseText"></font>
