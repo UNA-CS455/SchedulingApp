@@ -47,14 +47,39 @@
 	$headcount = (isset($_GET['headcount'])) ? $_GET['headcount'] : null;
 	$recur_enum = (isset($_GET['recur'])) ? $_GET['recur'] : null;
 	$date = (isset($_GET['date'])) ? $_GET['date'] : null; // format as 'Y/d/m'
+
 	
 	//TODO: VALIDATION
 	//////////////////////////////////////////////////////////////////////////
 
-	//set username if not already set for testing
-	if (!isset($_SESSION['username'])){
-			$_SESSION['username'] = "dbrown4@una.edu";
+	if ($starttime != null){
+		$starttime = filter_var($starttime, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}:[0-9]{1,2}$/")));
+		var_dump($starttime);
+		
 	}
+	
+	if ($endtime != null){
+		$endtime = filter_var($starttime, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}:[0-9]{1,2}$/")));
+		var_dump($endtime);
+	}
+
+	
+	if ($type != null){
+		if ($type != "Classroom" and $type != "Conference" and $type != "Computer Lab"){
+			$type = null;
+		}
+		var_dump($type);
+	}
+
+	if ($headcount != null){
+		$headcount = filter_var($headcunt, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
+		var_dump($headcount);
+	}
+	if ($date != null){
+		$date = filter_var($date, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}$/")));
+		var_dump($date);
+	}
+	
 
 	//obtain datbase metadata
     require "db_conf.php";
@@ -69,6 +94,7 @@
 	$sql = "";
 	$additional = "";
 
+	//TODO: Future work - see if we can refactor these sql statements to prepared statements for security
 
 	if($starttime != null || $endtime != null || $type != null || $headcount != null || $recur_enum != null){
 
