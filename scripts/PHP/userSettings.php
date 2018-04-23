@@ -4,7 +4,10 @@ session_start();
 if (!isset($_SESSION['username'])){
 	header('location: ../../login.html');
 }
-
+//only admin can view this page
+if ($_SESSION['permission']!= "A"){
+	header('location: ../../login.html');
+}
 ?>
 <!DOCTYPE html>
 <html>
