@@ -16,8 +16,7 @@
 		// ADD THIS AND STYLE TO YOUR LIKING 
 		echo "<form action='updateRoom.php' METHOD='POST'>";
 		echo "<table>";
-		echo "<tr><th></th><th></th></tr>";
-		//echo "<div class=\"roomContainer\">";
+		echo "<tr><th></th><th></th><th></th></tr>";
 		echo "<tr><td>Current Room: </td><td>" . $row['roomid'] . "</td></tr>";
 		echo "<input type='text' value='" . $row['roomid'] . "' name='currRoom' hidden>";
 		echo "<tr><td> New room number: </td><td><input type='text' value='" . $row['roomid'] . "'name='roomNumber'></td></tr>";
@@ -41,10 +40,16 @@
 		}
 		echo "<tr><td> New floor number: </td><td><input type='text' value='" . $row['floor'] . "'name='floor'></td></tr>";
 		echo "<tr><td> Seats: </td><td><input type='text' value='" . $row['seats'] . "'name='seats'></td></tr>";
-		echo "<tr><td> Number of computers: </td><td><input type='text' value='" . $row['numcomputers'] . "' name='numcomputers'></td></tr>";
+		echo "<tr><td> Blacklist: </td><td><input type='text' value='" . $row['blacklist'] . "'name='blacklist'></td>
+				<td>Please separate different groups by commas.</td></tr>";
 		echo "<tr><td> <input type='submit' value='Save changes'></form></td></tr></table>";
 		// ADD THIS FOR STYLING 
-		//echo "</div>";
+		/*echo "<br> Blacklisted Groups:";
+		echo "<div id='tableArea'>";
+		echo "<table>";
+		echo "<tr><th>Group ID</th><th></th></tr>";
+		
+		echo "</div>";*/
 		$sql = "SELECT * FROM reservations WHERE startdate >= CURDATE() AND roomnumber='$room' order by startdate, starttime";
         $result = $conn->query($sql);
 		echo "<h1> <br> Current Bookings <br></h1>";
@@ -67,10 +72,16 @@
 	}
 	else if ($result->num_rows > 1) 
 	{
-		echo "<br><br><br>Continue entering room name.";
+		echo "<br>Continue entering room name or click below to add this room.";
+		echo "<form action='addRoom.php' method='POST'>";
+		echo "<input type='text' value='$room' name='roomid' hidden>";
+		echo "<input type='submit' value='Add Room'>";
 	}
 	else {
-		echo "<br>Error: No room matching current name.";
+		echo "<br>Error: No room matching current name. Click below to add a room with this name.";
+		echo "<form action='addRoom.php' method='POST'>";
+		echo "<input type='text' value='$room' name='roomid' hidden>";
+		echo "<input type='submit' value='Add Room'>";
 	}
 	$conn->close();
 	
