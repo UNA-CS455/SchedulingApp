@@ -118,19 +118,18 @@ function getAgendaReservations() {
 			var reservation = JSON.parse(this.responseText);
 			
 			var runString = "<h2 style='text-align:center' >Active Reservations</h2>";
-			runString+= "<br><table id = 'agendaTable' >\n<th>Room</th><th>From</th><th>To</th><th>Details</th>\n";
+			runString+= "<br><table style='overflow-y:scroll;' id = 'agendaTable' >\n<th>Room</th><th>From</th><th>To</th><th>Details</th>\n";
 			for(var i = 0; i < reservation.length; i++){
 
 				runString += "<tr id=" + i + ">\n";
 				runString += "<td id=" + reservation[i].id + ">" + reservation[i].roomnumber + "</td>";
 				runString += "<td>" + reservation[i].startdate + "<br>" + reservation[i].starttime +reservation[i].start + "</td>";
 				runString += "<td>" + reservation[i].enddate + "<br>" + reservation[i].endtime + reservation[i].end +"</td>";
-				runString += "<td><a >Edit</a><br><a style='color: blue' onclick=openConfirmDelete(this.parentElement.parentElement)><u>Remove</u></a></td>";
+				runString += "<td><a style='cursor: pointer;'>Edit</a><br><a style='color: blue' onclick=openConfirmDelete(this.parentElement.parentElement)><u style='cursor: pointer;'>Remove</u></a></td>";
 				runString += "</tr>\n"; 
 			}
 			runString += "</table>";
-			document.getElementById('agendaReservations').innerHTML = '<img onclick="shaderClicked()" src="images/x.png" id="closeAgendaButton"></img>';
-			document.getElementById("agendaReservations").innerHTML += runString;
+			document.getElementById("agendaReservations").innerHTML = runString;
 		}
 	};
 
@@ -237,10 +236,6 @@ Author: Derek Brown.
 Date: 4/7/2018
 */
 function showCalendarView(){
-
-	document.getElementById("makeResButton").style.backgroundColor = "";
-	document.getElementById("monthViewButton").style.backgroundColor = "darkgray";
-
 	view = "cal"; // change views
 	fieldChanged(true); // load all rooms
 	updateCalendar(); // produce the calendar.
@@ -276,10 +271,6 @@ Edits:
 
 */
 function showCreateResForm(){
-
-	document.getElementById("makeResButton").style.backgroundColor = "darkgray";
-	document.getElementById("monthViewButton").style.backgroundColor = "";
-	
 	if (window.location.hash === "#calView"){
 		showCalendarView();
 		window.location.hash = "";
@@ -409,7 +400,7 @@ the document element by id with a call to getResFormData.
 */
 function createClicked(data){
 // sanity checks first.
-	var sendAnEmail = false;
+
 
 	if (roomSelected == null)
 	{
@@ -430,11 +421,6 @@ function createClicked(data){
 	var numSeats = data.numSeats;
 	var comment = data.comment;
 	var occur = data.occur;
-	var confirmEmail = document.getElementById("confirmEmailCheck");
-
-	if (confirmEmail.checked){
-		sendAnEmail = true;
-	}
 	
 	/*
 	console.error("got here");
@@ -523,7 +509,7 @@ function createClicked(data){
 	};
 	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment + "&sendEmail=" + sendAnEmail);
+	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
 
 }
 
@@ -818,7 +804,7 @@ function showDayViewModal(date, room, showQuickBook){
 		<input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "50" onchange = "" required></td></tr><br> \
 		<tr><td>Reserving for*:</td><td><input type="text" width="100%" id="owneremail" value="" required></td></tr><br>\
 		<tr><td>Brief Comment: </td><td><input type="text" width="100%" id="comment"><br><input type="hidden" id="date" value="'+date+'"><input type="hidden" id="allowshare" value="0" ></td><tr></table><br>\
-		<input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
+		<input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
 	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -1066,7 +1052,7 @@ function toggleRoomView()
 */
 
 function openTooltip(id,row){
-	console.log('yes');
+
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
