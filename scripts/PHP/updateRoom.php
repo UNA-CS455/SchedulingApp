@@ -6,7 +6,8 @@
 	$floor = $_POST['floor'];
 	$seats = $_POST['seats'];
 	$blacklist = $_POST['blacklist'];
-	if (trim($blacklist) ===""){
+	$blacklist = str_replace(" ", "", $blacklist);
+	if ($blacklist === ""){
 		$blacklist = "A";
 	}
 	if (trim($numcomputers) === ""){
