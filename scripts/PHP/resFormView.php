@@ -44,8 +44,10 @@
 
 	Comments:<br>
 		<textarea rows="4" cols="50" id="comment" style="resize:none; width:55%"></textarea><br>
-	<br><br>
+	<br>
+	<input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br>
 	<input id="reserveButton" type="submit" value="Reserve">
+	
 	<!-- <button onclick="openConfirmCreate()">Make reservation</button><br><br> -->
 	<br>
 	<font id="responseText"></font>

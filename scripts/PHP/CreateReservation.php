@@ -120,14 +120,12 @@ function processReservation()
 		$stmt->bind_param("ssissssssss", $roomnumber, $owneremail, $allowshare, $numberOfSeats, $date, $date, $startAssist, $endAssist, $occur, $comment, $logged_in_user);
         $check = $stmt->execute();
 		//$mResult = $stmt->get_result();
-		/*
-		if ($conn->query($sql) === TRUE) {
-			echo "Reservation made successfully";
-			//include 'mail.php'; uncomment when on deployed version
-		} else {
-			echo "Error making reservation: " . $conn->error;
-		}
-		*/
+		
+		if ($check === TRUE && $_POST['sendEmail'] === "true") {
+			include 'mail.php'; // uncomment when on deployed version
+			
+			sendMail();
+		} 
 		if (!$check) {
 			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 		}
