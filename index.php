@@ -47,7 +47,7 @@
 			<button id="makeResButton" onclick="showCreateResForm();">Make Reservation</button>
 			<button id="monthViewButton" onclick="showCalendarView();">Month View</button>
             <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
-			<?php	if($_SESSION['username'] == "super@una.edu")																							//using "super" as username and password for testing groups permissions
+			<?php	if($_SESSION['permission'] == "A")																							//using "super" as username and password for testing groups permissions
 					{
 						echo	"<button id=\"settingsButton\" onclick=\"window.location.href += 'scripts/PHP/userSettings.php'\">Settings</button>";
 					} 
