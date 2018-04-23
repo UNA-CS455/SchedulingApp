@@ -31,7 +31,7 @@
         <?php include 'modal.php'; ?>
         <script src="scripts/JS/popup.js"></script>
         <script src="scripts/JS/rooms.js"></script>
-		
+		<script src="scripts/JS/jquery-3.3.1.min.js"></script>
 		
 		
 		
