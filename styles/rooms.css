@@ -605,3 +605,15 @@ button.settingsButton{
 }
 /* End Settings Page CSS */
 
+#closeAgendaButton{
+	    width: 8%;
+    height: 6%;
+    top: 1%;
+    right: 1%;
+    position: absolute;
+}
+
+#closeAgendaButton:hover{
+	cursor: pointer;
+	border: 1px inset ghostwhite;
+}
