@@ -1,7 +1,6 @@
 <?php
 	session_start();
-	$currRoom = $_POST['currRoom'];
-	$roomid = $_POST['roomNumber'];
+	$roomid = $_POST['roomid'];
 	$type = $_POST['type'];
 	$floor = $_POST['floor'];
 	$seats = $_POST['seats'];
@@ -20,12 +19,10 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-	$sql = "UPDATE rooms SET roomid = '$roomid', type = '$type', floor = $floor, seats = $seats, blacklist='$blacklist' WHERE roomid = '$currRoom'";
+	$sql = "INSERT INTO rooms (roomid, type, floor, seats, blacklist) VALUES ('$roomid', '$type', '$floor', '$seats', '$blacklist')";
 	$conn->query($sql);
 	if ($conn->affected_rows > 0){
-		$_SESSION['msg'] = "<p> Successfully updated room</p>";
-		$sql = "UPDATE reservations SET roomnumber = '$roomid' WHERE roomnumber = '$currRoom'";
-		$conn->query($sql);
+		$_SESSION['msg'] = "<p> Successfully added room.</p>";
 	}
 	else
 	{
