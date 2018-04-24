@@ -1,5 +1,8 @@
 <?php session_start();
-
+require "ValidateReservation.php";
+if(isset($_SESSION['username'])){
+	$user= $_SESSION['username'];
+}
 	/*=========================================================================
 		Retrieve Rooms PHP Script
 		Purpose: Generates the rooms table that is shown on the primary page.
@@ -49,18 +52,19 @@
 	$date = (isset($_GET['date'])) ? $_GET['date'] : null; // format as 'Y/d/m'
 
 	
-	//TODO: VALIDATION
+	//VALIDATION
 	//////////////////////////////////////////////////////////////////////////
 
+	//echo "starttime is $starttime and endtime is $endtime";
 	if ($starttime != null){
-		$starttime = filter_var($starttime, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}:[0-9]{1,2}$/")));
-		var_dump($starttime);
+		$starttime = filter_var($starttime, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^'[0-9]{1,2}:[0-9]{1,2}'$/")));
+		//var_dump($starttime);
 		
 	}
 	
 	if ($endtime != null){
-		$endtime = filter_var($starttime, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}:[0-9]{1,2}$/")));
-		var_dump($endtime);
+		$endtime = filter_var($endtime, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^'[0-9]{1,2}:[0-9]{1,2}'$/")));
+		//var_dump($endtime);
 	}
 
 	
@@ -68,16 +72,16 @@
 		if ($type != "Classroom" and $type != "Conference" and $type != "Computer Lab"){
 			$type = null;
 		}
-		var_dump($type);
+		//var_dump($type);
 	}
 
 	if ($headcount != null){
-		$headcount = filter_var($headcunt, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
-		var_dump($headcount);
+		$headcount = filter_var($headcount, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
 	}
+
 	if ($date != null){
-		$date = filter_var($date, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}$/")));
-		var_dump($date);
+		$date = filter_var($date, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^'[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}'$/")));
+
 	}
 	
 
@@ -164,7 +168,7 @@
 	}
 
 	$sql = $sql . "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms "; // the final table columns that we want.
-	$sql = $sql . $additional ;//. " ORDER BY rooms.roomid";						// construction of the full query along with ordering
+	$sql = $sql . $additional ;					// construction of the full query along with ordering
 	//echo $sql; // used for testing purposes 
 	
     $result = $conn->query($sql); // run the query
@@ -183,6 +187,18 @@
 
 
 	///////////////////////////////////////////////////////////////////////////
+	// Generate Blacklist
+	///////////////////////////////////////////////////////////////////////////
+	
+	$permissions_SQL = "SELECT rooms.roomid, rooms.seats FROM `rooms` LEFT JOIN `users` ON users.permissions = rooms.blacklist WHERE users.email = '$user'";
+	$permissionsRes = $conn->query($permissions_SQL);
+	//place in array
+	$room_BlacklistArray = array();
+	while ($blacklistRowItem = $permissionsRes->fetch_assoc()) {
+		$room_BlacklistArray[] = $blacklistRowItem['roomid']; // append row to result.
+	}
+
+	///////////////////////////////////////////////////////////////////////////
 	// Generate favorites area
 	///////////////////////////////////////////////////////////////////////////
 	echo "<span id='favsheader'></span>";
@@ -196,11 +212,11 @@
 
 		$imgName = "images/fav-select.png";
 
-		//TODO add code here to check $result to see if room is in it before placing room in this area.
+
 		$inArray = false;
 		foreach ($room_array as $row) 
 		{
-			if($row['roomid'] == $favRow['roomid']){
+			if($row['roomid'] == $favRow['roomid'] && !in_array($favRow['roomid'],$room_BlacklistArray)){
 				$inArray = true;
 				break;
 			}
@@ -227,17 +243,18 @@
 	
 	foreach ($room_array as $row) 
 	{
-		$imgName = "images/fav-unselect.png";
-		$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
-		$result2 = $conn->query($sql);
-		while ($row2 = $result2->fetch_assoc()) {
-			// there is a favorite.
-			$imgName = "images/fav-select.png"; //color in star if this room is a favorite 
-		}
+		if(!in_array($row['roomid'],$room_BlacklistArray)){ // blacklist rooms are excluded
+			$imgName = "images/fav-unselect.png";
+			$sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
+			$result2 = $conn->query($sql);
+			while ($row2 = $result2->fetch_assoc()) {
+				// there is a favorite.
+				$imgName = "images/fav-select.png"; //color in star if this room is a favorite 
+			}
 
-		
-		echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = 'p_".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
 			
+			echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = '".$row['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = 'p_".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
+		}
 	}
 	if($result->num_rows == 0){
 		echo "<h4> No Results </h4>";
@@ -248,7 +265,7 @@
 $conn->close();
 
 
-
+/*
 //*************************************************************************************
 //This function checks a number of requirements on a new reservation being made.
 //If the reservation being made is before or after the start day and end day time
@@ -270,7 +287,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 	$endToCheck = DateTime::createFromFormat('H:i', $endToCheck);
 	$startDayErrMsg = "Your reservation cannot be made before 7 AM!";
 	$endDayErrMsg = "Your reservation cannot be made after 10 PM!";
-	$minuteErrMsg = "Your reservation must be made on 15 minute increments!";
+	//$minuteErrMsg = "Your reservation must be made on 15 minute increments!";
 	$startTimeErrMsg = "Your reservation start time is occurring after your end time!";
 
 	
@@ -315,4 +332,5 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 	
 	return $retValue;
 }
+*/
 ?>

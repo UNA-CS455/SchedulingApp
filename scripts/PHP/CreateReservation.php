@@ -121,11 +121,13 @@ function processReservation()
         $check = $stmt->execute();
 		//$mResult = $stmt->get_result();
 		
-		if ($check === TRUE && $_POST['sendEmail'] === "true") {
-			include 'mail.php'; // uncomment when on deployed version
-			
-			sendMail();
-		} 
+		if(isset($_POST['sendEmail'])){
+			if ($check === TRUE && $_POST['sendEmail'] === "true") {
+				include 'mail.php'; // uncomment when on deployed version
+				
+				sendMail();
+			} 
+		}
 		if (!$check) {
 			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 		}
