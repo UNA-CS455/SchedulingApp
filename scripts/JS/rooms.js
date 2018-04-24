@@ -129,7 +129,8 @@ function getAgendaReservations() {
 				runString += "</tr>\n"; 
 			}
 			runString += "</table>";
-			document.getElementById("agendaReservations").innerHTML = runString;
+			document.getElementById("agendaReservations").innerHTML = "<img id='closeAgendaButton' src='images/x.png' onclick='shaderClicked()'></img>";
+			document.getElementById("agendaReservations").innerHTML += runString;
 		}
 	};
 
