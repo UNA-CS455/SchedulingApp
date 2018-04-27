@@ -158,7 +158,12 @@ function processReservation()
                         //include 'mail.php'; uncomment when on deployed version
                     }
                 }
-
+			
+		if ($check === TRUE && $_POST['sendEmail'] === "true") {
+			include 'mail.php'; // uncomment when on deployed version
+			
+			sendMail();
+		} 
         $conn->close();
         
         }
