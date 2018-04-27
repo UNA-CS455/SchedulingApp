@@ -1,5 +1,14 @@
 <?php session_start();
 
+	
+
+if (!isset($_SESSION['username'])){
+	header('location: ../../login.html');
+}
+//only admin can view this page
+if ($_SESSION['permission']!= 1){
+	header('location: ../../login.html');
+}
 	/*=========================================================================
 		Retrieve Groups PHP Script
 		Purpose: Fetches all groups in the database and returns HTML buttons

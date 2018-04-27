@@ -944,7 +944,7 @@ function populateBlacklistRooms(groupChosen){
 			e.innerHTML = this.responseText;
 			var name = document.getElementById(groupChosen);
 			if(name !=null)
-				header.innerHTML = "Blaklist for " + name.innerHTML;
+				header.innerHTML = "Select rooms to blacklist for group " + name.innerHTML + "";
 		}
 	};
 	xhttp.open("GET", "retrieveBlacklistRooms.php?groupID=" + groupChosen);

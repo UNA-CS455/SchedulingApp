@@ -1,5 +1,13 @@
 <?php
 	session_start();
+
+if (!isset($_SESSION['username'])){
+	header('location: ../../login.html');
+}
+//only admin can view this page
+if ($_SESSION['permission']!= 1){
+	header('location: ../../login.html');
+}
 	$roomid = $_POST['roomid'];
 	$type = $_POST['type'];
 	$floor = $_POST['floor'];
