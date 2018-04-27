@@ -5,7 +5,7 @@
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-
+	$room = $conn->real_escape_string($room);
 	$sql = "SELECT * FROM rooms WHERE roomid LIKE '$room%'";
 	$result = $conn->query($sql);
 	

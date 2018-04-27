@@ -17,7 +17,7 @@
 
 	//$sql = "INSERT INTO rooms (roomid, type, floor, seats) VALUES ('$roomid', '$type', '$floor', '$seats')";
 	$stmt = $conn->prepare("INSERT INTO rooms (roomid, type, floor, seats) VALUES (?, ?, ?, ?)");
-	$stmt->bind_param("ssii", $user, $user);
+	$stmt->bind_param("ssii", $roomid, $type, $floor, $seats);
 	$check = $stmt->execute();
 	/*
 	$conn->query($sql);

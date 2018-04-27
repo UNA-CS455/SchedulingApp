@@ -1,8 +1,7 @@
 <?php
 	session_start();
 	$currUser = $_POST['currUser'];
-	$role = $_POST['role'];
-	$groupID = $_POST['group_id'];
+	$groupID = $_POST['groupID'];
 
 	require "db_conf.php";
 
@@ -11,7 +10,7 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-	$sql = "UPDATE users SET classification = '$role', groupID = $groupID WHERE email = '$currUser'";
+	$sql = "UPDATE users SET groupID = $groupID WHERE email = '$currUser'";
 	$conn->query($sql);
 	if ($conn->affected_rows >= 0){
 		$_SESSION['msg'] = "<p> User group changed. </p>";
