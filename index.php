@@ -2,8 +2,8 @@
 	session_start();
 
 	if (!isset($_SESSION['username'])){
-		$_SESSION['username'] = "admin@una.edu"; // for development, we will uncomment the call to header below.
-		//header('location: login.html'); exit();
+		//$_SESSION['username'] = "admin@una.edu"; // for development, we will uncomment the call to header below.
+		header('location: login.html'); exit();
 	}
 ?>
 

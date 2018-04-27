@@ -5,8 +5,8 @@ if (!isset($_SESSION['username'])){
 	header('location: ../../login.html');
 }
 //only admin can view this page
-$_SESSION['permission'] = "A"; // todo: remove this line
-if ($_SESSION['permission']!= "A"){
+
+if ($_SESSION['permission']!= 1){
 	header('location: ../../login.html');
 }
 

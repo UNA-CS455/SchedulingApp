@@ -10,9 +10,19 @@ $user = $_POST['username'];
 $pass = $_POST['password'];
 
 
-$result = `java ActiveDirectory $user $pass`;
-if($result == 200){
+if($user == "super" && $pass == "super"){						//superuser  for testing
+	$result = 200;
+	$ldap_permissions = 1;
+
+
+}
+
+else{
+	$result = `java ActiveDirectory $user $pass`;
+
+if($result == 200)
 	$in_ldap = true;
+
 }
 //append @una.edu for convenience in other source code files
 $user .= "@una.edu";
@@ -43,14 +53,14 @@ if($sql_result = mysqli_query($conn,$sql)){
 	}
 }
 	//get permission level
-	$sql = "SELECT `permissions` FROM `users` WHERE email='" . $user . "'";
+	$sql = "SELECT `groupID` FROM `users` WHERE email='" . $user . "'";
 
 	$sql_result = $conn->query($sql);
 	$rowcount = mysqli_num_rows($sql_result);
 	while($row=mysqli_fetch_assoc($sql_result)){
 	if($rowcount > 0){
 		
-			$ldap_permissions = $row["permissions"];
+			$ldap_permissions = $row["groupID"];
 		}
 	}
 	
