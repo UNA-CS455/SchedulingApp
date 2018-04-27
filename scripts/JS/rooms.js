@@ -120,7 +120,9 @@ function getAgendaReservations() {
                 runString += "</tr>\n";
             }
             runString += "</table>";
-            document.getElementById("agendaReservations").innerHTML = runString;
+
+		document.getElementById('agendaReservations').innerHTML = '<img onclick="shaderClicked()" src="images/x.png" id="closeAgendaButton"></img>';
+		document.getElementById("agendaReservations").innerHTML += runString;
         }
     };
     if (window.location.href.includes('PHP')) {
