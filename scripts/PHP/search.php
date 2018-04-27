@@ -15,7 +15,7 @@
 		"firstname" => $row['firstname'],
 		"lastname" => $row['lastname'],
 		"email" => $row['email'],
-		"role" => $row['permissions']
+		"role" => $row['classification']
 	);
 	$return_array[] = $rowResult; // append row to result.
 }

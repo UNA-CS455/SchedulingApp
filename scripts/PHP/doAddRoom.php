@@ -15,13 +15,23 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-	$sql = "INSERT INTO rooms (roomid, type, floor, seats) VALUES ('$roomid', '$type', '$floor', '$seats')";
+	//$sql = "INSERT INTO rooms (roomid, type, floor, seats) VALUES ('$roomid', '$type', '$floor', '$seats')";
+	$stmt = $conn->prepare("INSERT INTO rooms (roomid, type, floor, seats) VALUES (?, ?, ?, ?)");
+	$stmt->bind_param("ssii", $user, $user);
+	$check = $stmt->execute();
+	/*
 	$conn->query($sql);
 	if ($conn->affected_rows > 0){
 		$_SESSION['msg'] = "<p> Successfully added room.</p>";
 	}
 	else
 	{
+		$_SESSION['msg'] = "<p> failure $sql </p>";
+	}*/
+	if ($check){
+		$_SESSION['msg'] = "<p> Successfully added room.</p>";
+	}
+	else{
 		$_SESSION['msg'] = "<p> failure $sql </p>";
 	}
 	$conn->close();

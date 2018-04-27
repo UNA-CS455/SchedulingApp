@@ -43,6 +43,10 @@
 		<td><br><button class = "settingsButton" onclick="location.href='roomSettings.php';">Room Settings</button></td>
 		<br>
 	  </tr>
+	<tr>
+		<td><br><button class = "settingsButton" onclick="location.href='groupSettings.php';">Group Settings</button></td>
+		<br>
+	  </tr>
 	</table>
 	</div>
 <div id = "room"><h1> Room Settings </h1><br>
