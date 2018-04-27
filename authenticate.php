@@ -21,23 +21,23 @@ $user .= "@una.edu";
 //may need crabtree to give us function for verifying passwords
 
 if($in_ldap){
-	$ldap_first = "first_name";											//placeholders until dr crabtree gives us the ldap function to pull user data
-	$ldap_last = "last_name";											//also this is all subject to change as new info comes to light
-	$ldap_permissions = "U";											//lines 30 - 45 add the user from ldap to the table if we dont have them already
+	$ldap_first = "first_name";
+	$ldap_last = "last_name";											
+	$ldap_permissions = 2;													//add ldap code for getting user permissions							
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	if ($conn->connect_error) {
        die("Connection failed: " . $conn->connect_error);
 	}
 
-	$sql = "SELECT email from users WHERE email = '$user'";
+	$sql = "SELECT email from users WHERE email = '$user'";				//ldap permissions should be cahnged to 2 instead of U and change the setting page display test for != 1
 	
 if($sql_result = mysqli_query($conn,$sql)){
 	$sql_result = $conn->query($sql);
 	$rowcount = mysqli_num_rows($sql_result);
 	if($rowcount < 1)
 	{
-		$sql = "INSERT INTO `users` (`email`, `firstname`, `lastname`, `permissions`) VALUES
-				('". $user . "', '". $ldap_first ."', '" .$ldap_last . "', '" . $ldap_permissions ."') ";
+		$sql = "INSERT INTO `users` (`email`, `firstname`, `lastname`, `groupID`) VALUES									
+				(". $user . ", ". $ldap_first .", " .$ldap_last . ", " . $ldap_permissions .") ";
 
 		$conn->query($sql);
 	}
