@@ -40,23 +40,13 @@ function checkDateTime($outputError, $startToCheck, $endToCheck) {
     }
     //returns false if reservation made is after the valid end day time
     else if ($endToCheck > $dayEnd) {
-        echo "$endToCheck is greater than $dayEnd";
+
         $retValue = FALSE;
         if ($outputError) {
             echo $endDayErrMsg;
         }
     }
-    //returns false if reservation made has a minute value that is not on the required fifteen minute interval
-    /* Might need to be removed later, depending on how time is handled.
-      else if($startToCheck%15 != 0)
-      {
-      $retValue = FALSE;
-      if($outputError)
-      {
-      echo $startToCheck%15;
-      echo $minuteErrMsg;
-      }
-      } */
+
     //returns false if reservation made has a start time that is after the end time
     else if ($startToCheck > $endToCheck) {
         $retValue = FALSE;
@@ -272,7 +262,7 @@ function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $
 }
 
 function checkValidUpdate($outputError, $newStartTime, $newEndTime, $date, $room, $id) {
-    //error message diplayed when false
+    //error message displayed when false
     $errMsg = "Given times overlap with another reservation made by a user who opted not to share the room.";
     //default set to false
     $returnVal = FALSE;
