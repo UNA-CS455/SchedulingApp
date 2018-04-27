@@ -5,11 +5,6 @@
 	$type = $_POST['type'];
 	$floor = $_POST['floor'];
 	$seats = $_POST['seats'];
-	$blacklist = $_POST['blacklist'];
-	$blacklist = str_replace(" ", "", $blacklist);
-	if ($blacklist === ""){
-		$blacklist = "A";
-	}
 	if (trim($numcomputers) === ""){
 		$numcomputers = 0;
 	}
@@ -21,7 +16,7 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 
-	$sql = "UPDATE rooms SET roomid = '$roomid', type = '$type', floor = $floor, seats = $seats, blacklist='$blacklist' WHERE roomid = '$currRoom'";
+	$sql = "UPDATE rooms SET roomid = '$roomid', type = '$type', floor = $floor, seats = $seats WHERE roomid = '$currRoom'";
 	$conn->query($sql);
 	if ($conn->affected_rows > 0){
 		$_SESSION['msg'] = "<p> Successfully updated room</p>";

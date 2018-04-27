@@ -40,16 +40,9 @@
 		}
 		echo "<tr><td> New floor number: </td><td><input type='text' value='" . $row['floor'] . "'name='floor'></td></tr>";
 		echo "<tr><td> Seats: </td><td><input type='text' value='" . $row['seats'] . "'name='seats'></td></tr>";
-		echo "<tr><td> Blacklist: </td><td><input type='text' value='" . $row['blacklist'] . "'name='blacklist'></td>
-				<td>Please separate different groups by commas.</td></tr>";
 		echo "<tr><td> <input type='submit' value='Save changes'></form></td></tr></table>";
 		// ADD THIS FOR STYLING 
-		/*echo "<br> Blacklisted Groups:";
-		echo "<div id='tableArea'>";
-		echo "<table>";
-		echo "<tr><th>Group ID</th><th></th></tr>";
 		
-		echo "</div>";*/
 		$sql = "SELECT * FROM reservations WHERE startdate >= CURDATE() AND roomnumber='$room' order by startdate, starttime";
         $result = $conn->query($sql);
 		echo "<h1> <br> Current Bookings <br></h1>";
