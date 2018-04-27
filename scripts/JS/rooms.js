@@ -868,6 +868,75 @@ function findDay(dayNum) {
 }
 
 /*
+	Function that is accessed on the group settings page "groupSettings.php" and is
+	used to populate the list of rooms obtained through AJAX to the retrieveBlacklistRooms
+	php script. 
+	Author: Derek Brown
+	Date: 4/27/2018
+*/
+function populateBlacklistRooms(groupChosen){
+	var e = document.getElementById('roomContainer');
+	var header = document.getElementById('groupheader');
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			e.innerHTML = this.responseText;
+			var name = document.getElementById(groupChosen);
+			if(name !=null)
+				header.innerHTML = "Blaklist for " + name.innerHTML;
+		}
+	};
+	xhttp.open("GET", "retrieveBlacklistRooms.php?groupID=" + groupChosen);
+	xhttp.send();
+	
+
+}
+
+/*
+	Obtains all groups listed in the database and places them in the groups area div
+	on groupSettings.php.
+	Author: Derek Brown
+	Date: 4/27/2018
+*/
+function populateGroupList(){
+	var e = document.getElementById('groupsArea');
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			e.innerHTML = this.responseText;
+
+		}
+	};
+	xhttp.open("GET", "retrieveGroups.php");
+	xhttp.send();
+	
+
+}
+
+function updateBlacklist(groupid, roomid, bool_addToBlacklist){
+	console.error(roomid);
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.error(this.responseText);
+			populateBlacklistRooms(groupid);
+		}
+	};
+	xhttp.open("POST", "updateBlacklists.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	
+	if (bool_addToBlacklist){
+		// add to blacklist
+		xhttp.send("groupID="+groupid+"&roomid=" + roomid+"&operation='add'");
+	}
+	else{
+		// remove from blacklist
+		xhttp.send("groupID="+groupid+"&roomid=" + roomid+"&operation='remove'");
+	}
+}
+
+/*
  function openCreateRes(id){
  if (id.length < 5){
  return;
