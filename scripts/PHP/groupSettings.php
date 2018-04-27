@@ -14,6 +14,7 @@ if ($_SESSION['permission']!= 1){
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico" />
  <link rel="stylesheet" href="../../styles/rooms.css">
  
 	
