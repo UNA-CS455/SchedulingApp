@@ -190,7 +190,8 @@ if(isset($_SESSION['username'])){
 	// Generate Blacklist
 	///////////////////////////////////////////////////////////////////////////
 	
-	$permissions_SQL = "SELECT rooms.roomid, rooms.seats FROM `rooms` LEFT JOIN `users` ON users.permissions = rooms.blacklist WHERE users.email = '$user'";
+	//$permissions_SQL = "SELECT rooms.roomid, rooms.seats FROM `rooms` LEFT JOIN `users` ON users.permissions = rooms.blacklist WHERE users.email = '$user'";
+	$permissions_SQL = "SELECT rooms.roomid, rooms.seats FROM `blacklist` LEFT JOIN `rooms` ON blacklist.numeric_room_id = rooms.numeric_id INNER JOIN `users` ON blacklist.group_id = users.groupID WHERE users.email = '$user'";
 	$permissionsRes = $conn->query($permissions_SQL);
 	//place in array
 	$room_BlacklistArray = array();

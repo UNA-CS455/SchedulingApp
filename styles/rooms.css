@@ -18,6 +18,63 @@ b{
 	right: 0%;
 }
 
+/************************************************************/
+/*for blacklisting, used on the group settings page. */
+
+.groupsFrame{
+	width: 25%;
+    top: 7.5%;
+	min-height:20%;
+	max-height:45%;
+    background-color: white;
+    overflow-y: scroll;
+    border: solid;
+    border-color: silver;
+	display:flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+
+.bookAreaFrame{
+	width: 65%;
+
+    top: 7.5%;
+	max-height:45%;
+    background-color: white;
+    overflow-y: scroll;
+    border: solid;
+    border-color: silver;
+	display:flex;
+	flex-wrap: wrap;
+}
+
+.nonblacklistroombox {
+	background-color: ghostwhite;
+    margin: 2px;
+    border-radius: 1px;
+    border: solid;
+    border-color: slategray;
+    text-align: center;
+    font-size: 16px;
+    height: 110px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.blacklistedroombox {
+	background-color: #1e1e1e;
+    margin: 2px;
+    border-radius: 1px;
+    border: solid;
+    border-color: slategray;
+    text-align: center;
+    font-size: 16px;
+    height: 110px;
+    width: 150px;
+    cursor: pointer;
+}
+/************************************************************/
 .outerBookArea{
 	border-right: 3px solid #DDDDDD;
     border-collapse: collapse;
@@ -563,6 +620,7 @@ html, body{
     width: 100%;
 	/* font-size:30px; */
 }
+
 
 div.d {
     height: 100%;
