@@ -126,13 +126,14 @@ function getAgendaReservations() {
 				runString += "<td>" + reservation[i].startdate + "<br>" + reservation[i].starttime +reservation[i].start + "</td>";
 				runString += "<td>" + reservation[i].enddate + "<br>" + reservation[i].endtime + reservation[i].end +"</td>";
 				runString += "<td><a style='cursor: pointer;'>Edit</a><br><a style='color: blue' onclick=openConfirmDelete(this.parentElement.parentElement)><u style='cursor: pointer;'>Remove</u></a></td>";
-				runString += "</tr>\n"; 
-			}
-			runString += "</table>";
-			document.getElementById("agendaReservations").innerHTML = "<img id='closeAgendaButton' src='images/x.png' onclick='shaderClicked()'></img>";
+					runString += "</tr>\n"; 
+ 			}
+ 			runString += "</table>";
+			document.getElementById("agendaReservations").innerHTML = runString;
+			document.getElementById('agendaReservations').innerHTML = '<img onclick="shaderClicked()" src="images/x.png" id="closeAgendaButton"></img>';
 			document.getElementById("agendaReservations").innerHTML += runString;
-		}
-	};
+ 		}
+ 	};
 
 	if (window.location.href.includes('PHP')){
 		xmlhttp.open("GET", "res_user.php", true);
@@ -232,16 +233,17 @@ by itself, the calendar shown would not have the correct data within it, since a
 swapping between some views, such as redirection from the settings page, roomSelected might be
 null before the updateCalendar function is called and the calendar will instead show all reservations
 while incorrectly having a specific room selected.
-
-Author: Derek Brown.
 Date: 4/7/2018
-*/
+ */
 function showCalendarView(){
-	view = "cal"; // change views
-	fieldChanged(true); // load all rooms
-	updateCalendar(); // produce the calendar.
-}
 
+	document.getElementById("makeResButton").style.backgroundColor = "";
+	document.getElementById("monthViewButton").style.backgroundColor = "darkgray";
+
+ 	view = "cal"; // change views
+ 	fieldChanged(true); // load all rooms
+ 	updateCalendar(); // produce the calendar.
+}
 /*
 AJAX call to display and update the calendar within the rightmost area of index.php.
 Author: Derek Brown
@@ -270,11 +272,15 @@ Edits:
 		- add a check to determine if a redirect to index.php should instead display the 
 		calendar view, such as redirecting from settings.php.
 
-*/
-function showCreateResForm(){
-	if (window.location.hash === "#calView"){
-		showCalendarView();
-		window.location.hash = "";
+ */
+ function showCreateResForm(){
+
+	document.getElementById("makeResButton").style.backgroundColor = "darkgray";
+	document.getElementById("monthViewButton").style.backgroundColor = "";
+	
+ 	if (window.location.hash === "#calView"){
+ 		showCalendarView();
+ 		window.location.hash = "";
 		var clean_uri = location.protocol + "//" + location.host + location.pathname;
 		window.history.replaceState({}, document.title, clean_uri);
 		return;
@@ -399,12 +405,12 @@ this is used on the quick reserve to facilitate passing of form data between mod
 If left null or empty, then we can assume that there exists form data that can be obtained by looking for 
 the document element by id with a call to getResFormData.
 */
-function createClicked(data){
-// sanity checks first.
-
-
-	if (roomSelected == null)
-	{
+ function createClicked(data){
+ // sanity checks first.
+	var sendAnEmail = false;
+ 
+ 	if (roomSelected == null)
+ 	{
 		showMessageBoxOK("Select a room to the left and ensure all fields are complete.","Error", false);
 		return;
 	}
@@ -419,9 +425,14 @@ function createClicked(data){
 	var startMin = data.startMin;
 	var endHour = data.endHour;
 	var endMin = data.endMin;
-	var numSeats = data.numSeats;
-	var comment = data.comment;
-	var occur = data.occur;
+ 	var numSeats = data.numSeats;
+ 	var comment = data.comment;
+ 	var occur = data.occur;
+	var confirmEmail = document.getElementById("confirmEmailCheck");
+
+	if (confirmEmail.checked){
+		sendAnEmail = true;
+	}
 	
 	/*
 	console.error("got here");
@@ -507,11 +518,11 @@ function createClicked(data){
 			clearFields();
 			
 		}
-	};
-	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
-
+ 	};
+ 	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
+ 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment + "&sendEmail=" + sendAnEmail);
+ 
 }
 
 
@@ -802,13 +813,13 @@ function showDayViewModal(date, room, showQuickBook){
 	var quickBook = "";
 	if(showQuickBook){
 		quickBook='<hr><h1>Quick Reserve</h1><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;"><table width="100%" style= "margin-top:-5%"><tr><td>Duration*:</td><td><input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "50" onchange = "" required>\
-		<input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "50" onchange = "" required></td></tr><br> \
-		<tr><td>Reserving for*:</td><td><input type="text" width="100%" id="owneremail" value="" required></td></tr><br>\
-		<tr><td>Brief Comment: </td><td><input type="text" width="100%" id="comment"><br><input type="hidden" id="date" value="'+date+'"><input type="hidden" id="allowshare" value="0" ></td><tr></table><br>\
-		<input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
-	}
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
+ 		<input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "50" onchange = "" required></td></tr><br> \
+ 		<tr><td>Reserving for*:</td><td><input type="text" width="100%" id="owneremail" value="" required></td></tr><br>\
+ 		<tr><td>Brief Comment: </td><td><input type="text" width="100%" id="comment"><br><input type="hidden" id="date" value="'+date+'"><input type="hidden" id="allowshare" value="0" ></td><tr></table><br>\
+		<input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
+ 	}
+ 	var xhttp = new XMLHttpRequest();
+ 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			//document.getElementById("").innerHTML = this.responseText;
 			console.error(this.responseText);
@@ -1119,13 +1130,13 @@ function toggleRoomView()
 }
 
 
-*/
-
-function openTooltip(id,row){
-
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
+ */
+ 
+ function openTooltip(id,row){
+	console.log('yes');
+ 	var xmlhttp = new XMLHttpRequest();
+ 	xmlhttp.onreadystatechange = function() {
+ 		if (this.readyState == 4 && this.status == 200) {
 
 			console.error(this.responseText);
 			var reservation = JSON.parse(this.responseText);
