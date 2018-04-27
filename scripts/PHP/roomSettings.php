@@ -13,6 +13,7 @@ if ($_SESSION['permission']!= "A"){
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico" />
  <link rel="stylesheet" href="../../styles/rooms.css">
  
 	
