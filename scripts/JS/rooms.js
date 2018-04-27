@@ -121,8 +121,8 @@ function getAgendaReservations() {
             }
             runString += "</table>";
 
-		document.getElementById('agendaReservations').innerHTML = '<img onclick="shaderClicked()" src="images/x.png" id="closeAgendaButton"></img>';
-		document.getElementById("agendaReservations").innerHTML += runString;
+			document.getElementById('agendaReservations').innerHTML = '<img onclick="shaderClicked()" src="images/x.png" id="closeAgendaButton"></img>';
+			document.getElementById("agendaReservations").innerHTML += runString;
         }
     };
     if (window.location.href.includes('PHP')) {
@@ -482,114 +482,6 @@ function createClicked(data) {
 
 
 
-/*
- Function to be called when the intention is to perform an insert into the database of a new reservation.
- will perform sanity checks and acquire variables needed to pass to CreateReservation.php. Any values obtained here
- should also be checked on the server side for sanitation.
- 
- function createClicked(){
- // sanity checks first.
- document.getElementById('responseText').innerHTML = "";
- if (roomSelected == null)
- {
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
- return;
- }
- 
- var email = document.getElementById("owneremail").value;
- var startTime = document.getElementById("timeStart").value;
- var endTime = document.getElementById("timeEnd").value;
- var date = document.getElementById("date").value;
- var sharing = Number( document.getElementById("allowshare").checked);
- var startHour = startTime.charAt(0) + startTime.charAt(1);
- var startMin = startTime.charAt(3) + startTime.charAt(4);
- var endHour = endTime.charAt(0) + endTime.charAt(1);
- var endMin = endTime.charAt(3) + endTime.charAt(4);
- var numSeats = document.getElementById("numberOfSeats").value;
- var comment = document.getElementById("comment").value;
- var occur = document.getElementById("occur");
- 
- occur = occur[occur.selectedIndex].value;
- if (email == ""){
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Please enter an email first!";
- return;
- }
- 
- if (startHour == "" || startMin == ""){
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Please enter a full start time first!";
- return;
- }
- 
- if (endHour == "" || endMin == ""){
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
- return;
- }
- 
- if (/^\d+$/.test(startHour) && /^\d+$/.test(startMin)) {
- // Contain numbers only
- }
- else {
- // Contain other characters also
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Please only enter numbers in start time boxes!";
- return;
- }
- 
- // check headcount
- if(sharing){
- if (!(/^\+?(0|[1-9]\d*)$/.test(numSeats)) || numSeats <=0) {
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Please only enter positive numbers as a headcount!";
- return;
- }
- }
- 
- if (startMin.length > 2 || endMin.length > 2){
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Times can only be 2 numbers in length!";
- return;
- }
- 
- 
- 
- if (/^\d+$/.test(endHour) && /^\d+$/.test(endMin)) {
- // Contain numbers only
- }
- else {
- // Contain other characters also
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
- return;
- }
- 
- if (document.getElementById('allowshare').checked == true && numSeats == ""){
- document.getElementById('responseText').style.color = "red";
- document.getElementById('responseText').innerHTML = "Please specifiy a number of seats needed, or disable sharing.";
- return;
- }
- 
- // ajax call to create script.
- console.log('here');
- 
- var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
- //document.getElementById('responseText').innerHTML = this.responseText;
- showMessageBoxOK(this.responseText,"Make Reservation", false);
- clearFields();
- }
- };
- xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
- xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
- xhttp.send("roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment);
- 
- }
- 
- */
 
 /*
  * A function implemented with the favorites feature that handles a click on the star of a room div.
@@ -758,24 +650,25 @@ function clearFields() {
 }
 
 
-function showDayViewModal(date, room, showQuickBook) {
-    var quickBook = "";
-    if (showQuickBook) {
-        quickBook = '<hr><h1>Quick Reserve</h1><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;">Duration*:<input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "48" onchange = "" required>\
-		- <input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "48" onchange = "" required><br> \
-		Reserving for*:<input type="text" id="owneremail" value="" required><br>\
-		Brief Comment: <input type="text" id="comment"><br><input type="hidden" id="date" value="' + date + '"><input type="hidden" id="allowshare" value="0" >\
-		<input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
-    }
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            //document.getElementById("").innerHTML = this.responseText;
-            showMessageBox(this.responseText, "Day View - " + roomSelected + " for " + date, quickBook, true);
-        }
-    };
-    xhttp.open("GET", "scripts/PHP/dayView.php?date=" + date + "&room=" + room, true);
-    xhttp.send();
+function showDayViewModal(date, room, showQuickBook){
+	var quickBook = "";
+	if(showQuickBook){
+		quickBook='<hr><h1>Quick Reserve</h1><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;"><table width="100%" style= "margin-top:-5%"><tr><td>Duration*:</td><td><input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "50" onchange = "" required>\
+ 		<input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "50" onchange = "" required></td></tr><br> \
+ 		<tr><td>Reserving for*:</td><td><input type="text" width="100%" id="owneremail" value="" required></td></tr><br>\
+ 		<tr><td>Brief Comment: </td><td><input type="text" width="100%" id="comment"><br><input type="hidden" id="date" value="'+date+'"><input type="hidden" id="allowshare" value="0" ></td><tr></table><br>\
+		<input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
+ 	}
+ 	var xhttp = new XMLHttpRequest();
+ 	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			//document.getElementById("").innerHTML = this.responseText;
+			showMessageBox(this.responseText,"Day View - " + roomSelected + " for " + date,quickBook, true);
+		}
+	};
+	xhttp.open("GET", "scripts/PHP/dayView.php?date=" + date + "&room=" + room, true);
+	xhttp.send();
+
 }
 
 /*
@@ -936,147 +829,7 @@ function updateBlacklist(groupid, roomid, bool_addToBlacklist){
 	}
 }
 
-/*
- function openCreateRes(id){
- if (id.length < 5){
- return;
- }
- 
- let date = id.substr(3);
- let year = date.slice(0, 4);
- let month = date.slice(5, 7);
- month = findDay(month);
- let day = date.slice(8,10);
- let roomChoice = roomSelected;
- if (roomChoice == null){
- roomChoice = "All Rooms";
- }
- let formattedLabel = day + " " + month + " " + year + " - " + roomChoice;
- 
- 
- document.getElementById('createRes').style.display = "inline";
- document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
- document.getElementById('createRes').innerHTML = "";
- // AJAX CALL HERE.
- 
- var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
- document.getElementById("createRes").innerHTML = this.responseText;
- document.getElementById('createLabel').innerHTML = formattedLabel;
- }
- };
- xhttp.open("POST", "scripts/PHP/Reservations.php", true);
- xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
- console.error(roomChoice);
- xhttp.send("date=" + date + "&room=" + roomChoice);
- }
- 
- function typeChanged(id){
- var e = document.getElementById('compSelect');
- var f = document.getElementById('floorSelect');
- if (id == "Any" && e.options[e.selectedIndex].value == "Any" && f.options[f.selectedIndex].value == "Any"){
- var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
- document.getElementById("roominsert").innerHTML = this.responseText;
- }
- };
- xhttp.open("GET", "scripts/PHP/allrooms.php", true);
- xhttp.send();
- }
- else{
- var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
- document.getElementById("roominsert").innerHTML = this.responseText;
- }
- };
- xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + id + "&floor=" + f.options[f.selectedIndex].value + "&comp=" + e.options[e.selectedIndex].value, true);
- xhttp.send();
- }
- 
- 
- }
- 
- function floorChanged(id){
- var e = document.getElementById('typeSelect');
- var f = document.getElementById('compSelect');
- if (id == "Any" && e.options[e.selectedIndex].value == "Any" && f.options[f.selectedIndex].value == "Any"){
- var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
- document.getElementById("roominsert").innerHTML = this.responseText;
- }
- };
- xhttp.open("GET", "scripts/PHP/allrooms.php", true);
- xhttp.send();
- }
- else{
- var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
- document.getElementById("roominsert").innerHTML = this.responseText;
- }
- };
- xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + e.options[e.selectedIndex].value + "&floor=" + id + "&comp=" + f.options[f.selectedIndex].value, true);
- xhttp.send();
- }
- 
- }
- 
- function compChanged(id){
- var e = document.getElementById('typeSelect');
- var f = document.getElementById('floorSelect');
- if (id == "Any" && e.options[e.selectedIndex].value == "Any" && f.options[f.selectedIndex].value == "Any"){
- var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
- document.getElementById("roominsert").innerHTML = this.responseText;
- }
- };
- xhttp.open("GET", "scripts/PHP/allrooms.php", true);
- xhttp.send();
- }
- else{
- var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
- document.getElementById("roominsert").innerHTML = this.responseText;
- }
- };
- xhttp.open("GET", "scripts/PHP/roombytype.php?type=" + e.options[e.selectedIndex].value + "&floor=" + f.options[f.selectedIndex].value + "&comp=" + id, true);
- xhttp.send();
- }
- 
- }
- 
- function toggleRoomView()
- {
- if (showrooms == false)
- {
- showrooms = true;
- document.getElementById('roomMenu').style.display = "inline";
- document.getElementById('roomSelect').style.top = "88%";
- document.getElementById('roomWrapper').style.display = "none";
- document.getElementById('selectedRoom').style.top = "88%";
- document.getElementById('roomSelect').src = "images/up_arrow.png";
- document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
- }
- else
- {
- showrooms = false;
- document.getElementById('roomMenu').style.display = "none";
- document.getElementById('roomSelect').style.top = "14%";
- document.getElementById('roomWrapper').style.display = "inline";
- document.getElementById('selectedRoom').style.top = "14%";
- document.getElementById('roomSelect').src = "images/down_arrow.png";
- document.body.style.backgroundColor = "rgba(0,0,0,0)";
- }
- }
- 
- 
- */
+
 function updateClicked() {
     // sanity checks first.
 
