@@ -81,6 +81,7 @@ function processReservation()
 	//dropdown menu for how often the reservation should occur
 	$occur = ($_POST['occur']);
 
+
 	//comment variable
 	$comment = ($_POST['comment']);
 	$comment = trim($comment);
@@ -93,7 +94,7 @@ function processReservation()
 	require_once 'ValidateReservation.php'; // gain access to validation functions
 
 	if(checkValidTime_overload($starthour . ":" . $startminute, $endhour . ":" . $endminute, $date, $roomnumber)){
-		if($occur === "Once"){
+		if($occur === "Once" || $occur === "null"){
 			//connect to database
 			$conn = new mysqli($servername, $username, $password, $dbname);
 

@@ -236,10 +236,6 @@ class Calendar {
          
         }
 
-		if ($monthStartDay == 7){
-			$numOfweeks--;
-		}
-         
         return $numOfweeks;
     }
  

@@ -1171,4 +1171,103 @@ function toggleRoomView()
 
 }
 
+function updateClicked() {
+    // sanity checks first.
+
+    var roomnumber = document.getElementById("roomnumber").value;
+    var id = document.getElementById("id").innerHTML;
+    var email = document.getElementById("owneremail").value;
+    var startTime = document.getElementById("startTime").value;
+    var endTime = document.getElementById("endTime").value;
+    var startDate = document.getElementById("date").value;
+    var endDate = document.getElementById("date").value;
+    
+    console.error(startTime, endTime);
+
+
+    var startHour = startTime.charAt(0) + startTime.charAt(1);
+    var startMin = startTime.charAt(3) + startTime.charAt(4);
+    var endHour = endTime.charAt(0) + endTime.charAt(1);
+    var endMin = endTime.charAt(3) + endTime.charAt(4);
+
+    var comment = document.getElementById("comment").value;
+    if (email == "") {
+        document.getElementById('responseText').style.color = "red";
+        document.getElementById('responseText').innerHTML = "Please enter an email first!";
+        return;
+    }
+
+    if (startHour == "" || startMin == "") {
+        document.getElementById('responseText').style.color = "red";
+        document.getElementById('responseText').innerHTML = "Please enter a full start time first!";
+        return;
+    }
+
+    if (endHour == "" || endMin == "") {
+        document.getElementById('responseText').style.color = "red";
+        document.getElementById('responseText').innerHTML = "Please enter a full end time first!";
+        return;
+    }
+
+    if (/^\d+$/.test(startHour) && /^\d+$/.test(startMin)) {
+        // Contain numbers only
+    } else {
+        // Contain other characters also
+        document.getElementById('responseText').style.color = "red";
+        document.getElementById('responseText').innerHTML = "Please only enter numbers in start time boxes!";
+        return;
+    }
+
+    if (startMin.length > 2 || endMin.length > 2) {
+        document.getElementById('responseText').style.color = "red";
+        document.getElementById('responseText').innerHTML = "Times can only be 2 numbers in length!";
+        return;
+    }
+
+    if (Number(startMin) > 59 || Number(endMin) > 59) {
+        document.getElementById('responseText').style.color = "red";
+        document.getElementById('responseText').innerHTML = "Times cannot be bigger than 60 minutes!";
+        return;
+    }
+
+    if (/^\d+$/.test(endHour) && /^\d+$/.test(endMin)) {
+        // Contain numbers only
+    } else {
+        // Contain other characters also
+        document.getElementById('responseText').style.color = "red";
+        document.getElementById('responseText').innerHTML = "Please only enter numbers in end time boxes!";
+        return;
+    }
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('responseText').style.color = "black";
+            document.getElementById('responseText').innerHTML = this.responseText;
+            getAgendaReservations();
+        }
+    };
+    xhttp.open("POST", "./scripts/PHP/updateReservation.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id=" + id + "&owneremail=" + email + "&roomnumber=" + roomnumber  + "&startTime=" + startTime + "&startDate=" + startDate + "&endDate=" + endDate + "&endTime=" + endTime + "&comment=" + comment);
+
+}
+
+function editClicked(ele) {
+    var id = String(ele.children[0].id);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var editHtml = this.responseText;
+            var buttonHtml = "<button class='modal-button' onclick='updateClicked();'>Update</button>";
+            showMessageBox(editHtml, "Edit", buttonHtml, true);
+            
+        }
+    };
+    xhttp.open("POST", "scripts/PHP/editClicked.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id=" + id);
+
+
+}
 

@@ -45,7 +45,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 	//returns false if reservation made is after the valid end day time
 	else if($endToCheck > $dayEnd)
 	{
-
+		echo "$endToCheck is greater than $dayEnd";
 		$retValue = FALSE;
 		if($outputError)
 		{
@@ -82,7 +82,6 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 		}
 	}
 	
-
 	
 	return $retValue;
 }
@@ -92,7 +91,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck)
 //****************************************************************************
 //This function checks the database for reservations that are made or
 //updated to the system that conflict with another reservation already
-//made and doesn't allow roomsharing. It will also be used to give the 
+//made and doesnt allow roomsharing. It will also be used to give the 
 //user a visual representation of the rooms that are allowing sharing
 //and the rooms who do not on the Agenda screen (red and green highlight)
 //****************************************************************************
@@ -122,7 +121,7 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room)
 	$sql = "SELECT * FROM reservations WHERE roomnumber = '$room' AND allowshare = '0'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime > '$newResStart'))";
+				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
 
 
 	$result = $conn->query($sql);
@@ -155,7 +154,7 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room)
 // Overload
 //This function checks the database for reservations that are made or
 //updated to the system that conflict with another reservation already
-//made and doesn't allow roomsharing. It will also be used to give the 
+//made and doesnt allow roomsharing. It will also be used to give the 
 //user a visual representation of the rooms that are allowing sharing
 //and the rooms who do not on the Agenda screen (red and green highlight)
 //****************************************************************************
@@ -185,7 +184,7 @@ function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $dat
 	$sql = "SELECT * FROM reservations WHERE allowshare = '0' AND startdate = '$date' AND roomnumber = '$room'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime > '$newResStart'))";
+				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
 
 
 	$result = $conn->query($sql);
@@ -213,7 +212,7 @@ function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $dat
 }
 
 //****************************************************************************
-//Performs all checks to see if the particular time slot is open.
+//Performs all checks to see if the particualar time slot is open.
 //****************************************************************************
 function checkValidTime($outputError, $newResStart, $newResEnd, $room)
 {
@@ -224,7 +223,7 @@ function checkValidTime($outputError, $newResStart, $newResEnd, $room)
 
 
 //****************************************************************************
-//Overload Performs all checks to see if the particular time slot is open.
+//Overload Performs all checks to see if the particualar time slot is open.
 //****************************************************************************
 function checkValidTime_overload($newResStart, $newResEnd, $date, $room)
 {
@@ -242,7 +241,7 @@ so we need to go back and just add that outputError parameter above and go to da
 of the below redundant function.
 */
 //****************************************************************************
-//Overload Performs all checks to see if the particular time slot is open.
+//Overload Performs all checks to see if the particualar time slot is open.
 //****************************************************************************
 function checkValidTime_overload_noerr($newResStart, $newResEnd, $date, $room)
 {
@@ -279,8 +278,9 @@ function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $
 				startdate = '$newResDate' AND roomnumber = '$room'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime > '$newResStart'))";
+				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
 
+	//echo $sql;
 	$result = $conn->query($sql);
 	$row = $result->fetch_assoc();
 
@@ -311,7 +311,58 @@ function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $
 }
 
 
+function checkValidUpdate($outputError, $newStartTime, $newEndTime, $room, $id) {
+    	//error message diplayed when false
+	$errMsg = "Given times overlap with another reservation made by a user who opted not to share the room.";
+	//default set to false
+	$returnVal=FALSE;
+	//global $dayStart, $dayEnd; this doesn't work for some reason
+	$dayStart = DateTime::createFromFormat('H:i', '7:00');
+	$dayEnd  = DateTime::createFromFormat('H:i', '23:00');
+	$newStartTime = DateTime::createFromFormat('H:i', $newStartTime);
+	$newEndTime = DateTime::createFromFormat('H:i', $newEndTime);
+	require "db_conf.php";
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	// Check connection
+	if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+	}
 
+	//Locates a conflicting reservation made that overlaps times of another reservation that doesn't allow sharing 
+
+	$newStartTime = $newStartTime->format('H:i');
+	$newEndTime = $newEndTime->format('H:i');
+	$sql = "SELECT * FROM reservations WHERE roomnumber = '$room' AND allowshare = '0'
+                                AND id <> '$id'
+				AND((starttime > '$newStartTime' AND endtime <= '$newEndTime')
+				OR(endtime >= '$newEndTime' AND starttime < '$newEndTime')
+				OR(starttime < '$newStartTime' AND endtime >= '$newStartTime'))";
+
+
+	$result = $conn->query($sql);
+
+	if($result->num_rows > 0)
+	{
+		$returnVal = FALSE;
+		//if false, display error message
+		if($outputError)
+		{
+			echo $errMsg;
+		}
+	}
+	else
+	{
+		$returnVal = TRUE;
+	}
+	
+	//close database connection
+	$conn->close();
+
+	//Return the boolean value
+	return $returnVal;
+
+}
 
 
 
