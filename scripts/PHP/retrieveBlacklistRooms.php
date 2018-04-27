@@ -1,5 +1,4 @@
 <?php session_start();
-//require "ValidateReservation.php";
 if(isset($_SESSION['username'])){
 	$user= $_SESSION['username'];
 }
@@ -43,7 +42,7 @@ if(isset($_SESSION['username'])){
         die("Connection failed: " . $conn->connect_error);
     }
 
-	$sql = "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms "; // the final table columns that we want.				// construction of the full query along with ordering
+	$sql = "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.numeric_id, rooms.type FROM rooms "; // the final table columns that we want.				// construction of the full query along with ordering
 	//echo $sql; // used for testing purposes 
 	
     $result = $conn->query($sql); // run the query
@@ -55,7 +54,8 @@ if(isset($_SESSION['username'])){
 		$rowResult = array(
 			"roomid" => $rowItem['roomid'],
 			"seats" => $rowItem['seats'],
-			"type" => $rowItem['type']
+			"type" => $rowItem['type'],
+			"numeric_id" => $rowItem['numeric_id']
 		);
 		$room_array[] = $rowResult; // append row to result.
 	}
@@ -66,7 +66,7 @@ if(isset($_SESSION['username'])){
 	///////////////////////////////////////////////////////////////////////////
 	
 	//$permissions_SQL = "SELECT rooms.roomid, rooms.seats FROM `rooms` LEFT JOIN `users` ON users.permissions = rooms.blacklist WHERE users.email = '$user'";
-	$permissions_SQL = "SELECT rooms.roomid, rooms.seats FROM `blacklist` LEFT JOIN `rooms` ON blacklist.numeric_room_id = rooms.numeric_id WHERE blacklist.group_id = '$groupid'";
+	$permissions_SQL = "SELECT rooms.roomid, rooms.seats, rooms.numeric_id FROM `blacklist` LEFT JOIN `rooms` ON blacklist.numeric_room_id = rooms.numeric_id WHERE blacklist.group_id = '$groupid'";
 
 	$permissionsRes = $conn->query($permissions_SQL);
 	//place in array
@@ -86,9 +86,9 @@ if(isset($_SESSION['username'])){
 	{
 		if(in_array($row['roomid'],$room_BlacklistArray)){ // blacklist rooms are excluded
 			
-			echo "<div onclick='' class = 'blacklistedroombox' id = '".$row['roomid']."'><font class='roomboxcontent' id = 'p_".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
+			echo "<div onclick='updateBlacklist($groupid,".$row['numeric_id'].",false)' class = 'blacklistedroombox' id = '".$row['numeric_id']."'><font class='roomboxcontent' id = 'p_".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
 		} else{
-			echo "<div onclick='' class = 'nonblacklistroombox' id = '".$row['roomid']."'><font class='roomboxcontent' id = 'p_".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
+			echo "<div onclick='updateBlacklist($groupid,".$row['numeric_id'].",true)' class = 'nonblacklistroombox' id = '".$row['numeric_id']."'><font class='roomboxcontent' id = 'p_".$row['roomid']."' ><br><b>" . $row['roomid'] ."</b><br>". $row['seats'] ."<br>" . $row['type'] . "</font></div>";
 		}
 	}
 	if($result->num_rows == 0){

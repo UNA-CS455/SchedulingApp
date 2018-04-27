@@ -58,6 +58,9 @@ if ($_SESSION['permission']!= "A"){
 	  </tr>
 	  <tr>
 		<td><br><button class = "settingsButton" onclick="location.href='roomSettings.php';">Room Settings</button></td>
+	  </tr>
+	  <tr>
+		<td><br><button class = "settingsButton" onclick="location.href='groupSettings.php';">Group Settings</button></td>
 		<br>
 	  </tr>
 	</table>
@@ -66,10 +69,7 @@ if ($_SESSION['permission']!= "A"){
 	<div id = "room"><h1> Group Settings </h1><br>
 
 		<div class='groupsFrame' id='groupsArea'>
-			<button style='width:100%'> Test </button>
-			<button style='width:100%'> Test </button>
-						<button style='width:100%'> Test </button>
-			<button style='width:100%'> Test </button>
+
 		</div>
 			<h2 id='groupheader'></h2>
 		    <div id="roomContainer"> 

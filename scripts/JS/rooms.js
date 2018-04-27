@@ -956,6 +956,29 @@ function populateGroupList(){
 	
 
 }
+
+function updateBlacklist(groupid, roomid, bool_addToBlacklist){
+	console.error(roomid);
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.error(this.responseText);
+			populateBlacklistRooms(groupid);
+		}
+	};
+	xhttp.open("POST", "updateBlacklists.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	
+	if (bool_addToBlacklist){
+		// add to blacklist
+		xhttp.send("groupID="+groupid+"&roomid=" + roomid+"&operation='add'");
+	}
+	else{
+		// remove from blacklist
+		xhttp.send("groupID="+groupid+"&roomid=" + roomid+"&operation='remove'");
+	}
+}
+
 /*
 function openCreateRes(id){
 	if (id.length < 5){

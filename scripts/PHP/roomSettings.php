@@ -74,6 +74,9 @@ function findRoom(str) {
 	  </tr>
 	  <tr>
 		<td><br><button class = "settingsButton" onclick="location.href='roomSettings.php';">Room Settings</button></td>
+	  </tr>
+	  <tr>
+		<td><br><button class = "settingsButton" onclick="location.href='groupSettings.php';">Group Settings</button></td>
 		<br>
 	  </tr>
 	</table>
