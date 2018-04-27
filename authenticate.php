@@ -39,19 +39,29 @@ if($in_ldap){
        die("Connection failed: " . $conn->connect_error);
 	}
 
-	$sql = "SELECT email from users WHERE email = '$user'";				//ldap permissions should be cahnged to 2 instead of U and change the setting page display test for != 1
+	//$sql = "SELECT email from users WHERE email = '$user'";				//ldap permissions should be cahnged to 2 instead of U and change the setting page display test for != 1
 	
-if($sql_result = mysqli_query($conn,$sql)){
-	$sql_result = $conn->query($sql);
-	$rowcount = mysqli_num_rows($sql_result);
-	if($rowcount < 1)
-	{
-		$sql = "INSERT INTO `users` (`email`, `firstname`, `lastname`, `groupID`) VALUES									
-				(". $user . ", ". $ldap_first .", " .$ldap_last . ", " . $ldap_permissions .") ";
+	$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 
-		$conn->query($sql);
+	$stmt->bind_param("s", $user);
+	$check = $stmt->execute();
+    $stmt->store_result();
+	$numCheck = $stmt->num_rows;
+
+    
+	if($check){
+		if($numCheck < 1)
+		{
+			$stmt_insert = $conn->prepare("INSERT INTO `users` (`email`, `firstname`, `lastname`, `groupID`) VALUES									
+					(?, ?, ? ,?)");
+
+			$stmt_insert->bind_param("sssi", $user, $ldap_first, $ldap_last, $ldap_permissions);
+			$check = $stmt_insert->execute();
+//TODO check check and send back to login if error happened
+
+		}
 	}
-}
+
 	//get permission level
 	$sql = "SELECT `groupID` FROM `users` WHERE email='" . $user . "'";
 
@@ -63,7 +73,7 @@ if($sql_result = mysqli_query($conn,$sql)){
 			$ldap_permissions = $row["groupID"];
 		}
 	}
-	
+
 }	
 
 if($result == 200){
