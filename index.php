@@ -9,7 +9,7 @@
 
 <html>
     <head>
-	
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 		<!-- Stylesheets -->
 		<link rel="stylesheet" href="styles/rooms.css">
         <link rel="stylesheet" href="styles/Reservation.css">
