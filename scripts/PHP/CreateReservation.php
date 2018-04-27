@@ -113,14 +113,29 @@ function processReservation()
                 //if reservation occurs only only once
                 if ($occur === "Once"){
                     //if connection is success, insert data into database and echo to user result
-                    $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$date', '$date', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
-                
-                    if ($conn->query($sql) === TRUE) {
-			echo "Reservation made successfully";
-			//include 'mail.php'; uncomment when on deployed version
-                    } else {
-			echo "Error making reservation: " . $conn->error;
+                    //$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$date', '$date', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
+                    $stmt = $conn->prepare("INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $startAssist = date('H:i', strtotime($starthour . ":" . $startminute));
+                    $endAssist = date('H:i', strtotime($endhour . ":" . $endminute));
+                    $stmt->bind_param("ssissssssss", $roomnumber, $owneremail, $allowshare, $numberOfSeats, $date, $date, $startAssist, $endAssist, $occur, $comment, $logged_in_user);
+                    $check = $stmt->execute();
+                    //$mResult = $stmt->get_result();
+                  
+                    if(isset($_POST['sendEmail'])){
+			if ($check === TRUE && $_POST['sendEmail'] === "true") {
+				include 'mail.php'; // uncomment when on deployed version
+				
+				sendMail();
+			} 
                     }
+                    if (!$check) {
+			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+                    }
+                    else{
+			echo "Reservation made successfully";
+                    }
+                    $conn->close();
+                    
                 } else {
                     //if reservation is weekly
                     if ($occur === "Weekly"){
@@ -135,7 +150,7 @@ function processReservation()
                     $success = FALSE;
                     
                     $begin = new DateTime($date);
-                    $end = new DateTime(date('Y-m-d', strtotime($date . '+ 1 year')));
+                    $end = new DateTime(date('Y-m-d', strtotime($date . '+ 6 months')));
                     
                     $daterange = new DatePeriod($begin, $interval, $end);
                     
@@ -143,14 +158,20 @@ function processReservation()
                         //format the date
                         $fDate = $date->format("Y-m-d"); 
                         
-                        //if connection is success, insert data into database 
-                        $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$fDate', '$fDate', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
+                        //if connection is success, insert data into database and echo to user result
+                        //$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$date', '$date', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
+                        $stmt = $conn->prepare("INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        $startAssist = date('H:i', strtotime($starthour . ":" . $startminute));
+                        $endAssist = date('H:i', strtotime($endhour . ":" . $endminute));
+                        $stmt->bind_param("ssissssssss", $roomnumber, $owneremail, $allowshare, $numberOfSeats, $fDate, $fDate, $startAssist, $endAssist, $occur, $comment, $logged_in_user);
+                        $check = $stmt->execute();
+                        //$mResult = $stmt->get_result();
                         
-                        if ($conn->query($sql) === TRUE) {
-                            //Relay success to user after loop is finished
+                        if (!$check) {
+                            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+                        }
+                        else{
                             $success = TRUE;
-                        } else {
-                            echo "Error making reservation: " . $conn->error;
                         }
                     }
                     if ($success === TRUE){
@@ -158,12 +179,7 @@ function processReservation()
                         //include 'mail.php'; uncomment when on deployed version
                     }
                 }
-			
-		if ($check === TRUE && $_POST['sendEmail'] === "true") {
-			include 'mail.php'; // uncomment when on deployed version
-			
-			sendMail();
-		} 
+
         $conn->close();
         
         }
