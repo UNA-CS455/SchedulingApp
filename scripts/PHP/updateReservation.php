@@ -15,21 +15,38 @@ $endtime = $_POST['endTime'];
 $startdate = $_POST['startDate'];
 $enddate = $_POST['endDate'];
 $comment = $_POST['comment'];
+$headcount = $_POST['headcount'];
+$allowshare = $_POST['allowshare'];
 
-
+var_dump($allowshare);
 
 
 $sql = "UPDATE reservations SET roomnumber='$roomnumber', startdate='$startdate', enddate='$enddate', starttime='$starttime', endtime='$endtime', comment='$comment', res_email='$email' WHERE id = '$id'";
+$starttime = DateTime::createFromFormat('H:i', $starttime);
+$endtime = DateTime::createFromFormat('H:i', $endtime);
 
 
+if (checkValidUpdate(true, $starttime, $endtime, $startdate, $roomnumber, $id) && checkDateTime(true, $starttime->format("H:i"), $endtime->format("H:i"))) {
 
+    if ($allowshare == "1") {
 
-if (checkValidUpdate(true, $starttime, $endtime, $roomnumber, $id) && checkDateTime(true, $starttime, $endtime)) {
+        if (checkEnoughSeats(true, $starttime->format("H:i"), $endtime->format("H:i"), $startdate, $roomnumber, $headcount)) {
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Update Successful";
+            if ($conn->query($sql) === TRUE) {
+                echo "Update Successful";
+            } else {
+                echo "Update Failed";
+            }
+        }
     } else {
-        echo "Update Failed";
+        if (checkReservation($starttime, $endtime, $startdate, $roomnumber, $id)) {
+            var_dump(checkReservation($starttime, $endtime, $startdate, $roomnumber, $id));
+            if ($conn->query($sql) === TRUE) {
+                echo "Update Successful";
+            } else {
+                echo "Update Failed";
+            }
+        }
     }
 }
 $conn->close();

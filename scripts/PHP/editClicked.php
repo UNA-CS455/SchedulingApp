@@ -7,8 +7,6 @@ if ($conn->connect_errno) {
     die("Connect Error: " . $conn->connect_error);
 }
 $id = $_POST['id'];
-//$id = 48;
-//$id = 67;
 $select = "SELECT * FROM reservations WHERE id = $id";
 $result = $conn->query($select);
 if ($result->num_rows != 1) {
@@ -24,11 +22,16 @@ $endtime = $row['endtime'];
 $enddate = $row['enddate'];
 $roomnumber = $row['roomnumber'];
 $comment = $row['comment'];
+$headcount = $row['headcount'];
+$starttime = date('H:i', strtotime($starttime));
+$endtime = date('H:i', strtotime($endtime));
 
 if($row['allowshare']) {
     $allowshare = "Yes";
+    $headcount = "<span id='headcount'>$headcount</span> people <br><br>";
 } else {
     $allowshare = "No";
+    $headcount = "<span id='headcount'></span>";
 }
 
 
@@ -52,7 +55,7 @@ $edithtml = "<?php?><html><head></head><body>"
         . "<input type='date' id='date' value='$date'><br><br>"
         . "<input id = 'startTime' type = 'time' step = '900' width = '48' value='$starttime'>"
                 . "<br>to<br> <input id = 'endTime' type = 'time' step = '900' width = '48' value='$endtime'><br><br>"
-        . "Allow Sharing: $allowshare<br><br>"
+        . "Allow Sharing: <span id='allowshare'>$allowshare</span><br><br>$headcount"
         . "<select id='roomnumber'><option value='$roomnumber' hidden>$roomnumber</option>"
             . "$options</select><br><br>"
         . "Comments:"
