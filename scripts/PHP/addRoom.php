@@ -61,7 +61,6 @@
 			</select></td></tr>
 			<tr><td> Floor number: </td><td><input type='text' name='floor'></td></tr>
 			<tr><td> Seats: </td><td><input type='text' name='seats'></td></tr>
-			<tr><td> Permissions: </td><td><input type='text' name='blacklist'></td><td>Please separate different groups by commas.</td></tr>
 			<tr><td> <input type='submit' value='Add Room'>
 		</form></td></tr>
 	</table>
