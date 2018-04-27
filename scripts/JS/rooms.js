@@ -207,21 +207,24 @@ function updateReserveButtonText() {
 }
 
 /*
- Function that will be called when a desire to swap views to calendar view exists.
- We call this function when swapping to the view because if you just called updateCalendar()
- by itself, the calendar shown would not have the correct data within it, since at the point of
- swapping between some views, such as redirection from the settings page, roomSelected might be
- null before the updateCalendar function is called and the calendar will instead show all reservations
- while incorrectly having a specific room selected.
- 
- Author: Derek Brown.
- Date: 4/7/2018
+Function that will be called when a desire to swap views to calendar view exists.
+We call this function when swapping to the view because if you just called updateCalendar()
+by itself, the calendar shown would not have the correct data within it, since at the point of
+swapping between some views, such as redirection from the settings page, roomSelected might be
+null before the updateCalendar function is called and the calendar will instead show all reservations
+while incorrectly having a specific room selected.
+Date: 4/7/2018
  */
-function showCalendarView() {
-    view = "cal"; // change views
-    fieldChanged(true); // load all rooms
-    updateCalendar(); // produce the calendar.
+function showCalendarView(){
+
+	document.getElementById("makeResButton").style.backgroundColor = "";
+	document.getElementById("monthViewButton").style.backgroundColor = "darkgray";
+
+ 	view = "cal"; // change views
+ 	fieldChanged(true); // load all rooms
+ 	updateCalendar(); // produce the calendar.
 }
+
 
 /*
  AJAX call to display and update the calendar within the rightmost area of index.php.
@@ -252,26 +255,31 @@ function updateCalendar() {
  calendar view, such as redirecting from settings.php.
  
  */
-function showCreateResForm() {
-    if (window.location.hash === "#calView") {
-        showCalendarView();
-        window.location.hash = "";
-        var clean_uri = location.protocol + "//" + location.host + location.pathname;
-        window.history.replaceState({}, document.title, clean_uri);
-        return;
-    }
+ function showCreateResForm(){
 
-    var area = document.getElementById('createZone');
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            area.innerHTML = this.responseText;
-            updateReserveButtonText();
-            view = "res";
-        }
-    };
-    xhttp.open("GET", "scripts/PHP/resFormView.php", true);
-    xhttp.send();
+	document.getElementById("makeResButton").style.backgroundColor = "darkgray";
+	document.getElementById("monthViewButton").style.backgroundColor = "";
+	
+ 	if (window.location.hash === "#calView"){
+ 		showCalendarView();
+ 		window.location.hash = "";
+		var clean_uri = location.protocol + "//" + location.host + location.pathname;
+		window.history.replaceState({}, document.title, clean_uri);
+		return;
+	}
+	
+	var area = document.getElementById('createZone');
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			area.innerHTML = this.responseText;
+			updateReserveButtonText();
+			view = "res";
+		}
+	};
+	xhttp.open("GET", "scripts/PHP/resFormView.php", true);
+	xhttp.send();
+	
 }
 
 /*
