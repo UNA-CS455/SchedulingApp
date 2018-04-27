@@ -26,11 +26,15 @@ function changeSheet(){
 	var checkbox = document.getElementById('allowshare');
 	checkbox = (checkbox == null) ? false : checkbox.checked;
 	if(checkbox == true){
-		document.getElementById('numseatstext').style.visibility = "visible";
+		if (document.getElementById('numseatstext') != null){
+			document.getElementById('numseatstext').style.visibility = "visible";
+		}
+		
 	}
 	else {
-		document.getElementById('numseatstext').style.visibility = "hidden";
-		
+		if (document.getElementById('numseatstext') != null){
+			document.getElementById('numseatstext').style.visibility = "hidden";
+		}
 
 	}
 }
@@ -428,11 +432,14 @@ the document element by id with a call to getResFormData.
  	var numSeats = data.numSeats;
  	var comment = data.comment;
  	var occur = data.occur;
-	var confirmEmail = document.getElementById("confirmEmailCheck");
+	if (document.getElementById('confirmEmailCheck') != null){
+		var confirmEmail = document.getElementById("confirmEmailCheck");
 
-	if (confirmEmail.checked){
-		sendAnEmail = true;
+		if (confirmEmail.checked){
+			sendAnEmail = true;
+		}
 	}
+	
 	
 	/*
 	console.error("got here");
