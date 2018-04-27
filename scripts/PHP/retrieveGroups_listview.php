@@ -9,9 +9,6 @@ if (!isset($_SESSION['username'])){
 if ($_SESSION['permission']!= 1){
 	header('location: ../../login.html');
 }
-
-	$user= $_SESSION['username'];
-
 	/*=========================================================================
 		Retrieve Groups PHP Script
 		Purpose: Fetches all groups in the database and returns HTML buttons
@@ -40,14 +37,14 @@ if ($_SESSION['permission']!= 1){
 
 	//get all rooms first
 	$room_array = array();
+	echo "<td><select name='groupID'>";
 	while ($rowItem = $result->fetch_assoc()) {
 
-		echo "<button style='width:100%; height:40px; position:relative;' id = ".$rowItem['id']." onclick='populateBlacklistRooms(this.id)'>". $rowItem['name'] . "</button>";
+		echo "<option value='" . $rowItem['id'] . "'>" . $rowItem['name'] . "</option>";
 		
 	}
-	//TODO: add modal popup for new group creation.
-	echo "<button style='width:100%; height:40px; position:relative;' id = 'createNewGroupButton' onclick=''> Create New Group </button>";
-	
+	echo "</select></td></tr>";
+
 $conn->close();
 
 ?>

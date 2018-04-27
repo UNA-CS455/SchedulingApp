@@ -670,6 +670,7 @@ window.onclick = function (event) {
 }
 
 /*
+<<<<<<< HEAD
  Funciton to be called when the user desires to log out manually.
  * Author(s): Dillon Borden, Derek Brown, Earl Clark, 
  */
@@ -684,6 +685,29 @@ function logoutUser() {
         } else {
             window.location.href += 'scripts/PHP/logout.php';
         }
+=======
+	Function that is accessed on the group settings page "groupSettings.php" and is
+	used to populate the list of rooms obtained through AJAX to the retrieveBlacklistRooms
+	php script. 
+	Author: Derek Brown
+	Date: 4/27/2018
+*/
+function populateBlacklistRooms(groupChosen){
+	var e = document.getElementById('roomContainer');
+	var header = document.getElementById('groupheader');
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			e.innerHTML = this.responseText;
+			var name = document.getElementById(groupChosen);
+			if(name !=null)
+				header.innerHTML = "Select rooms to blacklist for group " + name.innerHTML + "";
+		}
+	};
+	xhttp.open("GET", "retrieveBlacklistRooms.php?groupID=" + groupChosen);
+	xhttp.send();
+	
+>>>>>>> 4918cee7394c1171d9f482f29efedd6cd2709bd7
 
     }
 }

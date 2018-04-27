@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2018 at 05:24 AM
+-- Generation Time: Apr 27, 2018 at 07:50 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -27,6 +27,26 @@ USE `cs455`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blacklist`
+--
+
+CREATE TABLE `blacklist` (
+  `group_id` int(11) NOT NULL,
+  `numeric_room_id` int(11) NOT NULL,
+  `blacklist_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `blacklist`
+--
+
+INSERT INTO `blacklist` (`group_id`, `numeric_room_id`, `blacklist_id`) VALUES
+(2, 3, 1),
+(1, 3, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `favorites`
 --
 
@@ -46,10 +66,29 @@ INSERT INTO `favorites` (`email`, `roomid`, `id`) VALUES
 ('dbrown4@una.edu', 'Keller 220', 91),
 ('dbrown4@una.edu', 'Keller 320', 93),
 ('dbrown4@una.edu', 'Keller 222', 96),
-('admin@una.edu', 'Keller 133', 98),
 ('admin@una.edu', 'Keller 3304', 131),
 ('admin@una.edu', 'Keller 122', 132),
-('admin@una.edu', 'Keller 327', 138);
+('admin@una.edu', 'Keller 222', 142),
+('admin@una.edu', 'Keller 133', 143);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups`
+--
+
+CREATE TABLE `groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`) VALUES
+(1, 'A'),
+(2, 'U');
 
 -- --------------------------------------------------------
 
@@ -129,23 +168,23 @@ CREATE TABLE `rooms` (
   `seats` int(11) NOT NULL COMMENT 'The number of open seats',
   `hascomputers` tinyint(4) NOT NULL,
   `numcomputers` int(11) DEFAULT NULL COMMENT 'number of open computers given that hascomputers is true.',
-  `blacklist` varchar(100) DEFAULT NULL COMMENT 'Comma-delimited string of group names that are blacklisted from booking this room'
+  `numeric_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`, `blacklist`) VALUES
-('Keller 122', 'Classroom', 1, 40, 0, NULL, NULL),
-('Keller 133', 'Classroom', 1, 64, 0, NULL, NULL),
-('Keller 220', 'Classroom', 2, 36, 0, NULL, NULL),
-('Keller 222', 'Classroom', 2, 40, 0, NULL, NULL),
-('Keller 227', 'Classroom', 2, 32, 0, NULL, NULL),
-('Keller 320', 'Classroom', 3, 36, 0, NULL, NULL),
-('Keller 322', 'Classroom', 3, 40, 0, NULL, NULL),
-('Keller 327', 'Classroom', 3, 32, 0, NULL, NULL),
-('Keller 3304', 'Computer Lab', 3, 48, 0, 0, NULL);
+INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`, `numeric_id`) VALUES
+('Keller 122', 'Classroom', 1, 40, 0, NULL, 1),
+('Keller 133', 'Classroom', 1, 64, 0, NULL, 2),
+('Keller 220', 'Classroom', 2, 36, 0, NULL, 3),
+('Keller 222', 'Classroom', 2, 40, 0, NULL, 4),
+('Keller 227', 'Classroom', 2, 32, 0, NULL, 5),
+('Keller 320', 'Classroom', 3, 36, 0, NULL, 6),
+('Keller 322', 'Classroom', 3, 40, 0, NULL, 7),
+('Keller 327', 'Classroom', 3, 32, 0, NULL, 8),
+('Keller 3304', 'Computer Lab', 3, 48, 0, 0, 9);
 
 -- --------------------------------------------------------
 
@@ -158,25 +197,39 @@ CREATE TABLE `users` (
   `firstname` varchar(100) DEFAULT NULL,
   `lastname` varchar(100) DEFAULT NULL,
   `classification` varchar(200) NOT NULL,
-  `permissions` varchar(2) NOT NULL
+  `groupID` int(2) DEFAULT '2'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `firstname`, `lastname`, `classification`, `permissions`) VALUES
-('admin@una.edu', 'Admin', 'account', 'ADMIN', 'U');
+INSERT INTO `users` (`email`, `firstname`, `lastname`, `classification`, `groupID`) VALUES
+('admin@una.edu', 'Admin', 'account', 'ADMIN', 1),
+('dbrown@una.edu', 'derek', 'brown', 'student', 2);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `blacklist`
+--
+ALTER TABLE `blacklist`
+  ADD PRIMARY KEY (`blacklist_id`);
+
+--
 -- Indexes for table `favorites`
 --
 ALTER TABLE `favorites`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `reservations`
@@ -188,7 +241,8 @@ ALTER TABLE `reservations`
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`roomid`);
+  ADD PRIMARY KEY (`numeric_id`),
+  ADD UNIQUE KEY `roomid` (`roomid`) USING BTREE;
 
 --
 -- Indexes for table `users`
@@ -201,16 +255,34 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `blacklist`
+--
+ALTER TABLE `blacklist`
+  MODIFY `blacklist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+
+--
+-- AUTO_INCREMENT for table `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `numeric_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

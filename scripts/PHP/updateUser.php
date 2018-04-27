@@ -2,13 +2,17 @@
 <?php 
 	$user = $_REQUEST['q'];
 	require "db_conf.php";
-	$conn = new mysqli($servername, $username, $password, $dbname);
+
 	echo "<form action='updatePermissions.php' method='POST'>";
-	echo "Current user: $user </br>";
-	echo "Group:<input type='text' name='permissions'></br>";
+	echo "<table><tr><th></th><th></th></tr>";
+	echo "<tr><td>Current user:</td><td> $user </td></tr>";
+	echo "<tr><td>Group: </td>";
+	require_once('retrieveGroups_listview.php');
 	echo "<input type='hidden' name='currUser' value='$user'></br>";
-	echo "<input type='submit' value='save changes'>";
+	echo "<tr><td><input type='submit' value='save changes'></td></tr>";
 	echo "</form>";
+	echo "</table>";
+	$conn = new mysqli($servername, $username, $password, $dbname);
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}

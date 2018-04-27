@@ -1,4 +1,14 @@
 <?php
+
+	session_start();
+
+if (!isset($_SESSION['username'])){
+	header('location: ../../login.html');
+}
+//only admin can view this page
+if ($_SESSION['permission']!= 1){
+	header('location: ../../login.html');
+}
 	$user = $_REQUEST['q'];
 	require "db_conf.php";
 				
@@ -15,7 +25,7 @@
 		"firstname" => $row['firstname'],
 		"lastname" => $row['lastname'],
 		"email" => $row['email'],
-		"role" => $row['permissions']
+		"role" => $row['classification']
 	);
 	$return_array[] = $rowResult; // append row to result.
 }

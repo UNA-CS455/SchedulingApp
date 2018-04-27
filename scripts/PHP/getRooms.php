@@ -1,11 +1,21 @@
 <?php
+	session_start();
+
+if (!isset($_SESSION['username'])){
+	header('location: ../../login.html');
+}
+//only admin can view this page
+if ($_SESSION['permission']!= 1){
+	header('location: ../../login.html');
+}
+	
 	$room = $_REQUEST["q"];
 	require "db_conf.php";
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-
+	$room = $conn->real_escape_string($room);
 	$sql = "SELECT * FROM rooms WHERE roomid LIKE '$room%'";
 	$result = $conn->query($sql);
 	

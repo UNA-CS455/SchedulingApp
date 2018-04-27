@@ -1,7 +1,16 @@
 <?php session_start();
-if(isset($_SESSION['username'])){
-	$user= $_SESSION['username'];
+
+
+if (!isset($_SESSION['username'])){
+	header('location: ../../login.html');
 }
+//only admin can view this page
+if ($_SESSION['permission']!= 1){
+	header('location: ../../login.html');
+}
+
+	$user= $_SESSION['username'];
+
 	/*=========================================================================
 		Update Blacklisted Rooms PHP Script
 		Purpose: Given three POST variables:
