@@ -94,7 +94,7 @@ function processReservation()
 	require_once 'ValidateReservation.php'; // gain access to validation functions
 
 	if(checkValidTime_overload($starthour . ":" . $startminute, $endhour . ":" . $endminute, $date, $roomnumber)){
-		if($occur === "Once" || $occur == null){
+		if($occur === "Once" || $occur === "null"){
 			//connect to database
 			$conn = new mysqli($servername, $username, $password, $dbname);
 
