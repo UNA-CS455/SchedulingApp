@@ -67,7 +67,7 @@ if(isset($_SESSION['username'])){
 	
 	//$permissions_SQL = "SELECT rooms.roomid, rooms.seats FROM `rooms` LEFT JOIN `users` ON users.permissions = rooms.blacklist WHERE users.email = '$user'";
 	$permissions_SQL = "SELECT rooms.roomid, rooms.seats, rooms.numeric_id FROM `blacklist` LEFT JOIN `rooms` ON blacklist.numeric_room_id = rooms.numeric_id WHERE blacklist.group_id = '$groupid'";
-
+	//echo $permissions_SQL;
 	$permissionsRes = $conn->query($permissions_SQL);
 	//place in array
 	$room_BlacklistArray = array();

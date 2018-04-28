@@ -76,13 +76,12 @@ if ($_SESSION['permission']!= 1){
 			<h1 id='groupheader'></h1>
 		    <div id="roomContainer"> 
 			<!--
-				This is the leftmost area of the page. Content is updated upon page load with the function fieldChanged().
-				This area serves as the room selector.
-			-->
+				The rooms are populated here along with their blacklist status via the javascript function populateBlacklistRooms() which is fired onload in the body tag above.
+			
 			<span id="allroomsheader"></span>	
-			<div id="bookArea"></div>
+			<div id="bookArea"></div>-->
         </div>
-
+		<span id='deleteGroupButtonArea'></span>
 	</div>
 </body>
 </html>

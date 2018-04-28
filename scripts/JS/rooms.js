@@ -809,15 +809,23 @@ function findDay(dayNum){
 	Date: 4/27/2018
 */
 function populateBlacklistRooms(groupChosen){
+	console.error(groupChosen);
 	var e = document.getElementById('roomContainer');
 	var header = document.getElementById('groupheader');
+	var deletearea = document.getElementById('deleteGroupButtonArea');
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			e.innerHTML = this.responseText;
 			var name = document.getElementById(groupChosen);
-			if(name !=null)
-				header.innerHTML = "Allowed Rooms For Group " + name.innerHTML + "";
+
+			if(name !=null){
+				header.innerHTML = "Allowed Rooms For Group '" + name.innerHTML + "'";
+				
+
+				deletearea.innerHTML = "<button onclick='openConfirmDeleteGroup("+groupChosen+")'>Delete This Group</button>";
+			}
+
 		}
 	};
 	xhttp.open("GET", "retrieveBlacklistRooms.php?groupID=" + groupChosen);
@@ -826,6 +834,47 @@ function populateBlacklistRooms(groupChosen){
 
 }
 
+function addNewGroup(newGroupName) {
+	if(newGroupName == null)
+		newGroupName = document.getElementById('groupnameinput').value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var content = this.responseText;
+            showMessageBoxOK(content, "Add Group", true);
+			populateGroupList();
+        }
+    };
+    xhttp.open("POST", "addGroup.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("groupName=" + newGroupName);
+}
+
+function removeGroup(groupID) {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var content = this.responseText;
+            showMessageBoxOK(content, "Remove Group", true);
+			populateGroupList();
+			populateBlacklistRooms(groupID);
+        }
+    };
+    xhttp.open("POST", "removeGroup.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("groupID=" + groupID);
+}
+
+
+function openConfirmDeleteGroup(groupChosen){
+	var deleteBoxContent = "Are you sure you want to delete " +  document.getElementById(groupChosen).innerHTML+ "?";
+	var buttonContent = "<button onclick='removeGroup(" + groupChosen +")'> Yes</button><button onclick='closeModal()'>No</button>"
+	showMessageBox(deleteBoxContent,'Delete',buttonContent, true);
+	
+	
+}
 /*
 	Obtains all groups listed in the database and places them in the groups area div
 	on groupSettings.php.
@@ -1003,19 +1052,4 @@ function editClicked(ele) {
     xhttp.send("id=" + id);
 }
 
-function addNewGroup(newGroupName) {
-	if(newGroupName == null)
-		newGroupName = document.getElementById('groupnameinput').value;
-	console.error(newGroupName);
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var content = this.responseText;
-            showMessageBoxOK(content, "Add Group", true);
-			populateGroupList();
-        }
-    };
-    xhttp.open("POST", "addGroup.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("groupName=" + newGroupName);
-}
+

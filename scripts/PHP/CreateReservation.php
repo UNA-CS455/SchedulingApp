@@ -87,7 +87,6 @@ function processReservation()
 	$comment = trim($comment);
 	$comment = filter_var($comment, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z''-'\s]{1,250}$/")));
 	$comment = str_replace("'","\'", $comment);
-	// TODO: strip " character
 
 
 	//We must validate the times and constraints given 

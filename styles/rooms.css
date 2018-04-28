@@ -22,17 +22,19 @@ b{
 /*for blacklisting, used on the group settings page. */
 
 .groupsFrame{
-	width: 25%;
+    width: 30%;
     top: 7.5%;
-	min-height:20%;
-	max-height:45%;
+    min-height: 20%;
+    max-height: 35%;
     background-color: white;
     overflow-y: scroll;
+    overflow-x: unset;
     border: solid;
     border-color: silver;
-	display:flex;
-	flex-wrap: wrap;
-	flex-direction: column;
+    display: grid;
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+    /* overflow-wrap: unset; */
 }
 
 

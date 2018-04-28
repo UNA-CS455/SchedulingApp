@@ -9,10 +9,14 @@ if (!isset($_SESSION['username'])){
 
 $groupName = (isset($_POST['groupName'])) ? $_POST['groupName'] : null; 
 
-	$groupName = trim($groupName);
-	$groupName = filter_var($groupName, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z''-'\s]{1,50}$/")));
-	$groupName = str_replace("'","\'", $groupName);
+$groupName = trim($groupName);
+$groupName = filter_var($groupName,FILTER_SANITIZE_SPECIAL_CHARS);
+//$groupName = str_replace("'","\'", $groupName);
 
+if(strlen($groupName)<1){
+	echo "Not enough characters in the group name field.";
+	exit;
+}
 require "db_conf.php"; // set servername,username,password,and dbname
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -30,7 +34,12 @@ $check = $stmt->execute();
 
 
 if (!$check) {
-	echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+	if($stmt->errno == 1062){ // name is a unique field in the database, so this error exists	
+								// when the user attempts to make another group.
+		echo "Can't create a group with the name '$groupName' as it already exists.";
+	}
+	else
+		echo $stmt->errno ." : ". $stmt->error;
 }
 else{
 	echo "Group '$groupName' created successfully.";
