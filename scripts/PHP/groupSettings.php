@@ -16,7 +16,7 @@ if ($_SESSION['permission']!= 1){
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico" />
  <link rel="stylesheet" href="../../styles/rooms.css">
- 
+  <link rel="stylesheet" href="../../styles/popup.css">
 	
 
 
@@ -26,7 +26,8 @@ if ($_SESSION['permission']!= 1){
 		<div id="shader" onclick="shaderClicked()"></div>
 	<script src="../JS/popup.js"></script>
     <script src="../JS/rooms.js"></script>
-		
+	
+	<?php include '../../modal.php'; ?>
 	<div id="banner">
 	
         <img src="../../images/una.png" id="logo" onclick="window.location.href = '../../'">
@@ -72,7 +73,7 @@ if ($_SESSION['permission']!= 1){
 		<div class='groupsFrame' id='groupsArea'>
 
 		</div>
-			<h2 id='groupheader'></h2>
+			<h1 id='groupheader'></h1>
 		    <div id="roomContainer"> 
 			<!--
 				This is the leftmost area of the page. Content is updated upon page load with the function fieldChanged().

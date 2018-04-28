@@ -7,8 +7,11 @@ if (!isset($_SESSION['username'])){
 		$_SESSION['username'] = "admin@una.edu";
 }
 
-$groupName = (isset($_GET['groupName'])) ? $_GET['groupName'] : null; 
-//TODO clean above boi
+$groupName = (isset($_POST['groupName'])) ? $_POST['groupName'] : null; 
+
+	$groupName = trim($groupName);
+	$groupName = filter_var($groupName, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z''-'\s]{1,50}$/")));
+	$groupName = str_replace("'","\'", $groupName);
 
 require "db_conf.php"; // set servername,username,password,and dbname
 

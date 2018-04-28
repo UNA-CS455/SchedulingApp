@@ -702,9 +702,8 @@ function showDayViewModal(date, room, showQuickBook){
  	var xhttp = new XMLHttpRequest();
  	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			//document.getElementById("").innerHTML = this.responseText;
-			console.error(this.responseText);
-			showMessageBox(this.responseText,"Day View - " + roomSelected + " for " + date,quickBook, true);
+			if(roomSelected!= null)
+				showMessageBox(this.responseText,"Day View - " + roomSelected + " for " + date,quickBook, true);
 		}
 	};
 	xhttp.open("GET", "scripts/PHP/dayView.php?date=" + date + "&room=" + room, true);
@@ -818,7 +817,7 @@ function populateBlacklistRooms(groupChosen){
 			e.innerHTML = this.responseText;
 			var name = document.getElementById(groupChosen);
 			if(name !=null)
-				header.innerHTML = "Select rooms to blacklist for group " + name.innerHTML + "";
+				header.innerHTML = "Allowed Rooms For Group " + name.innerHTML + "";
 		}
 	};
 	xhttp.open("GET", "retrieveBlacklistRooms.php?groupID=" + groupChosen);
@@ -850,11 +849,11 @@ function populateGroupList(){
 }
 
 function updateBlacklist(groupid, roomid, bool_addToBlacklist){
-	console.error(roomid);
+
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			console.error(this.responseText);
+		
 			populateBlacklistRooms(groupid);
 		}
 	};
@@ -873,12 +872,12 @@ function updateBlacklist(groupid, roomid, bool_addToBlacklist){
 
  
  function openTooltip(id,row){
-	console.log('yes');
+
  	var xmlhttp = new XMLHttpRequest();
  	xmlhttp.onreadystatechange = function() {
  		if (this.readyState == 4 && this.status == 200) {
 
-			console.error(this.responseText);
+			//console.error(this.responseText);
 			var reservation = JSON.parse(this.responseText);
 			var runString = "<h2 style='text-align:left; margin-top: 3%; margin-bottom: 0%;' >Details</h2><hr>";
 				runString += "<p style='text-align:left'>Starttime:" + reservation[0].starttime + reservation[0].start;
@@ -1002,4 +1001,21 @@ function editClicked(ele) {
     xhttp.open("POST", "scripts/PHP/editClicked.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("id=" + id);
+}
+
+function addNewGroup(newGroupName) {
+	if(newGroupName == null)
+		newGroupName = document.getElementById('groupnameinput').value;
+	console.error(newGroupName);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var content = this.responseText;
+            showMessageBoxOK(content, "Add Group", true);
+			populateGroupList();
+        }
+    };
+    xhttp.open("POST", "addGroup.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("groupName=" + newGroupName);
 }

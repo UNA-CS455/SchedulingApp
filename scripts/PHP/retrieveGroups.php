@@ -46,7 +46,9 @@ if ($_SESSION['permission']!= 1){
 		
 	}
 	//TODO: add modal popup for new group creation.
-	echo "<button style='width:100%; height:40px; position:relative;' id = 'createNewGroupButton' onclick=''> Create New Group </button>";
+	$contentformodal="<p>Group Name:</p><input type=\'text\' id=\'groupnameinput\'><br><button onclick=\'addNewGroup(newGroupName)\'></button>";
+	//alert('test');showMessageBoxOK($contentformodal,'Add New Group', true)
+	echo "<button style='width:100%; height:40px; position:relative;' id = 'createNewGroupButton' onclick=\"showMessageBox('<form><p>Group Name:</p><input type=\'text\' id=\'groupnameinput\' required><br>','Add New Group', '<button onclick=\'addNewGroup()\'>Create</button></form>',true);\"> Create New Group </button>";
 	
 $conn->close();
 
