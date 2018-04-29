@@ -440,7 +440,23 @@ the document element by id with a call to getResFormData.
 			sendAnEmail = true;
 		}
 	}
-	
+	if(occur != null && occur != "Once"){
+		//showMessageBox(message,header,buttonhtml, allowClickOutsideClose);
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				//document.getElementById('responseText').innerHTML = this.responseText;
+				showMessageBox(this.responseText,'Bulk Reserve',"", true);
+				
+			}else{
+				showMessageBoxOK("There was a problem validating your bulk reservation.",'Bulk Reserve', true);
+			}
+		};
+		xhttp.open("POST", "scripts/PHP/RecurseResPopup.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("roomnumber=" + roomSelected + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur);
+		return;
+	}
 
 
 	if (email == ""){
@@ -623,43 +639,6 @@ function logoutUser(){
 
 
 
-
-
-/*
-Function to be called when the make reservation button has been clicked. Opens a confirmation dialog to
-ask the user to confirm their reservation details.
-Author: Derek Brown
-Date: 4/2/2018
-
-
-function openConfirmCreate(){
-	if (roomSelected == null){
-		document.getElementById('responseText').style.color = "red";
-		document.getElementById('responseText').innerHTML = "Select a room to the left and ensure all fields are complete.";
-		return;
-	}
-	
-	var details = "";
-	var xhttp = new XMLHttpRequest();
-	console.error("here");
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			
-			details = this.responseText;
-				buttonhtml =  "<button class='modal-button' onclick='closeModal(); createClicked();'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
-				showMessageBox("Are you sure you want to reserve " + roomSelected + "?<br>" + details ,"Confirm",buttonhtml, false);
-		}
-		console.error(this);
-	};
-	
-	xhttp.open("GET", "scripts/PHP/Confirmation.php?resEmail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&timeStart=" + startHour + ":" + startMin + "&date=" + date + "&timeEnd=" + endHour + ":" + endMin + "&occur=" + occur + "&comment=" + comment);
-	xhttp.send();
-
-	
-}
-
-*/
-
 /*
 Function to clear input fields under the Make Reservation section.
 Author: Derek Brown
@@ -724,8 +703,6 @@ the document element by id with a call to getResFormData.
 Author: Derek Brown
 Date: 4/2/2018 
 */
-
-
 function openConfirmCreate(data){
 	var response = document.getElementById('responseText');
 	if (roomSelected == null && response != null){
@@ -809,7 +786,7 @@ function findDay(dayNum){
 	Date: 4/27/2018
 */
 function populateBlacklistRooms(groupChosen){
-	console.error(groupChosen);
+
 	var e = document.getElementById('roomContainer');
 	var header = document.getElementById('groupheader');
 	var deletearea = document.getElementById('deleteGroupButtonArea');
@@ -819,11 +796,14 @@ function populateBlacklistRooms(groupChosen){
 			e.innerHTML = this.responseText;
 			var name = document.getElementById(groupChosen);
 
-			if(name !=null){
+			if(name !=null && groupChosen != null){
 				header.innerHTML = "Allowed Rooms For Group '" + name.innerHTML + "'";
 				
 
-				deletearea.innerHTML = "<button onclick='openConfirmDeleteGroup("+groupChosen+")'>Delete This Group</button>";
+				deletearea.innerHTML = "<br><button onclick='openConfirmDeleteGroup("+groupChosen+")'>Delete This Group</button>";
+			} else{
+				header.innerHTML = "";
+				deletearea.innerHTML = "";
 			}
 
 		}
@@ -834,6 +814,11 @@ function populateBlacklistRooms(groupChosen){
 
 }
 
+/*
+	Adds a new group with a given mnemonic name.
+	Author: Derek Brown
+	Date: 4/27/2018
+*/
 function addNewGroup(newGroupName) {
 	if(newGroupName == null)
 		newGroupName = document.getElementById('groupnameinput').value;
@@ -851,6 +836,11 @@ function addNewGroup(newGroupName) {
     xhttp.send("groupName=" + newGroupName);
 }
 
+/*
+	Removes a group with the given groupID.
+	Author: Derek Brown
+	Date: 4/27/2018
+*/
 function removeGroup(groupID) {
 
     var xhttp = new XMLHttpRequest();
@@ -859,7 +849,8 @@ function removeGroup(groupID) {
             var content = this.responseText;
             showMessageBoxOK(content, "Remove Group", true);
 			populateGroupList();
-			populateBlacklistRooms(groupID);
+			if(groupID != 2 && groupID !=1) // if the user attempted to delete admin or user:
+				populateBlacklistRooms(null);
         }
     };
     xhttp.open("POST", "removeGroup.php", true);
@@ -932,11 +923,10 @@ function updateBlacklist(groupid, roomid, bool_addToBlacklist){
 				runString += "<p style='text-align:left'>Starttime:" + reservation[0].starttime + reservation[0].start;
 				runString += "<br>Endtime:" + reservation[0].endtime + reservation[0].end;
 				runString += "<br>Owner: " + reservation[0].res_email;
-				runString += "<br>Comments:" + reservation[0].comment;
+				runString += "<br>Comments:<br><textarea style='width:100%; max-height:70px; overflow-y:scroll; resize: none;' readonly>" + reservation[0].comment + "</textarea>";
 				runString += (reservation[0].allowshare == 1) ? "<br>Note: This room is available for sharing timeslots. Current headcount is " + reservation[0].headcount + "</p>" : "</p>";
 				
-
-			document.getElementById('tooltipContent_'+id + ' '+row).innerHTML = runString;
+			showMessageBoxOK(runString,'Reservation Details',true);
 		}
 	};
 
@@ -1037,6 +1027,9 @@ function updateClicked() {
     xhttp.send("id=" + id + "&owneremail=" + email + "&roomnumber=" + roomnumber + "&startTime=" + startTime + "&startDate=" + startDate + "&endDate=" + endDate + "&endTime=" + endTime + "&allowshare=" + allowshare + "&headcount=" + headcount + "&comment=" + comment);
 }
 
+/*
+	Event handler for when 'Edit' is clicked on the 'My Reservations' popup.
+*/
 function editClicked(ele) {
     var id = String(ele.children[0].id);
     var xhttp = new XMLHttpRequest();
@@ -1052,4 +1045,47 @@ function editClicked(ele) {
     xhttp.send("id=" + id);
 }
 
+/*
+	Function that will perform a bulk reservation. Should be called only when the occur variable is set to something other than
+	'Just Once'.
+	Author: Derek Brown
+	Date: 4/29/2018
+*/
+function bulkReserve(){
 
+	data = getResFormData();
+	var email = data.email;
+	var date = data.date;
+	var sharing = data.sharing;
+	var startHour = data.startHour;
+	var startMin = data.startMin;
+	var endHour = data.endHour;
+	var endMin = data.endMin;
+ 	var numSeats = data.numSeats;
+ 	var comment = data.comment;
+ 	var occur = data.occur;
+	var sendAnEmail = false;
+	if (document.getElementById('confirmEmailCheck') != null){
+		var confirmEmail = document.getElementById("confirmEmailCheck");
+
+		if (confirmEmail.checked){
+			sendAnEmail = true;
+		}
+	}
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			//document.getElementById('responseText').innerHTML = this.responseText;
+			showMessageBoxOK(this.responseText,"Make Reservation", false);
+			updateCalendar();
+			clearFields();
+			
+		}
+ 	};
+ 	xhttp.open("POST", "scripts/PHP/CreateReservation.php", true);
+ 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("bulkConfirmed=1&roomnumber=" + roomSelected + "&owneremail=" + email + "&allowshare=" + sharing + "&numberOfSeats=" + numSeats + "&starthour=" + startHour + "&startminute=" + startMin + "&date=" + date + "&endhour=" + endHour + "&endminute=" + endMin + "&occur=" + occur + "&comment=" + comment + "&sendEmail=" + sendAnEmail);
+ 
+ 
+}

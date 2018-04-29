@@ -91,9 +91,9 @@ function processReservation()
 
 	//We must validate the times and constraints given 
 	require_once 'ValidateReservation.php'; // gain access to validation functions
-
-	if(checkValidTime_overload($starthour . ":" . $startminute, $endhour . ":" . $endminute, $date, $roomnumber)){
-		if($occur === "Once" || $occur === "null"){
+	if($occur === "Once" || $occur === "null"){
+		if(checkValidTime_overload($starthour . ":" . $startminute, $endhour . ":" . $endminute, $date, $roomnumber)){
+		
 			//connect to database
 			$conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -125,18 +125,22 @@ function processReservation()
 				echo "Reservation made successfully";
 			}
 
-			
-		} else {
-			//if reservation is weekly
-			if ($occur === "Weekly"){
-				//Date is incremented by 1 week each iteration
-				$interval = new DateInterval('P1W');
-			} else {
-				//Date is incremented by 4 weeks each iteration
-				$interval = new DateInterval('P4W');
+		} else{
+			echo "Error making reservation. Your time selected is likely no longer available.";
+		}
+	} else {
+		if(isset($_POST['bulkConfirmed']) && $_POST['bulkConfirmed'] == 1){
+			switch($occur){
+				case "Weekly":
+					$interval = new DateInterval('P1W');
+					break;
+				case "Monthly":
+					$interval = new DateInterval('P1M');
+					break;
 			}
-
-			//connect to database
+			
+			
+				//connect to database
 			$conn = new mysqli($servername, $username, $password, $dbname);
 
 			//if connection to database fails, die
@@ -150,35 +154,35 @@ function processReservation()
 			$end = new DateTime(date('Y-m-d', strtotime($date . '+ 6 months')));
 			
 			$daterange = new DatePeriod($begin, $interval, $end);
-			
+			$startAssist = date('H:i', strtotime($starthour . ":" . $startminute));
+			$endAssist = date('H:i', strtotime($endhour . ":" . $endminute));
+			$badDateArray = checkReservationRecurring($startAssist,$endAssist, $begin, $end, $roomnumber, $interval, $numberOfSeats);
 			foreach ($daterange as $date) {
 				//format the date
 				$fDate = $date->format("Y-m-d"); 
-				
-				//if connection is success, insert data into database and echo to user result
-				//$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$date', '$date', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
-				$stmt = $conn->prepare("INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-				$startAssist = date('H:i', strtotime($starthour . ":" . $startminute));
-				$endAssist = date('H:i', strtotime($endhour . ":" . $endminute));
-				$stmt->bind_param("ssissssssss", $roomnumber, $owneremail, $allowshare, $numberOfSeats, $fDate, $fDate, $startAssist, $endAssist, $occur, $comment, $logged_in_user);
-				$check = $stmt->execute();
-				//$mResult = $stmt->get_result();
-				
-				if (!$check) {
-					echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-				}
-				else{
-					$success = TRUE;
+				if(!in_array($date,$badDateArray)){
+					//if connection is success, insert data into database and echo to user result
+					//$sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES ('$roomnumber', '$owneremail', '$allowshare', '$numberOfSeats', '$date', '$date', '$starthour:$startminute', '$endhour:$endminute', '$occur', '$comment', '$logged_in_user')";
+					$stmt = $conn->prepare("INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					$stmt->bind_param("ssissssssss", $roomnumber, $owneremail, $allowshare, $numberOfSeats, $fDate, $fDate, $startAssist, $endAssist, $occur, $comment, $logged_in_user);
+					$check = $stmt->execute();
+					//$mResult = $stmt->get_result();
+					
+					if (!$check) {
+						echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+					}
+					else{
+						$success = TRUE;
+					}
 				}
 			}
 			if ($success === TRUE){
-				echo "Reservations made successfully";
+				echo "Reservation(s) made successfully";
 				//include 'mail.php'; uncomment when on deployed version
 			}
 		}
 		$conn->close();
-	} else{
-		echo "Error making reservation.";
+			
 	}
 	
 	

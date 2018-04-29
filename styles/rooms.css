@@ -24,7 +24,7 @@ b{
 .groupsFrame{
     width: 30%;
     top: 7.5%;
-    min-height: 20%;
+
     max-height: 35%;
     background-color: white;
     overflow-y: scroll;

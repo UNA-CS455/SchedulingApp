@@ -14,52 +14,8 @@ $dayStart to $dayEnd on the date given in the GET request.
 Authors: Derek Brown, Matthew Foster
 March 2018
 **************************************************************************/
-	echo '<style>/* Tooltip container */
-			.tooltip {
-				position: relative;
-				display: inline-block;
-				height:100%;
-				width:99%;
-			}
 
-			/* Tooltip text */
-			.tooltip .tooltiptext {
-				visibility: hidden;
-				width: 100%;
-				background-color: #555;
-				color: #fff;
-				text-align: center;
 
-				/* Position the tooltip text */
-				position: absolute;
-				z-index: 100;
-				bottom: 125%;
-				left: 50%;
-				margin-left: -60px;
-
-				/* Fade in tooltip */
-				opacity: 0;
-				transition: opacity 0.3s;
-			}
-
-			/* Tooltip arrow */
-			.tooltip .tooltiptext::after {
-				content: "";
-				position: absolute;
-				top: 100%;
-				left: 50%;
-				margin-left: -5px;
-				border-width: 5px;
-				border-style: solid;
-				border-color: #555 transparent transparent transparent;
-			}
-
-			/* Show the tooltip text when you mouse over the tooltip container */
-			.tooltip:hover .tooltiptext {
-				visibility: visible;
-				opacity: 1;
-			}
-			</style>';
     $date = $_GET['date'];
 	$selectedRoom = $_GET['room'];
 
@@ -165,24 +121,7 @@ March 2018
 						$i = count($resColumnArr)+1;
 						break;
 					}
-					/*
-					for($j = count($resColumnArr[$i])-1; $j >= 0; $j--){
-						echo "Is $resCounter overlapping:" . $res[(int)$resCounter]['starthour']->format("H:i") . "<" . $res[$resColumnArr[$i][$j]]['endhour']->format("H:i"). "<br>";
-						if(!($res[(int)$resCounter]['starthour'] < $res[$resColumnArr[$i][$j]]['endhour'])){
-							echo "No overlap for $resCounter in column $i, placing... <br>";
-							//the current reservation we are looking at to place is not overlapping with the one in this column, so place it in this column
-							
-							$isOverlapping = false;
-							$columnToPlaceIn = $i;
-							$i = count($resColumnArr)+1;
-							break;
-						}
 
-						echo "Yes. Trying next column. <br>";
-
-						break;
-					}
-					*/
 				}
 				if($isOverlapping){
 					// all columns are full, so add a new column in the table
@@ -242,7 +181,7 @@ March 2018
 					$resIDForToolTip = $res[$table[$col][$row->format('H:i')]]['id'];
 					$newColor = $res[$table[$col][$row->format('H:i')]]['color'];
 					$rowID = $row->format('H:i');
-					echo " bgcolor ='$newColor' onmouseover='openTooltip($resIDForToolTip,$rowID)'> <span style='visibility:hidden'>|</span><span id='tooltipContent_$resIDForToolTip $rowID' class='tooltiptext'></span>";
+					echo " bgcolor ='$newColor' onclick=\"openTooltip($resIDForToolTip,'$rowID','$date','$selectedRoom',true)\">"; //<span style='visibility:hidden'>|</span><span id='tooltipContent_$resIDForToolTip $rowID' class='tooltiptext'></span>";
 					if($table[$col][$row->format('H:i')] == $labelID[$labelMaintainCount]){
 						
 						$labelMaintainCount++;

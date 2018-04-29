@@ -1,4 +1,7 @@
 <?php
+//POST
+
+
 
 //to do: fix the functions below so they use these instead of having to locally define them
 $dayStart = DateTime::createFromFormat('H:i', '7:00');
@@ -124,12 +127,12 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room) {
 // Overload
 //This function checks the database for reservations that are made or
 //updated to the system that conflict with another reservation already
-//made and doesnt allow roomsharing. It will also be used to give the 
+//made and doesn't allow roomsharing. It will also be used to give the 
 //user a visual representation of the rooms that are allowing sharing
 //and the rooms who do not on the Agenda screen (red and green highlight)
 //****************************************************************************
 function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $date, $room) {
-    //error message diplayed when false
+    //error message displayed when false
     $errMsg = "Given times overlap with another reservation made by a user who opted not to share the room.";
     //default set to false
     $returnVal = FALSE;
@@ -351,6 +354,28 @@ function checkReservation($starttime, $endtime, $date, $room, $id) {
 
     //Return the boolean value
     return $returnVal;
+}
+
+
+//****************************************************************************
+// Checks a recurring reservation request. Given a duration start to end, and 
+// a room, this function will return any reservation that collides with 
+// the particular time slot. A null value for headcount will assume sharing
+// is not allowed, else reservations will be checked against sharing parameters.
+// Interval is the recurring interval. 
+// Return: Array of dates(YYYY/MM/DD) that can't be booked.
+// Author: Derek Brown
+// Date: 4/28/2018
+//****************************************************************************
+function checkReservationRecurring($starttime,$endtime, $dateStart, $dateEnd, $room, $interval, $headcount){
+	$dateArray = array();
+	for($i = clone $dateStart; $i < $dateEnd; $i->add($interval)){
+		if(!checkValidTime_overload_noerr($starttime, $endtime, $i->format('Y-m-d'), $room) || (($headcount != null) && (!checkEnoughSeats(false, $starttime, $endtime, $i->format('Y-m-d'), $room, $headcount)))){
+			
+			$dateArray[] = clone $i;
+		}
+	}
+	return $dateArray;
 }
 
 ?>

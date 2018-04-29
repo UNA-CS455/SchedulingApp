@@ -44,6 +44,7 @@
 			
 			
             <img src="images/una.png" id="logo" onclick="window.location.href = ''">
+
 			<button id="makeResButton" onclick="showCreateResForm();">Make Reservation</button>
 			<button id="monthViewButton" onclick="showCalendarView();">Month View</button>
             <button onclick="dropdownRes();"id="myResButton">My Reservations</button>
