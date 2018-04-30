@@ -670,6 +670,7 @@ button.settingsButton{
     height: 6%;
     top: 1%;
     right: 1%;
+    z-index: 2;
     position: absolute;
 }
 

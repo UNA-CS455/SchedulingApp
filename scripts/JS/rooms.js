@@ -8,6 +8,23 @@ var roomSelected = null;
 selectRoom(null);
 var view = "res"; // or "cal" for calendar view.
 
+
+if (!String.prototype.includes) {
+  String.prototype.includes = function(search, start) {
+    'use strict';
+    if (typeof start !== 'number') {
+      start = 0;
+    }
+    
+    if (start + search.length > this.length) {
+      return false;
+    } else {
+      return this.indexOf(search, start) !== -1;
+    }
+  };
+}
+
+
 /*
 * Code added to ensure that the url always "appears" as directory/ for the index
 * but no effect is ever taken.  This is done so the interaction, redirection, and navigation
@@ -38,6 +55,8 @@ function changeSheet(){
 
 	}
 }
+
+
 
 /*
 Function that will update the room currently selected. Updates include changing the coloration of the 
