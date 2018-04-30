@@ -55,6 +55,7 @@ if(isset($_SESSION['username'])){
 	//VALIDATION
 	//////////////////////////////////////////////////////////////////////////
 
+	/*
 	//echo "starttime is $starttime and endtime is $endtime";
 	if ($starttime != null){
 		$starttime = filter_var($starttime, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^'[0-9]{1,2}:[0-9]{1,2}'$/")));
@@ -84,6 +85,11 @@ if(isset($_SESSION['username'])){
 
 	}
 	
+	if (!$headcount){
+		$headcount = 250;
+	}
+*/
+	
 
 	//obtain datbase metadata
     require "db_conf.php";
@@ -110,39 +116,10 @@ if(isset($_SESSION['username'])){
 				exit;
 			}
 
-			if($headcount == null){
-				$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
-					WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
-					AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
-			} else {
-				// if a headcount has been provided, then sharing is allowed. special conditions must be considered:
-				/*
-					1. if there exist a collision with another reservation, then we must check if that colliding reservation has its allow sharing bit set to 1.
-						if this is true, then we won't consider it a conflict. We must check the headcount of this reservation and any other conflicting reservation
-						and sum their headcount field. We then compare this to the room number of seats. If this sum is greater than the number of seats available in a room,
-						then the headcount is too large, and the reservation cannot be made for this particular room.
-					2. if the allow sharing bit is set to 0, then we know that we must treat that room as unavailable as we did above.
-				
-				
-				*/
-				
-				$sql = $sql . "SELECT t1.roomid, t1.seats, t1.type FROM (";
-				$additional = $additional . "LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, reservations.allowshare, roomid, rooms.seats,
-				rooms.type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber WHERE allowshare = 0 AND startdate = $date AND 
-				(($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime))) AS subquery ON rooms.roomid = 
-				subquery.roomid WHERE (subquery.roomid IS NULL)) AS t1
+			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
+				WHERE allowshare = '0' AND startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
+				AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
 
-				INNER JOIN
-
-				(SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms LEFT JOIN (SELECT SUM(reservations.headcount) AS roomSUM, 
-				reservations.allowshare, roomid, rooms.seats, rooms.type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
-				WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime))) AS 
-				subquery ON rooms.roomid = subquery.roomid WHERE (subquery.roomid IS NULL) OR ((subquery.roomSUM + $headcount) <= rooms.seats)) AS rooms
-
-				USING(roomid) WHERE $headcount <= rooms.seats AND ";
-				
-				
-			}
 		} else {
 			
 			
@@ -167,10 +144,11 @@ if(isset($_SESSION['username'])){
 		$additional = $additional . '1'; // we are done appending on clauses. All previous statements before this and with 'AND', so we terminate with '1'.
 	}
 
+	
 	$sql = $sql . "SELECT DISTINCT rooms.roomid, rooms.seats, rooms.type FROM rooms "; // the final table columns that we want.
 	$sql = $sql . $additional ;					// construction of the full query along with ordering
 	//echo $sql; // used for testing purposes 
-	
+	//echo "<p>$sql</p>";
     $result = $conn->query($sql); // run the query
 
 	//get all rooms first
@@ -183,6 +161,18 @@ if(isset($_SESSION['username'])){
 			"type" => $rowItem['type']
 		);
 		$room_array[] = $rowResult; // append row to result.
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+	// Check allow sharing
+	///////////////////////////////////////////////////////////////////////////
+	if($headcount != null && $starttime != null &&  $endtime != null){
+		for($i = 0; $i < count($room_array); $i++){
+
+			if(!checkEnoughSeats(false,  substr($starttime,1,count($starttime)-2), substr($endtime,1,count($endtime)-2),  substr($date,1,count($date)-2), $room_array[$i]['roomid'], $headcount)){	
+				array_splice($room_array, $i, 1);
+			}
+		}
 	}
 
 
@@ -266,72 +256,4 @@ if(isset($_SESSION['username'])){
 $conn->close();
 
 
-/*
-//*************************************************************************************
-//This function checks a number of requirements on a new reservation being made.
-//If the reservation being made is before or after the start day and end day time
-//it returns FALSE and the correct error message to the user. If the reservation 
-//made is not on a fifteen minute interval, then it returns FALSE and the correct 
-//message is displayed to the user. If the reservation start time occurs after the
-//end time then return FALSE and display correct message to the user. If the reser-
-//vation being made is good, the correct message is displayed and returnsVal = TRUE.
-//************************************************************************************
-function checkDateTime($outputError, $startToCheck, $endToCheck)
-{
-	//msg variables to indicate the problem that occurred 
-	$returnVal = FALSE;
-
-	$dayStart = DateTime::createFromFormat('H:i', '7:00');
-	$dayEnd  = DateTime::createFromFormat('H:i', '23:00');
-	// use the dayStart and dayEnd times
-	$startToCheck = DateTime::createFromFormat('H:i', $startToCheck);
-	$endToCheck = DateTime::createFromFormat('H:i', $endToCheck);
-	$startDayErrMsg = "Your reservation cannot be made before 7 AM!";
-	$endDayErrMsg = "Your reservation cannot be made after 10 PM!";
-	//$minuteErrMsg = "Your reservation must be made on 15 minute increments!";
-	$startTimeErrMsg = "Your reservation start time is occurring after your end time!";
-
-	
-
-	//returns false if reservation made is before the valid start day time
-	if($startToCheck < $dayStart)
-	{
-		$retValue = FALSE;
-		if($outputError)
-		{
-			echo $startDayErrMsg;
-		}
-
-	}
-	//returns false if reservation made is after the valid end day time
-	else if($endToCheck > $dayEnd)
-	{
-		
-	//	echo $endToCheck->format('H:i') . " is greater than " . $dayEnd->format('H:i');
-		$retValue = FALSE;
-		if($outputError)
-		{
-			echo $endDayErrMsg;
-		}
-	}
-
-	//returns false if reservation made has a start time that is after the end time
-	else if($startToCheck > $endToCheck)
-	{
-		$retValue = FALSE;
-		if($outputError)
-		{
-			echo $startTimeErrMsg;
-		}
-	}
-	//returns true if reservation made has no conflicting reservations times already made
-	else
-	{
-		$retValue = TRUE;
-	}
-	
-	
-	return $retValue;
-}
-*/
 ?>
