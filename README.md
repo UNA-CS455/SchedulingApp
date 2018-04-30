@@ -18,9 +18,7 @@ Testing Setup
         -Go to: https:/127.0.0.1/PHPmyadmin
         -Paste SQL from cs455.sql and run
 
-6.	Repeat step 5 for cs55.sql
-
-7.	App should now be accessible at: http://localhost/SchedulingApp/
+6.	App should now be accessible at: http://localhost/SchedulingApp/
 
 -------------------------------------------------------------------------------
 NOTE: login will not work without LDAP file. 
