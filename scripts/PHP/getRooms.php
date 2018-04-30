@@ -62,7 +62,7 @@ if ($_SESSION['permission']!= 1){
 		}
 	    else{
 			echo "<table><tr><th>Reserving Email</th><th>Owner Email</th><th>Room Number</th><th>Sharing Allowed</th><th>Head Count</th>
-				<th>Start Date</th><th>End Date</th><th>Start Time</th><th>End Time</th><th>Occurrance</th></tr>";
+				<th>Start Date</th><th>End Date</th><th>Start Time</th><th>End Time</th><th>Occurrence</th></tr>";
 		
 			while ($row = $result->fetch_assoc()) {
 				echo "<tr><td>" . $row['res_email'] . "</td><td>" . $row['owneremail'] . "</td><td>" 
