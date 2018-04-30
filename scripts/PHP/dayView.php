@@ -181,7 +181,8 @@ March 2018
 					$resIDForToolTip = $res[$table[$col][$row->format('H:i')]]['id'];
 					$newColor = $res[$table[$col][$row->format('H:i')]]['color'];
 					$rowID = $row->format('H:i');
-					echo " bgcolor ='$newColor' onclick=\"openTooltip($resIDForToolTip,'$rowID','$date','$selectedRoom',true)\">"; //<span style='visibility:hidden'>|</span><span id='tooltipContent_$resIDForToolTip $rowID' class='tooltiptext'></span>";
+                                        $dayViewCell = "dayViewCell";
+					echo " id = '$dayViewCell' bgcolor ='$newColor' onclick=\"openTooltip($resIDForToolTip,'$rowID','$date','$selectedRoom',true)\">"; //<span style='visibility:hidden'>|</span><span id='tooltipContent_$resIDForToolTip $rowID' class='tooltiptext'></span>";
 					if($table[$col][$row->format('H:i')] == $labelID[$labelMaintainCount]){
 						
 						$labelMaintainCount++;

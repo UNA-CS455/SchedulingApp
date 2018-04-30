@@ -1036,8 +1036,14 @@ function updateClicked() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('responseText').style.color = "black";
-            document.getElementById('responseText').innerHTML = this.responseText;
+            if (this.responseText.includes('Update Successful')){
+                showMessageBoxOK(this.responseText, "Update Reservation", true);
+            }
+            else{
+                document.getElementById('responseText').style.color = "red";
+                document.getElementById("responseText").innerHTML = this.responseText;
+            }
+            
             getAgendaReservations();
         }
     };

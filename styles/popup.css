@@ -76,6 +76,10 @@ if more are needed */
     position: relative;
 }
 
+#dayViewCell:hover{
+    cursor: pointer;
+}
+
 /* The Close Button */
 .close {
     color: white;

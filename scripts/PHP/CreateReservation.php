@@ -85,9 +85,9 @@ function processReservation()
 	//comment variable
 	$comment = ($_POST['comment']);
 	$comment = trim($comment);
-	$comment = filter_var($comment, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z''-'\s]{1,250}$/")));
-	$comment = str_replace("'","\'", $comment);
-
+	//$comment = filter_var($comment, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z''-'\s]{1,250}$/")));
+	//$comment = str_replace("'","\'", $comment);
+        $comment = filter_var($comment, FILTER_SANITIZE_SPECIAL_CHARS);
 
 	//We must validate the times and constraints given 
 	require_once 'ValidateReservation.php'; // gain access to validation functions

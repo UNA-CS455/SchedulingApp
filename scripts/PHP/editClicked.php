@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
 
 $edithtml = "<?php?><html><head></head><body>"
         . "<div id='responseText'></div>"
-        . "ID: <span id='id'>$id</span><br><br>"
+        . "<span id='id' style='display:none'>$id</span>"
         . "Reserving Email: $owneremail<br><br>"
         . "Revervation for: <input type='text' id = 'owneremail' value='$res_email'><br><br>"
         . "<input type='date' id='date' value='$date'><br><br>"
@@ -59,7 +59,7 @@ $edithtml = "<?php?><html><head></head><body>"
         . "<select id='roomnumber'><option value='$roomnumber' hidden>$roomnumber</option>"
             . "$options</select><br><br>"
         . "Comments:"
-            . "<textarea rows='4' cols='25' id='comment'>$comment</textarea><br><br><br><br>"
+            . "<br><textarea rows='4' cols='25' id='comment'>$comment</textarea><br><br><br><br>"
         . "</body>"
         . "</html>";
 

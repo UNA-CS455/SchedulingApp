@@ -18,7 +18,9 @@ $comment = $_POST['comment'];
 $headcount = $_POST['headcount'];
 $allowshare = $_POST['allowshare'];
 
-var_dump($allowshare);
+$comment = trim($comment);
+$comment = filter_var($comment, FILTER_SANITIZE_SPECIAL_CHARS);
+
 
 
 $sql = "UPDATE reservations SET roomnumber='$roomnumber', startdate='$startdate', enddate='$enddate', starttime='$starttime', endtime='$endtime', comment='$comment', res_email='$email' WHERE id = '$id'";
@@ -40,7 +42,6 @@ if (checkValidUpdate(true, $starttime, $endtime, $startdate, $roomnumber, $id) &
         }
     } else {
         if (checkReservation($starttime, $endtime, $startdate, $roomnumber, $id)) {
-            var_dump(checkReservation($starttime, $endtime, $startdate, $roomnumber, $id));
             if ($conn->query($sql) === TRUE) {
                 echo "Update Successful";
             } else {
