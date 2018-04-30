@@ -9,7 +9,7 @@
 	echo "<tr><td>Group: </td>";
 	require_once('retrieveGroups_listview.php');
 	echo "<input type='hidden' name='currUser' value='$user'></br>";
-	echo "<tr><td><input type='submit' value='save changes'></td></tr>";
+	echo "<tr><td><input type='submit' value='Save Changes'></td></tr>";
 	echo "</form>";
 	echo "</table>";
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -24,7 +24,7 @@
 		echo "There are no current bookings for this user";
 	} else{
 		echo "<table><tr><th>Reserving Email</th><th>Owner Email</th><th>Room Number</th><th>Sharing Allowed</th><th>Head Count</th>
-			<th>Start Date</th><th>End Date</th><th>Start Time</th><th>End Time</th><th>Occurrance</th></tr>";
+			<th>Start Date</th><th>End Date</th><th>Start Time</th><th>End Time</th><th>Occurrence</th></tr>";
 		
 		while ($row = $result->fetch_assoc()) {
 			echo "<tr><td>" . $row['res_email'] . "</td><td>" . $row['owneremail'] . "</td><td>" 
