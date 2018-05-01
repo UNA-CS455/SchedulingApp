@@ -210,6 +210,7 @@ function checkValidTime_overload_noerr($newResStart, $newResEnd, $date, $room) {
     return checkDateTime(false, $newResStart, $newResEnd) && checkAllowSharing_overload(false, $newResStart, $newResEnd, $date, $room);
 }
 
+
 function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $room, $givenHeadcount) {
     //error message diplayed when false
     $errMsg = "There aren't enough seats left";
@@ -238,12 +239,14 @@ function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $
 				startdate = '$newResDate' AND roomnumber = '$room'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
+				OR(starttime < '$newResStart' AND endtime >= '$newResStart') 
+				OR (starttime = '$newResStart'))";
 
-    //echo $sql;
+    //echo $sql . "<br><br><br><br>";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-
+	if($row['seats_remaining'] !=null)
+		echo "Seats remaining in $room: " . $row['seats_remaining'];
     if ($result->num_rows == 0 || $row['seats_remaining'] == null) {
         // there are no overlapping reservations to begin with, so return true.
         $returnVal = TRUE;
