@@ -116,9 +116,15 @@ if(isset($_SESSION['username'])){
 				exit;
 			}
 
+			if($headcount == null){
+				$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
+					WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
+					AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
+			} else {
 			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
 				WHERE allowshare = '0' AND startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
 				AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
+			}
 
 		} else {
 			
@@ -169,8 +175,9 @@ if(isset($_SESSION['username'])){
 	if($headcount != null && $starttime != null &&  $endtime != null){
 		for($i = 0; $i < count($room_array); $i++){
 
-			if(!checkEnoughSeats(false,  substr($starttime,1,count($starttime)-2), substr($endtime,1,count($endtime)-2),  substr($date,1,count($date)-2), $room_array[$i]['roomid'], $headcount)){	
+			if(!checkEnoughSeats(false,  substr($starttime,1,strlen($starttime)-2), substr($endtime,1,strlen($endtime)-2),  substr($date,1,strlen($date)-2), $room_array[$i]['roomid'], $headcount)){	
 				array_splice($room_array, $i, 1);
+				$i--;
 			}
 		}
 	}
