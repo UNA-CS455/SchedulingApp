@@ -121,7 +121,7 @@ if(isset($_SESSION['username'])){
 					WHERE startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
 					AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
 			} else {
-			$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
+				$additional = $additional . "LEFT JOIN (SELECT DISTINCT roomid, seats, type FROM rooms RIGHT JOIN reservations ON rooms.roomid = reservations.roomnumber 
 				WHERE allowshare = '0' AND startdate = $date AND (($starttime >= starttime AND $starttime < endtime) OR ($starttime < starttime AND $endtime > starttime)))
 				AS subquery ON rooms.roomid = subquery.roomid WHERE subquery.roomid IS NULL AND ";
 			}
