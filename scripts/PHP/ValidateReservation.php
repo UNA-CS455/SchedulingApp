@@ -133,7 +133,7 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room) {
 //****************************************************************************
 function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $date, $room) {
     //error message displayed when false
-    $errMsg = "Given times overlap with another reservation made by a user who opted not to share the room.";
+    $errMsg = "Given times overlap with another reservation made by a user who opted not to share the room. false";
     //default set to false
     $returnVal = FALSE;
     //global $dayStart, $dayEnd; this doesn't work for some reason
@@ -156,9 +156,9 @@ function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $dat
     $sql = "SELECT * FROM reservations WHERE allowshare = '0' AND startdate = '$date' AND roomnumber = '$room'
 				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
 				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
-				OR(starttime < '$newResStart' AND endtime >= '$newResStart'))";
+				OR(starttime < '$newResStart' AND endtime > '$newResStart'))";
 
-
+	//echo $sql;
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -245,8 +245,7 @@ function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $
     //echo $sql . "<br><br><br><br>";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-	if($row['seats_remaining'] !=null)
-		echo "Seats remaining in $room: " . $row['seats_remaining'];
+
     if ($result->num_rows == 0 || $row['seats_remaining'] == null) {
         // there are no overlapping reservations to begin with, so return true.
         $returnVal = TRUE;
