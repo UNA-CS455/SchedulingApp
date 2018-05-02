@@ -154,7 +154,13 @@ function getAgendaReservations() {
  			}
  			runString += "</table>";
 			document.getElementById("agendaReservations").innerHTML = runString;
-			document.getElementById('agendaReservations').innerHTML = '<img onclick="shaderClicked()" src="images/x.png" id="closeAgendaButton"></img>';
+			if (window.location.href.includes('PHP')){
+				document.getElementById('agendaReservations').innerHTML = '<img onclick="shaderClicked()" src="../../images/x.png" id="closeAgendaButton"></img>';
+			}
+			else{
+				document.getElementById('agendaReservations').innerHTML = '<img onclick="shaderClicked()" src="images/x.png" id="closeAgendaButton"></img>';
+			}
+			
 			document.getElementById("agendaReservations").innerHTML += runString;
  		}
  	};
@@ -200,8 +206,13 @@ function deleteClicked(id, id2){
 
 		let temp = new Date();
 		
-
-		xmlhttp.open("POST", "scripts/PHP/room_remove.php", true);
+		if (window.location.href.includes('PHP')){
+			xmlhttp.open("POST", "../../scripts/PHP/room_remove.php", true);
+		}
+		else{
+			xmlhttp.open("POST", "scripts/PHP/room_remove.php", true);
+		}
+		
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp.send("id=" + id2);
 		//loadCalendar(); // reload the calendar to reflect new reservations.
@@ -1049,7 +1060,14 @@ function updateClicked() {
             getAgendaReservations();
         }
     };
-    xhttp.open("POST", "./scripts/PHP/updateReservation.php", true);
+
+	if (window.location.href.includes('PHP')){
+		xhttp.open("POST", "../../scripts/PHP/updateReservation.php", true);
+	}
+	else{
+		xhttp.open("POST", "scripts/PHP/updateReservation.php", true);
+	}
+    
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("id=" + id + "&owneremail=" + email + "&roomnumber=" + roomnumber + "&startTime=" + startTime + "&startDate=" + startDate + "&endDate=" + endDate + "&endTime=" + endTime + "&allowshare=" + allowshare + "&headcount=" + headcount + "&comment=" + comment);
 }
@@ -1067,7 +1085,14 @@ function editClicked(ele) {
             showMessageBox(editHtml, "Edit", buttonHtml, true);
         }
     };
-    xhttp.open("POST", "scripts/PHP/editClicked.php", true);
+	if (window.location.href.includes('PHP')){
+		xhttp.open("POST", "../../scripts/PHP/editClicked.php", true);
+	}
+	else{
+		xhttp.open("POST", "scripts/PHP/editClicked.php", true);
+	}
+
+    
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("id=" + id);
 }

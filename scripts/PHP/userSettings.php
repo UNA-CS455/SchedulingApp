@@ -14,6 +14,7 @@ if ($_SESSION['permission']!= 1){
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico" />
 <link rel="stylesheet" href="../../styles/rooms.css">
+<link rel="stylesheet" href="../../styles/popup.css">
 <script>
 /*
 Email search function
@@ -81,6 +82,8 @@ function setEmail(str){
 <title>Settings</title>
 </head>
 <body>
+<?php require '../../modal.php';
+?>
 <div id="shader" onclick="shaderClicked()"></div>
 	<script src="../JS/popup.js"></script>
     <script src="../JS/rooms.js"></script>

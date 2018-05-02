@@ -23,6 +23,8 @@ if ($_SESSION['permission']!= 1){
 <title>Settings</title>
 </head>
 <body onload='populateBlacklistRooms(null); populateGroupList();'>
+<?php require '../../modal.php';
+?>
 		<div id="shader" onclick="shaderClicked()"></div>
 	<script src="../JS/popup.js"></script>
     <script src="../JS/rooms.js"></script>

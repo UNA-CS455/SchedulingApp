@@ -9,6 +9,7 @@ Date: 4/2/2018
 echo "
 
 <!-- The Modal -->
+
 <div id='myModal' class='modal'>
 
   <!-- Modal content -->
