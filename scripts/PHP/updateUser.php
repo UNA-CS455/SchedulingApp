@@ -31,7 +31,7 @@
 				. $row['roomnumber'] . "</td><td>" . $row['allowshare'] . "</td><td>" . $row['headcount'] . "</td><td>"
 				. $row['startdate'] . "</td><td>" . $row['enddate'] . "</td><td>" . $row['starttime'] . "</td><td>"
 				. $row['endtime'] . "</td><td>" . $row['occur'] . "</td>";
-			echo "<td><form action=room_remove.php METHOD='POST'>";
+			echo "<td><form action=room_remove_user.php METHOD='POST'>";
 			echo "<input type='text' value='" . $row['id'] . "' name='id' hidden>";
 			echo "<input type='submit' value='Delete'>";
 			echo "</form></td></tr>";
