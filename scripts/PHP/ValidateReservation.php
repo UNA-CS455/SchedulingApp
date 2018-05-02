@@ -27,7 +27,7 @@ function checkDateTime($outputError, $startToCheck, $endToCheck) {
     $startToCheck = DateTime::createFromFormat('H:i', $startToCheck);
     $endToCheck = DateTime::createFromFormat('H:i', $endToCheck);
     $startDayErrMsg = "Your reservation cannot be made before 7 AM!";
-    $endDayErrMsg = "Your reservation cannot be made after 10 PM!";
+    $endDayErrMsg = "Your reservation cannot be made after 11 PM!";
     $minuteErrMsg = "Your reservation must be made on 15 minute increments!";
     $startTimeErrMsg = "Your reservation start time is occurring after your end time!";
 
@@ -133,7 +133,7 @@ function checkAllowSharing($outputError, $newResStart, $newResEnd, $room) {
 //****************************************************************************
 function checkAllowSharing_overload($outputError, $newResStart, $newResEnd, $date, $room) {
     //error message displayed when false
-    $errMsg = "Given times overlap with another reservation made by a user who opted not to share the room. false";
+    $errMsg = "Given times overlap with another reservation made by a user who opted not to share the room.";
     //default set to false
     $returnVal = FALSE;
     //global $dayStart, $dayEnd; this doesn't work for some reason
@@ -210,6 +210,45 @@ function checkValidTime_overload_noerr($newResStart, $newResEnd, $date, $room) {
     return checkDateTime(false, $newResStart, $newResEnd) && checkAllowSharing_overload(false, $newResStart, $newResEnd, $date, $room);
 }
 
+
+function checkAnyCollision($newResStart, $newResEnd, $date, $room){
+	$returnVal = true;
+	$newResStart = DateTime::createFromFormat('H:i', $newResStart);
+    $newResEnd = DateTime::createFromFormat('H:i', $newResEnd);
+    require "db_conf.php";
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    //Locates any collision
+
+    $newResStart = $newResStart->format('H:i');
+    $newResEnd = $newResEnd->format('H:i');
+    $sql = "SELECT * FROM reservations WHERE startdate = '$date' AND roomnumber = '$room'
+				AND((starttime > '$newResStart' AND endtime <= '$newResEnd')
+				OR(endtime >= '$newResEnd' AND starttime < '$newResEnd')
+				OR(starttime < '$newResStart' AND endtime > '$newResStart')) LIMIT 1";
+	
+	//echo $sql . "<br><br>";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $returnVal = TRUE; // collision
+
+    } else {
+        $returnVal = FALSE; // no collision
+    }
+
+    //close database connection
+    $conn->close();
+
+    //Return the boolean value
+    return $returnVal;
+
+}
 
 function checkEnoughSeats($outputError, $newResStart, $newResEnd, $newResDate, $room, $givenHeadcount) {
     //error message diplayed when false
@@ -372,7 +411,17 @@ function checkReservation($starttime, $endtime, $date, $room, $id) {
 function checkReservationRecurring($starttime,$endtime, $dateStart, $dateEnd, $room, $interval, $headcount){
 	$dateArray = array();
 	for($i = clone $dateStart; $i < $dateEnd; $i->add($interval)){
-		if(!checkValidTime_overload_noerr($starttime, $endtime, $i->format('Y-m-d'), $room) || (($headcount != null) && (!checkEnoughSeats(false, $starttime, $endtime, $i->format('Y-m-d'), $room, $headcount)))){
+		// first, we will check if numberOfSeats is set. If it was not, then they don't want to share, so we will just check for any
+		// colliding reservationns with checkAnyCollision (coming from ValidateReservation.php). This function returns true if there
+		// is any collision with a reservation at all. So we only allow the reservation to be made if this function returns false. We store
+		// this return value in $collisionCheck and check it in the if statement that follows.
+		$collisionCheck = false;
+		if($headcount == null || $headcount == false){
+			
+			$collisionCheck = checkAnyCollision($starttime, $endtime, $i->format('Y-m-d'), $room);
+		}
+
+		if($collisionCheck || !checkValidTime_overload_noerr($starttime, $endtime, $i->format('Y-m-d'), $room) || (($headcount != null) && (!checkEnoughSeats(false, $starttime, $endtime, $i->format('Y-m-d'), $room, $headcount)))){
 			
 			$dateArray[] = clone $i;
 		}

@@ -10,19 +10,16 @@ should be sent via POST.
 
 Spring 2018
 ******************************************************************************/
+/*
 	if (!isset($_SESSION['username'])){
 		//TODO redirect to login.
 			$_SESSION['username'] = "admin@una.edu";
 	}
-	//$_SESSION['logged_in_useremail']
-    //$roomnumber = $_POST['roomnumber'];
-/*	displayReservationForm();
+*/
 
-	if (isset($_POST['reserve'])) //if reserve clicked
-	{
-
-		processReservation();
-	}*/
+	if (!isset($_SESSION['username'])){
+		header('location: ../../login.html');
+	}
 
 	processReservation();
 
@@ -36,7 +33,7 @@ function processReservation()
 		
 	require "db_conf.php"; // set servername,username,password,and dbname
 
-	//roomnumber should come from index page....?????
+
 	$roomnumber = ($_POST['roomnumber']);
 
 	//email that owns the reservation
@@ -92,7 +89,18 @@ function processReservation()
 	//We must validate the times and constraints given 
 	require_once 'ValidateReservation.php'; // gain access to validation functions
 	if($occur === "Once" || $occur === "null"){
-		if(checkValidTime_overload($starthour . ":" . $startminute, $endhour . ":" . $endminute, $date, $roomnumber)){
+
+		// first, we will check if numberOfSeats is set. If it was not, then they don't want to share, so we will just check for any
+		// colliding reservationns with checkAnyCollision (coming from ValidateReservation.php). This function returns true if there
+		// is any collision with a reservation at all. So we only allow the reservation to be made if this function returns false. We store
+		// this return value in $collisionCheck and check it in the if statement that follows.
+		$collisionCheck = false;
+		if($numberOfSeats == null || $numberOfSeats == false){
+			$collisionCheck = checkAnyCollision($starthour . ":" . $startminute, $endhour . ":" . $endminute, $date, $roomnumber);
+		}
+
+
+		if(checkValidTime_overload($starthour . ":" . $startminute, $endhour . ":" . $endminute, $date, $roomnumber) && !$collisionCheck){
 		
 			//connect to database
 			$conn = new mysqli($servername, $username, $password, $dbname);
@@ -126,7 +134,7 @@ function processReservation()
 			}
 
 		} else{
-			echo "Error making reservation. Your time selected is likely no longer available.";
+			echo "That time slot is not available.";
 		}
 	} else {
 		if(isset($_POST['bulkConfirmed']) && $_POST['bulkConfirmed'] == 1){

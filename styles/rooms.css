@@ -75,6 +75,11 @@ b{
     height: 110px;
     width: 150px;
     cursor: pointer;
+
+}
+
+.blacklistedroombox > font {
+	color: white;
 }
 /************************************************************/
 .outerBookArea{

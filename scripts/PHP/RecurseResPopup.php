@@ -67,7 +67,7 @@
 		echo "These reservations will not be made due to conflicts with other reservations. Would you still like to reserve the available days?<br>";
 		echo "<button onclick='bulkReserve($badRes)'>Yes</button> <button onclick='closeModal()'>No</button>";
 	} else{
-		echo "This reservation will be made $occur. You have no conflicts! Please confirm your reservation(s) below to reserve $roomnumber starting " . $begin->format('Y-m-d') ." through " .$end->format('Y-m-d') ." $occur.";
+		echo "This reservation will be made $occur. You have no conflicts!<br> Please confirm your reservation(s) below to reserve $roomnumber starting<br> " . $begin->format('Y-m-d') ." through " .$end->format('Y-m-d') ." $occur.<br><br>";
 		echo "<button onclick='bulkReserve()'>Confirm</button> <button onclick='closeModal()'>Cancel</button>";
 	}
 ?>

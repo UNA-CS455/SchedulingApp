@@ -465,9 +465,11 @@ the document element by id with a call to getResFormData.
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				//document.getElementById('responseText').innerHTML = this.responseText;
+				console.error(this.responseText);
 				showMessageBox(this.responseText,'Bulk Reserve',"", true);
 				
-			}else{
+			} else{
+				console.error("in else" + this.responseText);
 				showMessageBoxOK("There was a problem validating your bulk reservation.",'Bulk Reserve', true);
 			}
 		};
