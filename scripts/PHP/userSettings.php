@@ -111,7 +111,7 @@ if ($_SESSION['permission']!= 1){
     <div class="jumbotron">
         <img src="../../images/una.png" id="logo" onclick="window.location.href = ''">
     </div>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#"></a>
