@@ -9,16 +9,16 @@
 }
 
 .makeReservation {
-	/*
+    /*
     position: absolute;
     top: 15%;
     right: 0;
     width: 50%;
     height: 85%;
     z-index: 55;
-	*/
-	position: absolute;
-    top: 15%;
+  */
+    position: absolute;
+    top: 20.5%;
     right: 0px;
     left: 54%;
     width: 50%;
@@ -29,22 +29,22 @@
 
 
 
-.test{
+.test {
     margin-left: 2%;
     height: 100%;
     top: 0%;
     overflow-y: scroll;
 }
 
-#roominsert font{
-	font-size: 1.25vmin;
+#roominsert font {
+    font-size: 1.25vmin;
 }
 
-#roomInsert font b{
-	font-size: 1.5vmin;
+#roomInsert font b {
+    font-size: 1.5vmin;
 }
 
-.calendar{
+.calendar {
     border-right: 3px solid #DDDDDD;
     border-collapse: collapse;
     text-align: center;
@@ -58,72 +58,72 @@
     z-index: 55;
 }
 
-.test h1{
-	position: relative;
-	font-size: 22;
+.test h1 {
+    position: relative;
+    font-size: 22;
 }
 
-.test input{
-position: relative;
+.test input {
+    position: relative;
 }
 
-.test p{
-	position: relative;
+.test p {
+    position: relative;
 }
 
-.test select{
-position: relative;
+.test select {
+    position: relative;
 }
 
-.test span{
-position: relative;
+.test span {
+    position: relative;
 }
 
-#createRes h1{
-	position: initial;
-	text-align: left;
-	font-size: 2.65vmin;
-}
-
-
-#createRes p{
-	position: initial;
-	text-align: left;
+#createRes h1 {
+    position: initial;
+    text-align: left;
+    font-size: 2.65vmin;
 }
 
 
-#createRes input{
-	position: initial;
-	text-align: left;
+#createRes p {
+    position: initial;
+    text-align: left;
 }
 
-#createRes option{
-	position: initial;
-	text-align: left;
+
+#createRes input {
+    position: initial;
+    text-align: left;
 }
 
-#startDate{
-	right: 0%;
-	float:right;
+#createRes option {
+    position: initial;
+    text-align: left;
 }
 
-#endDate{
-	right: 0%;
-	float:right;
+#startDate {
+    right: 0%;
+    float: right;
 }
 
-#submitMakeRes{
-	    position: absolute;
+#endDate {
+    right: 0%;
+    float: right;
+}
+
+#submitMakeRes {
+    position: absolute;
     height: 6%;
     right: 9%;
 }
 
-#createRes textarea{
-	resize: none;
+#createRes textarea {
+    resize: none;
 }
 
-#createLabel{
-	color: white;
+#createLabel {
+    color: white;
     font-size: 3.75vmin;
     left: 0%;
     top: 23%;
