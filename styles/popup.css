@@ -93,6 +93,8 @@ if more are needed */
     text-align: center;
     font-size: 1.9vmin;
     position: relative;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 #dayViewCell:hover {
