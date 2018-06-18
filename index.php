@@ -38,32 +38,9 @@
         <script src="scripts/JS/popup.js"></script>
         <script src="scripts/JS/rooms.js"></script>
         <script src="scripts/JS/jquery-3.3.1.min.js"></script>
-        <div class="jumbotron">
-            <img src="images/una.png" id="logo" onclick="window.location.href = ''">
-        </div>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
-                        <!-- Adrianne -->
-                        <?php
-              if(isset($_SESSION['username'])){echo "<p>Welcome, " .$logged_in_user."</p>";}
-            ?>
-                    </a>
-                </div>
-                <button id="makeResButton" class="btn btn-default navbar-btn" onclick="showCreateResForm()">Make Reservation</button>
-                <button id="monthViewButton" class="btn btn-default navbar-btn" onclick="showCalendarView()">Month View</button>
-                <button class="btn btn-default navbar-btn" onclick="dropdownRes()">My Reservations</button>
-                <?php //TODO: database query on users table for permission?
-            if(isset($_SESSION['permission']) &&  $_SESSION['permission'] == 1)//using "super" as username and password for testing groups permissions
-            {
-              echo  "<button class='btn btn-default navbar-btn' id=\"settingsButton\" onclick=\"window.location.href += 'scripts/PHP/userSettings.php'\">Settings</button>";
-            } 
+        <?php 
+          include("{$_SERVER['DOCUMENT_ROOT']}/schedulingApp/includes/header.php")
         ?>
-                <!--Taylor-->
-                <button onclick="logoutUser();" class="signOut btn btn-default navbar-btn pull-right">Logout</button>
-            </div>
-        </nav>
         <div style="position:absolute" id="agendaReservations">
             <!--
         The "My Reservations" agenda dropdown area. Content will be given to this via a call to the dropdownRes()
