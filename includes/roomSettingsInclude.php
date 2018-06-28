@@ -41,9 +41,9 @@ function findRoom(str) {
   <h1> Room Settings </h1>
 
   <br/>
-  <div class="container dropdown">
+
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3 col-sm-3 col-xs-3">
         <form>
           <div class="form-group">
             <label for="findRoom">Search Room:</label>
@@ -52,6 +52,6 @@ function findRoom(str) {
         </form>
       </div>
     </div>
-  </div>
+
   <p> <span id="roomInfo"></span></p>
 </div>
