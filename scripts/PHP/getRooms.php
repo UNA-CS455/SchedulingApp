@@ -24,33 +24,72 @@ if ($_SESSION['permission']!= 1){
 		$room = $row['roomid'];
 		//added to create space from room settings search bar
 		// ADD THIS AND STYLE TO YOUR LIKING 
-		echo "<form action='updateRoom.php' METHOD='POST'>";
-		echo "<table>";
-		echo "<tr><th></th><th></th><th></th></tr>";
-		echo "<tr><td>Current Room: </td><td>" . $row['roomid'] . "</td></tr>";
-		echo "<input type='text' value='" . $row['roomid'] . "' name='currRoom' hidden>";
-		echo "<tr><td> New room number: </td><td><input type='text' value='" . $row['roomid'] . "'name='roomNumber'></td></tr>";
-		echo "<tr><td><font id='typeText'>Type: </font> 
-			</td><td><select name='type'>";
-		if ($row['type'] == "Classroom"){
-			echo "<option value='Classroom' selected='selected' >Classroom</option>
-				<option value='Conference'>Conference Room</option>
-				<option value='Computer Lab'>Computer Lab</option>
-				</select></td></tr>";
-		} else if ($row['type'] == "Computer Lab"){
-			echo "<option value='Classroom' >Classroom</option>
-				<option value='Conference'>Conference Room</option>
-				<option value='Computer Lab' selected='selected'>Computer Lab</option>
-				</select></td></tr>";
-		} else {
-			echo "<option value='Classroom' >Classroom</option>
-				<option value='Conference' selected='selected'>Conference Room</option>
-				<option value='Computer Lab'>Computer Lab</option>
-				</select></td></tr>";
-		}
-		echo "<tr><td> New floor number: </td><td><input type='text' value='" . $row['floor'] . "'name='floor'></td></tr>";
-		echo "<tr><td> Seats: </td><td><input type='text' value='" . $row['seats'] . "'name='seats'></td></tr>";
-		echo "<tr><td> <input type='submit' value='Save changes'></form></td></tr></table>";
+		echo "<form action='updateRoom.php' METHOD='POST'>
+      <div class='row'>
+        <div class='col-md-1 col-sm-1 col-xs-1'>
+          <label for='currentRoom'>
+            Current Room
+          </label>
+          <input type='text' class='form-control' value='". $row['roomid'] ." ' disabled='disabled'>
+        </div>
+        <div class='col-md-1 col-sm-1 col-xs-1'>
+          <label for='currentRoom' style='font-size: 15.2px; font-weight: bold; padding-bottom: 1px;'>
+            New Room Number
+          </label>
+          <input type='text' name='currRoom' class='form-control' value='". $row['roomid'] ." ' hidden='hidden'>
+        </div>
+      </div>
+      <br/>
+      <div class='row'>
+        <div class='col-md-2 col-sm-2 col-xs-2'>
+          <label for='type'>
+            Type
+          </label>
+          <select id='type' class='form-control' value=' ".$row['type']." '>";
+            if ($row['type'] == "Classroom"){
+          echo "<option value='Classroom' selected='selected' >Classroom</option>
+            <option value='Conference'>Conference Room</option>
+            <option value='Computer Lab'>Computer Lab</option>
+            </select>";
+        } else if ($row['type'] == "Computer Lab"){
+          echo "<option value='Classroom' >Classroom</option>
+            <option value='Conference'>Conference Room</option>
+            <option value='Computer Lab' selected='selected'>Computer Lab</option>
+            </select>";
+        } else {
+          echo "<option value='Classroom' >Classroom</option>
+            <option value='Conference' selected='selected'>Conference Room</option>
+            <option value='Computer Lab'>Computer Lab</option>
+            </select>";
+        }
+        echo"</div></div><br/>";
+        echo"<div class='row'>
+          <div class='col-md-1 col-sm-1 col-xs-1'>
+            <label for='floorName' style='font-size: 15.2px;'>
+              New Floor Number
+            </label>
+            <input class='form-control' type='text' name='floor' value='" .$row['floor']. "'>
+          </div>
+          <div class='col-md-1 col-sm-1 col-xs-1'>
+            <label for='floorName'>
+              Seats
+            </label>
+            <input class='form-control' type='text' name='seats' value='" .$row['seats']. "'>
+          </div>
+        </div>
+        <br/>
+        <div class='row'>
+          <div class='col-md-2 col-sm-2 col-xs-2'>
+            <!-- <input type='submit' value='Save Changes'> -->
+            <button type='submit' class='btn btn-primary' style='width: 100%;'>
+              Submit Changes
+            </button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </form>
+    <br/>";
 		// ADD THIS FOR STYLING 
 		
 		$sql = "SELECT * FROM reservations WHERE startdate >= CURDATE() AND roomnumber='$room' order by startdate, starttime";
