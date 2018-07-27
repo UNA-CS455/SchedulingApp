@@ -62,7 +62,7 @@
           <option value="Monthly">Monthly</option>
         </select>
       </div>
-      <div style="position: relative; top: 34.5px;" class="form-group col-md-3 col-ms-3 col-xs-3">
+      <div style="position: relative; top: 34.5px; overflow: hidden; white-space: nowrap;" class="form-group col-md-3 col-ms-3 col-xs-3">
         <input type="checkbox" onclick="changeSheet(); fieldChanged();" id="allowshare">
         <label>
           Allow room sharing

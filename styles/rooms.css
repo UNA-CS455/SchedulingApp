@@ -93,11 +93,12 @@ b {
     border-collapse: collapse;
     position: absolute;
     left: 8%;
-    width: 45%;
+    width: 25%;
     z-index: 55;
     top: 20.5%;
     height: 100%;
     min-height: 300px;
+    padding-right: 10px;
 }
 
 .bookArea {
