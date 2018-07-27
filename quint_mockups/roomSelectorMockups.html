@@ -1,0 +1,46 @@
+<!-- Mockups for the room selection on the landing page
+
+Feel free to delete this page if it is not needed, it is not connected to anything -->
+<!-- list group -->
+<a href='#' class='list-group-item list-group-item-action' onclick='selectRoom(this.id)' id='fav_".$favRow[' roomid ']."'>
+  <font class='roomboxcontent' id='p_".$favRow[' roomid ']."'>
+    <b>" . $favRow['roomid'] ."</b>&nbsp;|&nbsp;". $favRow['seats'] ."&nbsp;|&nbsp;" . $favRow['type'] . "
+  </font>
+</a>
+<!-- table -->
+<table class='table table-sm' id='bookArea'>
+  <thead>
+    <tr>
+      <th scope='col'>
+        Room
+      </th>
+      <th scope='col'>
+        Seats
+      </th>
+      <th scope='col'>
+        Type
+      </th>
+      <th scope='col'>
+        Favorite
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr onclick='selectRoom(this.id)' id = '".$row['roomid']."'>
+      <td>
+        <font class='roomboxcontent' id = 'p_".$row['roomid']."' >
+          " . $row['roomid'] ."
+        </font>
+      </td>
+      <td>
+        ". $row['seats'] ."
+      </td>
+      <td>
+        " . $row['type'] . "
+      </td>
+      <td>
+        <img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon' align='middle'>
+      </td>
+    </tr>
+  </tbody>
+</table>
