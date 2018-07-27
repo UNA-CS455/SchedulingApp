@@ -20,14 +20,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
+        <!-- Include FontAwesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
         <!-- Stylesheets -->
         <link rel="stylesheet" href="styles/rooms.css">
         <link rel="stylesheet" href="styles/Reservation.css">
         <link rel="stylesheet" href="styles/calendar.css">
-        <!-- Add? <link rel="stylesheet" href="styles/links.css"> <!--Taylor-->
         <link rel="stylesheet" href="styles/popup.css">
+        
         <!-- Jquery -->
-        <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
         <title>LeoBook</title>
     </head>
 

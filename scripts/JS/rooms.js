@@ -66,12 +66,18 @@ April 2018
 */
 function selectRoom(id) {
 
+    // console.log("selectRoom Called");
+
     var notAvailableColor = '#1e1e1e';
     var availableUnselectedColor = "ghostwhite";
-    var availableSelectedColor = "gray";
+    var availableSelectedColor = "lightgray";
     if (roomSelected != null) {
         var normalVersion = document.getElementById(roomSelected);
+        // console.log("normalVersionInside");
+        // console.log(normalVersion);
         var favoriteVersion = document.getElementById('fav_' + roomSelected);
+        // console.log(favoriteVersion);
+        // console.log("favoriteVersionInside");
 
         if (favoriteVersion != null) {
             if (favoriteVersion.className.includes("notfound")) {
@@ -85,11 +91,17 @@ function selectRoom(id) {
     }
     if (normalVersion == null) {
         var bookAreaParent = document.getElementById("bookArea");
+        // console.log("bookAreaParent");
+        // console.log(bookAreaParent);
         id = null;
         if (bookAreaParent != null) {
             var firstRoom = bookAreaParent.childNodes[0];
+            // console.log("firstRoom");
+            // console.log(firstRoom);
             if (firstRoom != null) {
                 id = (firstRoom.className.includes("roombox")) ? firstRoom.id : null;
+                // console.log("idInside");
+                // console.log(id);
                 // only set the id if the firstRoom is in fact a room, not some other item such as the "No Results" text.
             }
 
@@ -104,9 +116,15 @@ function selectRoom(id) {
 
 
     roomSelected = id;
+    // console.log("roomSelected");
+    // console.log(roomSelected);
 
     var normalVersion = document.getElementById(id);
+    // console.log("normalVersion");
+    // console.log(normalVersion);
     var favoriteVersion = document.getElementById('fav_' + id);
+    // console.log("favoriteVersion");
+    // console.log(favoriteVersion);
 
     if (favoriteVersion != null) {
         favoriteVersion.style.backgroundColor = availableSelectedColor;
@@ -388,8 +406,8 @@ function fieldChanged(getAll) {
         if (this.readyState === 4 && this.status === 200) {
             document.getElementById("roomContainer").innerHTML = this.responseText;
             if (document.getElementById("allroomsheader") != null && document.getElementById("favsheader") != null) {
-                document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 19;'>All Rooms<h1>"
-                document.getElementById("favsheader").innerHTML = "<h1 style='font-size: 19;'>Favorites<h1>"
+                document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 19; background-color: #337ab7; border-color: #2e6da4; color: white; padding: 5px; border-radius: 5px;'>All Rooms<h1>"
+                document.getElementById("favsheader").innerHTML = "<h1 style='font-size: 19; background-color: #337ab7; border-color: #2e6da4; color: white; padding: 5px; border-radius: 5px;'>Favorites<h1>"
             }
             selectRoom(roomSelected);
         }
@@ -563,7 +581,13 @@ function createClicked(data) {
  */
 function favoriteClicked(parentEle) {
     let star = document.getElementById(parentEle.id);
+
+    console.log("star");
+    console.log(star);
+
     var roomId = parentEle.id;
+    console.log("roomId");
+    console.log(roomId);
     if (roomId.substring(0, 4) == "fav_") {
         roomId = roomId.substring(4);
     }
@@ -576,7 +600,7 @@ function favoriteClicked(parentEle) {
     xhttp.open("POST", "scripts/PHP/favorite.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    if (star.children[0].src.includes("images/fav-unselect.png")) {
+    if (star.children[3].children[0].src.includes("images/fav-unselect.png")) {
         // add a favorite.
         xhttp.send("add=yes&roomid=" + roomId);
     } else {
