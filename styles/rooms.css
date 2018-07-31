@@ -413,11 +413,11 @@ body {
 #agendaReservations {
     text-align: center;
     height: 63%;
-    top: 25%;
-    width: 28%;
+    top: 20%;
+    width: 65%;
     z-index: 99;
     display: none;
-    left: 35%;
+    left: 18%;
     background-color: ghostwhite;
     border: 10px solid #3b3b3b;
     overflow-y: scroll;
@@ -707,8 +707,6 @@ button.settingsButton {
 /* End Settings Page CSS */
 
 #closeAgendaButton {
-    width: 8%;
-    height: 6%;
     top: 1%;
     right: 1%;
     z-index: 2;
