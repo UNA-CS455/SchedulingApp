@@ -156,7 +156,7 @@ function getAgendaReservations() {
 
             var reservation = JSON.parse(this.responseText);
 
-            var runString = "<h2 style='text-align:center' >Active stuff</h2>";
+            var runString = "<h2 style='text-align:center' >Active Reservations</h2>";
             runString += "<br><table style='overflow-y:scroll;' id = 'agendaTable' >\n<th>Room</th><th>From</th><th>To</th><th>Details</th>\n";
             for (var i = 0; i < reservation.length; i++) {
 
