@@ -718,7 +718,7 @@ button.settingsButton {
     border: 1px inset ghostwhite;
 }
 
-.jumbotron {
+.jumbotron-fluid {
     margin: 0px;
     height: 13vh;
     background-color: #46166B !important;
