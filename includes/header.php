@@ -1,5 +1,5 @@
 <!-- jumbotron and navbar -->
-<div class="jumbotron">
+<div class="jumbotron-fluid">
   <img src="images/una.png" id="logo" onclick="window.location.href = ''">
 </div>
 <nav class="navbar navbar-default">

@@ -1,0 +1,39 @@
+index left hand side notes
+
+
+echo "<span id='favsheader'></span>";
+  echo "<div id='favsbookArea' class='favBookArea'>";
+  
+  $favoritesSQL = "SELECT DISTINCT rooms.roomid,rooms.seats,rooms.type FROM favorites LEFT JOIN rooms on favorites.roomid = rooms.roomid WHERE email='" . $_SESSION['username'] . "' ORDER BY rooms.roomid";
+    $favoritesResult = $conn->query($favoritesSQL);
+  
+  while ($favRow = $favoritesResult->fetch_assoc()) 
+  {
+
+    $imgName = "images/fav-select.png";
+
+
+    $inArray = false;
+    foreach ($room_array as $row) 
+    {
+      if($row['roomid'] == $favRow['roomid'] && !in_array($favRow['roomid'],$room_BlacklistArray)){
+        $inArray = true;
+        break;
+      }
+    }
+    if($inArray){
+      echo "<div onclick='selectRoom(this.id)' class = 'roombox' id = 'fav_".$favRow['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' id = 'p_".$favRow['roomid']."' ><br><b>" . $favRow['roomid'] ."</b><br>". $favRow['seats'] ."<br>" . $favRow['type'] . "</font></div>";
+    } else {
+      // not found in all rooms, so cut favorites
+      echo "<div onclick='' class = 'roomboxnotfound' id = 'fav_".$favRow['roomid']."'><img src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon'><font class='roomboxcontent' style='color:white' id = 'p_".$favRow['roomid']."' ><br><b>" . $favRow['roomid'] ."</b><br>". $favRow['seats'] ."<br>" . $favRow['type'] . "</font></div>";
+    }
+  }
+  /*
+  if($result->num_rows == 0){
+    echo "<h4> No Results </h4>";
+  } */
+  echo "</div>";
+
+
+
+  have to have id='bookArea'

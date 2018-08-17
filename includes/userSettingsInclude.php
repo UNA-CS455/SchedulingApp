@@ -77,13 +77,13 @@ function setEmail(str) {
 <div id="shader" onclick="shaderClicked()"></div>
 <script src="../JS/popup.js"></script>
 <script src="../JS/rooms.js"></script>
-<div id="room">
+<div class="container" id="room">
 
   <br/>
 
   <h1>User Settings</h1>
   <br>
-  <div class="container dropdown">
+  <!-- <div class="container dropdown">
     <div class="row">
       <div class="col-md-4">
         <form>
@@ -96,5 +96,127 @@ function setEmail(str) {
     </div>
     <div id="userInfo" class="dropdown-content"></div>
     <div id="userData"></div>
+  </div> -->
+  <button class="btn btn-success createUsrBtn">
+    <span>Create user&nbsp;&nbsp;<i class="fas fa-plus"></i></span>
+  </button>
+
+  <br/>
+  <br/>
+
+  <div class="row usrTable">
+    <div class="col-md-9">
+      <table class="table table-responsive">
+        <thead>
+          <th>
+            First Name
+          </th>
+          <th>
+            Last Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Classification
+          </th>
+          <th>
+            Group ID
+          </th>
+          <th>
+            Actions
+          </th>
+        </thead>
+        <tbody>
+          <?php
+            /*
+            $_userRes is pulled as an array:
+                0: email
+                1: firstname
+                2: lastname
+                3: classification
+                4: groupID
+            */
+
+            if($_userRes > 0)
+            {
+              foreach ($_userRes as $user)
+              {
+                echo '<tr>';
+                echo '<td>' . $user[1]. '</td>';
+                echo '<td>' . $user[2]. '</td>';
+                echo '<td>' . $user[0]. '</td>';
+                echo '<td>' . $user[3]. '</td>';
+                echo '<td>' . $user[4]. '</td>';
+                // echo "<td><a href='deleteUser.php?' style='margin-right: 2.5px;' class='btn btn-default'><i class='fas fa-pencil-alt'></i></a>;
+                // echo <a style='margin-left: 2.5px;' class='btn btn-default'><i class='fas fa-trash-alt'></i></a></td>";
+                echo '<td>';
+                echo '<a class="btn btn-default" href="deleteUser.php?email='.$user['0'].'"><i class="fas fa-trash-alt"></i></a>';
+
+              }
+            }
+          ?>
+        </tbody>
+      </table>
+    </div>
   </div>
+  <div class="createUsrDiv row" style="display: none;">
+    <form name="createUser" method="POST" action="">
+      <div class="row">
+        <br/>
+        <div class="col-md-3">
+          <label for="firstname">First Name</label>
+          <input type="text" name="firstname" class="form-control">
+        </div><!-- /.col-lg-3 -->
+        <div class="col-md-3">
+          <label for="lastname">Last Name</label>
+          <input type="text" name="lastname" class="form-control">
+        </div><!-- /.col-lg-3 -->
+      </div>
+      <div class="row">
+        <br/>
+        <div class="col-md-3">
+          <label for="email">Email</label>
+          <input type="text" name="email" class="form-control">
+        </div>
+        <div class="col-md-3">
+          <label for="classification">Classification</label>
+          <select class="form-control" id="classification" name="classification">
+            <option value="">Select One</option>
+            <option value="ADMIN">Admin</option>
+            <option value="USER">User</option>
+          </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <br/>
+            <button class="btn btn-secondary" id="submit" name="submit" type="submit">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <?php 
+
+    // if($result > 0)
+    // {
+    //   foreach($result as $res)
+    //   {
+    //     echo 'Hello there '.$res''
+    //   }
+    // }
+
+  ?>
 </div>
+
+<script>
+  $(document).ready(function()
+  {
+    $('.createUsrBtn').click(function()
+    {
+      $('.usrTable').toggle();
+      $('.createUsrDiv').toggle();
+    })
+  })
+</script>

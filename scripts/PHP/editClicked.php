@@ -57,9 +57,9 @@ $edithtml = "<?php?><html><head></head><body>"
                 . "<br>to<br> <input id = 'endTime' type = 'time' step = '900' width = '48' value='$endtime'><br><br>"
         . "Allow Sharing: <span id='allowshare'>$allowshare</span><br><br>$headcount"
         . "<select id='roomnumber'><option value='$roomnumber' hidden>$roomnumber</option>"
-            . "$options</select><br><br>"
+            . "$options</select><br>"
         . "Comments:"
-            . "<br><textarea rows='4' cols='25' id='comment'>$comment</textarea><br><br><br><br>"
+            . "<br><textarea rows='4' cols='25' id='comment'>$comment</textarea>"
         . "</body>"
         . "</html>";
 
