@@ -1,13 +1,51 @@
 <?php
-session_start();
+  session_start();
 
-if (!isset($_SESSION['username'])){
-  header('location: ../../login.html');
-}
-//only admin can view this page
-if ($_SESSION['permission']!= 1){
-  header('location: ../../login.html');
-}
+  if (!isset($_SESSION['username'])){
+    header('location: ../../login.html');
+  }
+  //only admin can view this page
+  if ($_SESSION['permission']!= 1){
+    header('location: ../../login.html');
+  }
+
+  require "db_conf.php";
+
+  $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+  $_sql = "SELECT * FROM `users` ORDER BY `firstname` ASC";
+
+  $_res = $conn->query($_sql);
+
+  $_userRes = $_res->fetch_all();
+
+  // var_dump($result);
+
+  if(isset($_POST['submit']))
+  {
+    $fname = $_POST['firstname'];
+    $lname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $classification = $_POST['classification'];
+    
+    $sql = "INSERT INTO `users` (`email`, `firstname`, `lastname`, `classification`) VALUES ('$email', '$fname', '$lname', '$classification')";
+
+    if($conn->query($sql) === TRUE)
+    {
+      // echo "success";
+      Header("Refresh: 0");
+    }
+    else
+    {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // $_userRes = $conn->query($_userPost);
+  }
+
 ?>
 <!DOCTYPE html>
 <html class="gr__localhost">
@@ -31,6 +69,8 @@ if ($_SESSION['permission']!= 1){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- Jquery -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../styles/rooms.css">
     <link rel="stylesheet" href="../../styles/Reservation.css">
@@ -110,7 +150,7 @@ if ($_SESSION['permission']!= 1){
             <p class="modal-center-text" id="buttonContent"></p>
         </div>
     </div>
-    <div class="jumbotron">
+    <div class="jumbotron-fluid">
         <img src="../../images/una.png" id="logo" onclick="window.location.href = ''">
     </div>
     <nav class="navbar navbar-default" style="margin-bottom: 0px;">
