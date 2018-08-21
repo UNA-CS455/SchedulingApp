@@ -67,11 +67,11 @@ function setEmail(str) {
 <!-- The Modal -->
 <div id="myModal" class="modal">
     <!-- Modal content -->
-    <!--             <div class="modal-content">
-                <div class="modal-content-header">
-                    <h1 style="color:white; left:3%;" id="modal-header-text"></h1> <span class="close">×</span></div>
-                <p class="modal-content-text" id="modalMessage">Enter text</p>
-                <p class="modal-center-text" id="buttonContent"></p>
+    <!--    <div class="modal-content">
+              <div class="modal-content-header">
+                  <h1 style="color:white; left:3%;" id="modal-header-text"></h1> <span class="close">×</span></div>
+              <p class="modal-content-text" id="modalMessage">Enter text</p>
+              <p class="modal-center-text" id="buttonContent"></p>
             </div> -->
 </div>
 <div id="shader" onclick="shaderClicked()"></div>
@@ -103,7 +103,16 @@ function setEmail(str) {
 
   <br/>
   <br/>
-
+  <!-- <div class="row editUserDiv" style="display: none;">
+    <form name="editUser" method="POST" action="POST">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="emailEdit">Email</label>
+          <input type="text" name="emailEdit" class="form-control">
+        </div>
+      </div>
+    </form>
+  </div> -->
   <div class="row usrTable" style="display: block;">
     <div class="col-md-9">
       <table class="table table-responsive">
@@ -149,10 +158,8 @@ function setEmail(str) {
                 echo '<td>' . $user[0]. '</td>';
                 echo '<td>' . $user[4]. '</td>';
                 echo '<td>' . $user[5]. '</td>';
-                // echo "<td><a href='deleteUser.php?' style='margin-right: 2.5px;' class='btn btn-default'><i class='fas fa-pencil-alt'></i></a>;
-                // echo <a style='margin-left: 2.5px;' class='btn btn-default'><i class='fas fa-trash-alt'></i></a></td>";
                 echo '<td>';
-                echo '<a style="margin-right: 5px;" class="btn btn-default editBtn disabled" href="#"><i class="fas fa-pencil-alt"></i></a>';
+                echo '<a style="margin-right: 5px;" class="btn btn-default editBtn" href="#"><i class="fas fa-pencil-alt"></i></a>';
                 echo '<a style="margin-right: 5px;" class="btn btn-default" href="deleteUser.php?email='.$user['0'].'"><i class="fas fa-trash-alt"></i></a>';
                 echo '</td>';
               }
@@ -203,9 +210,6 @@ function setEmail(str) {
       </div>
     </form>
   </div>
-  <div class="editUserDiv row" style="display: none;">
-    <p>test</p>
-  </div>
 </div>
 
 <script>
@@ -217,10 +221,11 @@ function setEmail(str) {
       $('.createUsrDiv').toggle();
     })
 
-    // $('.editBtn').click(function()
-    // {
-    //   $('.usrTable').toggle();
-    //   $('.editUserDiv').toggle();
-    // })
+    $('.editBtn').click(function()
+    {
+      $('.usrTable').toggle();
+      $('.editUserDiv').toggle();
+      $('.createUsrBtn').toggle();
+    })
   })
 </script>
