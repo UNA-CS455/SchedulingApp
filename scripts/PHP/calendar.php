@@ -115,7 +115,7 @@ class Calendar {
                
       if(intval($cellNumber) == intval($firstDayOfTheWeek))
       {
-          $this->currentDay=1;
+        $this->currentDay=1;
       }
     }
 
