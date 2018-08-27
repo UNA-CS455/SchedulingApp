@@ -29,9 +29,11 @@
     $fname = $_POST['firstname'];
     $lname = $_POST['lastname'];
     $email = $_POST['email'];
+    $unsecurePass = $_POST['password'];
+    $password = sha1($email . $unsecurePass);
     $classification = $_POST['classification'];
     
-    $sql = "INSERT INTO `users` (`email`, `firstname`, `lastname`, `classification`) VALUES ('$email', '$fname', '$lname', '$classification')";
+    $sql = "INSERT INTO `users` (`email`, `firstname`, `lastname`, `password`, `classification`) VALUES ('$email', '$fname', '$lname', '$password', '$classification')";
 
     if($conn->query($sql) === TRUE)
     {

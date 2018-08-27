@@ -67,11 +67,11 @@ function setEmail(str) {
 <!-- The Modal -->
 <div id="myModal" class="modal">
     <!-- Modal content -->
-    <!--             <div class="modal-content">
-                <div class="modal-content-header">
-                    <h1 style="color:white; left:3%;" id="modal-header-text"></h1> <span class="close">×</span></div>
-                <p class="modal-content-text" id="modalMessage">Enter text</p>
-                <p class="modal-center-text" id="buttonContent"></p>
+    <!--    <div class="modal-content">
+              <div class="modal-content-header">
+                  <h1 style="color:white; left:3%;" id="modal-header-text"></h1> <span class="close">×</span></div>
+              <p class="modal-content-text" id="modalMessage">Enter text</p>
+              <p class="modal-center-text" id="buttonContent"></p>
             </div> -->
 </div>
 <div id="shader" onclick="shaderClicked()"></div>
@@ -103,8 +103,17 @@ function setEmail(str) {
 
   <br/>
   <br/>
-
-  <div class="row usrTable">
+  <!-- <div class="row editUserDiv" style="display: none;">
+    <form name="editUser" method="POST" action="POST">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="emailEdit">Email</label>
+          <input type="text" name="emailEdit" class="form-control">
+        </div>
+      </div>
+    </form>
+  </div> -->
+  <div class="row usrTable" style="display: block; max-height: 400px; overflow-y: auto;">
     <div class="col-md-9">
       <table class="table table-responsive">
         <thead>
@@ -134,8 +143,9 @@ function setEmail(str) {
                 0: email
                 1: firstname
                 2: lastname
-                3: classification
-                4: groupID
+                3: password
+                4: classification
+                5: groupID
             */
 
             if($_userRes > 0)
@@ -146,13 +156,12 @@ function setEmail(str) {
                 echo '<td>' . $user[1]. '</td>';
                 echo '<td>' . $user[2]. '</td>';
                 echo '<td>' . $user[0]. '</td>';
-                echo '<td>' . $user[3]. '</td>';
                 echo '<td>' . $user[4]. '</td>';
-                // echo "<td><a href='deleteUser.php?' style='margin-right: 2.5px;' class='btn btn-default'><i class='fas fa-pencil-alt'></i></a>;
-                // echo <a style='margin-left: 2.5px;' class='btn btn-default'><i class='fas fa-trash-alt'></i></a></td>";
+                echo '<td>' . $user[5]. '</td>';
                 echo '<td>';
-                echo '<a class="btn btn-default" href="deleteUser.php?email='.$user['0'].'"><i class="fas fa-trash-alt"></i></a>';
-
+                echo '<a style="margin-right: 5px;" class="btn btn-default editBtn" href="#"><i class="fas fa-pencil-alt"></i></a>';
+                echo '<a style="margin-right: 5px;" class="btn btn-default" href="deleteUser.php?email='.$user['0'].'"><i class="fas fa-trash-alt"></i></a>';
+                echo '</td>';
               }
             }
           ?>
@@ -164,11 +173,11 @@ function setEmail(str) {
     <form name="createUser" method="POST" action="">
       <div class="row">
         <br/>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label for="firstname">First Name</label>
           <input type="text" name="firstname" class="form-control">
         </div><!-- /.col-lg-3 -->
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label for="lastname">Last Name</label>
           <input type="text" name="lastname" class="form-control">
         </div><!-- /.col-lg-3 -->
@@ -180,6 +189,10 @@ function setEmail(str) {
           <input type="text" name="email" class="form-control">
         </div>
         <div class="col-md-3">
+          <label for="password">Password</label>
+          <input type="text" name="password" class="form-control">  
+        </div>
+        <div class="col-md-2">
           <label for="classification">Classification</label>
           <select class="form-control" id="classification" name="classification">
             <option value="">Select One</option>
@@ -197,17 +210,6 @@ function setEmail(str) {
       </div>
     </form>
   </div>
-  <?php 
-
-    // if($result > 0)
-    // {
-    //   foreach($result as $res)
-    //   {
-    //     echo 'Hello there '.$res''
-    //   }
-    // }
-
-  ?>
 </div>
 
 <script>
@@ -217,6 +219,13 @@ function setEmail(str) {
     {
       $('.usrTable').toggle();
       $('.createUsrDiv').toggle();
+    })
+
+    $('.editBtn').click(function()
+    {
+      $('.usrTable').toggle();
+      $('.editUserDiv').toggle();
+      $('.createUsrBtn').toggle();
     })
   })
 </script>
