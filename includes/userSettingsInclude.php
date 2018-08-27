@@ -113,7 +113,7 @@ function setEmail(str) {
       </div>
     </form>
   </div> -->
-  <div class="row usrTable" style="display: block;">
+  <div class="row usrTable" style="display: block; max-height: 400px; overflow-y: auto;">
     <div class="col-md-9">
       <table class="table table-responsive">
         <thead>
