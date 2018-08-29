@@ -32,7 +32,7 @@
         
         <!-- Jquery -->
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <title>LeoBook</title>
+        <title>Test</title>
     </head>
 
     <body onload="showCreateResForm();fieldChanged();">
