@@ -17,14 +17,14 @@
     height: 85%;
     z-index: 55;
   */
-    position: absolute;
+ /*    position: absolute;
     top: 20.5%;
     right: 0px;
-    left: 35%;
-    width: 75%;
+    left: 40%;
+    width: 30vh;
     height: 85%;
     overflow: scroll;
-    z-index: 55;
+    z-index: 55; */
 }
 
 
