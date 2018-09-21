@@ -20,6 +20,7 @@
     <html>
 
     <head>
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Include Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -40,48 +41,53 @@
         <title>LeoBook</title>
     </head>
 
-    <body onload="showCreateResForm();fieldChanged();">
-        <!-- By default, load the make reservation screen into createZone -->
-        <div id="shader" onclick="shaderClicked()"></div>
-        <?php include 'modal.php'; ?>
-        <script src="scripts/JS/popup.js"></script>
-        <script src="scripts/JS/rooms.js"></script>
-        <script src="scripts/JS/jquery-3.3.1.min.js"></script>
-        <?php 
-          include("{$_SERVER['DOCUMENT_ROOT']}/SchedulingApp/includes/header.php")
-        ?>
-        <div style="position:absolute" id="agendaReservations">
-            <!--
-        The "My Reservations" agenda dropdown area. Content will be given to this via a call to the dropdownRes()
-        function which is called when the "My Reservations" link in the banner is clicked.
-      -->
-        </div>
-        <div id="deleteRes"></div>
-        <div class="makeReservation" id="createZone">
-            <!--
-        This is the rightmost area of the page. Content is provided by function calls:
-        
-        showCreateResForm() - will update the content of this div with the Make Reservation
-        form. This is intended to be the default view, and is also called at the top of this
-        file in the onload attribute of the body tag. 
-        
-        showCalendarView() - will update the content of this div with a calendar showing reservations
-        on each day of the month for the room selected in the roomselector (which is the div with id of
-        "roomContainer" at the bottom of this page). 
-      
-      
-      -->
-        </div>
-        <div class="outerBookArea" id="roomContainer">
-            <!--
-        This is the leftmost area of the page. Content is updated upon page load with the function fieldChanged().
-        This area serves as the room selector.
-      -->
-            <span id="favsheader"></span>
-            <div id="favsbookArea"></div>
-            <span id="allroomsheader"></span>
-            <div id="bookArea"></div>
-        </div>
+    <body onload="showCreateResForm();fieldChanged();" class="container-fluid" style="padding: 0px; overflow: scroll;">
+    	<div class="row">
+	        <!-- By default, load the make reservation screen into createZone -->
+	        <div id="shader" onclick="shaderClicked()"></div>
+	        <?php include 'modal.php'; ?>
+	        <script src="scripts/JS/popup.js"></script>
+	        <script src="scripts/JS/rooms.js"></script>
+	        <script src="scripts/JS/jquery-3.3.1.min.js"></script>
+	        <?php 
+	          include("{$_SERVER['DOCUMENT_ROOT']}/SchedulingApp/includes/header.php")
+	        ?>
+	        <div style="position:absolute" id="agendaReservations">
+	            <!--
+	        The "My Reservations" agenda dropdown area. Content will be given to this via a call to the dropdownRes()
+	        function which is called when the "My Reservations" link in the banner is clicked.
+	      -->
+	        </div>
+	        <div id="deleteRes"></div>
+	        
+	        <div class="col-md-4 outerBookArea" id="roomContainer" style="padding-left: 30px;">
+	            <!--
+	        This is the leftmost area of the page. Content is updated upon page load with the function fieldChanged().
+	        This area serves as the room selector.
+	      -->
+	            <span id="favsheader"></span>
+	            <div id="favsbookArea"></div>
+	            <span id="allroomsheader"></span>
+	            <div id="bookArea"></div>
+	        </div>
+	        
+	        <div class="col-md-8 col-sm-5" id="createZone">
+	            <!--
+	        This is the rightmost area of the page. Content is provided by function calls:
+	        
+	        showCreateResForm() - will update the content of this div with the Make Reservation
+	        form. This is intended to be the default view, and is also called at the top of this
+	        file in the onload attribute of the body tag. 
+	        
+	        showCalendarView() - will update the content of this div with a calendar showing reservations
+	        on each day of the month for the room selected in the roomselector (which is the div with id of
+	        "roomContainer" at the bottom of this page). 
+	      
+	      
+	      -->
+	        </div>
+	        
+		</div>
     </body>
 
     </html>
