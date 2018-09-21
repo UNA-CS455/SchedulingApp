@@ -60,7 +60,7 @@
 	        </div>
 	        <div id="deleteRes"></div>
 	        
-	        <div class="col-md-4 outerBookArea" id="roomContainer" style="padding-left: 30px;">
+	        <div class="col-md-4 outerBookArea" id="roomContainer">
 	            <!--
 	        This is the leftmost area of the page. Content is updated upon page load with the function fieldChanged().
 	        This area serves as the room selector.
@@ -71,7 +71,7 @@
 	            <div id="bookArea"></div>
 	        </div>
 	        
-	        <div class="col-md-8 col-sm-5" id="createZone">
+	        <div class="col-md-8 col-sm-5" id="createZone" style="padding-left: 45px;">
 	            <!--
 	        This is the rightmost area of the page. Content is provided by function calls:
 	        
