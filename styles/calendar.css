@@ -3,7 +3,7 @@ div#calendar {
     padding: 0px;
     margin-top: 0%;
     margin-left: 0%;
-    width: 780px;
+    /* width: 780px; */
     height: 625px;
     font-family: "Weiss Medium";
 }

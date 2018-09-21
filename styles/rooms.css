@@ -97,8 +97,10 @@ b {
     z-index: 55;
     top: 20.5%;
     height: 100%;
-    min-height: 300px;
-    padding-right: 10px; */
+    min-height: 300px;*/
+    padding-right: 30px; 
+    padding-left: 30px;
+    
 }
 
 /* .bookArea {
@@ -716,6 +718,14 @@ button.settingsButton {
 #closeAgendaButton:hover {
     cursor: pointer;
     border: 1px inset ghostwhite;
+}
+
+@media (max-width: 767px)
+{
+	jumbotron
+	{
+		display: none;
+	}
 }
 
 .jumbotron-fluid {

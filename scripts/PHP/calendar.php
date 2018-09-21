@@ -72,7 +72,7 @@ class Calendar {
 
     $this->daysInMonth=$this->_daysInMonth($month,$year);  
 
-    $content='<div id="calendar">'.
+    $content='<div class="col-md-9 col-xs-9" id="calendar">'.
       '<div class="box">'.
       $this->_createNavi().
       '</div>'.
