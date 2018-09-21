@@ -71,7 +71,7 @@
 	            <div id="bookArea"></div>
 	        </div>
 	        
-	        <div class="col-md-8 col-sm-5" id="createZone" style="padding-left: 45px;">
+	        <div class="col-md-8 col-sm-12" id="createZone" style="padding-left: 45px;">
 	            <!--
 	        This is the rightmost area of the page. Content is provided by function calls:
 	        
