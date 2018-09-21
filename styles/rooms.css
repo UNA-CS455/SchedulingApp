@@ -677,10 +677,10 @@ div.d {
 
 #logo {
     width: 9%;
-    height: 9%;
+    /*height: 9%;*/
     left: 1%;
     top: 2.5%;
-    position: absolute;
+    position: relative;
 }
 
 #logo:hover {
