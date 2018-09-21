@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    color: #444;
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 51px;
+    line-height: 44px;
+    letter-spacing: -2px;
+    font-weight: bold;
+}
+
+body {
+    font-size: 62.5%;
+    font-family: Helvetica, sans-serif;
+    background-color: #46166B
+}
+
+p {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+
+#page-wrap {
+    width: 660px;
+    background: white;
+    padding: 20px 50px 20px 50px;
+    margin: 20px auto;
+    min-height: 500px;
+    height: auto !important;
+    height: 500px;
+}
+
+#contact-area {
+    width: 600px;
+    margin-top: 25px;
+}
+
+#contact-area input,
+#contact-area textarea {
+    padding: 5px;
+    width: 200px;
+    font-family: Helvetica, sans-serif;
+    font-size: 1.3em;
+    margin: 0px, 0px 10px 0px;
+    border: 2px solid #ccc;
+}
+
+select {
+    padding: 5px;
+    width: 150px;
+    font-family: Helvetica, sans-serif;
+    font-size: 1.3em;
+    margin: 0px 0px 10px 0px;
+    border: 2px solid #ccc;
+}
+
+#contact-area textarea {
+    height: 90px;
+}
+
+#contact-area textarea:focus,
+#contact-area input:focus {
+    border: 2px solid #900;
+}
+
+#contact-area input.submit-button {
+    width: 100px;
+    float: left;
+    margin: 25px 0px 10px 0px;
+}
+
+.time {
+    position: absolute;
+    width: 4%;
+    height: 0%;
+}
+
+span {
+    display: block;
+    margin: 0 0 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#contact-area label {
+    float: left;
+    margin-right: 15px;
+    width: 200px;
+    padding-top: 5px;
+    font-size: 1.1em;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    padding: 15px;
+}

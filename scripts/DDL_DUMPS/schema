@@ -1,0 +1,64 @@
+-------------------------------------------------------------------------------------------------------
+Reservations
+-------------------------------------------------------------------------------------------------------
+roomid | owneremail | allowshare | headcount |  startdate  |  enddate  |  starttime  |  endtime  | comment |  id  |  repeat_id | res_email
+-------------------------------------------------------------------------------------------------------
+*roomid - the name of the room as a varchar. ie "Raburn 210" or "Conference Room"
+*owneremail - the email of the individual who requested this reservation be placed.
+*allowshare - a tinyint variable that can either be 1 or 0 (true or false, respectively). If true, then
+the individual making the reservation checked "Allow Other Reservations During This Time", meaning that
+the individual is alright sharing their room with someone else. A true value indicates that the reserving 
+individual entered a numeric value in the "headcount" field that is greater than 0 and less than the max seats
+available in a room, as defined in the rooms table.
+*headcount - this field is either null or contains a numeric value greater than 0 but less than the number of
+seats defined in the rooms table for the room this reservation belongs to as defined by the roomnumber field.
+It is to be checked to ensure that someone else attempting to share a room (provided the allowshare field is 1)
+can know how many students will be expected in the room during that time. We can use this to deny others from
+booking if their headcount on their reservation they are attempting to make plus this record's headcount field
+is greater than the max seats available as defined in the rooms table.
+*startdate - the staring date, a DATE variable.
+*enddate - the ending date, a DATE variable.
+*starttime - the staring time, a TIME variable stored in 24-hour format.
+*endtime - the ending time, a TIME variable stored in 24-hour format.
+*comment - a max 500 character field that is used for any additional comments the individual making the
+reservation may have.
+*id - an autoincrementing id field that we may need later.
+*repeat_id - an integer (maybe need a hex string instead?) that represents the id on repeated group of
+entries. Used for easily locating all records during the event of an update, retrieval or delete.
+For example, if someone chooses to repeat their reservation this time every Monday for the whole 
+semester, records are added for every monday, but all signed with the same repeat_id for easier
+access to the whole group later. This field can be NULL if the user just wanted to reserve once.
+*res_email - the email of the individual who placed this reservation.
+
+roomid is a FOREIGN KEY --> pointing to roomid in the rooms table. 
+email is a FOREIGN KEY --> pointing to email in the users table.
+id is the PRIMARY KEY of this table.
+
+-------------------------------------------------------------------------------------------------------
+rooms
+-------------------------------------------------------------------------------------------------------
+roomid | type | floor | seats | hascomputers | numcomputers | comment
+-------------------------------------------------------------------------------------------------------
+*roomid - the name of the room as a varchar. ie "Raburn 210" or "Conference Room"
+*type - one of the defined room types subject to change: (Conference, Testing Lab, Classroom, Other)
+*floor - a tinyint (-128 to 128) representing the floor number.
+*seats - an integer representing the number of seats (could be desks, computers, etc) in this room.
+*hascomputers - a tinyint that is 0 or false if this room has no computers, or a 1 or true if it does.
+if this is true, then numcomputers must have a value and should be checked.
+*numcomputers - 
+roomid is a PRIMARY KEY, since there cannot be more than one of the same room.
+
+-------------------------------------------------------------------------------------------------------
+users
+-------------------------------------------------------------------------------------------------------
+email | firstname | lastname | classification | permissions
+-------------------------------------------------------------------------------------------------------
+*email - email obtained from portal
+*firstname - Full first name
+*lastname - Full last name
+*classification - A string representing user type (professor, admin, worker, other)
+*permissions - A string of characters that can be used to define the permissions a user has.
+
+
+email is the PRIMARY KEY, since it is the "username" of this system and there cannot be two individuals
+with the same email in the system.

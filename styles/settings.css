@@ -1,0 +1,175 @@
+#room {
+    left: 21%;
+    position: absolute;
+    top: 15%;
+    height: 100%;
+    width: 100%;
+}
+
+div.d {
+    height: 100%;
+    top: 4%;
+    position: absolute;
+    width: 20%;
+    background-color: lightgrey;
+}
+
+#logo {
+    width: 10%;
+    height: 75%;
+    left: 1%;
+    top: 12.5%;
+}
+
+#pages {
+    margin-left: 0%;
+    margin-top: 8%;
+    font-size: 30px;
+    text-align: center;
+    background-color: lightgrey;
+    background-size: cover;
+}
+
+button.settingsButton {
+    background-color: white;
+    padding: 5% 5%;
+    font-size: 30px;
+}
+
+
+#agenda {
+    text-align: center;
+    z-index: 40;
+    border: 6px solid #5F6062;
+    height: 100%;
+    width: 22%;
+    left: 7%;
+    overflow-y: scroll;
+}
+
+#agendaReservations {
+    text-align: center;
+    height: 63%;
+    top: 25%;
+    width: 28%;
+    z-index: 99;
+    display: none;
+    left: 35%;
+    background-color: ghostwhite;
+    border: 10px solid #3b3b3b;
+    overflow-y: scroll;
+}
+
+#agenda-head {
+    text-align: left;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background-color: #46166B;
+}
+
+#agendaTable {
+    z-index: 40;
+    width: 100%;
+    height: 30%;
+}
+
+#agendaTable tbody {
+    position: initial;
+    width: 100%;
+    height: 100%;
+}
+
+#agendaTable th,
+#agendaTable td {
+
+    text-align: center;
+    padding: 8px;
+    position: relative;
+    width: 100%;
+    height: 22%;
+    display: block;
+}
+
+#agendaTable tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+#agendaTable tr {
+    position: relative;
+    width: 100%;
+
+    display: inline-flex;
+}
+
+#agendaTable th {
+    background-color: #5F6062;
+    color: white;
+}
+
+
+
+#banner {
+    width: 100%;
+    height: 13%;
+    left: 0%;
+    top: 0%;
+    background-color: #46166B;
+}
+
+#myResButton {
+    left: 20%;
+    bottom: 0.1%;
+    width: 10%;
+    height: 22%;
+    border-radius: 8px 8px 0px 0px;
+}
+
+#settingsButton {
+    left: 32%;
+    bottom: 0.1%;
+    width: 10%;
+    height: 22%;
+    border-radius: 8px 8px 0px 0px;
+}
+
+#myResButton:hover {
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+#settingsButton:hover {
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+.welcome {
+    right: 13%;
+    bottom: 12%;
+    width: 20%;
+    height: 20%;
+}
+
+#welcomeText {
+    color: white;
+    float: left;
+}
+
+.signOut {
+    right: -30%;
+    bottom: -56.9%;
+    width: 41%;
+    height: 93%;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.signOut:hover {
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+#agendaReservations h2 {
+    font-size: 2.8vmin;
+    position: relative;
+}
