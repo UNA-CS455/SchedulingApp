@@ -89,7 +89,7 @@ b {
 /************************************************************/
 
 .outerBookArea {
-    border-right: 3px solid #DDDDDD;
+    /* border-right: 3px solid #DDDDDD;
     border-collapse: collapse;
     position: absolute;
     left: 3vh;
@@ -98,10 +98,10 @@ b {
     top: 20.5%;
     height: 100%;
     min-height: 300px;
-    padding-right: 10px;
+    padding-right: 10px; */
 }
 
-.bookArea {
+/* .bookArea {
     width: 99%;
     left: 2%;
     top: 7.5%;
@@ -118,7 +118,7 @@ b {
     width: 99%;
     left: 2%;
     top: 7.5%;
-    /* max-height:35%; */
+    max-height:35%;
     max-height: 26%;
     background-color: white;
     overflow-y: scroll;
@@ -126,7 +126,7 @@ b {
     border-color: silver;
     display: flex;
     flex-wrap: wrap;
-}
+} */
 
 /*.roombox {
     background-color: ghostwhite;
