@@ -24,7 +24,7 @@ if($_userRes['classification'] != "")
 if($_userRes['email'] != "")
 	$_SESSION['email'] = $_userRes['email'];
 
-	if($user == $_userRes['email']/* &&  sha1($user . $_POST['password']) == $_userRes['password'] */)
+	if($user == $_userRes['email'] &&  sha1($user . $_POST['password']) == $_userRes['password'])
 	{
 		echo "this should show up once";
 		$result = 200;
