@@ -1281,6 +1281,7 @@ function bulkReserve()
 			showMessageBoxOK(this.responseText, "Make Reservation", false);
 			updateCalendar();
 			clearFields();
+			
 
 		}
 	};
