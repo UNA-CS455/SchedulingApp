@@ -33,7 +33,7 @@ if (isset ( $_GET ['roomid'] ))
 	$roomToEdit = $_editRoomRes->fetch_assoc ();
 } else
 {
-	echo "being edited";
+	// echo "being edited";
 	$roomToEdit = null;
 	$beingEdited = false;
 }
@@ -49,17 +49,17 @@ if (isset ( $_POST ['submit'] ))
 	$numComputers = ( int ) $_POST ['numcomputers'];
 	if ($_POST ['hascomputers'] == "on")
 	{
-		echo "made it into the if statement";
+		// echo "made it into the if statement";
 		$hasComputers = 1;
 		$numComputers = ( int ) $_POST ['numcomputers'];
 // 		header('Location: userSettings.php');
 	} 
 	else if($_POST['hascomputers'] == "off")
 	{
-		echo "else statement";
-		var_dump($_POST);
+		// echo "else statement";
+		// var_dump($_POST);
 		$hasComputers = 0;
-		$numComputers = 0;
+		$numComputers = null;
 		
 // 		header('Location: userSettings.php');
 	}
@@ -72,12 +72,12 @@ if (isset ( $_POST ['submit'] ))
 		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers', `rooms`.`numcomputers` = '$numComputers' WHERE `rooms`.`roomid` = '$roomid'";
 
 		$conn->query ( $_updateSql );
-		// header ( "Location: userSettings.php" );
+		header ( "Location: userSettings.php" );
 	} else
 	{
 		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
 		$conn->query ( $_createSql );
-		// header ( "Location: userSettings.php" );
+		header ( "Location: userSettings.php" );
 	}
 }
 
