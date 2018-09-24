@@ -33,34 +33,42 @@ if (isset ( $_GET ['roomid'] ))
 	$roomToEdit = $_editRoomRes->fetch_assoc ();
 } else
 {
+	echo "being edited";
 	$roomToEdit = null;
 	$beingEdited = false;
 }
 
 if (isset ( $_POST ['submit'] ))
 {
+	
 	$roomid = $_POST ['roomid'];
 	$type = $_POST ['type'];
 	$floor = $_POST ['floor'];
 	$seats = ( int ) $_POST ['seats'];
 // 	$hasComputers = $_POST ['hascomputers'];
 	$numComputers = ( int ) $_POST ['numcomputers'];
-	if ($_POST ['hascomputers'] = "on")
+	if ($_POST ['hascomputers'] == "on")
 	{
-		echo "didn't want to make it here";
+		echo "made it into the if statement";
 		$hasComputers = 1;
 		$numComputers = ( int ) $_POST ['numcomputers'];
-	} else
+// 		header('Location: userSettings.php');
+	} 
+	else if($_POST['hascomputers'] == "off")
 	{
-		echo "made it to the else statement";
+		echo "else statement";
+		var_dump($_POST);
 		$hasComputers = 0;
 		$numComputers = 0;
+		
+// 		header('Location: userSettings.php');
 	}
 
 // 	var_dump ( $_POST );
 
 	if ($beingEdited)
 	{
+		echo "editing now";
 		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers', `rooms`.`numcomputers` = '$numComputers' WHERE `rooms`.`roomid` = '$roomid'";
 
 		$conn->query ( $_updateSql );
@@ -182,7 +190,7 @@ if (isset ( $_POST ['submit'] ))
 					<div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<!-- hidden field for if checkbox is not checked -->
-						<input type="hidden" name="hascomputers" value="0">
+						<input type="hidden" name="hascomputers" value="off">
 						<input class="form-check-input" name="hascomputers" id="hasComputersCheck" type="checkbox" <?php echo($roomToEdit['hascomputers'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="hasComputers">Has Computers</label>
 					</div>
