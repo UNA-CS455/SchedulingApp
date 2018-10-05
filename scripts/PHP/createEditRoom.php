@@ -59,7 +59,7 @@ if (isset ( $_POST ['submit'] ))
 		// echo "else statement";
 		// var_dump($_POST);
 		$hasComputers = 0;
-		$numComputers = null;
+		$numComputers = 0;
 		
 // 		header('Location: userSettings.php');
 	}
@@ -73,6 +73,7 @@ if (isset ( $_POST ['submit'] ))
 
 		$conn->query ( $_updateSql );
 		header ( "Location: userSettings.php" );
+    var_dump($_updateSql);
 	} else
 	{
 		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
