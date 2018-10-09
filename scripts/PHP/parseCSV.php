@@ -73,16 +73,16 @@ for ($i = 0; $i < count($data); $i++) {
             echo 'NON NULL DATE:' . date('Y-m-d', $dateIterator);
             echo "<br>";
             //print_r($data[$i][$dayIndicator]);
-            /*$dateToInsert = date("Y-m-d", $dateIterator);
-            $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, termstart, termend, startdate, enddate, starttime, endtime, occur, comment, res_email)
-                  VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$termStart', '$termEnd', '$dateToInsert', '$dateToInsert', '$startTime', '$endTime', '$occur', '$comment', '$owneremail')";
+             $dateToInsert = date("Y-m-d", $dateIterator);
+              $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, termstart, termend, startdate, enddate, starttime, endtime, occur, comment, res_email)
+              VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$termStart', '$termEnd', '$dateToInsert', '$dateToInsert', '$startTime', '$endTime', '$occur', '$comment', '$owneremail')";
 
 
-            if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }*/
+              if ($conn->query($sql) === TRUE) {
+              echo "New record created successfully";
+              } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+              }
         }
 
 
