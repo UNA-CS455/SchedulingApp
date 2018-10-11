@@ -286,7 +286,7 @@ if(isset($_SESSION['username'])){
   // Generate all rooms area
   ///////////////////////////////////////////////////////////////////////////
 
-  echo "<span id='allroomsheader'></span>";
+  echo "<span id='allroomsheader'>All Rooms</span>";
   // echo "<div id='bookArea' class='bookArea'>";
   echo "<div class='table-responsive' style='height: 500px; overflow: auto;'><table class='table table-sm'>
     <thead>
@@ -355,7 +355,8 @@ if(isset($_SESSION['username'])){
   $sql = "select distinct rooms.roomid, rooms.seats, rooms.`type`, favorites.email from rooms
           left join favorites
           on favorites.roomid = rooms.roomid
-          and favorites.email = '" . $_SESSION['username'] . "'";
+          and favorites.email = '" . $_SESSION['username'] . "'
+          ORDER BY email desc, roomid";
 
   $result = $conn->query($sql);
   // var_dump($result);
@@ -396,7 +397,7 @@ if(isset($_SESSION['username'])){
               echo'<td>
                     <a href="scripts/PHP/favorite.php?room=' . $row['roomid'] . '">
                       <button class="btn" style="background-color: transparent">
-                        <i style="color: #E57B72;" class="fas fa-heart" aria-hidden="true" ></i>
+                        <i style="color: #E57B72;" class="fas fa-heart fa-lg" aria-hidden="true" ></i>
                       </button>
                     </a>
                   </td>';
@@ -406,7 +407,7 @@ if(isset($_SESSION['username'])){
               echo'<td>
                     <a href="scripts/PHP/favorite.php?room=' . $row['roomid'] . '">
                       <button class="btn" style="background-color: transparent">
-                        <i  class="far fa-heart" aria-hidden="true" ></i>
+                        <i  class="far fa-heart fa-lg" aria-hidden="true" ></i>
                       </button>
                     </a>
                   </td>';
