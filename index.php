@@ -50,7 +50,7 @@
 	        <script src="scripts/JS/rooms.js"></script>
 	        <script src="scripts/JS/jquery-3.3.1.min.js"></script>
 	        <?php 
-	          include("{$_SERVER['DOCUMENT_ROOT']}/dev/workspace/SchedulingApp/includes/header.php")
+	          include("{$_SERVER['DOCUMENT_ROOT']}/SchedulingApp/includes/header.php");
 	        ?>
 	        <div style="position:absolute" id="agendaReservations">
 	            <!--
