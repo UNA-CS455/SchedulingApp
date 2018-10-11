@@ -200,7 +200,7 @@ if(isset($_SESSION['username'])){
   // Generate favorites area
   ///////////////////////////////////////////////////////////////////////////
   
-  // echo "<span id='favsheader'></span>";
+  echo "<span id='favsheader'></span>";
   // echo "<div class='table-responsive' style='height: 150;; overflow: auto;'><table class='table table-sm table-hover'>
   //         <thead>
   //           <tr>
@@ -280,15 +280,16 @@ if(isset($_SESSION['username'])){
   if($result->num_rows == 0){
     echo "<h4> No Results </h4>";
   } */
-  echo "</tbody></table></div>";
+  // echo "</tbody></table></div>";
   
   ///////////////////////////////////////////////////////////////////////////
   // Generate all rooms area
   ///////////////////////////////////////////////////////////////////////////
 
-  echo "<span id='allroomsheader'>All Rooms</span>";
+  // echo "<span id='allroomsheader'>All Rooms</span>";
+  echo"<h1 style='font-size: 19; background-color: #337ab7; border-color: #2e6da4; color: white; padding: 5px; border-radius: 5px;'>All Rooms<h1>";
   // echo "<div id='bookArea' class='bookArea'>";
-  echo "<div class='table-responsive' style='height: 500px; overflow: auto;'><table class='table table-sm'>
+  echo "<div class='table-responsive' style='height: 450px; overflow: auto;'><table class='table table-sm'>
     <thead>
       <tr>
         <th scope='col'>
