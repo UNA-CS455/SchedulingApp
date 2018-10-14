@@ -9,7 +9,8 @@ $days = array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
 
 
 require "db_conf.php"; // set servername,username,password,and dbname
-$csv = file_get_contents('classschedule.csv', FILE_USE_INCLUDE_PATH);
+$filePath = "../../classschedule.csv";                //set this to the path that an admin specifies in their personal filesystem on seperate page, send to this script
+$csv = file_get_contents($filePath, FILE_USE_INCLUDE_PATH);
 $lines = explode("\n", $csv);
 // remove the first element from the array
 $head = str_getcsv(array_shift($lines));
@@ -72,10 +73,12 @@ for ($i = 0; $i < count($data); $i++) {
 
             echo 'NON NULL DATE:' . date('Y-m-d', $dateIterator);
             echo "<br>";
-            //print_r($data[$i][$dayIndicator]);
+            print_r($data[$i][$dayIndicator]);
              $dateToInsert = date("Y-m-d", $dateIterator);
-              $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, termstart, termend, startdate, enddate, starttime, endtime, occur, comment, res_email)
-              VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$termStart', '$termEnd', '$dateToInsert', '$dateToInsert', '$startTime', '$endTime', '$occur', '$comment', '$owneremail')";
+              $collisionID = md5($roomnumber . $owneremail . $allowshare . $headcount . $termStart . $termEnd . $dateToInsert . $dateToInsert . $startTime . $endTime . $occur . $comment . $owneremail);
+              echo "<br>$collisionID</br>";
+              $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, termstart, termend, startdate, enddate, starttime, endtime, occur, comment, res_email, unique_identifier)
+              VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$termStart', '$termEnd', '$dateToInsert', '$dateToInsert', '$startTime', '$endTime', '$occur', '$comment', '$owneremail', '$collisionID')";
 
 
               if ($conn->query($sql) === TRUE) {
@@ -83,10 +86,11 @@ for ($i = 0; $i < count($data); $i++) {
               } else {
               echo "Error: " . $sql . "<br>" . $conn->error;
               }
+             
         }
 
 
-
+         
         //echo date('Y-m-d', $dateIterator);
         echo "<br>----------<br>";
         $dateIterator = $dateIterator + 86400;
