@@ -1,6 +1,7 @@
 <?php session_start();
 
-include "ValidateReservation.php";
+  require 'db_conf.php';
+  include "ValidateReservation.php";
 
 /**************************************************************************
 Retrieve Day View Script
@@ -16,7 +17,13 @@ March 2018
 **************************************************************************/
 
 
-    $date = $_GET['date'];
+
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $date = $_GET['date'];
 	$selectedRoom = $_GET['room'];
 
 	if($date == null || $selectedRoom == null || $date == "null" || $selectedRoom == "null"){
@@ -25,14 +32,8 @@ March 2018
 		echo "<h1>Please select a date and a room to check its availability.</h1>";
 		return;
 	}
+
 	//Script to fill in the table with reservations
-	require 'db_conf.php';
-
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-
 	$sql = " SELECT * FROM reservations WHERE startdate='$date' AND roomnumber= '$selectedRoom' ORDER BY starttime";
 	$results = $conn->query($sql);
 
