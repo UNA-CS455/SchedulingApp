@@ -64,8 +64,8 @@ div#calendar div.box-content {
     position: relative;
     display: table;
     margin-top: 4px;
-    width: 125%;
-    margin-left: 9px;
+    width: 128.2%;
+    margin-left: -3px;
     height: 65%;
 }
 
@@ -125,7 +125,7 @@ div#calendar ul.dates li {
     vertical-align: middle;
     float: left;
     list-style-type: none;
-    width: 13.35%;
+    width: 13.53%;
     height: 16%;
     /* font-size: 15px; */
     background-color: #5f6062;
@@ -149,7 +149,7 @@ div#calendar ul.dates li:hover {
     vertical-align: middle;
     float: left;
     list-style-type: none;
-    width: 13.38%;
+    width: 13.53%;
     height: 16%;
     font-size: 15px;
     background-color: #46166B;

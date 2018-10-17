@@ -771,3 +771,8 @@ button.settingsButton {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+@media (max-width: 992px)
+{
+  .index-body {overflow-y: scroll;}
+}

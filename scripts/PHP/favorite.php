@@ -2,43 +2,68 @@
 
 require 'db_conf.php';
 
-if ($_POST['add'] == "yes"){
-	// add a favorite
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	} 
+if ($_GET['room']){
 
-	$sql = "INSERT INTO favorites (email, roomid)
-	VALUES ('" . $_SESSION['username'] . "', '" . $_POST['roomid'] . "')";
+  $gotRoom = $_GET['room'];
+  $email = $_SESSION['username'];
 
-	if ($conn->query($sql) === TRUE) {
-		echo "New record created successfully";
-	} else {
-		echo "Error: " . $sql . "<br>" . $conn->error;
-	}
+  // add a favorite
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  } 
 
-	$conn->close();
-}
-else{
-	// remove one.
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	} 
+  $checkSql = "Select * FROM favorites WHERE roomid = '$gotRoom' AND email = '$email'";
 
-	// sql to delete a record
-	$sql = "DELETE FROM favorites WHERE email='" . $_SESSION['username'] . "' AND roomid='" . $_POST['roomid'] . "' LIMIT 1";
+  $checkResponse = $conn->query($checkSql);
 
-	if ($conn->query($sql) === TRUE) {
-		echo "Record deleted successfully";
-	} else {
-		echo "Error deleting record: " . $conn->error;
-	}
+  $values = $checkResponse->fetch_all();
 
-	$conn->close();
+
+
+  var_dump($values);
+
+  if(!$values > 0)
+  {
+    // echo "added a room";
+    $sql = "INSERT INTO favorites (email, roomid)
+    VALUES ('" . $_SESSION['username'] . "', '" . $_GET['room'] . "')";
+
+    if ($conn->query($sql) === TRUE) {
+      echo "New record created successfully";
+      header("Location: " . $_SERVER['HTTP_REFERER']);
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+  }
+  else
+  {
+    // echo "deleted a room";
+    // // remove one.
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    } 
+
+    // sql to delete a record
+    $sql = "DELETE FROM favorites WHERE email= '$email' AND roomid= '$gotRoom' LIMIT 1";
+
+    var_dump($sql);
+
+    if ($conn->query($sql) === TRUE) {
+      echo "Record deleted successfully";
+      header("Location: " . $_SERVER['HTTP_REFERER']);
+    } else {
+      echo "Error deleting record: " . $conn->error;
+    }
+
+    $conn->close();
+  }
 }
 
 ?>
+

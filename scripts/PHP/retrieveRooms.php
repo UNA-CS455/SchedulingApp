@@ -158,16 +158,16 @@ if(isset($_SESSION['username'])){
     $result = $conn->query($sql); // run the query
 
   //get all rooms first
-  $room_array = array();
-  while ($rowItem = $result->fetch_assoc()) {
+  // $room_array = array();
+  // while ($rowItem = $result->fetch_assoc()) {
 
-    $rowResult = array(
-      "roomid" => $rowItem['roomid'],
-      "seats" => $rowItem['seats'],
-      "type" => $rowItem['type']
-    );
-    $room_array[] = $rowResult; // append row to result.
-  }
+  //   $rowResult = array(
+  //     "roomid" => $rowItem['roomid'],
+  //     "seats" => $rowItem['seats'],
+  //     "type" => $rowItem['type']
+  //   );
+  //   $room_array[] = $rowResult; // append row to result.
+  // }
 
   ///////////////////////////////////////////////////////////////////////////
   // Check allow sharing
@@ -201,92 +201,95 @@ if(isset($_SESSION['username'])){
   ///////////////////////////////////////////////////////////////////////////
   
   echo "<span id='favsheader'></span>";
-  echo "<div class='table-responsive' style='height: 150;; overflow: auto;'><table class='table table-sm table-hover'>
-          <thead>
-            <tr>
-              <th scope='col'>
-                Room
-              </th>
-              <th scope='col'>
-                Seats
-              </th>
-              <th scope='col'>
-                Type
-              </th>
-              <th scope='col'>
-                Favorite
-              </th>
-            </tr>
-          </thead>
-          <tbody id='favbookArea'>";
+  // echo "<div class='table-responsive' style='height: 150;; overflow: auto;'><table class='table table-sm table-hover'>
+  //         <thead>
+  //           <tr>
+  //             <th scope='col'>
+  //               Room
+  //             </th>
+  //             <th scope='col'>
+  //               Seats
+  //             </th>
+  //             <th scope='col'>
+  //               Type
+  //             </th>
+  //             <th scope='col'>
+  //               Favorite
+  //             </th>
+  //           </tr>
+  //         </thead>
+  //         <tbody id='favbookArea'>";
     
-  $favoritesSQL = "SELECT DISTINCT rooms.roomid,rooms.seats,rooms.type FROM favorites LEFT JOIN rooms on favorites.roomid = rooms.roomid WHERE email='" . $_SESSION['username'] . "' ORDER BY rooms.roomid";
-  $favoritesResult = $conn->query($favoritesSQL);
+  // $favoritesSQL = "SELECT DISTINCT rooms.roomid,rooms.seats,rooms.type FROM favorites LEFT JOIN rooms on favorites.roomid = rooms.roomid WHERE email='" . $_SESSION['username'] . "' ORDER BY rooms.roomid";
+  // $favoritesResult = $conn->query($favoritesSQL);
     
-  while ($favRow = $favoritesResult->fetch_assoc()) 
-  {
+  // while ($favRow = $favoritesResult->fetch_assoc()) 
+  // {
 
-    $imgName = "images/fav-select.png";
+  //   var_dump($favRow);
+
+  //   $imgName = "images/fav-select.png";
 
 
-    $inArray = false;
-    foreach ($room_array as $row) 
-    {
-      if($row['roomid'] == $favRow['roomid'] && !in_array($favRow['roomid'],$room_BlacklistArray)){
-        $inArray = true;
-        break;
-      }
-    }
-    if($inArray){
-      echo "<tr class='roombox' onclick='selectRoom(this.id)' id = 'fav_".$favRow['roomid']."'>
-                <td>
-                  <font class='roomboxcontent' id = 'p_".$favRow['roomid']."' >
-                    " . $favRow['roomid'] ."
-                  </font>
-                </td>
-                <td>
-                  ". $favRow['seats'] ."
-                </td>
-                <td>
-                  " . $favRow['type'] . "
-                </td>
-                <td id = 'fav_".$favRow['roomid']."'>
-                  <img id='starImg' src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon' align='middle'>
-                </td>
-              </tr>";
-    } else {
-      // not found in all rooms, so cut favorites
-      echo "<tr class='roomboxnotfound' button onclick='' class = 'roomboxnotfound' id = 'fav_".$favRow['roomid']."'>
-              <td>
-                <font class='roomboxcontent' id = 'p_".$favRow['roomid']."' >
-                  " . $favRow['roomid'] ."
-                </font>
-              </td>
-              <td>
-                ". $favRow['seats'] ."
-              </td>
-              <td>
-                " . $favRow['type'] . "
-              </td>
-              <td>
-                <img id='starImg' src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon' align='middle'>
-              </td>
-            </tr>";
-    }
-  }
+  //   $inArray = false;
+  //   foreach ($room_array as $row) 
+  //   {
+  //     if($row['roomid'] == $favRow['roomid'] && !in_array($favRow['roomid'],$room_BlacklistArray)){
+  //       $inArray = true;
+  //       break;
+  //     }
+  //   }
+  //   if($inArray){
+  //     echo "<tr class='roombox' onclick='selectRoom(this.id)' id = 'fav_".$favRow['roomid']."'>
+  //               <td>
+  //                 <font class='roomboxcontent' id = 'p_".$favRow['roomid']."' >
+  //                   " . $favRow['roomid'] ."
+  //                 </font>
+  //               </td>
+  //               <td>
+  //                 ". $favRow['seats'] ."
+  //               </td>
+  //               <td>
+  //                 " . $favRow['type'] . "
+  //               </td>
+  //               <td id = 'fav_".$favRow['roomid']."'>
+  //                 <img id='starImg' src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon' align='middle'>
+  //               </td>
+  //             </tr>";
+  //   } else {
+  //     // not found in all rooms, so cut favorites
+  //     echo "<tr class='roomboxnotfound' button onclick='' class = 'roomboxnotfound' id = 'fav_".$favRow['roomid']."'>
+  //             <td>
+  //               <font class='roomboxcontent' id = 'p_".$favRow['roomid']."' >
+  //                 " . $favRow['roomid'] ."
+  //               </font>
+  //             </td>
+  //             <td>
+  //               ". $favRow['seats'] ."
+  //             </td>
+  //             <td>
+  //               " . $favRow['type'] . "
+  //             </td>
+  //             <td>
+  //               <img id='starImg' src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon' align='middle'>
+  //             </td>
+  //           </tr>";
+  //   }
+  // }
   /*
   if($result->num_rows == 0){
     echo "<h4> No Results </h4>";
   } */
-  echo "</tbody></table></div>";
+  // echo "</tbody></table></div>";
   
   ///////////////////////////////////////////////////////////////////////////
   // Generate all rooms area
   ///////////////////////////////////////////////////////////////////////////
 
-  echo "<span id='allroomsheader'></span>";
+  // echo "<span id='allroomsheader'>All Rooms</span>";
+  echo"<h1 style='font-size: 19; background-color: #337ab7; border-color: #2e6da4; color: white; padding: 5px; border-radius: 5px;'>All Rooms<h1>";
   // echo "<div id='bookArea' class='bookArea'>";
-  echo "<div class='table-responsive' style='height: 285px; overflow: auto;'><table class='table table-sm'>
+  echo "<div class='table-responsive' style='height: 450px; overflow: auto;'><table class='table table-sm'>
     <thead>
       <tr>
         <th scope='col'>
@@ -305,40 +308,132 @@ if(isset($_SESSION['username'])){
     </thead>
     <tbody id='bookArea'>";
   
-  foreach ($room_array as $row) 
-  {
-    if(!in_array($row['roomid'],$room_BlacklistArray)){ // blacklist rooms are excluded
-      $imgName = "images/fav-unselect.png";
-      $sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
-      $result2 = $conn->query($sql);
-      while ($row2 = $result2->fetch_assoc()) {
-        // there is a favorite.
-        $imgName = "images/fav-select.png"; //color in star if this room is a favorite 
-      }
+  // foreach ($room_array as $row) 
+  // {
+  //   if(!in_array($row['roomid'],$room_BlacklistArray)){ // blacklist rooms are excluded
+  //     $imgName = "images/fav-unselect.png";
+  //     // $sql = "SELECT * FROM favorites WHERE roomid='" . $row['roomid'] . "' AND email='" . $_SESSION['username'] . "'";
+
+  //     // $sql = "select *
+  //     //         from favorites
+  //     //         right join rooms
+  //     //         on favorites.roomid = rooms.roomid
+  //     //         WHERE favorites.email = '" . $_SESSION['username'] . "'
+  //     //         AND favorites.roomid = '" . $row['roomid'] . "'
+  //     //         order by favorites.roomid asc";
+
+  //     // $result2 = $conn->query($sql);
+  //     // while ($row2 = $result2->fetch_assoc()) {
+  //     //   // var_dump($row2);
+  //     //   // there is a favorite.
+  //     //   $imgName = "images/fav-select.png"; //color in star if this room is a favorite 
+  //     // }
+
 
       
-      echo "<tr class='roombox' onclick='selectRoom(this.id)' id = '".$row['roomid']."'>
-                <td>
-                  <font class='roomboxcontent' id = 'p_".$row['roomid']."' >
-                    " . $row['roomid'] ."
-                  </font>
-                </td>
-                <td>
-                  ". $row['seats'] ."
-                </td>
-                <td>
-                  " . $row['type'] . "
-                </td>
-                <td id = '".$row['roomid']."'>
-                  <img id='starImg' src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon' align='middle'>
-                </td>
-              </tr>";
-    }
-  }
-  if($result->num_rows == 0){
-    echo "<h4> No Results </h4>";
+  //     echo "<tr class='roombox' onclick='selectRoom(this.id)' id = '".$row['roomid']."'>
+  //               <td>
+  //                 <font class='roomboxcontent' id = 'p_".$row['roomid']."' >
+  //                   " . $row['roomid'] ."
+  //                 </font>
+  //               </td>
+  //               <td>
+  //                 ". $row['seats'] ."
+  //               </td>
+  //               <td>
+  //                 " . $row['type'] . "
+  //               </td>
+  //               <td id = '".$row['roomid']."'>
+  //                 <img id='starImg' src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon' align='middle'>
+  //               </td>
+  //             </tr>";
+  //   }
+  // }
+  // if($result->num_rows == 0){
+  //   echo "<h4> No Results </h4>";
+  // }
+
+  $sql = "select distinct rooms.roomid, rooms.seats, rooms.`type`, favorites.email from rooms
+          left join favorites
+          on favorites.roomid = rooms.roomid
+          and favorites.email = '" . $_SESSION['username'] . "'
+          ORDER BY email desc, roomid";
+
+  $result = $conn->query($sql);
+  // var_dump($result);
+  $room_array = array();
+  while($rows = $result->fetch_assoc())
+  {
+    // var_dump($rows);
+    $rowResult = array
+    (
+      "roomid" => $rows['roomid'],
+      "seats" => $rows['seats'],
+      "type" => $rows['type'],
+      "email" => $rows['email']
+    );
+    $room_array[] = $rowResult;
   }
   
+
+  // var_dump($room_array);
+
+  foreach ($room_array as $row)
+  {
+    echo "<tr class='roombox' onclick='selectRoom(this.id)' id = '".$row['roomid']."'>
+            <td>
+              <font class='roomboxcontent' id = 'p_".$row['roomid']."' >
+                " . $row['roomid'] ."
+              </font>
+            </td>
+            <td>
+              ". $row['seats'] ."
+            </td>
+            <td>
+              " . $row['type'] . "
+            </td>";
+
+            if($row['email'])
+            {
+              echo'<td>
+                    <a href="scripts/PHP/favorite.php?room=' . $row['roomid'] . '">
+                      <button class="btn" style="background-color: transparent">
+                        <i style="color: #E57B72;" class="fas fa-heart fa-lg" aria-hidden="true" ></i>
+                      </button>
+                    </a>
+                  </td>';
+            }
+            else
+            {
+              echo'<td>
+                    <a href="scripts/PHP/favorite.php?room=' . $row['roomid'] . '">
+                      <button class="btn" style="background-color: transparent">
+                        <i  class="far fa-heart fa-lg" aria-hidden="true" ></i>
+                      </button>
+                    </a>
+                  </td>';
+            }
+            // <td id = '".$row['roomid']."'>
+            //   <img id='starImg' src='" . $imgName . "' onclick='favoriteClicked(this.parentElement); event.stopPropagation();' class='favoriteIcon' align='middle'>
+            // </td>
+          echo "</tr>";
+  }
+
+  
+
+    //get all rooms first
+  // $room_array = array();
+  // while ($rowItem = $result->fetch_assoc()) {
+
+  //   $rowResult = array(
+  //     "roomid" => $rowItem['roomid'],
+  //     "seats" => $rowItem['seats'],
+  //     "type" => $rowItem['type']
+  //   );
+  //   $r
+
+
+
   echo "</tbody></table></div>";
   // echo "</div>";
   
