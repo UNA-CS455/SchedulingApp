@@ -803,6 +803,9 @@ function clearFields()
 function showDayViewModal(date, room, showQuickBook)
 {
 	var quickBook = "";
+  console.log(date);
+  console.log(room);
+  console.log(showQuickBook);
 	if (showQuickBook)
 	{
 		quickBook = '<hr><h3>Quick Reserve</h3><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;"><table width="100%" style= "margin-top:-5%"><tr><td>Duration*:</td><td><input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "50" onchange = "" required>\
@@ -860,6 +863,8 @@ function openConfirmCreate(data)
 
 function calendarDateClicked(date)
 {
+  console.log(date.substring(3));
+  console.log(roomSelected);
 	showDayViewModal(date.substring(3), roomSelected, true);
 }
 
