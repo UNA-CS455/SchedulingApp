@@ -135,7 +135,7 @@ function setEmail(str) {
 												echo '<td>' . $user [2] . '</td>';
 												echo '<td>' . $user [0] . '</td>';
 												echo '<td>' . $user [4] . '</td>';
-												echo '<td>' . $user [5] . '</td>';
+												//echo '<td>' . $user [5] . '</td>';
 												echo '<td>';
 												echo '<a style="margin-right: 5px;" class="btn btn-default editBtn" href="editUser.php?email=' . $user [0] . '"><i class="fas fa-pencil-alt"></i></a>';
 												echo '<a style="margin-right: 5px;" class="btn btn-default" href="deleteUser.php?email=' . $user [0] . '"><i class="fas fa-trash-alt"></i></a>';
