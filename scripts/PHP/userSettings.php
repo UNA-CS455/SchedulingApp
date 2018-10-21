@@ -213,18 +213,6 @@
         include("{$_SERVER['DOCUMENT_ROOT']}/schedulingApp/includes/userReservationsInclude.php")
       ?>
     </div>
-    <!-- <div id="room">
-    <h1>User Settings</h1>
-    <br>
-    <div class="dropdown">
-        <form>
-            Email:
-            <input id="emailInput" type="text" onkeyup="search(this.value)">
-        </form>
-        <div id="userInfo" class="dropdown-content"></div>
-        <div id="userData"></div>
-                </div>
-</div> -->
 </body>
 
 </html>
