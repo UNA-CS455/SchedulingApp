@@ -6,11 +6,21 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-		$id = $_POST['id'];
+		
 
-        $sql = "DELETE FROM reservations WHERE id=$id LIMIT 1;";
-        if ($conn->query($sql) === TRUE) {
+    if(isset($_GET['id']))
+    {
+      $id = $_GET['id'];
+    }
+    else
+    {
+      $id = $_POST['id'];
+    }
+
+    $sql = "DELETE FROM reservations WHERE id=$id LIMIT 1;";
+    if ($conn->query($sql) === TRUE) {
 			echo "Record deleted successfully";
+      echo ("Location: " . $_SERVER['HTTP_REFERER']);
 		} else {
 			echo "Error deleting record: " . $conn->error;
 		}
