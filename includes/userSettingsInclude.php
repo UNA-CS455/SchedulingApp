@@ -83,20 +83,6 @@ function setEmail(str) {
 
 	<h1>User Settings</h1>
 	<br>
-	<!-- <div class="container dropdown">
-    <div class="row">
-      <div class="col-md-4">
-        <form>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input class="form-control" id="emailInput" type="text" onkeyup="search(this.value)">
-            </div>
-        </form>
-      </div>
-    </div>
-    <div id="userInfo" class="dropdown-content"></div>
-    <div id="userData"></div>
-  </div> -->
 	<button class="btn btn-success createUsrBtn">
 		<span>Create user&nbsp;&nbsp;<i class="fas fa-plus"></i></span>
 	</button>
@@ -112,7 +98,7 @@ function setEmail(str) {
 					<th>Last Name</th>
 					<th>Email</th>
 					<th>Classification</th>
-					<!-- <th>Group ID</th -->>
+					<!-- <th>Group ID</th -->
 					<th>Actions</th>
 				</thead>
 				<tbody>
