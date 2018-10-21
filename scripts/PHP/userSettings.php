@@ -193,7 +193,7 @@
     <div class="sidenav">
         <a id="userSettingsBtn">User Settings</a>
         <a id="roomSettingsBtn">Room Settings</a>
-        <a id="groupSettingsBtn">Group Settings</a>
+        <a id="groupSettingsBtn" style="font-size: 18.63px;">User Reservations</a>
     </div>
     <!-- Display user settings -->
     <div id="displayUserSettings" style="display: none;">
@@ -210,7 +210,7 @@
     <!-- Display group settings -->
     <div id="displayGroupSettings" style="">
       <?php 
-        include("{$_SERVER['DOCUMENT_ROOT']}/schedulingApp/includes/groupSettingsInclude.php")
+        include("{$_SERVER['DOCUMENT_ROOT']}/schedulingApp/includes/userReservationsInclude.php")
       ?>
     </div>
     <!-- <div id="room">
