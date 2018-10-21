@@ -6,7 +6,17 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_errno) {
     die("Connect Error: " . $conn->connect_error);
 }
-$id = $_POST['id'];
+
+if(isset($_GET['id']))
+{
+  $id = $_GET['id'];
+}
+else
+{
+  $id = $_POST['id'];
+}
+
+
 $select = "SELECT * FROM reservations WHERE id = $id";
 $result = $conn->query($select);
 if ($result->num_rows != 1) {
