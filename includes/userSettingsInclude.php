@@ -112,7 +112,7 @@ function setEmail(str) {
 					<th>Last Name</th>
 					<th>Email</th>
 					<th>Classification</th>
-					<th>Group ID</th>
+					<!-- <th>Group ID</th -->>
 					<th>Actions</th>
 				</thead>
 				<tbody>
