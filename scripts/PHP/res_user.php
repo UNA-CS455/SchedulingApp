@@ -27,7 +27,7 @@
         //$result = $conn->query($sql);
 		//$return_array = array();
 
-        $stmt->execute();
+    $stmt->execute();
 		$mResult = $stmt->get_result();
 		$return_array = [];
 		while ($row = $mResult->fetch_assoc()){
@@ -80,4 +80,4 @@
 		
 		echo json_encode($return_array); // return an array of reservations.
 		
-        ?>
+?>
