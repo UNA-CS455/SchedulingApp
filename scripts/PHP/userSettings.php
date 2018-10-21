@@ -97,10 +97,10 @@
     <link rel="stylesheet" href="../../styles/popup.css">
     <script>
     /*
-                                              Email search function
-                                              Performs AJAX to retrieve_emails.php that will perform a lookup from the database of emails
-                                              and return suggested emails as the user types.
-                                              */
+      Email search function
+      Performs AJAX to retrieve_emails.php that will perform a lookup from the database of emails
+      and return suggested emails as the user types.
+    */
     function search(partial) {
         var parser = new DOMParser();
 
