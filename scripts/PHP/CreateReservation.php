@@ -48,10 +48,16 @@ function processReservation()
 
 
 	//headcount
-	$numberOfSeats = ($_POST['numberOfSeats']);
-	$numberOfSeats = trim($numberOfSeats);
-	$numberOfSeats = filter_var($numberOfSeats, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
-
+  if(!$_POST['numberOfSeats'])
+  {
+    $numberOfSeats = null;
+  }
+  else
+  {
+  	$numberOfSeats = ($_POST['numberOfSeats']);
+  	$numberOfSeats = trim($numberOfSeats);
+  	$numberOfSeats = filter_var($numberOfSeats, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[0-9]{1,2}$/")));
+  }
 	//Hour reservation starts
 	$starthour = ($_POST['starthour']);
 	$starthour = trim($starthour);
