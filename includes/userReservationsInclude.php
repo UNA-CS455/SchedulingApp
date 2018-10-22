@@ -42,6 +42,7 @@
             while($reservation = $_reservationsRes->fetch_assoc())
             {
               echo '<tr>';
+              echo '<td style="display: none;" hidden>' . $reservation['id'] . '</td>';
               echo '<td>' . $reservation['owneremail'] . '</td>';
               echo '<td>' . $reservation['roomnumber'] . '</td>';
               echo '<td>' . $reservation['startdate'] . '</td>';
@@ -49,7 +50,7 @@
               echo '<td>' . $reservation['starttime'] . '</td>';
               echo '<td>' . $reservation['endtime'] . '</td>';
               echo '<td>';
-              echo '<a style="margin-right: 5px;" class="btn btn-default editBtn" href="editClicked.php?id=' . $reservation['id'] . '"><i class="fas fa-pencil-alt"></i></a>';
+              echo '<a style="margin-right: 5px;" class="btn btn-default" href="reservationEdit.php?id=' . $reservation['id'] . '"><i class="fas fa-pencil-alt"></i></a>';
               echo '<a style="margin-right: 5px;" class="btn btn-default" href="room_remove.php?id=' . $reservation['id'] . '"><i class="fas fa-trash-alt"></i></a>';
               echo '</td></tr>';
             }
@@ -61,5 +62,4 @@
 </div>
 
 <script>
-
 </script>
