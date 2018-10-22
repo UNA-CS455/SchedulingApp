@@ -7,14 +7,8 @@ if ($conn->connect_errno) {
     die("Connect Error: " . $conn->connect_error);
 }
 
-if(isset($_GET['id']))
-{
-  $id = $_GET['id'];
-}
-else
-{
-  $id = $_POST['id'];
-}
+
+$id = $_POST['id'];
 
 
 $select = "SELECT * FROM reservations WHERE id = $id";
