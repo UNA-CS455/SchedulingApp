@@ -128,9 +128,21 @@ if (isset ( $_POST ['submit'] ))
                   <?php
                     while($roomid = $_getRoomsResponse->fetch_assoc()){
                   ?>
-                  <option value="<?php echo $roomid['roomid']; ?>"><?php echo $roomid['roomid']; ?></option>
+                  <option value="<?php echo $roomid['roomid'];?>" <?php echo ($roomid['roomid'] == $reservation['roomnumber']) ? "selected" : "" ?>><?php echo $roomid['roomid']; ?></option>
                 <?php } ?>
                 </select>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-2">
+              <div class="form-group">
+                <label for="allowSharing">Allow Sharing</label>
+                <input id="allowshareCheck" class="form-check-input" type="checkbox" name="allowshare" <?php echo($reservation['allowshare'] == 1) ? 'checked value="1"' : '' ?>>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-2">
+              <div class="form-group">
+                <label for="headcount">Headcount</label>
+                <input id="headcount" class="form-control" type="text" name="headcount"  <?php echo($reservation['allowshare'] == 1) ? (($reservation['headcount']) ? 'value=" '.$reservation['headcount'].' "' :  'readonly value="0"') : '' ?> >
               </div>
             </div>
           </div>
@@ -141,4 +153,18 @@ if (isset ( $_POST ['submit'] ))
 
 </html>
 <script>
+
+    $('#allowshareCheck').change(function()
+    {
+      if(this.checked)
+      {
+        $('#headcount').removeAttr('readonly');
+      }
+      else
+      {
+        $('#headcount').prop('readonly', true);
+        $('#headcount').val(null);
+      }
+    })
+
 </script>
