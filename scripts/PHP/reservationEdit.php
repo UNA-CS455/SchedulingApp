@@ -142,7 +142,7 @@ if (isset ( $_POST ['submit'] ))
             <div class="col-lg-2 col-md-3 col-sm-2">
               <div class="form-group">
                 <label for="headcount">Headcount</label>
-                <input id="headcount" class="form-control" type="text" name="headcount"  <?php echo($reservation['allowshare'] == 1) ? (($reservation['headcount']) ? 'value=" '.$reservation['headcount'].' "' :  'readonly value="0"') : '' ?> >
+                <input id="headcount" class="form-control" type="text" name="headcount" readonly  <?php echo($reservation['allowshare'] == 1) ? (($reservation['headcount']) ? 'value=" '.$reservation['headcount'].' "' :  'value="0"') : '' ?> >
               </div>
             </div>
           </div>
