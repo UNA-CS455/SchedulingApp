@@ -1,7 +1,6 @@
 <?php session_start();
 
-  require 'db_conf.php';
-  include "ValidateReservation.php";
+include "ValidateReservation.php";
 
 /**************************************************************************
 Retrieve Day View Script
@@ -17,13 +16,7 @@ March 2018
 **************************************************************************/
 
 
-
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
-
-  $date = $_GET['date'];
+    $date = $_GET['date'];
 	$selectedRoom = $_GET['room'];
 
 	if($date == null || $selectedRoom == null || $date == "null" || $selectedRoom == "null"){
@@ -34,6 +27,15 @@ March 2018
 	}
 
 	//Script to fill in the table with reservations
+	require 'db_conf.php';
+
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+
+
+
 	$sql = " SELECT * FROM reservations WHERE startdate='$date' AND roomnumber= '$selectedRoom' ORDER BY starttime";
 	$results = $conn->query($sql);
 
@@ -166,8 +168,11 @@ March 2018
 		for($row = clone $dayStart; $row < $dayEnd; $row = $row->add(new DateInterval('PT60M'))){	
 			
 			echo "<tr>";	
+			
 			$timeBlock = $row->format('h:i'); // set time digits
-			$timeColor = (checkValidTime_overload_noerr($row->format('H:i') , DateTime::createFromFormat('H:i',$row->format('H:i'))->add(new DateInterval('PT60M'))->format('H:i'), $date, $selectedRoom) && checkEnoughSeats(false, $row->format('H:i') , DateTime::createFromFormat('H:i',$row->format('H:i'))->add(new DateInterval('PT60M'))->format('H:i'), $date, $selectedRoom, 1)) ? "bgcolor = '#e9ffe2'" : "bgcolor = '#ff8282'";
+			
+			$timeColor = /*(checkValidTime_overload_noerr($row->format('H:i') , DateTime::createFromFormat('H:i',$row->format('H:i'))->add(new DateInterval('PT60M'))->format('H:i'), $date, $selectedRoom) && checkEnoughSeats(false, $row->format('H:i') , DateTime::createFromFormat('H:i',$row->format('H:i'))->add(new DateInterval('PT60M'))->format('H:i'), $date, $selectedRoom, 1)) ? "bgcolor = '#e9ffe2'" :*/ "bgcolor = '#ff8282'";
+			
 			echo "<td " . $timeColor .">" . $timeBlock . "</td>";
 			
 			for($col = 0; $col < count($table); $col++){
@@ -205,5 +210,3 @@ March 2018
 	?>
 
   </table>
-
-  

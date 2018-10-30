@@ -42,18 +42,43 @@ if (isset ( $_GET ['id'] ))
   $_getReservationResponse = $conn->query($_getReservationSql);
   $reservation = $_getReservationResponse->fetch_assoc();
 
-  // var_dump($reservation);
-}
-else
-{
-  // echo "being edited";
-  
+  $id = $_GET['id'];
 }
 
-if (isset ( $_POST ['submit'] ))
+// ////////////////////////////////////////////////////////////////////////////////////
+// /////////PROCESS THE FORM
+// ////////////////////////////////////////////////////////////////////////////////////
+
+if(isset($_POST['submit']))
 {
-  
+  $owneremail = $_POST['owneremail'];
+  $roomnumber = $_POST['roomnumber'];
+  // $allowshare = $_POST['allowSharing'];
+  $headcount = $_POST['headcount'];
+  $termstart = $_POST['termstart'];
+  $termend = $_POST['termend'];
+  $startdate = $_POST['startdate'];
+  $enddate = $_POST['enddate'];
+  $occur = $_POST['occur'];
+  $comments = $_POST['comments'];
+  $starttime = $_POST['starttime'];
+  $endtime = $_POST['endtime'];
+
+  if(!isset($_POST['allowshare']))
+  {
+    $allowshare = 0;
+  }
+  else
+  {
+    $allowshare = 1;
+  }
+
+  // var_dump($allowshare);
+
+  $_editReservationSql = "UPDATE `reservations` SET `roomnumber`=$roomnumber, `allowshare`=$allowshare, `headcount`=$headcount, `termstart`=$termstart, `termend`=$termend, `startdate`=$startdate, `enddate`=$enddate, `starttime`=$starttime, `endtime`=$endtime, `occur`=$occur, `comment`=$comments WHERE `id`=$id";
+  $_editReservationResponse = $conn->query($_editReservationSql);
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -63,7 +88,8 @@ if (isset ( $_POST ['submit'] ))
   <script type="text/javascript" src="chrome-extension://aadgmnobpdmgmigaicncghmmoeflnamj/ng-inspector.js"></script>
 </head>
 
-<body onload="populateBlacklistRooms(null); populateGroupList();" data-gr-c-s-loaded="true">
+<body onload="populateBlacklistRooms(null); populateGroupList();" data-gr-c-s-loaded="true" overflow-y="scroll">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <div id="shader" onclick="shaderClicked()"></div>
   <!-- Jquery -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -86,6 +112,13 @@ if (isset ( $_POST ['submit'] ))
   <link rel="stylesheet" href="../../styles/calendar.css">
   <!-- Add? <link rel="stylesheet" href="styles/links.css"> <!--Taylor-->
   <link rel="stylesheet" href="../../styles/popup.css">
+  <style>
+    #allowSharingCheckbox
+      {
+        position: relative !important;
+        top: 30px;
+      }
+  </style>
   <title>Edit user</title>
   <div class="jumbotron-fluid">
     <img src="../../images/una.png" id="logo" onclick="window.location.href = ''">
@@ -111,20 +144,23 @@ if (isset ( $_POST ['submit'] ))
     <div class="container">
       <br />
       <h1>Edit Reservation</h1>
+      <p>
+        <small><i class="fas fa-exclamation-triangle fa-sm"></i> = required field</small>
+      </p>
       <br />
       <div class="row">
         <form name="reservationForm" method="POST" action="">
           <div class="row">
-            <div class="col-lg-2 col-md-3 col-sm-2">
+            <div class="col-lg-2 col-md-2 col-sm-2">
               <div class="form-group">
                 <label for="owneremail">Owner Email</label>
-                <input class="form-control" type="text" name="owneremail" <?php echo($reservation['owneremail']) ? 'placeholder= " '.$reservation['owneremail'].' "' : '' ?> readonly>
+                <input class="form-control" type="text" name="owneremail" <?php echo($reservation['owneremail']) ? 'placeholder= " '.$reservation['owneremail'].' " value="'.$reservation['owneremail'].'"' : '' ?> readonly>
               </div>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-2">
+            <div class="col-lg-2 col-md-2 col-sm-2">
               <div class="form-group">
                 <label for="roomnumber">Room Number</label>
-                <select class="form-control">
+                <select class="form-control" name="roomnumber">
                   <?php
                     while($roomid = $_getRoomsResponse->fetch_assoc()){
                   ?>
@@ -133,19 +169,71 @@ if (isset ( $_POST ['submit'] ))
                 </select>
               </div>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-2">
-              <div class="form-group">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+              <div class="form-group" id="allowSharingCheckbox">
                 <label for="allowSharing">Allow Sharing</label>
                 <input id="allowshareCheck" class="form-check-input" type="checkbox" name="allowshare" <?php echo($reservation['allowshare'] == 1) ? 'checked value="1"' : '' ?>>
               </div>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-2">
+            <div class="col-lg-2 col-md-2 col-sm-2">
               <div class="form-group">
                 <label for="headcount">Headcount</label>
                 <input id="headcount" class="form-control" type="text" name="headcount" readonly  <?php echo($reservation['allowshare'] == 1) ? (($reservation['headcount']) ? 'value=" '.$reservation['headcount'].' "' :  'value="0"') : '' ?> >
               </div>
             </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+              <div class="form-group">
+                <label for="termstart">Term Start</label>
+                <input class="form-control" type="date" name="termstart" <?php echo($reservation['termstart']) ? 'placeholder= " '.$reservation['termstart'].' "' : 'placeholder = "yyyy - mm - dd"' ?> >
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+              <div class="form-group">
+                <label for="termend">Term End</label>
+                <input class="form-control" type="date" name="termend" <?php echo($reservation['termend']) ? 'placeholder= " '.$reservation['termend'].' "' : 'placeholder = "yyyy - mm - dd"' ?> >
+              </div>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+              <div class="form-group">
+                <label for="startdate">Start Date <i class="fas fa-exclamation-triangle fa-xs"></i></label>
+                <input required="required" class="form-control" type="date" name="startdate" <?php echo($reservation['startdate']) ? 'value= " '.$reservation['startdate'].' "' : '' ?> >
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+              <div class="form-group">
+                <label for="enddate">End Date <i class="fas fa-exclamation-triangle fa-xs"></i></label>
+                <input required="required" class="form-control" type="date" name="enddate" <?php echo($reservation['enddate']) ? 'placeholder= " '.$reservation['enddate'].' "' : 'placeholder = "yyyy - mm - dd"' ?> >
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+              <div class="form-group">
+                <label for="occur">Occurence</label>
+                <select class="form-control" name="occur">
+                  <option <?php echo($reservation['occur'] == "Once") ? 'Selected' : '' ?> value="Once">Just Once</option>
+                  <option <?php echo($reservation['occur'] == "Weekly") ? 'Selected' : '' ?> value="Weekly">Weekly</option>
+                  <option <?php echo($reservation['occur'] == "Monthly") ? 'Selected' : '' ?> value="Monthly">Monthly</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+              <label for="starttime">Start Time <i class="fas fa-exclamation-triangle fa-xs"></i></label>
+              <input required type="time" name="starttime" class="form-control">
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+              <label for="endtime">End Time <i class="fas fa-exclamation-triangle fa-xs"></i></label>
+              <input required type="time" name="endtime" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <label for="comments" class="control-label">Comments</label>
+              <textarea name="comments" class="form-control" rows="4"></textarea>
+              <br/>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="submit" name="submit" type="submit">Update Reservation</button>
         </form>
       </div>
     </div>
