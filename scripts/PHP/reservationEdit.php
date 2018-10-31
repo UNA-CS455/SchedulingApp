@@ -198,7 +198,7 @@ if(isset($_POST['submit']))
             <div class="col-lg-2 col-md-2 col-sm-2">
               <div class="form-group">
                 <label for="startdate">Start Date <i class="fas fa-exclamation-triangle fa-xs"></i></label>
-                <input required="required" class="form-control" type="date" name="startdate" <?php echo($reservation['startdate']) ? 'value= " '.$reservation['startdate'].' "' : '' ?> >
+                <input id="startdate" required="required" class="form-control" type="date" name="startdate" <?php echo($reservation['startdate']) ? 'value= " '.$reservation['startdate'].' "' : '' ?> >
               </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
@@ -233,6 +233,9 @@ if(isset($_POST['submit']))
               <br/>
             </div>
           </div>
+          <div class="col-lg-2 col-md-2 col-sm-2">
+              <button class="btn btn-primary" type="button" onclick="showDayViewModal(document.getElementById(&quot;startdate&quot;).value, document.getElementsByName(&quot;roomnumber&quot;)[0].value);">Check</button>
+            </div>
           <button class="btn btn-primary" id="submit" name="submit" type="submit">Update Reservation</button>
         </form>
       </div>
