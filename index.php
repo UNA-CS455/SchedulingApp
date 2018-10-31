@@ -38,7 +38,7 @@
   <title>LeoBook</title>
 </head>
 
-<body onload="showCreateResForm();fieldChanged();" class="container-fluid index-body">
+<body onload="showCreateResForm();fieldChanged();" class="container-fluid index-body" style="overflow-y: scroll;" >
   <div class="row">
     <!-- By default, load the make reservation screen into createZone -->
     <div id="shader" onclick="shaderClicked()"></div>
