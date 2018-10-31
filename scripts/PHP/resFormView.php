@@ -81,11 +81,11 @@
         <textarea class="form-control" rows="4" cols="50" id="comment" style="resize:none; width:55%"></textarea>
       </div>
     </div><!-- end form row -->
-    <div class="form-row">
+<!--     <div class="form-row">
       <div class="form-group col-md-10 col-sm-10 col-xs-10">
         <input type="checkbox" id="confimeEmailCheck">
         <label>Send me a Confimation email</label>
-      </div>
+      </div> -->
     </div><!-- end form row -->
     <div class="form-row">
       <div class="form-group col-md-4 col-sm-4 col-xs-4">

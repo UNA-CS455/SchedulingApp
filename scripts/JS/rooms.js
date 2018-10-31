@@ -808,11 +808,19 @@ function showDayViewModal(date, room, showQuickBook)
   console.log(showQuickBook);
 	if (showQuickBook)
 	{
-		quickBook = '<hr><h3>Quick Reserve</h3><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;"><table width="100%" style= "margin-top:-5%"><tr><td>Duration*:</td><td><input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "50" onchange = "" required>\
+		// ORIGIONAL WITH EMAIL CONFIRMATION
+		// quickBook = '<hr><h3>Quick Reserve</h3><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;"><table width="100%" style= "margin-top:-5%"><tr><td>Duration*:</td><td><input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "50" onchange = "" required>\
+  //   <input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "50" onchange = "" required></td></tr><br> \
+  //   <tr><td>Reserving for*:</td><td><input type="text" width="100%" id="owneremail" value="" required></td></tr><br>\
+  //   <tr><td>Brief Comment: </td><td><input type="text" width="100%" id="comment"><br><input type="hidden" id="date" value="' + date + '"><input type="hidden" id="allowshare" value="0" ></td><tr></table><br>\
+  //   <input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
+
+  		// NO EMAIL CONFIRMATION
+	  	quickBook = '<hr><h3>Quick Reserve</h3><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;"><table width="100%" style= "margin-top:-5%"><tr><td>Duration*:</td><td><input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "50" onchange = "" required>\
     <input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "50" onchange = "" required></td></tr><br> \
     <tr><td>Reserving for*:</td><td><input type="text" width="100%" id="owneremail" value="" required></td></tr><br>\
     <tr><td>Brief Comment: </td><td><input type="text" width="100%" id="comment"><br><input type="hidden" id="date" value="' + date + '"><input type="hidden" id="allowshare" value="0" ></td><tr></table><br>\
-    <input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
+    <br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
 	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
