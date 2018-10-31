@@ -803,9 +803,9 @@ function clearFields()
 function showDayViewModal(date, room, showQuickBook)
 {
 	var quickBook = "";
-  console.log(date);
-  console.log(room);
-  console.log(showQuickBook);
+	console.log(date);
+	console.log(room);
+	console.log(showQuickBook);
 	if (showQuickBook)
 	{
 		// ORIGIONAL WITH EMAIL CONFIRMATION
