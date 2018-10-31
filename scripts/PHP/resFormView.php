@@ -31,7 +31,7 @@
     <div class="form-row">
       <div class="form-group col-md-3 col-sm-3 col-xs-3">
         <label>
-          Duration
+          Date
         </label>
         <input class="form-control" id = 'date' name = 'date' type = 'date' onchange = "fieldChanged()" value=<?php echo date('Y-m-d'); ?>>
       </div>
