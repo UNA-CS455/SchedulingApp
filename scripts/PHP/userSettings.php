@@ -85,6 +85,7 @@
 </head>
 
 <body onload="populateBlacklistRooms(null); populateGroupList();" data-gr-c-s-loaded="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <div id="shader" onclick="shaderClicked()"></div>
     <!-- Jquery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
