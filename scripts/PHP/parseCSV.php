@@ -9,7 +9,7 @@ $days = array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
 
 
 require "db_conf.php"; // set servername,username,password,and dbname
-$filePath = "../../classschedule.csv";                //set this to the path that an admin specifies in their personal filesystem on seperate page, send to this script
+$filePath = "../../CSV_FILE_HERE";                //set this to the path that an admin specifies in their personal filesystem on seperate page, send to this script
 $csv = file_get_contents($filePath, FILE_USE_INCLUDE_PATH);
 $lines = explode("\n", $csv);
 // remove the first element from the array
