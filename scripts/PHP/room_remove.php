@@ -20,7 +20,12 @@
     $sql = "DELETE FROM reservations WHERE id=$id LIMIT 1;";
     if ($conn->query($sql) === TRUE) {
 			echo "Record deleted successfully";
-      header ("Location: " . $_SERVER['HTTP_REFERER']);
+      $ref = $_SERVER['HTTP_REFERER'];
+      // echo $ref;
+      if(strpos($ref, 'userSettings.php') == true)
+      {
+        header ("Location: " . $_SERVER['HTTP_REFERER']);
+      }
 		} else {
 			echo "Error deleting record: " . $conn->error;
 		}
