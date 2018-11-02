@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `favorites` (
   `roomid` varchar(100) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cs455.favorites: ~14 rows (approximately)
+-- Dumping data for table cs455.favorites: ~10 rows (approximately)
 /*!40000 ALTER TABLE `favorites` DISABLE KEYS */;
 INSERT INTO `favorites` (`email`, `roomid`, `id`) VALUES
 	('dbrown4@una.edu', 'Keller 122', 74),
@@ -52,15 +52,15 @@ INSERT INTO `favorites` (`email`, `roomid`, `id`) VALUES
 	('dbrown4@una.edu', 'Keller 220', 91),
 	('dbrown4@una.edu', 'Keller 320', 93),
 	('dbrown4@una.edu', 'Keller 222', 96),
-	('admin@una.edu', 'Keller 3304', 131),
-	('admin@una.edu', 'Keller 122', 132),
-	('admin@una.edu', 'Keller 222', 142),
-	('admin@una.edu', 'Keller 133', 143),
-	('super@una.edu', 'Keller 220', 146),
-	('super@una.edu', 'Keller 133', 147),
 	('super', 'Keller 220', 195),
 	('super', 'Keller 222', 196),
-	('super', 'Keller 233', 197);
+	('super', 'Keller 233', 197),
+	('admin@una.edu', 'Keller 122', 198),
+	('admin@una.edu', 'Keller 233', 199),
+	('admin@una.edu', 'Keller 221', 200),
+	('user@una.edu', 'Raburn 305', 201),
+	('user@una.edu', 'Raburn 210', 202),
+	('user@una.edu', 'Raburn 207', 203);
 /*!40000 ALTER TABLE `favorites` ENABLE KEYS */;
 
 -- Dumping structure for table cs455.groups
@@ -97,9 +97,9 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   `unique_identifier` varchar(33) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `identifier` (`unique_identifier`)
-) ENGINE=InnoDB AUTO_INCREMENT=13360 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13378 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cs455.reservations: ~5,907 rows (approximately)
+-- Dumping data for table cs455.reservations: ~5,776 rows (approximately)
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
 INSERT INTO `reservations` (`roomnumber`, `owneremail`, `allowshare`, `headcount`, `termstart`, `termend`, `startdate`, `enddate`, `starttime`, `endtime`, `occur`, `comment`, `id`, `res_email`, `unique_identifier`) VALUES
 	('KELLER 322', 'N/A', 0, 0, '2019-01-09', '2019-05-08', '2019-01-15', '2019-01-15', '18:00:00', '20:45:00', 'weekly', 'Automated reservation by parseCSV.php', 7300, 'N/A', '500bbea0a9ff48c3dba60239f2f48641'),
@@ -6214,12 +6214,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table cs455.users: ~3 rows (approximately)
+-- Dumping data for table cs455.users: ~2 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`email`, `firstname`, `lastname`, `password`, `classification`, `groupID`) VALUES
-	('admin@una.edu', 'Admin', 'account', NULL, 'ADMIN', 1),
-	('dbrown@una.edu', 'derek', 'brown', NULL, 'student', 2),
-	('super@una.edu', 'Admin', 'account', NULL, 'ADMIN', 1);
+	('admin@una.edu', 'admin', 'admin', '771fd8b75bddc7a94885ec0331bf0f3c298dc2ae', 'ADMIN', 2),
+	('super@una.edu', 'super', 'super', 'e97ce80acab2f20ca045fe17ba1d3f5a8087e963', 'ADMIN', 2),
+	('user@una.edu', 'user', 'user', 'f9b047f39effbd6912cc851ff989115f9b4f9ada', 'USER', 2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
