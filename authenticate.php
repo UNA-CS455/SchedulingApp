@@ -8,9 +8,9 @@ $in_ldap = false;
 $user = $_POST['username'];
 $_SESSION['username'] = $user;
 $pass = $_POST['password'];
-//$user .= "@una.edu";
+$user .= "@una.edu";
 
-/* echo $user;
+ echo $user;
   echo "\n";
   echo $pass;
   echo "\n";
@@ -39,17 +39,20 @@ $pass = $_POST['password'];
   $in_ldap = true;
   }
 
- */
-if ($user == "super" && $pass == "super") {      //superuser  for testing
-    $result = 200;
-    $ldap_permissions = 1;
-    $_SESSION['classification'] = "ADMIN";
- }
-    else {
-        $result = `java ActiveDirectory $user $pass`;
-        if ($result == 200)
-            $in_ldap = true;
-    }
+ 
+// if ($user == "super" && $pass == "super") {      //superuser  for testing
+//     $result = 200;
+//     $ldap_permissions = 1;
+//     $_SESSION['classification'] = "ADMIN";
+//  }
+//     else {
+//         $result = `java ActiveDirectory $user $pass`;
+//         if ($result == 200)
+//             $in_ldap = true;
+//     }
+
+
+    
 //append @una.edu for convenience in other source code files
 //verify ldap
 //check to see if user is in the user table
