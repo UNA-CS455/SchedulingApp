@@ -121,7 +121,7 @@ function processReservation()
 			$stmt = $conn->prepare("INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, startdate, enddate, starttime, endtime, occur, comment, res_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			$startAssist = date('H:i', strtotime($starthour . ":" . $startminute));
 			$endAssist = date('H:i', strtotime($endhour . ":" . $endminute));
-			$stmt->bind_param("ssissssssss", $roomnumber, $owneremail, $allowshare, $numberOfSeats, $date, $date, $startAssist, $endAssist, $occur, $comment, $logged_in_user);
+			$stmt->bind_param("ssiisssssss", $roomnumber, $owneremail, $allowshare, $numberOfSeats, $date, $date, $startAssist, $endAssist, $occur, $comment, $logged_in_user);
 			$check = $stmt->execute();
 			//$mResult = $stmt->get_result();
 			
