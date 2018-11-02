@@ -816,11 +816,7 @@ function showDayViewModal(date, room, showQuickBook)
   //   <input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
 
   		// NO EMAIL CONFIRMATION
-	  	quickBook = '<hr><h3>Quick Reserve</h3><form id = "quickBookForm" onsubmit="openConfirmCreate(getResFormData()); return false;"><table width="100%" style= "margin-top:-5%"><tr><td>Duration*:</td><td><input id = "timeStart"  name = "startTime "type = "time" step = "900" width = "50" onchange = "" required>\
-    <input id = "timeEnd" name = "endTime" type = "time" step = "900" width = "50" onchange = "" required></td></tr><br> \
-    <tr><td>Reserving for*:</td><td><input type="text" width="100%" id="owneremail" value="" required></td></tr><br>\
-    <tr><td>Brief Comment: </td><td><input type="text" width="100%" id="comment"><br><input type="hidden" id="date" value="' + date + '"><input type="hidden" id="allowshare" value="0" ></td><tr></table><br>\
-    <br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
+	  	quickBook = '<hr><h3>Quick Reserve</h3><form id=quickBookForm onsubmit="return openConfirmCreate(getResFormData()),!1"><style>.form-group{text-align:left}</style><div class="form-group row"><div class=col-sm-4><label>Duration <i aria-hidden=true class="fa fa-exclamation-triangle"></i>:</label></div><div class=col-sm-4><input id=timeStart class=form-control width=50 required name="startTime "step=900 type=time></div><div class=col-sm-4><input id=timeEnd class=form-control width=50 required name=endTime step=900 type=time></div></div><div class="form-group row"><div class=col-sm-4><label>Reserving for <i aria-hidden=true class="fa fa-exclamation-triangle"></i>:</label></div><div class=col-sm-8><input id=owneremail class=form-control width=100% required></div></div><div class="form-group row"><div class=col-sm-4><label>Brief Comment:</label></div><div class=col-sm-8><input id=comment class=form-control width=100%><input id=date type=hidden value="' + date + '"><input id=allowshare type=hidden value=0></div></div><div class="form-group row"><div class=col-sm-4></div><div class=col-sm-4><button class="btn btn-default"id=reserveButton type=submit value="Quick Reserve">Quick Reserve</button></div><div class=col-sm-4></div></div></form>';
 	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
