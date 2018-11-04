@@ -226,7 +226,7 @@ function deleteClicked(id, id2)
 			if (this.readyState == 4 && this.status == 200)
 			{
 				//alert(this.responseText);
-				buttonhtml = "<button class='modal-button' onclick='closeModal()'>Ok</button>"
+				buttonhtml = "<button class='modal-button btn btn-secondary' onclick='closeModal()'>Ok</button>"
 				showMessageBox(this.responseText, "Delete Reservation", buttonhtml, false);
 				document.getElementById('deleteRes').style.display = "none";
 				document.body.style.backgroundColor = "rgba(0,0,0,0)";
@@ -273,7 +273,7 @@ function openConfirmDelete(ele)
 
 	lastDeleteClicked = ele;
 	buttonhtml = "<button class='modal-button' onclick='closeModal()'>Ok</button>"
-	showMessageBox("<br><br>Are you sure you want to delete reservation:<br><br>" + ele.children[0].innerHTML + "<br>From:<br>" + ele.children[1].innerHTML + "<br>To:<br>" + ele.children[2].innerHTML + "<br><br><button class = 'modal-button' id='yesDelete' onclick='deleteClicked(this.id," + String(ele.children[0].id) + ")'>Yes</button><button class='modal-button' id='noDelete' onclick='closeModal()'>No</button>", "Delete Reservation", "", false);
+	showMessageBox("<br><br>Are you sure you want to delete reservation:<br><br>" + ele.children[0].innerHTML + "<br>From:<br>" + ele.children[1].innerHTML + "<br>To:<br>" + ele.children[2].innerHTML + "<br><br><button class = 'modal-button btn btn-success' id='yesDelete' onclick='deleteClicked(this.id," + String(ele.children[0].id) + ")'>Yes</button><button class='modal-button btn btn-danger' id='noDelete' onclick='closeModal()'>No</button>", "Delete Reservation", "", false);
 
 }
 
@@ -816,7 +816,7 @@ function showDayViewModal(date, room, showQuickBook)
   //   <input type="checkbox" id="confirmEmailCheck">Send me a Confirmation email</input><br><br><input id="reserveButton" type="submit" value="Quick Reserve"> </form>';
 
   		// NO EMAIL CONFIRMATION
-	  	quickBook = '<hr><h3>Quick Reserve</h3><form id=quickBookForm onsubmit="return openConfirmCreate(getResFormData()),!1"><style>.form-group{text-align:left}</style><div class="form-group row"><div class=col-sm-4><label>Duration <i aria-hidden=true class="fa fa-exclamation-triangle"></i>:</label></div><div class=col-sm-4><input id=timeStart class=form-control width=50 required name="startTime "step=900 type=time></div><div class=col-sm-4><input id=timeEnd class=form-control width=50 required name=endTime step=900 type=time></div></div><div class="form-group row"><div class=col-sm-4><label>Reserving for <i aria-hidden=true class="fa fa-exclamation-triangle"></i>:</label></div><div class=col-sm-8><input id=owneremail class=form-control width=100% required></div></div><div class="form-group row"><div class=col-sm-4><label>Brief Comment:</label></div><div class=col-sm-8><input id=comment class=form-control width=100%><input id=date type=hidden value="' + date + '"><input id=allowshare type=hidden value=0></div></div><div class="form-group row"><div class=col-sm-4></div><div class=col-sm-4><button class="btn btn-default"id=reserveButton type=submit value="Quick Reserve">Quick Reserve</button></div><div class=col-sm-4></div></div></form>';
+	  	quickBook = '<hr><h3>Quick Reserve</h3><form id=quickBookForm onsubmit="return openConfirmCreate(getResFormData()),!1"><style>.form-group{text-align:left}</style><div class="form-group row"><div class=col-sm-4><label>Duration <i aria-hidden=true class="fa fa-exclamation-triangle"></i>:</label></div><div class=col-sm-4><input id=timeStart class=form-control width=50 required name="startTime "step=900 type=time></div><div class=col-sm-4><input id=timeEnd class=form-control width=50 required name=endTime step=900 type=time></div></div><div class="form-group row"><div class=col-sm-4><label>Reserving for <i aria-hidden=true class="fa fa-exclamation-triangle"></i>:</label></div><div class=col-sm-8><input id=owneremail class=form-control width=100% required></div></div><div class="form-group row"><div class=col-sm-4><label>Brief Comment:</label></div><div class=col-sm-8><input id=comment class=form-control width=100%><input id=date type=hidden value="' + date + '"><input id=allowshare type=hidden value=0></div></div><div class="form-group row"><div class=col-sm-4></div><div class=col-sm-4><button class="btn btn-secondary"id=reserveButton type=submit value="Quick Reserve">Quick Reserve</button></div><div class=col-sm-4></div></div></form>';
 	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -1018,7 +1018,7 @@ function removeGroup(groupID)
 function openConfirmDeleteGroup(groupChosen)
 {
 	var deleteBoxContent = "Are you sure you want to delete " + document.getElementById(groupChosen).innerHTML + "?";
-	var buttonContent = "<button onclick='removeGroup(" + groupChosen + ")'> Yes</button><button onclick='closeModal()'>No</button>"
+	var buttonContent = "<button class='btn btn-success' onclick='removeGroup(" + groupChosen + ")'> Yes</button><button class='btn btn-danger' onclick='closeModal()'>No</button>"
 	showMessageBox(deleteBoxContent, 'Delete', buttonContent, true);
 
 
@@ -1236,7 +1236,7 @@ function editClicked(ele)
 		if (this.readyState == 4 && this.status == 200)
 		{
 			var editHtml = this.responseText;
-			var buttonHtml = "<button class='modal-button' onclick='updateClicked();'>Update</button>";
+			var buttonHtml = "<button class='modal-button btn bnt-secondary' onclick='updateClicked();'>Update</button>";
 			showMessageBox(editHtml, "Edit", buttonHtml, true);
 		}
 	};

@@ -82,7 +82,7 @@ function showMessageBoxOK(message,header, allowClickOutsideClose){
 	// set content
 	document.getElementById('modal-header-text').innerHTML = header;
 	document.getElementById('modalMessage').innerHTML = message;
-	document.getElementById('buttonContent').innerHTML = "<button class='modal-button' onclick='closeModal()'>Ok</button>";
+	document.getElementById('buttonContent').innerHTML = "<button class='modal-button btn btn-default' onclick='closeModal()'>Ok</button>";
 
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
