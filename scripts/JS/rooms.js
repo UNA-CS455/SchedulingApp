@@ -854,7 +854,7 @@ function openConfirmCreate(data)
 		return;
 	}
 
-	buttonhtml = "<button id='ConfirmClickCreateButton' class='modal-button'>Book it!</button><button class='modal-button' onclick='closeModal()'>Cancel</button>"
+	buttonhtml = "<button id='ConfirmClickCreateButton' class='modal-button btn btn-success' >Book it!</button><button class='modal-button btn btn-danger' onclick='closeModal()'>Cancel</button>"
 	showMessageBox("Are you sure you want to reserve " + roomSelected + "?", "Confirm", buttonhtml, false);
 	// to pass data, we have to use an anon function.
 	document.getElementById('ConfirmClickCreateButton').onclick = function() {
