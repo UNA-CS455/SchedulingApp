@@ -35,6 +35,8 @@
   <link rel="stylesheet" href="styles/popup.css">
   <!-- Jquery -->
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!-- Scripts -->
+  <script src="scripts/JS/roomObjects.js"></script>
   <title>LeoBook</title>
 </head>
 
@@ -45,6 +47,7 @@
     <?php include 'modal.php'; ?>
     <script src="scripts/JS/popup.js"></script>
     <script src="scripts/JS/rooms.js"></script>
+    
     <script src="scripts/JS/jquery-3.3.1.min.js"></script>
     <?php 
       include("{$_SERVER['DOCUMENT_ROOT']}/SchedulingApp/includes/header.php");
