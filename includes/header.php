@@ -1,5 +1,16 @@
 <!-- jumbotron and navbar -->
 <div class="jumbotron-fluid">
+  <style>
+    @media(max-width: 992px)
+    {
+      #logo
+      {
+        width: auto;        
+        top: 15%;
+        left: 3%;
+      }
+    }
+  </style>
   <img src="images/una.png" id="logo" onclick="window.location.href = ''">
 </div>
 <nav class="navbar navbar-default">
