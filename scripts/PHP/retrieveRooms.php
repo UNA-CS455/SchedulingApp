@@ -353,6 +353,15 @@ if(isset($_SESSION['username'])){
   //   echo "<h4> No Results </h4>";
   // }
 
+  if(isset($_GET['type']))
+  {
+    echo "got type";
+  }
+  else
+  {
+    echo "no type";
+  }
+
   $sql = "select distinct rooms.roomid, rooms.seats, rooms.`type`, favorites.email from rooms
           left join favorites
           on favorites.roomid = rooms.roomid
@@ -375,6 +384,8 @@ if(isset($_SESSION['username'])){
     $room_array[] = $rowResult;
   }
   
+  json_encode($result);
+
 
   // var_dump($room_array);
 
