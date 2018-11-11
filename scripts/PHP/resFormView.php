@@ -53,10 +53,10 @@
         <label>
           Type
         </label>
-        <select class="form-control" id="typeSelect" onchange="fieldChanged()">
-          <option value="Any">Any</option>
+        <select class="form-control" id="typeSelect">
+          <option value="All">All</option>
           <option value="Classroom">Classroom</option>
-          <option value="Conference">Conference Room</option>
+          <option value="Conference Room">Conference Room</option>
           <option value="Computer Lab">Computer Lab</option>
         </select> 
       </div> 
