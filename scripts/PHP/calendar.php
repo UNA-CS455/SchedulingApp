@@ -12,7 +12,7 @@ class Calendar {
   }
 
   /********************* PROPERTY ********************/  
-  private $dayLabels = array("MON","TUE","WED","THU","FRI","SAT","SUN");
+  private $dayLabels = array("SUN","MON","TUE","WED","THU","FRI","SAT");
 
   private $currentYear=0;
 
@@ -111,7 +111,7 @@ class Calendar {
   {
     if($this->currentDay==0)
     {
-      $firstDayOfTheWeek = date('N',strtotime($this->currentYear.'-'.$this->currentMonth.'-01'));
+      $firstDayOfTheWeek = date('N',strtotime($this->currentYear.'-'.$this->currentMonth.'-02'));
                
       if(intval($cellNumber) == intval($firstDayOfTheWeek))
       {
