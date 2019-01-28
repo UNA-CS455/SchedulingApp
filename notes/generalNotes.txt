@@ -1,0 +1,1 @@
+createEditRoom.php is the location where we will need to implement the "Limit Reservations" checkbox
