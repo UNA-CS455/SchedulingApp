@@ -203,9 +203,15 @@ if (isset ( $_POST ['submit'] ))
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-1">
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
+					</div>
+                    <div class="col-md-2 form-check"
+						style="position: relative; top: .5vh; left: 5vh;">
+						<input type="hidden" name="limit" value="off">
+						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox">
+						<label for="limit">Limit Reservations</label>
 					</div>
 				</div>
 			</form>
