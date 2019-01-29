@@ -193,6 +193,9 @@ if (isset ( $_POST ['submit'] ))
 						<!-- hidden field for if checkbox is not checked -->
 						<input type="hidden" name="hascomputers" value="off">
 						<input class="form-check-input" name="hascomputers" id="hasComputersCheck" type="checkbox" <?php echo($roomToEdit['hascomputers'] == 1) ? 'checked value="1"' : '' ?>>
+							<!-- For the php in the previous line, the 'checked value' part is part of the form itself.
+								 The script itself is simply asking if the room is set to have computers in the database, then
+								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
 					</div>
 					<div class="col-md-2 form-group">
@@ -213,6 +216,9 @@ if (isset ( $_POST ['submit'] ))
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox">
 						<label for="limit">Limit Reservations</label>
 					</div>
+					<!-- I'm thinking we use a responsive table for the whitelisted users.
+						 Maybe we can set an arbitrary maximum amount of users for it, as I don't see a way to increase
+						 the table dynamically as of right now (1/28). -->
 				</div>
 			</form>
 		</div>
