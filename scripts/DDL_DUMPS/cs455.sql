@@ -36,22 +36,6 @@ INSERT INTO `blacklist` (`group_id`, `numeric_room_id`, `blacklist_id`) VALUES
 	(2, 1, 13);
 /*!40000 ALTER TABLE `blacklist` ENABLE KEYS */;
 
-CREATE TABLE IF NOT EXISTS `whitelist` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
-  `roomid` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-
-/*!40000 ALTER TABLE `whitelist` DISABLE KEYS */;
-INSERT INTO `whitelist` (`email`, `roomid`) VALUES	
-	('bcornelius@una.edu', 'Keller 122'),
-	('user@una.edu', 'Keller 133'),
-	('user@una.edu', 'Raburn 305');
-/*!40000 ALTER TABLE `whitelist` ENABLE KEYS */;
-
-
 
 
 -- Dumping structure for table cs455.favorites
@@ -6239,6 +6223,25 @@ INSERT INTO `users` (`email`, `firstname`, `lastname`, `password`, `classificati
 	('super@una.edu', 'super', 'super', 'e97ce80acab2f20ca045fe17ba1d3f5a8087e963', 'ADMIN', 2),
 	('user@una.edu', 'user', 'user', 'f9b047f39effbd6912cc851ff989115f9b4f9ada', 'USER', 2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+
+CREATE TABLE IF NOT EXISTS `whitelist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `roomid` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`email`) REFERENCES users(`email`),
+  FOREIGN KEY (`roomid`) REFERENCES rooms(`roomid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+/*!40000 ALTER TABLE `whitelist` DISABLE KEYS */;
+INSERT INTO `whitelist` (`email`, `roomid`) VALUES	
+	('user@una.edu', 'Keller 122'),
+	('user@una.edu', 'Keller 133'),
+	('user@una.edu', 'Raburn 305');
+/*!40000 ALTER TABLE `whitelist` ENABLE KEYS */;
+
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
