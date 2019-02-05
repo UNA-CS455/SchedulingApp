@@ -36,6 +36,24 @@ INSERT INTO `blacklist` (`group_id`, `numeric_room_id`, `blacklist_id`) VALUES
 	(2, 1, 13);
 /*!40000 ALTER TABLE `blacklist` ENABLE KEYS */;
 
+CREATE TABLE IF NOT EXISTS `whitelist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `roomid` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+/*!40000 ALTER TABLE `whitelist` DISABLE KEYS */;
+INSERT INTO `whitelist` (`email`, `roomid`) VALUES	
+	('bcornelius@una.edu', 'Keller 122'),
+	('user@una.edu', 'Keller 133'),
+	('user@una.edu', 'Raburn 305');
+/*!40000 ALTER TABLE `whitelist` ENABLE KEYS */;
+
+
+
+
 -- Dumping structure for table cs455.favorites
 CREATE TABLE IF NOT EXISTS `favorites` (
   `email` varchar(100) NOT NULL,
