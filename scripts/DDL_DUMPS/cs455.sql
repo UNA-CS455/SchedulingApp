@@ -6226,10 +6226,8 @@ INSERT INTO `users` (`email`, `firstname`, `lastname`, `password`, `classificati
 
 
 CREATE TABLE IF NOT EXISTS `whitelist` (
---  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
   `roomid` varchar(100) NOT NULL,
---  PRIMARY KEY (`id`),
   FOREIGN KEY (`email`) REFERENCES users(`email`),
   FOREIGN KEY (`roomid`) REFERENCES rooms(`roomid`),
   PRIMARY KEY (`email`, `roomid`)
