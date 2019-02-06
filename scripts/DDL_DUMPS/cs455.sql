@@ -6201,7 +6201,7 @@ INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcom
 	('Raburn 207', 'Computer Lab', 2, 12, 1, 12, 19),
 	('Raburn 210', 'Computer Lab', 2, 24, 1, 24, 20),
 	('Raburn 211', 'Computer Lab', 2, 30, 1, 30, 21),
-	('Raburn 305', 'Conferece Room', 3, 25, 0, NULL, 22),
+	('Raburn 305', 'Conference Room', 3, 25, 0, NULL, 22),
 	('Keller 240', 'Conference Room', 2, 8, 0, NULL, 23);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 
