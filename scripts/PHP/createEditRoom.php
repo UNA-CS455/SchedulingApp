@@ -223,7 +223,7 @@ if (isset ( $_POST ['submit'] ))
 					<div class="col-lg-1; hidden">
 						spacer
 					</div>
-					<div class="col-sm-0">
+					<div class="col-md-1">
 						<b>Allowed Users</b>
 					</div>
 					<div class="col-md-2" style="overflow-y:auto; max-height: 96px;">
