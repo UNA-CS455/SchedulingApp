@@ -219,7 +219,11 @@ if (isset ( $_POST ['submit'] ))
 					<!-- I'm thinking we use a responsive table for the whitelisted users.
 						 Maybe we can set an arbitrary maximum amount of users for it, as I don't see a way to increase
 						 the table dynamically as of right now (1/28). -->
-					<div class="col-md-2" style="overflow-y:auto;">
+					<!--
+						Issues:
+							Responsive table not halting at a set number of items
+					-->
+					<div class="col-md-2" style="overflow-y:auto; max-height: 960px;">
 						<table>
 						    <tr>
 						      <th>Email</th>
