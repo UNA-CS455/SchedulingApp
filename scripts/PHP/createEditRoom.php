@@ -205,7 +205,7 @@ if (isset ( $_POST ['submit'] ))
 							<?php echo($roomToEdit['hascomputers'] == 1) ? (($roomToEdit['numcomputers']) ? 'value=" '.$roomToEdit['numcomputers'].' "' : 'value="0"') : '' ?>>
 					</div>
 				</div>
-				<div class="col">
+				<div class="row">
 					<div class="col-md-1">
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
