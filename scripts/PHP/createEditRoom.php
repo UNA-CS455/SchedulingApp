@@ -223,7 +223,7 @@ if (isset ( $_POST ['submit'] ))
 					<div class="col-sm-1" style="margin: 1px">
 						<b>Allowed Users</b>
 					</div>
-					<div class="col-md-2" style="overflow-y:auto; max-height: 96px; border: 1px solid black">
+					<div class="row-md-2" style="overflow-y:auto; max-height: 96px; border: 1px solid black">
 						<table>
 						    <tr>
 						      <td>user@una.edu</td>
