@@ -245,6 +245,27 @@ if (isset ( $_POST ['submit'] ))
 						    <tr>
 						      <td>ssnake@una.edu</td>
 						    </tr>
+						    <tr>
+						      <td>rocelot@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>bboss@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>thepain@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>thefear@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>thesorrow@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>theboss@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>nsnake@una.edu</td>
+						    </tr>
 						  </table>
 					</div>
 				</div>
