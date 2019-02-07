@@ -213,7 +213,7 @@ if (isset ( $_POST ['submit'] ))
                     <div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
-						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" onchange="showWhitelist()">
+						<input class="form-control" name="limit" id="limitCheck" type="checkbox" onchange="showWhitelist()">
 						<label for="limit">Limit Reservations</label>
 					</div>
 					<!--
