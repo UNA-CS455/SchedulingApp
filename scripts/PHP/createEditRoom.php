@@ -233,6 +233,18 @@ if (isset ( $_POST ['submit'] ))
 						    <tr>
 						      <td>tnelson3@una.edu</td>
 						    </tr>
+						    <tr>
+						      <td>fjager@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>dhayter@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>otacon3@una.edu</td>
+						    </tr>
+						    <tr>
+						      <td>ssnake@una.edu</td>
+						    </tr>
 						  </table>
 					</div>
 				</div>
