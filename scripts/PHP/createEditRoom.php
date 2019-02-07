@@ -216,14 +216,13 @@ if (isset ( $_POST ['submit'] ))
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox">
 						<label for="limit">Limit Reservations</label>
 					</div>
-					<!-- I'm thinking we use a responsive table for the whitelisted users.
-						 Maybe we can set an arbitrary maximum amount of users for it, as I don't see a way to increase
-						 the table dynamically as of right now (1/28). -->
 					<!--
-						Issues:
-							Responsive table not halting at a set number of items
+						TODO:
+							Input from Whitelist table
 					-->
-					<b>Email</b>
+					<div class="col-sm-2">
+						<b>Email</b>
+					</div>
 					<div class="col-md-2" style="overflow-y:auto; max-height: 96px;">
 						<table>
 						    <tr>
