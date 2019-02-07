@@ -220,9 +220,9 @@ if (isset ( $_POST ['submit'] ))
 						TODO:
 							Input from Whitelist table
 					-->
-					<div class="col-lg-2" style="margin: 1px">
+					<div class="col-lg-1" style="margin: 1px">
 						<b>Allowed Users</b>
-						<div class="col-md-2" style="overflow-y:auto; max-height: 96px; border: 1px solid black">
+						<div class="col-md-2" style="overflow-y:auto; min-width: 96px; max-height: 96px; border: 1px solid black">
 							<table>
 							    <tr>
 							      <td>user@una.edu</td>
