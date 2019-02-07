@@ -224,10 +224,8 @@ if (isset ( $_POST ['submit'] ))
 							Responsive table not halting at a set number of items
 					-->
 					<div class="col-md-2" style="overflow-y:auto; max-height: 96px;">
+						Email
 						<table>
-						    <tr>
-						      <th>Email</th>
-						    </tr>
 						    <tr>
 						      <td>user@una.edu</td>
 						    </tr>
