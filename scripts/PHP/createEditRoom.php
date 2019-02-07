@@ -222,60 +222,16 @@ if (isset ( $_POST ['submit'] ))
 					<div class="col-md-2" style="overflow-y:scroll;">
 						<table>
 						    <tr>
-						      <th>First Name</th>
-						      <th>Last Name</th>
-						      <th>Points</th>
-						      <th>Points</th>
-						      <th>Points</th>
-						      <th>Points</th>
-						      <th>Points</th>
-						      <th>Points</th>
-						      <th>Points</th>
-						      <th>Points</th>
-						      <th>Points</th>
-						      <th>Points</th>
+						      <th>Email</th>
 						    </tr>
 						    <tr>
-						      <td>Jill</td>
-						      <td>Smith</td>
-						      <td>50</td>
-						      <td>50</td>
-						      <td>50</td>
-						      <td>50</td>
-						      <td>50</td>
-						      <td>50</td>
-						      <td>50</td>
-						      <td>50</td>
-						      <td>50</td>
-						      <td>50</td>
+						      <td>user@una.edu</td>
 						    </tr>
 						    <tr>
-						      <td>Eve</td>
-						      <td>Jackson</td>
-						      <td>94</td>
-						      <td>94</td>
-						      <td>94</td>
-						      <td>94</td>
-						      <td>94</td>
-						      <td>94</td>
-						      <td>94</td>
-						      <td>94</td>
-						      <td>94</td>
-						      <td>94</td>
+						    	<td>bcornelius@una.edu</td>
 						    </tr>
 						    <tr>
-						      <td>Adam</td>
-						      <td>Johnson</td>
-						      <td>67</td>
-						      <td>67</td>
-						      <td>67</td>
-						      <td>67</td>
-						      <td>67</td>
-						      <td>67</td>
-						      <td>67</td>
-						      <td>67</td>
-						      <td>67</td>
-						      <td>67</td>
+						      <td>tnelson3@una.edu</td>
 						    </tr>
 						  </table>
 					</div>
