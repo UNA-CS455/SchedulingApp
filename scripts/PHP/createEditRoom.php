@@ -219,7 +219,7 @@ if (isset ( $_POST ['submit'] ))
 					<!-- I'm thinking we use a responsive table for the whitelisted users.
 						 Maybe we can set an arbitrary maximum amount of users for it, as I don't see a way to increase
 						 the table dynamically as of right now (1/28). -->
-					<div style="overflow-y:scroll;">
+					<div class="col-md-2" style="overflow-y:scroll;">
 						<table>
 						    <tr>
 						      <th>First Name</th>
