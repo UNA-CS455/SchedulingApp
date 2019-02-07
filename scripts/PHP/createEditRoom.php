@@ -205,7 +205,7 @@ if (isset ( $_POST ['submit'] ))
 							<?php echo($roomToEdit['hascomputers'] == 1) ? (($roomToEdit['numcomputers']) ? 'value=" '.$roomToEdit['numcomputers'].' "' : 'value="0"') : '' ?>>
 					</div>
 				</div>
-				<div class="row">
+				<div class="col">
 					<div class="col-md-1">
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
@@ -219,7 +219,7 @@ if (isset ( $_POST ['submit'] ))
 					<!-- I'm thinking we use a responsive table for the whitelisted users.
 						 Maybe we can set an arbitrary maximum amount of users for it, as I don't see a way to increase
 						 the table dynamically as of right now (1/28). -->
-					<div class="row-md-2" style="overflow-y:auto;">
+					<div class="col-md-2" style="overflow-y:auto;">
 						<table>
 						    <tr>
 						      <th>Email</th>
