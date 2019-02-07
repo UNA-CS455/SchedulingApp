@@ -220,7 +220,7 @@ if (isset ( $_POST ['submit'] ))
 						TODO:
 							Input from Whitelist table
 					-->
-					<div class="col-sm-2">
+					<div class="col-sm-1">
 						<b>Email</b>
 					</div>
 					<div class="col-md-2" style="overflow-y:auto; max-height: 96px;">
