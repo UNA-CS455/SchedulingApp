@@ -206,7 +206,7 @@ if (isset ( $_POST ['submit'] ))
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
 					</div>
@@ -220,6 +220,9 @@ if (isset ( $_POST ['submit'] ))
 						TODO:
 							Input from Whitelist table
 					-->
+					<div class="col-sm-1; invisible">
+						spacer
+					</div>
 					<div class="col-sm-0">
 						<b>Allowed Users</b>
 					</div>
