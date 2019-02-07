@@ -206,7 +206,7 @@ if (isset ( $_POST ['submit'] ))
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-1">
+					<div class="col-md-2">
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
 					</div>
