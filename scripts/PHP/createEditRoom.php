@@ -220,9 +220,8 @@ if (isset ( $_POST ['submit'] ))
 						TODO:
 							Input from Whitelist table
 					-->
-					<div class="col-sm-1; invisible">
-						spacer
-					</div>
+				</div>
+				<div class="row">
 					<div class="col-sm-0">
 						<b>Allowed Users</b>
 					</div>
