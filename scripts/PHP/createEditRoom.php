@@ -221,7 +221,7 @@ if (isset ( $_POST ['submit'] ))
 							Input from Whitelist table
 					-->
 				</div>
-				<div class="row">
+				<div class="col">
 					<div class="col-lg-1; hidden">
 						spacer
 					</div>
