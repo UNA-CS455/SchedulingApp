@@ -222,6 +222,9 @@ if (isset ( $_POST ['submit'] ))
 					-->
 				</div>
 				<div class="row">
+					<div class="col-lg-1; invisible">
+						spacer
+					</div>
 					<div class="col-sm-0">
 						<b>Allowed Users</b>
 					</div>
