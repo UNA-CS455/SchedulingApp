@@ -213,14 +213,14 @@ if (isset ( $_POST ['submit'] ))
                     <div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
-						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox">
+						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" onchange="showWhitelist()">
 						<label for="limit">Limit Reservations</label>
 					</div>
 					<!--
 						TODO:
 							Input from Whitelist table
 					-->
-					<div class="col-lg-1" style="margin: 1px; min-width: 250px">
+					<div class="col-lg-1" style="margin: 1px; min-width: 250px" id="allowedReserve">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
