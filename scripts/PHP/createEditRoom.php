@@ -223,7 +223,7 @@ if (isset ( $_POST ['submit'] ))
 						Issues:
 							Responsive table not halting at a set number of items
 					-->
-					<div class="col-md-2" style="overflow-y:auto; max-height: 960px;">
+					<div class="col-md-2" style="overflow-y:auto; max-height: 96px;">
 						<table>
 						    <tr>
 						      <th>Email</th>
