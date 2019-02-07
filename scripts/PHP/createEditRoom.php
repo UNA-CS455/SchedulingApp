@@ -221,7 +221,7 @@ if (isset ( $_POST ['submit'] ))
 							Input from Whitelist table
 					-->
 					<div class="col-sm-1">
-						<b>Email</b>
+						<b>Allowed Users</b>
 					</div>
 					<div class="col-md-2" style="overflow-y:auto; max-height: 96px;">
 						<table>
