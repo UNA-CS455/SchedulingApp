@@ -222,7 +222,7 @@ if (isset ( $_POST ['submit'] ))
 					-->
 				</div>
 				<div class="row">
-					<div class="col-lg-1; invisible">
+					<div class="col-lg-1">
 						spacer
 					</div>
 					<div class="col-sm-0">
