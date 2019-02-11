@@ -67,6 +67,14 @@ if (isset ( $_POST ['submit'] ))
 		
 // 		header('Location: userSettings.php');
 	}
+	if ($_POST ['limit'] == "on")
+	{
+		$areLimiting = 1;
+	} 
+	else if($_POST['limit'] == "off")
+	{
+		$areLimiting = 0;
+	}
 
 // 	var_dump ( $_POST );
 
