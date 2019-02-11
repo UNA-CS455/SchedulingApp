@@ -57,7 +57,7 @@ if (isset ( $_POST ['submit'] ))
 	else if($_POST['hascomputers'] == "off")
 	{
 		// echo "else statement";
-		// var_dump($_POST);
+		var_dump($_POST);
 		$hasComputers = 0;
 		$numComputers = 0;
 		
@@ -81,6 +81,15 @@ if (isset ( $_POST ['submit'] ))
 		header ( "Location: userSettings.php" );
 	}
 }
+// Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
+// We also can go ahead and call our other SQL call to get the list of allowed users
+
+// if($_POST['limit'] == "on"){
+	
+// }
+// else if($_POST['limi'] == "off"){
+// 	//do stuff
+// }
 
 ?>
 <!DOCTYPE html>
@@ -250,6 +259,17 @@ if (isset ( $_POST ['submit'] ))
 		{
 			$('#numComputers').prop('readonly', true);
 			$('#numComputers').val(null);
+		}
+	})
+</script>
+
+<script>
+	$('#limitCheck').change(function(){
+		if(this.checked){
+			//show some boxes
+		}	
+		else{
+			//don't show some boxes
 		}
 	})
 </script>
