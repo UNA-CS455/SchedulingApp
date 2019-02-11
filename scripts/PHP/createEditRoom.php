@@ -213,7 +213,7 @@ if (isset ( $_POST ['submit'] ))
                     <div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
-						<input class="form-control" name="limit" id="limitCheck" type="checkbox" onchange="showWhitelist()">
+						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" onchange="showWhitelist()">
 						<label for="limit">Limit Reservations</label>
 					</div>
 					<!--
@@ -224,49 +224,10 @@ if (isset ( $_POST ['submit'] ))
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
-							    <tr>
-							      <td>user@una.edu</td>
-							    </tr>
-							    <tr>
-							    	<td>bcornelius@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>tnelson3@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>fjager@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>dhayter@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>otacon3@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>ssnake@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>rocelot@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>bboss@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>thepain@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>thefear@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>thesorrow@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>theboss@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>nsnake@una.edu</td>
-							    </tr>
-							  </table>
+								<?php
+									
+								?>
+							</table>
 						</div>
 					</div>
 				</div>
