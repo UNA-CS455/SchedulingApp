@@ -32,7 +32,7 @@ if (isset ( $_GET ['roomid'] ))
 
 	$roomToEdit = $_editRoomRes->fetch_assoc ();
 	
-	$getAllowedUsers
+	// $getAllowedUsers
 	
 	
 } else
