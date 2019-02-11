@@ -81,7 +81,8 @@ if (isset ( $_POST ['submit'] ))
 	if ($beingEdited)
 	{
 		echo "editing now";
-		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers', `rooms`.`numcomputers` = '$numComputers' WHERE `rooms`.`roomid` = '$roomid'";
+		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
+			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
 
 		$conn->query ( $_updateSql );
 		header ( "Location: userSettings.php" );
