@@ -57,7 +57,7 @@ if (isset ( $_POST ['submit'] ))
 	else if($_POST['hascomputers'] == "off")
 	{
 		// echo "else statement";
-		var_dump($_POST);
+		// var_dump($_POST);
 		$hasComputers = 0;
 		$numComputers = 0;
 		
@@ -234,7 +234,7 @@ if (isset ( $_POST ['submit'] ))
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
 								<?php
-									
+									var_dump($_POST);
 								?>
 							</table>
 						</div>
