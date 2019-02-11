@@ -31,6 +31,10 @@ if (isset ( $_GET ['roomid'] ))
 	$_editRoomRes = $conn->query ( $_editRoomSql );
 
 	$roomToEdit = $_editRoomRes->fetch_assoc ();
+	
+	$getAllowedUsers
+	
+	
 } else
 {
 	// echo "being edited";
@@ -84,12 +88,15 @@ if (isset ( $_POST ['submit'] ))
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
 // We also can go ahead and call our other SQL call to get the list of allowed users
 
-// if($_POST['limit'] == "on"){
-	
+// if(isset($_POST['ourUpdateUsersButton'])){
+//  	if($_POST['limit'] == "on"){
+			// insert new user to list
+//  	}
+//  	else if($_POST['limit'] == "off"){
+//  		// do stuff
+//  	}
 // }
-// else if($_POST['limi'] == "off"){
-// 	//do stuff
-// }
+
 
 ?>
 <!DOCTYPE html>
@@ -222,7 +229,7 @@ if (isset ( $_POST ['submit'] ))
                     <div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
-						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" onchange="showWhitelist()">
+						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
 					</div>
 					<!--
@@ -234,7 +241,7 @@ if (isset ( $_POST ['submit'] ))
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
 								<?php
-									var_dump($_POST);
+									
 								?>
 							</table>
 						</div>
@@ -266,7 +273,7 @@ if (isset ( $_POST ['submit'] ))
 <script>
 	$('#limitCheck').change(function(){
 		if(this.checked){
-			//show some boxes
+			//show some boxes, maybe some other stuff?
 		}	
 		else{
 			//don't show some boxes
