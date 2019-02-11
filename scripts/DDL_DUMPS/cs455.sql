@@ -6173,6 +6173,7 @@ CREATE TABLE IF NOT EXISTS `rooms` (
   `seats` int(11) NOT NULL COMMENT 'The number of open seats',
   `hascomputers` int(11) unsigned DEFAULT NULL,
   `numcomputers` int(11) DEFAULT NULL COMMENT 'number of open computers given that hascomputers is true.',
+  `limit` int(11) unsigned DEFAULT NULL COMMENT 'indicates if an Admin can limit reservations on a room',
   `numeric_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`numeric_id`),
   UNIQUE KEY `roomid` (`roomid`) USING BTREE
