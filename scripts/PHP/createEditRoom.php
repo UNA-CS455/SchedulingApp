@@ -247,7 +247,7 @@ if (isset ( $_POST ['submit'] ))
 						TODO:
 							Input from Whitelist table
 					-->
-					<div class="col-lg-1" style="margin: 1px; min-width: 250px; visibility: hidden" id="allowedReserve">
+					<div class="col-lg-1" style="margin: 1px; min-width: 250px; visibility: invisible" id="allowedReserve">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
