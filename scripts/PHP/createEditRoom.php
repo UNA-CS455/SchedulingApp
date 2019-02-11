@@ -67,16 +67,18 @@ if (isset ( $_POST ['submit'] ))
 		
 // 		header('Location: userSettings.php');
 	}
+	
 	if ($_POST ['limit'] == "on")
 	{
+		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
 		$areLimiting = 1;
 	} 
 	else if($_POST['limit'] == "off")
 	{
+		// If the checkbox is unchecked, set the flag to 0
 		$areLimiting = 0;
 	}
 
-// 	var_dump ( $_POST );
 
 	if ($beingEdited)
 	{
@@ -86,7 +88,7 @@ if (isset ( $_POST ['submit'] ))
 
 		$conn->query ( $_updateSql );
 		header ( "Location: userSettings.php" );
-    var_dump($_updateSql);
+    	var_dump($_updateSql);
 	} else
 	{
 		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
@@ -283,9 +285,11 @@ if (isset ( $_POST ['submit'] ))
 	$('#limitCheck').change(function(){
 		if(this.checked){
 			//show some boxes, maybe some other stuff?
+			$('#allowedReserve').show();
 		}	
 		else{
 			//don't show some boxes
+			$('#allowedReserve').hide();
 		}
 	})
 </script>

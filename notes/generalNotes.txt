@@ -1,1 +1,13 @@
 createEditRoom.php is the location where we will need to implement the "Limit Reservations" checkbox
+
+
+
+
+
+
+
+
+
+
+IMPORTANT:
+    When working with the Production version, we need to update the database to the specifications in cs455.sql
