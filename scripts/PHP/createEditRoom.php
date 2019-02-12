@@ -219,11 +219,11 @@ if (isset ( $_POST ['submit'] ))
 								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
 					</div>
-					<div class="col-md-2 form-group">
-						<label for="numComputers">Number of Computers</label>
-						<input type="text" id="numComputers" name="numcomputers"
-							class="form-control" readonly
-							<?php echo($roomToEdit['hascomputers'] == 1) ? (($roomToEdit['numcomputers']) ? 'value=" '.$roomToEdit['numcomputers'].' "' : 'value="0"') : '' ?>>
+					<div class="col-md-2 form-check"
+						style="position: relative; top: .5vh; left: 5vh;">
+						<input type="hidden" name="limit" value="off">
+						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
+						<label for="limit">Limit Reservations</label>
 					</div>
 				</div>
 				<div class="row">
@@ -231,11 +231,10 @@ if (isset ( $_POST ['submit'] ))
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
 					</div>
-                    <div class="col-md-2 form-check"
-						style="position: relative; top: .5vh; left: 5vh;">
-						<input type="hidden" name="limit" value="off">
-						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
-						<label for="limit">Limit Reservations</label>
+                    <div class="col-md-2 form-group">
+						<label for="numComputers">Number of Computers</label>
+						<input type="text" id="numComputers" name="numcomputers"
+							class="form-control" style="<?php echo($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none" ?>">
 					</div>
 					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
@@ -263,12 +262,11 @@ if (isset ( $_POST ['submit'] ))
 	{
 		if(this.checked)
 		{
-			$('#numComputers').removeAttr('readonly');
+			$('#numComputers').show();
 		}
 		else
 		{
-			$('#numComputers').prop('readonly', true);
-			$('#numComputers').val(null);
+			$('#numComputers').hide();
 		}
 	})
 </script>

@@ -1,3 +1,8 @@
+<?php echo($roomToEdit['hascomputers'] == 1) ? (($roomToEdit['numcomputers']) ? 'value=" '.$roomToEdit['numcomputers'].' "' : 'value="0"') : '' ?>
+
+
+
+
                                 <tr>
 							      <td>user@una.edu</td>
 							    </tr>
