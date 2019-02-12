@@ -232,7 +232,7 @@ function processReservation()
 	}
 	else{
 		//User isn't among the whitelist users allowed to reserve the room
-		echo "You do not have permission to reserve this room"
+		echo "You do not have permission to reserve this room";
 	}
 	
 }
