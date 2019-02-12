@@ -58,11 +58,20 @@ function processReservation()
 	//We will need to check in the database to see if:
 		//1) The room has restrictions on reservations (limit)
 		//2) The user is in the list of users who can reserve, given that 1) is true
-	//$limitSqlCheck = "SELECT * FROM `rooms` WHERE `rooms`.`roomid` = '$roomnumber' AND `rooms`.`limit` = '1'";
+	$limitSqlCheck = "SELECT * FROM `rooms` WHERE `rooms`.`roomid` = '$roomnumber' AND `rooms`.`limit` = '1'";
+	$limitRes = $conn->query($limitSqlCheck);
+	$limitRows = $limitRes->num_rows;
+	//If there are more than 0 rows, then the room has the limit check on it
 	
-	//$restrictedRes = value of room's 'limit' field;
+	if($limitRows > 0){
+		//Check if the user is in the allowed users
+		$userSqlCheck = "SELECT * FROM `whitelist` WHERE `whitelist`.`email` = '$logged_in_user' AND `whitelist`.`roomid` = '$roomnumber'";
+		$userRes = $conn->query($userSqlCheck);
+		$userRows = $userRes->num_rows;
+	}
+	
 
-//	if(1){ // If the user is on the whitelist for the specified room,
+	if(1){ // If the user is on the whitelist for the specified room,
 			// OR if the specified room has no restrictions.
 		//checkbox type
 		$allowshare=($_POST['allowshare']);
@@ -220,10 +229,10 @@ function processReservation()
 			$conn->close();
 				
 		}
-	//}
-	//else{
-		// User isn't among the whitelist users allowed to reserve the room
-//	}
+	}
+	else{
+		//User isn't among the whitelist users allowed to reserve the room
+	}
 	
 }
 
