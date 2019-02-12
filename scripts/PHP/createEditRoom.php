@@ -234,7 +234,7 @@ if (isset ( $_POST ['submit'] ))
                     
                     <div class="col-md-1 form-group" style="min-width: 250px">
                     	<b>Number of Computers</b>
-                    	<div class="col-md-2">
+                    	<div class="row-md-2">
 							<input type="text" id="numComputers" name="numcomputers" class="form-control">
 						</div>
 					</div>
