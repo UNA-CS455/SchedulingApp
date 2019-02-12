@@ -49,6 +49,7 @@ function processReservation()
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
+	var_dump($roomnumber);
 	
 	//At this point, we want to make sure that the user has permission to register the room
 	
