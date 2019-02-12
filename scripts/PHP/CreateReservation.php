@@ -71,7 +71,7 @@ function processReservation()
 	}
 	
 
-	if(1){ // If the user is on the whitelist for the specified room,
+	if($userRows == 0){ // If the user is on the whitelist for the specified room,
 			// OR if the specified room has no restrictions.
 		//checkbox type
 		$allowshare=($_POST['allowshare']);
@@ -232,6 +232,7 @@ function processReservation()
 	}
 	else{
 		//User isn't among the whitelist users allowed to reserve the room
+		echo "You do not have permission to reserve this room"
 	}
 	
 }
