@@ -71,6 +71,11 @@ function processReservation()
 		$userRes = $conn->query($userSqlCheck);
 		$userRows = $userRes->num_rows;
 	}
+	if($userRows == 0){
+		//If the user is the superuser, set userRows to 1 to indicate that the superuser is allowed to reserve every room regardless
+		
+	}
+	var_dump($_SESSION);
 	
 
 	if($userRows > 0){ // If the user is on the whitelist for the specified room,
