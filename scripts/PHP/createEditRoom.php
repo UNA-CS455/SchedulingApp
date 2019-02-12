@@ -26,18 +26,16 @@ if (isset ( $_GET ['roomid'] ))
 {
 	$beingEdited = true;
 	$gotRoom = $_GET ['roomid'];
+	
 	$_editRoomSql = "SELECT * FROM `rooms` WHERE `rooms`.`roomid` = '$gotRoom'";
-
 	$_editRoomRes = $conn->query ( $_editRoomSql );
-
 	$roomToEdit = $_editRoomRes->fetch_assoc ();
 	
-	// $getAllowedUsers
-	
+	$getAllowedUsers = "SELECT * FROM `whitelist` WHERE `whitelist`.`roomid` = '$gotRoom'";
+	$allowedUsersRes = $conn->query($getAllowedUsers);
 	
 } else
 {
-	// echo "being edited";
 	$roomToEdit = null;
 	$beingEdited = false;
 }
@@ -49,23 +47,19 @@ if (isset ( $_POST ['submit'] ))
 	$type = $_POST ['type'];
 	$floor = $_POST ['floor'];
 	$seats = ( int ) $_POST ['seats'];
-// 	$hasComputers = $_POST ['hascomputers'];
 	$numComputers = ( int ) $_POST ['numcomputers'];
 	if ($_POST ['hascomputers'] == "on")
 	{
-		// echo "made it into the if statement";
+		// If the checkbox for "Has Computers" is checked
 		$hasComputers = 1;
 		$numComputers = ( int ) $_POST ['numcomputers'];
-// 		header('Location: userSettings.php');
 	} 
 	else if($_POST['hascomputers'] == "off")
 	{
-		// echo "else statement";
-		// var_dump($_POST);
+		// If the checkbox for "Has Computers" is unchecked
 		$hasComputers = 0;
 		$numComputers = 0;
 		
-// 		header('Location: userSettings.php');
 	}
 	
 	if ($_POST ['limit'] == "on")
@@ -243,16 +237,14 @@ if (isset ( $_POST ['submit'] ))
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
 					</div>
-					<!--
-						TODO:
-							Input from Whitelist table
-					-->
 					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
 								<?php
-									
+									while($allowedUsers = $allowedUsersRes->fetch_assoc()){
+										echo "<tr>" . $allowedUsers['email'] . "</tr>";
+									}
 								?>
 							</table>
 						</div>
