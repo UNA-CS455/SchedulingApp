@@ -232,7 +232,7 @@ if (isset ( $_POST ['submit'] ))
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
 					</div>
                     
-                    <div class="col-md-1 form-group" style="min-width: 30px; margin-left: 45px">
+                    <div class="col-md-1 form-group" style="min-width: 150px; margin-left: 45px">
                     	<b>Number of Computers</b>
                     	<div class="row-md-2">
 							<input type="text" id="numComputers" name="numcomputers" class="form-control">
