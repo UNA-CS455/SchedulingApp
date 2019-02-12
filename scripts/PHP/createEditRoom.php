@@ -243,7 +243,7 @@ if (isset ( $_POST ['submit'] ))
 							<table>
 								<?php
 									while($allowedUsers = $allowedUsersRes->fetch_assoc()){
-										echo "<tr>" . $allowedUsers['email'] . "</tr>";
+										echo "<tr> <td>" . $allowedUsers['email'] . " </td> </tr>";
 									}
 								?>
 							</table>
