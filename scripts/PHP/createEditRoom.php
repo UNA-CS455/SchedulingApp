@@ -247,7 +247,7 @@ if (isset ( $_POST ['submit'] ))
 						TODO:
 							Input from Whitelist table
 					-->
-					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($areLimiting == 1) ? "visibility: visible" : "visibility: hidden" ?>">
+					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "visibility: visible" : "visibility: hidden" ?>">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
