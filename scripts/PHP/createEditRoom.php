@@ -231,10 +231,10 @@ if (isset ( $_POST ['submit'] ))
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
 					</div>
-                    <div class="col-md-2 form-group">
+                    <div class="col-md-2 form-group" style="<?php echo($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none" ?>">
 						<label for="numComputers">Number of Computers</label>
 						<input type="text" id="numComputers" name="numcomputers"
-							class="form-control" style="<?php echo($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none" ?>">
+							class="form-control">
 					</div>
 					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
