@@ -73,9 +73,10 @@ function processReservation()
 	}
 	if($userRows == 0){
 		//If the user is the superuser, set userRows to 1 to indicate that the superuser is allowed to reserve every room regardless
-		
+		if($logged_in_user == "super@una.edu" || $logged_in_user == "krirwin@una.edu"){
+			$userRows = 1;
+		}
 	}
-	var_dump($_SESSION);
 	
 
 	if($userRows > 0){ // If the user is on the whitelist for the specified room,
