@@ -64,6 +64,8 @@ function processReservation()
 	$limitRows = $limitRes->num_rows;
 	//If there are more than 0 rows, then the room has the limit check on it
 	
+	$userRows = 0; //
+	
 	if($limitRows > 0){
 		//Check if the user is in the allowed users
 		$userSqlCheck = "SELECT * FROM `whitelist` WHERE `whitelist`.`email` = '$logged_in_user' AND `whitelist`.`roomid` = '$roomnumber'";
@@ -72,7 +74,7 @@ function processReservation()
 	}
 	
 
-	if($userRows == 0){ // If the user is on the whitelist for the specified room,
+	if($userRows > 0){ // If the user is on the whitelist for the specified room,
 			// OR if the specified room has no restrictions.
 		//checkbox type
 		$allowshare=($_POST['allowshare']);
