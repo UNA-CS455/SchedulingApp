@@ -232,14 +232,14 @@ if (isset ( $_POST ['submit'] ))
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
 					</div>
                     
-                    <div class="col-md-1 form-group" style="min-width: 250px; margin-left: 45px">
+                    <div class="col-md-1 form-group" style="min-width: 30px; margin-left: 45px">
                     	<b>Number of Computers</b>
                     	<div class="row-md-2">
 							<input type="text" id="numComputers" name="numcomputers" class="form-control">
 						</div>
 					</div>
 					
-					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 30px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
+					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
