@@ -50,8 +50,6 @@ function processReservation()
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
-	var_dump($_SESSION);
-	
 	//At this point, we want to make sure that the user has permission to register the room
 	
 	//Note that we will use the session username rather than the email. This lets us see who
@@ -75,7 +73,7 @@ function processReservation()
 	}
 	if($userRows == 0){
 		//If the user is the superuser, set userRows to 1 to indicate that the superuser is allowed to reserve every room regardless
-		if(0){
+		if($_SESSION['classification'] == "ADMIN"){
 			$userRows = 1;
 		}
 	}
