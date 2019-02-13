@@ -219,15 +219,7 @@ if (isset ( $_POST ['submit'] ))
 								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
 					</div>
-					<div class="row-xs-2">
-						 <div class="row-sm-2 form-group" style="min-width: 190px; margin-left: 45px">
-	                    	<b>Number of Computers</b>
-	                    	<div class="row-xs-1">
-								<input type="text" id="numComputers" name="numcomputers" class="form-control">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 form-check"
+					<div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
@@ -243,12 +235,12 @@ if (isset ( $_POST ['submit'] ))
 					<!--- TODO: MOVE DIVS AROUND  --->
 					
                     
-     <!--               <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px">-->
-     <!--               	<b>Number of Computers</b>-->
-     <!--               	<div class="row-md-2">-->
-					<!--		<input type="text" id="numComputers" name="numcomputers" class="form-control">-->
-					<!--	</div>-->
-					<!--</div>-->
+                    <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px">
+                    	<b>Number of Computers</b>
+                    	<div class="row-md-2">
+							<input type="text" id="numComputers" name="numcomputers" class="form-control">
+						</div>
+					</div>
 					
 					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
