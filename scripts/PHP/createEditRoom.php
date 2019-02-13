@@ -73,16 +73,16 @@ if (isset ( $_POST ['submit'] ))
 	// }
 	
 	// if ($_POST ['limit'] == "on")
-	if(!empty($_POST['limit']))
+	if(empty($_POST['limit']))
 	{
 		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
-		$areLimiting = 1;
+		$areLimiting = 0;
 	} 
 	// else if($_POST['limit'] == "off")
 	else
 	{
 		// If the checkbox is unchecked, set the flag to 0
-		$areLimiting = 0;
+		$areLimiting = 1;
 	}
 
 
