@@ -227,7 +227,7 @@ if (isset ( $_POST ['submit'] ))
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2 form-check"
+					<div class="col-md-3 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
