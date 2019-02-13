@@ -218,8 +218,9 @@ if (isset ( $_POST ['submit'] ))
 								 The script itself is simply asking if the room is set to have computers in the database, then
 								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
-						<div class="row-xs-0 form-group" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers']) ? "visibility: hidden" : "visibility: visible"?>">
-	                    	<b>Number of Computers</b>
+						<div class="row-xs-0 form-group" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "visibility: visible" : "visibility: hidden"?>">
+	                    	<b>Number of Computers</b><br>
+	                    	<b><?php echo $roomToEdit['hascomputers']; ?></b>
 	                    	<div class="row-md-2" style="max-width: 175px">
 								<input type="text" id="numComputers" name="numcomputers" class="form-control">
 						</div>
