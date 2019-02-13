@@ -49,29 +49,37 @@ if (isset ( $_POST ['submit'] ))
 	$seats = ( int ) $_POST ['seats'];
 	$numComputers = ( int ) $_POST ['numcomputers'];
 	// if ($_POST ['hascomputers'] == "on")
-	if(isset($_POST['hascomputers']))
-	{
-		// If the checkbox for "Has Computers" is checked
-		$hasComputers = 1;
-		$numComputers = ( int ) $_POST ['numcomputers'];
-	} 
-	// else if($_POST['hascomputers'] == "off")
-	else if(!isset($_POST['hascomputers']))
-	{
-		// If the checkbox for "Has Computers" is unchecked
+	
+	if($numComputers <= 0){
 		$hasComputers = 0;
-		$numComputers = 0;
-		
+	}
+	else{
+		$hasComputers = 1;
 	}
 	
+	// if(isset($_POST['hascomputers']))
+	// {
+	// 	// If the checkbox for "Has Computers" is checked
+	// 	$hasComputers = 1;
+	// 	$numComputers = ( int ) $_POST ['numcomputers'];
+	// } 
+	// // else if($_POST['hascomputers'] == "off")
+	// else if(!isset($_POST['hascomputers']))
+	// {
+	// 	// If the checkbox for "Has Computers" is unchecked
+	// 	$hasComputers = 0;
+	// 	$numComputers = 0;
+		
+	// }
+	
 	// if ($_POST ['limit'] == "on")
-	if(isset($_POST[limit]))
+	if(!empty($_POST[limit]))
 	{
 		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
 		$areLimiting = 1;
 	} 
 	// else if($_POST['limit'] == "off")
-	else if(!isset($_POST['limit']))
+	else if(empty($_POST['limit']))
 	{
 		// If the checkbox is unchecked, set the flag to 0
 		$areLimiting = 0;
