@@ -48,7 +48,7 @@ if (isset ( $_POST ['submit'] ))
 	$floor = $_POST ['floor'];
 	$seats = ( int ) $_POST ['seats'];
 	$numComputers = ( int ) $_POST ['numcomputers'];
-	$limit = $_POST['limit'];
+	$limit = (int) $_POST['limit'];
 	// if ($_POST ['hascomputers'] == "on")
 	
 	if($numComputers <= 0){
