@@ -182,6 +182,7 @@ if (isset ( $_POST ['submit'] ))
 							placeholder="Ex. Keller 122"
 							<?php echo($roomToEdit['roomid']) ? ' value="'.$roomToEdit['roomid'].'" readonly="readonly" ' : "" ?>>
 					</div>
+					
 					<div class="col-md-3 form-group">
 						<label for="type"> Room Type </label>
 						<select class="form-control" id="type" name="type">
@@ -196,11 +197,13 @@ if (isset ( $_POST ['submit'] ))
 								Room</option>
 						</select>
 					</div>
+					
 					<div class="col-md-1 form-group">
 						<label for="floor">Floor</label>
 						<input type="text" name="floor" class="form-control"
 							<?php echo($roomToEdit['floor']) ? 'value=" '.$roomToEdit['floor'].' "' : '' ?>>
 					</div>
+					
 				</div>
 				<br />
 				<div class="row">
@@ -209,38 +212,50 @@ if (isset ( $_POST ['submit'] ))
 						<input type="text" name="seats" class="form-control"
 							<?php echo($roomToEdit['seats']) ? 'value=" '.$roomToEdit['seats'].' "' : '' ?>>
 					</div>
+					
 					<div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<!-- hidden field for if checkbox is not checked -->
 						<input type="hidden" name="hascomputers" value="off">
 						<input class="form-check-input" name="hascomputers" id="hasComputersCheck" type="checkbox" <?php echo($roomToEdit['hascomputers'] == 1) ? 'checked value="1"' : '' ?>>
-							<!-- For the php in the previous line, the 'checked value' part is part of the form itself.
-								 The script itself is simply asking if the room is set to have computers in the database, then
-								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
+						
 						<div class="row-xs-0 form-group" id="computerBlock" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none"?>">
 	                    	<b>Number of Computers</b>
 	                    	<div class="row-md-2" style="max-width: 175px">
 								<input type="text" id="numComputers" name="numcomputers" class="form-control">
+							</div>
 						</div>
+						
 					</div>
-					</div>
+					
 					<div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
+						<div>
+							<!--Put input box here-->
+							<!--Make sure the number in the class field is the same as the one in the parent div-->
+						</div>
 					</div>
 				</div>
+				
+				<!-- ISSUE:
+						When editing a room, if the room has computers checked, it will flip in the system every time you save chagnes.
+					
+				     TODO:
+				     	Diagnose issue. Fix issue.
+				-->
+				
+				
+				
 				<div class="row">
 					<div class="col-md-1">
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Save Changes" : print "Create Room") ?></button>
 					</div>
 					
-					<!--- TODO: MOVE DIVS AROUND  --->
-					
-                    
                     <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px; visibility: hidden">
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
