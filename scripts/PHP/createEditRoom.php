@@ -48,13 +48,15 @@ if (isset ( $_POST ['submit'] ))
 	$floor = $_POST ['floor'];
 	$seats = ( int ) $_POST ['seats'];
 	$numComputers = ( int ) $_POST ['numcomputers'];
-	if ($_POST ['hascomputers'] == "on")
+	// if ($_POST ['hascomputers'] == "on")
+	if(isset($_POST['hascomputers']))
 	{
 		// If the checkbox for "Has Computers" is checked
 		$hasComputers = 1;
 		$numComputers = ( int ) $_POST ['numcomputers'];
 	} 
-	else if($_POST['hascomputers'] == "off")
+	// else if($_POST['hascomputers'] == "off")
+	else if(!isset($_POST['hascomputers']))
 	{
 		// If the checkbox for "Has Computers" is unchecked
 		$hasComputers = 0;
@@ -62,12 +64,14 @@ if (isset ( $_POST ['submit'] ))
 		
 	}
 	
-	if ($_POST ['limit'] == "on")
+	// if ($_POST ['limit'] == "on")
+	if(isset($_POST[limit]))
 	{
 		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
 		$areLimiting = 1;
 	} 
-	else if($_POST['limit'] == "off")
+	// else if($_POST['limit'] == "off")
+	else if(!isset($_POST['limit']))
 	{
 		// If the checkbox is unchecked, set the flag to 0
 		$areLimiting = 0;
@@ -219,6 +223,7 @@ if (isset ( $_POST ['submit'] ))
 						<input type="hidden" name="hascomputers" value="off">
 						<input class="form-check-input" name="hascomputers" id="hasComputersCheck" type="checkbox" <?php echo($roomToEdit['hascomputers'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="hasComputers">Has Computers</label>
+						
 						
 						<div class="row-xs-0 form-group" id="computerBlock" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none"?>">
 	                    	<b>Number of Computers</b>
