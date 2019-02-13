@@ -79,7 +79,7 @@ if (isset ( $_POST ['submit'] ))
 		$areLimiting = 1;
 	} 
 	// else if($_POST['limit'] == "off")
-	else if(empty($_POST['limit']))
+	else
 	{
 		// If the checkbox is unchecked, set the flag to 0
 		$areLimiting = 0;
