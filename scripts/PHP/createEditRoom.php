@@ -220,7 +220,7 @@ if (isset ( $_POST ['submit'] ))
 						<label for="hasComputers">Has Computers</label>
 					</div>
 					<div class="col-xs-2">
-						 <div class="row-sm-2 form-group" style="min-width: 190px; margin-left: 45px">
+						 <div class="col-sm-2 form-group" style="min-width: 190px; margin-left: 45px">
 	                    	<b>Number of Computers</b>
 	                    	<div class="row-md-2">
 								<input type="text" id="numComputers" name="numcomputers" class="form-control">
