@@ -221,7 +221,7 @@ if (isset ( $_POST ['submit'] ))
 						<div class="row-xs-0 form-group" id="computerBlock" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none"?>">
 	                    	<b>Number of Computers</b>
 	                    	<div class="row-md-2" style="max-width: 175px">
-								<input type="text" id="numComputers" name="numcomputers" class="form-control">
+								<input type="text" id="numComputers" name="numcomputers" class="form-control" <?php ($roomToEdit['numcomputers']) ? 'value=" '.$roomToEdit['numcomputers'].' "' : 'value="0"') ?>>
 						</div>
 					</div>
 					</div>
