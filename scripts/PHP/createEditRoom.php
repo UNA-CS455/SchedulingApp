@@ -219,6 +219,12 @@ if (isset ( $_POST ['submit'] ))
 								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
 					</div>
+					 <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px">
+                    	<b>Number of Computers</b>
+                    	<div class="row-md-2">
+							<input type="text" id="numComputers" name="numcomputers" class="form-control">
+						</div>
+					</div>
 					<div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
@@ -231,13 +237,16 @@ if (isset ( $_POST ['submit'] ))
 						<br />
 						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
 					</div>
+					
+					<!--- TODO: MOVE DIVS AROUND  --->
+					
                     
-                    <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px">
-                    	<b>Number of Computers</b>
-                    	<div class="row-md-2">
-							<input type="text" id="numComputers" name="numcomputers" class="form-control">
-						</div>
-					</div>
+     <!--               <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px">-->
+     <!--               	<b>Number of Computers</b>-->
+     <!--               	<div class="row-md-2">-->
+					<!--		<input type="text" id="numComputers" name="numcomputers" class="form-control">-->
+					<!--	</div>-->
+					<!--</div>-->
 					
 					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
