@@ -219,7 +219,7 @@ if (isset ( $_POST ['submit'] ))
 								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
 					</div>
-					<div class="row-xs-2">
+					<div class="col-xs-2">
 						 <div class="row-sm-2 form-group" style="min-width: 190px; margin-left: 45px">
 	                    	<b>Number of Computers</b>
 	                    	<div class="row-md-2">
