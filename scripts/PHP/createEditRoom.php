@@ -218,7 +218,7 @@ if (isset ( $_POST ['submit'] ))
 								 The script itself is simply asking if the room is set to have computers in the database, then
 								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
-						<div class="row-xs-0 form-group" style="min-width: 190px;" <?php echo ($roomToEdit['hascomputers'] == 1) ? 'display: run-in' : 'display: none'?>>
+						<div class="row-xs-0 form-group" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none"?>">
 	                    	<b>Number of Computers</b>
 	                    	<div class="row-md-2" style="max-width: 175px">
 								<input type="text" id="numComputers" name="numcomputers" class="form-control">
@@ -245,7 +245,7 @@ if (isset ( $_POST ['submit'] ))
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
 					
-					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php// echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
+					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
