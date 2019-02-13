@@ -218,7 +218,7 @@ if (isset ( $_POST ['submit'] ))
 								 The script itself is simply asking if the room is set to have computers in the database, then
 								 make the box checked by default. Else, do nothing (have it not checked) -->
 						<label for="hasComputers">Has Computers</label>
-						<div class="row-xs-0 form-group" style="min-width: 190px; margin-left: 45px">
+						<div class="row-xs-0 form-group" style="min-width: 190px;">
 	                    	<b>Number of Computers</b>
 	                    	<div class="row-md-2">
 								<input type="text" id="numComputers" name="numcomputers" class="form-control">
@@ -235,18 +235,15 @@ if (isset ( $_POST ['submit'] ))
 				<div class="row">
 					<div class="col-md-1">
 						<br />
-						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Edit Room" : print "Create Room") ?></button>
+						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Save Changes" : print "Create Room") ?></button>
 					</div>
 					
 					<!--- TODO: MOVE DIVS AROUND  --->
 					
                     
-     <!--               <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px">-->
-     <!--               	<b>Number of Computers</b>-->
-     <!--               	<div class="row-md-2">-->
-					<!--		<input type="text" id="numComputers" name="numcomputers" class="form-control">-->
-					<!--	</div>-->
-					<!--</div>-->
+                    <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px; visibility: hidden">
+                    	<b>Spacer, shouldn't be seen</b>
+					</div>
 					
 					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
