@@ -48,7 +48,7 @@ if (isset ( $_POST ['submit'] ))
 	$floor = $_POST ['floor'];
 	$seats = ( int ) $_POST ['seats'];
 	$numComputers = ( int ) $_POST ['numcomputers'];
-	$limit = (int) $_POST['limit'];
+	$limit = $_POST['limit'];
 	// if ($_POST ['hascomputers'] == "on")
 	
 	if($numComputers <= 0){
@@ -74,7 +74,7 @@ if (isset ( $_POST ['submit'] ))
 	// }
 	
 	// if ($_POST ['limit'] == "on")
-	if($limit == 0)
+	if($limit == "off")
 	{
 		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
 		$areLimiting = 0;
