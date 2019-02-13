@@ -74,7 +74,7 @@ if (isset ( $_POST ['submit'] ))
 	// }
 	
 	// if ($_POST ['limit'] == "on")
-	if($limit)
+	if($limit == 0)
 	{
 		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
 		$areLimiting = 0;
