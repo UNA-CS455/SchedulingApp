@@ -52,7 +52,6 @@ if (isset ( $_POST ['submit'] ))
 	// if ($_POST ['hascomputers'] == "on")
 	
 	if($numComputers <= 0){
-		$numComputers = NULL;
 		$hasComputers = 0;
 	}
 	else{
