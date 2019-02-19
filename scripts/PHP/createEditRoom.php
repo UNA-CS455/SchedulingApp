@@ -271,6 +271,9 @@ if(isset($_POST['ourUpdateUsersButton'])){
 						<div class="row-md-1" style="max-width: 175px">
 								<input type="text" id="email" name="allowedUser" class="form-control">
 						</div>
+						<div class="row-md-3">
+							<button class="btn btn-secondary" id="submit" name="submit" type="submit"></button>
+						</div>
 						<div>
 							<!--Put delete here-->
 							<!--SQL goes up top-->
