@@ -133,8 +133,8 @@ if (isset ( $_POST ['submit'] ))
 	data-gr-c-s-loaded="true">
 	
 	<?php include '../../modal.php'; ?>
-	<script src="scripts/JS/popup.js"></script>
-	<link rel="stylesheet" href="styles/popup.css">
+	<script src="../JS/popup.js"></script>
+	<link rel="stylesheet" href="../../styles/popup.css">
 	
 	<div id="shader" onclick="shaderClicked()"></div>
 	<!-- Jquery -->
