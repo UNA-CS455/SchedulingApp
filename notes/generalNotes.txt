@@ -4,8 +4,14 @@ CreateReservation.php -> processReservation() holds the key to enforcing the lim
 
 
 
-
-
+	buttonhtml = "<button id='ConfirmDeleteUser' class='modal-button btn btn-success' >Delete</button><button class='modal-button btn btn-danger' onclick='closeModal()'>Cancel</button>"
+	showMessageBox("Are you sure you want to delete this user?", "Confirm", buttonhtml, false);
+	// to pass data, we have to use an anon function.
+	document.getElementById('ConfirmDeleteUser').onclick = function() {
+		closeModal();
+		createClicked(data);
+	};
+  
 
 
 

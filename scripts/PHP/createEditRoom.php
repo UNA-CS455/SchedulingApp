@@ -95,7 +95,6 @@ if (isset ( $_POST ['submit'] ))
 
 		$conn->query ( $_updateSql );
 		header ( "Location: userSettings.php" );
-    	var_dump($_updateSql);
 	} else
 	{
 		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
@@ -115,6 +114,11 @@ if (isset ( $_POST ['submit'] ))
 //  	}
 // }
 
+//if(isset($_POST['ourDeleteUserButton'])){
+	// do stuff
+	// Delete from `whitelist` where email=user email AND room= '$roomid'
+// }
+
 
 ?>
 <!DOCTYPE html>
@@ -127,6 +131,11 @@ if (isset ( $_POST ['submit'] ))
 
 <body onload="populateBlacklistRooms(null); populateGroupList();"
 	data-gr-c-s-loaded="true">
+	
+	<?php include 'modal.php'; ?>
+	<script src="scripts/JS/popup.js"></script>
+	<link rel="stylesheet" href="styles/popup.css">
+	
 	<div id="shader" onclick="shaderClicked()"></div>
 	<!-- Jquery -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -248,20 +257,22 @@ if (isset ( $_POST ['submit'] ))
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
-						<div>
+						<div style="position: relative; top: .5vh; left: 5vh;">
 							<!--Put input box here-->
 							<!--Make sure the number in the class field is the same as the one in the parent div-->
+							<!--Put SQL up top with other SQL calls-->
+							
+							<!--<input type="hidden" name="limit" value="off">-->
+							<!--<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php //echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>-->
+							<!--<label for="limit">Limit Reservations</label>-->
+						</div>
+						<div>
+							<!--Put delete here-->
+							<!--SQL goes up top-->
+							<!--Whenever button gets clicked, so an (onclick) field is needed, call showMessageBox function-->
 						</div>
 					</div>
 				</div>
-				
-				<!-- ISSUE:
-						When editing a room, if the room has computers checked, it will flip in the system every time you save chagnes.
-					
-				     TODO:
-				     	Diagnose issue. Fix issue.
-				-->
-				
 				
 				
 				<div class="row">
