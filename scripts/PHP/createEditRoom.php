@@ -267,7 +267,7 @@ if(isset($_POST['ourUpdateUsersButton'])){
 							<!--Put input box here-->
 							<!--Make sure the number in the class field is the same as the one in the parent div-->
 							<!--Put SQL up top with other SQL calls-->
-							<div class="row-md-2" style="max-width: 175px">
+							<div class="row-md-1" style="max-width: 175px">
 								<input type="text" id="email" name="allowedUser" class="form-control">
 							</div>
 						</div>
