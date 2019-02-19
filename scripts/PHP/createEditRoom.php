@@ -263,13 +263,13 @@ if(isset($_POST['ourUpdateUsersButton'])){
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
-						<div style="position: relative; top: .5vh; left: 5vh;">
+						<!--<div style="position: relative; top: .5vh; left: 5vh;">-->
 							<!--Put input box here-->
 							<!--Make sure the number in the class field is the same as the one in the parent div-->
 							<!--Put SQL up top with other SQL calls-->
-							<div class="row-md-1" style="max-width: 175px">
+						<!--</div>-->
+						<div class="row-md-1" style="max-width: 175px">
 								<input type="text" id="email" name="allowedUser" class="form-control">
-							</div>
 						</div>
 						<div>
 							<!--Put delete here-->
