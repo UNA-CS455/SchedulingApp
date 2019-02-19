@@ -105,14 +105,20 @@ if (isset ( $_POST ['submit'] ))
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
 // We also can go ahead and call our other SQL call to get the list of allowed users
 
-// if(isset($_POST['ourUpdateUsersButton'])){
-//  	if($_POST['limit'] == "on"){
-			// insert new user to list
-//  	}
-//  	else if($_POST['limit'] == "off"){
-//  		// do stuff
-//  	}
-// }
+if(isset($_POST['ourUpdateUsersButton'])){
+	if($_POST['limit'] == "on"){
+		// insert new user to list
+		$email = $_POST ['allowedUser'];
+		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
+		$conn->query ( $_allowedSql );
+		header ( "Location: userSettings.php" );
+	}
+	else if($_POST['limit'] == "off"){
+		// do stuff
+		// what do we want this to do?
+	}
+}
+
 
 //if(isset($_POST['ourDeleteUserButton'])){
 	// do stuff
@@ -261,10 +267,9 @@ if (isset ( $_POST ['submit'] ))
 							<!--Put input box here-->
 							<!--Make sure the number in the class field is the same as the one in the parent div-->
 							<!--Put SQL up top with other SQL calls-->
-							
-							<!--<input type="hidden" name="limit" value="off">-->
-							<!--<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php //echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>-->
-							<!--<label for="limit">Limit Reservations</label>-->
+							<div class="row-md-2" style="max-width: 175px">
+								<input type="text" id="email" name="allowedUser" class="form-control">
+							</div>
 						</div>
 						<div>
 							<!--Put delete here-->
