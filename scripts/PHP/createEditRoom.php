@@ -132,7 +132,7 @@ if (isset ( $_POST ['submit'] ))
 <body onload="populateBlacklistRooms(null); populateGroupList();"
 	data-gr-c-s-loaded="true">
 	
-	<?php include 'modal.php'; ?>
+	<?php include '/modal.php'; ?>
 	<script src="scripts/JS/popup.js"></script>
 	<link rel="stylesheet" href="styles/popup.css">
 	
