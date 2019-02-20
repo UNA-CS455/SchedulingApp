@@ -268,7 +268,7 @@ if(isset($_POST['ourUpdateUsersButton'])){
 							<!--Make sure the number in the class field is the same as the one in the parent div-->
 							<!--Put SQL up top with other SQL calls-->
 						<!--</div>-->
-						<div class="row-md-1" style="max-width: 175px <?php //echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
+						<div class="row-md-1" style="max-width: 175px">
 								<input type="text" id="email" name="allowedUser" class="form-control">
 						</div>
 						
@@ -350,9 +350,11 @@ if(isset($_POST['ourUpdateUsersButton'])){
 	if($('#limitCheck').checked){
 		$('#allowedReserve').show();
 		$('#addUser').show();
+		$('$email').show();
 	}
 	else{
 		$('#allowedReserve').hide();
 		$('#addUser').hide();
+		$('$email').hide();
 	}
 </script>
