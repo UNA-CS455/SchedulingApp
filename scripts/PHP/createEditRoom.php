@@ -278,7 +278,7 @@ if(isset($_POST['ourUpdateUsersButton'])){
 							<!--Whenever button gets clicked, so an (onclick) field is needed, call showMessageBox function-->
 						</div>
 					</div>
-					<div class="col-xl-3" style="<?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>" >
+					<div class="col-xl-3" style="<?php //echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>" >
 							<button class="btn btn-secondary" style="margin-top: 32px; margin-left: 50px" id="addUser" name="addUser" type="submit">Add User</button>
 					</div>
 				</div>
