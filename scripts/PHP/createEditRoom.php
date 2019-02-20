@@ -350,11 +350,11 @@ if(isset($_POST['ourUpdateUsersButton'])){
 	if($('#limitCheck').checked){
 		$('#allowedReserve').show();
 		$('#addUser').show();
-		$('$email').show();
+		$('$allowedUser').show();
 	}
 	else{
 		$('#allowedReserve').hide();
 		$('#addUser').hide();
-		$('$email').hide();
+		$('$allowedUser').hide();
 	}
 </script>
