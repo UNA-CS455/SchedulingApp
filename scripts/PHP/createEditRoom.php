@@ -278,8 +278,8 @@ if(isset($_POST['ourUpdateUsersButton'])){
 							<!--Whenever button gets clicked, so an (onclick) field is needed, call showMessageBox function-->
 						</div>
 					</div>
-					<div class="col-xl-3" style="margin-top: 32px; margin-left: 50px;">
-							<button class="btn btn-secondary" id="addUser" name="addUser" type="submit">Add User</button>
+					<div class="col-xl-3" >
+							<button class="btn btn-secondary" style="margin-top: 32px; margin-left: 50px" id="addUser" name="addUser" type="submit">Add User</button>
 					</div>
 				</div>
 				
