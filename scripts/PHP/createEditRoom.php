@@ -268,7 +268,7 @@ if(isset($_POST['ourUpdateUsersButton'])){
 							<!--Make sure the number in the class field is the same as the one in the parent div-->
 							<!--Put SQL up top with other SQL calls-->
 						<!--</div>-->
-						<div class="row-md-1" style="max-width: 175px">
+						<div class="row-md-1" style="max-width: 175px; margin-top: 23px">
 								<input type="text" id="email" name="allowedUser" class="form-control">
 						</div>
 						
@@ -279,7 +279,7 @@ if(isset($_POST['ourUpdateUsersButton'])){
 						</div>
 					</div>
 					<div class="col-xl-3" >
-							<button class="btn btn-secondary" style="margin-top: 32px; margin-left: 50px" id="addUser" name="addUser" type="submit">Add User</button>
+							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px" id="addUser" name="addUser" type="submit">Add User</button>
 					</div>
 				</div>
 				
