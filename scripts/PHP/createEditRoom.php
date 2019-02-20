@@ -336,10 +336,12 @@ if(isset($_POST['ourUpdateUsersButton'])){
 			//show some boxes, maybe some other stuff?
 			$('#allowedReserve').show();
 			$('#addUser').show();
+			$('#email').show();
 		}	
 		else{
 			//don't show some boxes
 			$('#allowedReserve').hide();
+			$('#addUser').hide();
 			$('#addUser').hide();
 		}
 	})
