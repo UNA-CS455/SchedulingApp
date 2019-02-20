@@ -280,7 +280,6 @@ if(isset($_POST['ourUpdateUsersButton'])){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 32px; margin-left: 50px" id="addUser" name="addUser" type="submit">Add User</button>
-							<!--comment-->
 					</div>
 				</div>
 				
