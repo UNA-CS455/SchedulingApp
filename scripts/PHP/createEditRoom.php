@@ -342,7 +342,7 @@ if(isset($_POST['ourUpdateUsersButton'])){
 			//don't show some boxes
 			$('#allowedReserve').hide();
 			$('#addUser').hide();
-			$('#addUser').hide();
+			$('#email').hide();
 		}
 	})
 </script>
