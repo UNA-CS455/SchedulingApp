@@ -109,6 +109,7 @@ if(isset($_POST['addUser'])){
 		$conn->query ( $_allowedSql ) or die($conn->error);
 	//	echo "meta http-equiv='refresh' content='0'";
 	//	header ( "Location: createEditRoom.php" );
+		header("Refresh: 0");
 	}
 }
 
