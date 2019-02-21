@@ -94,7 +94,7 @@ if(isset($_POST['addUser'])){
 		
 	if($_POST['limit'] != "off"){
 		// insert new user to list
-		$email = $_POST['email'];
+		$email = $_POST['allowedUser'];
 		
 		// ISSUE: 
 			// $_POST['email'] doesn't seem to exist
