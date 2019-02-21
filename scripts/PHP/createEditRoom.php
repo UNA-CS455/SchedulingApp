@@ -96,6 +96,8 @@ if(isset($_POST['addUser'])){
 		// insert new user to list
 		$email = $_POST['allowedUser'];
 		
+		var_dump($_POST);
+		
 		// ISSUE: 
 			// $_POST['email'] doesn't seem to exist
 			// Giving SQL error because the email isn't getting in to the variable on it
