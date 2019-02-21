@@ -93,8 +93,8 @@ if(isset($_POST['addUser'])){
 		// insert new user to list
 		$email = $_POST ['allowedUser'];
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
-		$conn->query ( $_allowedSql );
-		header ( "Location: userSettings.php" );
+		$conn->query ( $_allowedSql ) or die($conn->error);
+	//	header ( "Location: userSettings.php" );
 	// }
 }
 
