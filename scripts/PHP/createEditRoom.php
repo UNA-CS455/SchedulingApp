@@ -89,15 +89,24 @@ if (isset ( $_POST ['submit'] ))
 // We also can go ahead and call our other SQL call to get the list of allowed users
 
 if(isset($_POST['addUser'])){
-	// if($roomToEdit['limit'] == "on"){
+	// We need to set the limit check to whatever "on" is here as well. That way we don't have to have them check the box, then hit "save changes"
+		// and then add the user. We can do it in one fell swoop.
+		
+	if($_POST['limit'] != "off"){
 		// insert new user to list
-		//$email = $_POST ['email'];
-		$email = "test@una.edu";
+		$email = $_POST ['email'];
+		
+		// ISSUE: 
+			// $_POST['email'] doesn't seem to exist
+			// Giving SQL error because the email isn't getting in to the variable on it
+			// Tested with the below email variable and it works fine, so it's an issue with $_POST
+		
+		//$email = "test@una.edu";
 		$roomid = $_POST['roomid'];
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
 		$conn->query ( $_allowedSql ) or die($conn->error);
-	//	header ( "Location: userSettings.php" );
-	// }
+		header ( "Location: createEditRoom.php" );
+	}
 }
 
 
