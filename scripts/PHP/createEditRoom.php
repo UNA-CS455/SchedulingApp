@@ -58,28 +58,12 @@ if (isset ( $_POST ['submit'] ))
 		$hasComputers = 1;
 	}
 	
-	// if(isset($_POST['hascomputers']))
-	// {
-	// 	// If the checkbox for "Has Computers" is checked
-	// 	$hasComputers = 1;
-	// 	$numComputers = ( int ) $_POST ['numcomputers'];
-	// } 
-	// // else if($_POST['hascomputers'] == "off")
-	// else if(!isset($_POST['hascomputers']))
-	// {
-	// 	// If the checkbox for "Has Computers" is unchecked
-	// 	$hasComputers = 0;
-	// 	$numComputers = 0;
-		
-	// }
 	
-	// if ($_POST ['limit'] == "on")
 	if($limit == "off")
 	{
 		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
 		$areLimiting = 0;
-	} 
-	// else if($_POST['limit'] == "off")
+	}
 	else
 	{
 		// If the checkbox is unchecked, set the flag to 0
@@ -89,7 +73,6 @@ if (isset ( $_POST ['submit'] ))
 
 	if ($beingEdited)
 	{
-		echo "editing now";
 		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
 			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
 
@@ -105,17 +88,13 @@ if (isset ( $_POST ['submit'] ))
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
 // We also can go ahead and call our other SQL call to get the list of allowed users
 
-if(isset($_POST['ourUpdateUsersButton'])){
+if(isset($_POST['addUser'])){
 	if($_POST['limit'] == "on"){
 		// insert new user to list
 		$email = $_POST ['allowedUser'];
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
 		$conn->query ( $_allowedSql );
 		header ( "Location: userSettings.php" );
-	}
-	else if($_POST['limit'] == "off"){
-		// do stuff
-		// what do we want this to do?
 	}
 }
 
@@ -247,8 +226,7 @@ if(isset($_POST['ourUpdateUsersButton'])){
 						<input type="hidden" name="hascomputers" value="off">
 						<input class="form-check-input" name="hascomputers" id="hasComputersCheck" type="checkbox" <?php echo($roomToEdit['hascomputers'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="hasComputers">Has Computers</label>
-						<!--f-->
-						
+
 						<div class="row-xs-0 form-group" id="computerBlock" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none"?>">
 	                    	<b>Number of Computers</b>
 	                    	<div class="row-md-2" style="max-width: 175px">
@@ -263,23 +241,21 @@ if(isset($_POST['ourUpdateUsersButton'])){
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
-						<!--<div style="position: relative; top: .5vh; left: 5vh;">-->
-							<!--Put input box here-->
-							<!--Make sure the number in the class field is the same as the one in the parent div-->
-							<!--Put SQL up top with other SQL calls-->
-						<!--</div>-->
 						<div class="row-md-1" style="max-width: 175px; margin-top: 23px">
 								<input type="text" id="email" name="allowedUser" class="form-control">
 						</div>
-						
 						<div>
 							<!--Put delete here-->
 							<!--SQL goes up top-->
-							<!--Whenever button gets clicked, so an (onclick) field is needed, call showMessageBox function-->
 						</div>
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px" id="addUser" name="addUser" type="submit">Add User</button>
+					</div>
+					<div>
+							<!--Put delete button here-->
+							<!--SQL goes up top-->
+							<!--Whenever button gets clicked, so an (onclick) field is needed, call showMessageBox function-->
 					</div>
 				</div>
 				
