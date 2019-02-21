@@ -216,8 +216,8 @@ if(isset($_POST['addUser'])){
 				<div class="row">
 					<div class="col-md-1 form-group">
 						<label for="seats">Seats</label>
-						<input type="text" name="seats" class="form-control"
-							<?php echo($roomToEdit['seats']) ? 'value=" '.$roomToEdit['seats'].' "' : '' ?>>
+						<input type="text" name="seats" class="form-control" value="3"
+							<?php //echo($roomToEdit['seats']) ? 'value=" '.$roomToEdit['seats'].' "' : '' ?>>
 					</div>
 					
 					<div class="col-md-2 form-check"
@@ -250,7 +250,8 @@ if(isset($_POST['addUser'])){
 						</div>
 					</div>
 					<div class="col-xl-3" >
-							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px" id="addUser" name="addUser" type="submit">Add User</button>
+							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+								id="addUser" name="addUser" type="submit">Add User</button>
 					</div>
 					<div>
 							<!--Put delete button here-->
@@ -325,14 +326,14 @@ if(isset($_POST['addUser'])){
 
 
 <script>
-	if($('#limitCheck').checked){
-		$('#allowedReserve').show();
-		$('#addUser').show();
-		$('#email').show();
-	}
-	else{
-		$('#allowedReserve').hide();
-		$('#addUser').hide();
-		$('#email').hide();
-	}
+	// if($('#limitCheck').checked){
+	// 	$('#allowedReserve').show();
+	// 	$('#addUser').show();
+	// 	$('#email').show();
+	// }
+	// else{
+	// 	$('#allowedReserve').hide();
+	// 	$('#addUser').hide();
+	// 	$('#email').hide();
+	// }
 </script>
