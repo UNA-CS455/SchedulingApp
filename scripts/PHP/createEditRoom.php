@@ -89,13 +89,13 @@ if (isset ( $_POST ['submit'] ))
 // We also can go ahead and call our other SQL call to get the list of allowed users
 
 if(isset($roomToEdit['addUser'])){
-	if($roomToEdit['limit'] == "on"){
+	// if($roomToEdit['limit'] == "on"){
 		// insert new user to list
 		$email = $_POST ['allowedUser'];
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
 		$conn->query ( $_allowedSql );
 		header ( "Location: userSettings.php" );
-	}
+	// }
 }
 
 
