@@ -107,7 +107,7 @@ if(isset($_POST['addUser'])){
 		$roomid = $_POST['roomid'];
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
 		$conn->query ( $_allowedSql ) or die($conn->error);
-		echo "meta http-equiv='refresh' content='0'";
+	//	echo "meta http-equiv='refresh' content='0'";
 	//	header ( "Location: createEditRoom.php" );
 	}
 }
