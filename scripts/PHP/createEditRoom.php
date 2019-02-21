@@ -91,7 +91,8 @@ if (isset ( $_POST ['submit'] ))
 if(isset($_POST['addUser'])){
 	// if($roomToEdit['limit'] == "on"){
 		// insert new user to list
-		$email = $_POST ['email'];
+		//$email = $_POST ['email'];
+		$email = "test@una.edu";
 		$roomid = $_POST['roomid'];
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
 		$conn->query ( $_allowedSql ) or die($conn->error);
