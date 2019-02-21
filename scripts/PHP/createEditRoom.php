@@ -94,7 +94,7 @@ if(isset($_POST['addUser'])){
 		
 	if($_POST['limit'] != "off"){
 		// insert new user to list
-		$email = $_POST ['email'];
+		$email = $_POST['email'];
 		
 		// ISSUE: 
 			// $_POST['email'] doesn't seem to exist
@@ -262,7 +262,7 @@ if(isset($_POST['addUser'])){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="submit">Add User</button>
+								id="addUser"  type="submit">Add User</button>
 					</div>
 					<div>
 							<!--Put delete button here-->
