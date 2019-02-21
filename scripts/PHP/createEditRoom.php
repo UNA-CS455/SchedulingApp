@@ -88,7 +88,7 @@ if (isset ( $_POST ['submit'] ))
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
 // We also can go ahead and call our other SQL call to get the list of allowed users
 
-if(isset($roomToEdit['addUser'])){
+if(isset($_POST['addUser'])){
 	// if($roomToEdit['limit'] == "on"){
 		// insert new user to list
 		$email = $_POST ['allowedUser'];
