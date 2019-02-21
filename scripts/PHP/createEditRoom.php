@@ -262,9 +262,9 @@ if(isset($_POST['addUser'])){
 				
 				
 				<div class="row">
-					<div class="col-md-1">
+					<div class="col-md-1" style="visibility: hidden">
 						<br />
-						<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Save Changes" : print "Create Room") ?></button>
+						<b>Spacer, shouldn't be seen</b>
 					</div>
 					
                     <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px; visibility: hidden">
@@ -284,6 +284,9 @@ if(isset($_POST['addUser'])){
 						</div>
 					</div>
 					
+				</div>
+				<div class="row">
+					<button class="btn btn-secondary" id="submit" name="submit" type="submit"><?php (($beingEdited == true) ? print "Save Changes" : print "Create Room") ?></button>
 				</div>
 			</form>
 		</div>
