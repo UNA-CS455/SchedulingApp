@@ -241,7 +241,7 @@ if(isset($_POST['addUser'])){
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
-						<div class="row-md-1" style="max-width: 175px; margin-top: 23px; <?php// echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
+						<div class="row-md-1" style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
 								<input type="text" id="email" name="allowedUser" class="form-control">
 						</div>
 						<div>
@@ -250,7 +250,7 @@ if(isset($_POST['addUser'])){
 						</div>
 					</div>
 					<div class="col-xl-3" >
-							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php// echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
 								id="addUser" name="addUser" type="submit">Add User</button>
 					</div>
 					<div>
@@ -271,7 +271,7 @@ if(isset($_POST['addUser'])){
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
 					
-					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php// echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
+					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
@@ -326,20 +326,14 @@ if(isset($_POST['addUser'])){
 
 
 <script>
-	if($('#limitCheck').checked){
-		// $('#allowedReserve').show();
-		// $('#addUser').show();
-		// $('#email').show();
-		document.getElementById("allowedReserve").style.display='run-in';
-		document.getElementById("addUser").style.display='run-in';
-		document.getElementById("email").style.display='run-in';
-	}
-	else{
-		// $('#allowedReserve').hide();
-		// $('#addUser').hide();
-		// $('#email').hide();
-		document.getElementById("allowedReserve").style.display='none';
-		document.getElementById("addUser").style.display='none';
-		document.getElementById("email").style.display='none';
-	}
+	// if($('#limitCheck').checked){
+	// 	$('#allowedReserve').show();
+	// 	$('#addUser').show();
+	// 	$('#email').show();
+	// }
+	// else{
+	// 	$('#allowedReserve').hide();
+	// 	$('#addUser').hide();
+	// 	$('#email').hide();
+	// }
 </script>
