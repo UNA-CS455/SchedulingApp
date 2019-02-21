@@ -88,8 +88,8 @@ if (isset ( $_POST ['submit'] ))
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
 // We also can go ahead and call our other SQL call to get the list of allowed users
 
-if(isset($_POST['addUser'])){
-	if($_POST['limit'] == "on"){
+if(isset($roomToEdit['addUser'])){
+	if($roomToEdit['limit'] == "on"){
 		// insert new user to list
 		$email = $_POST ['allowedUser'];
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
@@ -251,7 +251,7 @@ if(isset($_POST['addUser'])){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="submit" formmethod="post">Add User</button>
+								id="addUser" name="addUser" type="submit">Add User</button>
 					</div>
 					<div>
 							<!--Put delete button here-->
