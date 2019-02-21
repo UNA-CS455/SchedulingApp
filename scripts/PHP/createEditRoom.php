@@ -254,8 +254,8 @@ if(isset($_POST['addUser'])){
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
-						<div class="row-md-1" id="email" name="allowedUser" style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
-								<input type="text" class="form-control">
+						<div class="row-md-1" id="email"  style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
+								<input type="text" name="allowedUser" class="form-control">
 						</div>
 						<div>
 							<!--Put delete here-->
