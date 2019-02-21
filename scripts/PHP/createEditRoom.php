@@ -250,7 +250,7 @@ if(isset($_POST['addUser'])){
 						</div>
 					</div>
 					<div class="col-xl-3" >
-							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px <?php// echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php// echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
 								id="addUser" name="addUser" type="submit">Add User</button>
 					</div>
 					<div>
@@ -271,7 +271,7 @@ if(isset($_POST['addUser'])){
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
 					
-					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px <?php// echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
+					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php// echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
@@ -330,9 +330,9 @@ if(isset($_POST['addUser'])){
 		// $('#allowedReserve').show();
 		// $('#addUser').show();
 		// $('#email').show();
-		document.getElementById("allowedReserve").style.display='block';
-		document.getElementById("addUser").style.display='block';
-		document.getElementById("email").style.display='block';
+		document.getElementById("allowedReserve").style.display='run-in';
+		document.getElementById("addUser").style.display='run-in';
+		document.getElementById("email").style.display='run-in';
 	}
 	else{
 		// $('#allowedReserve').hide();
