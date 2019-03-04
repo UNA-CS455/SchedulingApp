@@ -43,47 +43,50 @@ if (isset ( $_GET ['roomid'] ))
 if (isset ( $_POST ['submit'] ))
 {
 	
-	$roomid = $_POST ['roomid'];
-	$type = $_POST ['type'];
-	$floor = $_POST ['floor'];
-	$seats = ( int ) $_POST ['seats'];
-	$numComputers = ( int ) $_POST ['numcomputers'];
-	$limit = $_POST['limit'];
-	// if ($_POST ['hascomputers'] == "on")
+	// $roomid = $_POST ['roomid'];
+	// $type = $_POST ['type'];
+	// $floor = $_POST ['floor'];
+	// $seats = ( int ) $_POST ['seats'];
+	// $numComputers = ( int ) $_POST ['numcomputers'];
+	// $limit = $_POST['limit'];
+	// // if ($_POST ['hascomputers'] == "on")
 	
-	if($numComputers <= 0){
-		$hasComputers = 0;
-	}
-	else{
-		$hasComputers = 1;
-	}
+	// if($numComputers <= 0){
+	// 	$hasComputers = 0;
+	// }
+	// else{
+	// 	$hasComputers = 1;
+	// }
 	
 	
-	if($limit == "off")
-	{
-		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
-		$areLimiting = 0;
-	}
-	else
-	{
-		// If the checkbox is unchecked, set the flag to 0
-		$areLimiting = 1;
-	}
+	// if($limit == "off")
+	// {
+	// 	// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
+	// 	$areLimiting = 0;
+	// }
+	// else
+	// {
+	// 	// If the checkbox is unchecked, set the flag to 0
+	// 	$areLimiting = 1;
+	// }
 
 
-	if ($beingEdited)
-	{
-		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
-			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
+	// if ($beingEdited)
+	// {
+	// 	$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
+	// 		`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
 
-		$conn->query ( $_updateSql );
-		header ( "Location: userSettings.php" );
-	} else
-	{
-		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
-		$conn->query ( $_createSql );
-		header ( "Location: userSettings.php" );
-	}
+	// 	$conn->query ( $_updateSql );
+	// 	header ( "Location: userSettings.php" );
+	// } else
+	// {
+	// 	$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
+	// 	$conn->query ( $_createSql );
+	// 	header ( "Location: userSettings.php" );
+	// }
+	
+	saveChanges();
+	
 }
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
 // We also can go ahead and call our other SQL call to get the list of allowed users
@@ -115,7 +118,8 @@ if(isset($_POST['addUser'])){
 		
 	//	echo "meta http-equiv='refresh' content='0'";
 	//	header ( "Location: createEditRoom.php" );
-		$_POST['submit'] = 1;
+	//	$_POST['submit'] = 1;
+		saveChanges();
 		header("Refresh: 0");
 	}
 }
@@ -358,4 +362,54 @@ if(isset($_POST['addUser'])){
 		}
 	})
 </script>
+
+<!--PHP FUNCTIONS-->
+<?php
+function saveChanges(){
+	$roomid = $_POST ['roomid'];
+	$type = $_POST ['type'];
+	$floor = $_POST ['floor'];
+	$seats = ( int ) $_POST ['seats'];
+	$numComputers = ( int ) $_POST ['numcomputers'];
+	$limit = $_POST['limit'];
+	// if ($_POST ['hascomputers'] == "on")
+	
+	if($numComputers <= 0){
+		$hasComputers = 0;
+	}
+	else{
+		$hasComputers = 1;
+	}
+	
+	
+	if($limit == "off")
+	{
+		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
+		$areLimiting = 0;
+	}
+	else
+	{
+		// If the checkbox is unchecked, set the flag to 0
+		$areLimiting = 1;
+	}
+
+
+	if ($beingEdited)
+	{
+		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
+			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
+
+		$conn->query ( $_updateSql );
+		header ( "Location: userSettings.php" );
+	} else
+	{
+		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
+		$conn->query ( $_createSql );
+		header ( "Location: userSettings.php" );
+	}
+}
+
+?>
+
+
 
