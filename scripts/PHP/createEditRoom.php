@@ -43,12 +43,12 @@ if (isset ( $_GET ['roomid'] ))
 if (isset ( $_POST ['submit'] ))
 {
 	
-	// $roomid = $_POST ['roomid'];
-	// $type = $_POST ['type'];
-	// $floor = $_POST ['floor'];
-	// $seats = ( int ) $_POST ['seats'];
-	// $numComputers = ( int ) $_POST ['numcomputers'];
-	// $limit = $_POST['limit'];
+	$roomid = $_POST ['roomid'];
+	$type = $_POST ['type'];
+	$floor = $_POST ['floor'];
+	$seats = ( int ) $_POST ['seats'];
+	$numComputers = ( int ) $_POST ['numcomputers'];
+	$limit = $_POST['limit'];
 	// // if ($_POST ['hascomputers'] == "on")
 	
 	// if($numComputers <= 0){
@@ -85,7 +85,7 @@ if (isset ( $_POST ['submit'] ))
 	// 	header ( "Location: userSettings.php" );
 	// }
 	
-	saveChanges();
+	saveChanges($conn, $beingEdited, $_POST);
 	
 }
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
@@ -119,7 +119,7 @@ if(isset($_POST['addUser'])){
 	//	echo "meta http-equiv='refresh' content='0'";
 	//	header ( "Location: createEditRoom.php" );
 	//	$_POST['submit'] = 1;
-		saveChanges();
+		saveChanges($conn, $beingEdited, $_POST);
 		header("Refresh: 0");
 	}
 }
@@ -130,17 +130,13 @@ if(isset($_POST['addUser'])){
 // 	$sql = "DELETE 'user' FROM `whitelist` WHERE 'email' = '$email' AND 'room' = '$roomid'";
 	
 // }
-
-
-
-function saveChanges(){
-	$roomid = $_POST ['roomid'];
-	$type = $_POST ['type'];
-	$floor = $_POST ['floor'];
-	$seats = ( int ) $_POST ['seats'];
-	$numComputers = ( int ) $_POST ['numcomputers'];
-	$limit = $_POST['limit'];
-	// if ($_POST ['hascomputers'] == "on")
+function saveChanges($conn, $beingEdited, $post_vars){
+	$roomid = $post_vars ['roomid'];
+	$type = $post_vars ['type'];
+	$floor = $post_vars ['floor'];
+	$seats = ( int ) $post_vars ['seats'];
+	$numComputers = ( int ) $post_vars ['numcomputers'];
+	$limit = $post_vars['limit'];
 	
 	if($numComputers <= 0){
 		$hasComputers = 0;
@@ -176,6 +172,8 @@ function saveChanges(){
 		header ( "Location: userSettings.php" );
 	}
 }
+
+
 
 ?>
 <!DOCTYPE html>
