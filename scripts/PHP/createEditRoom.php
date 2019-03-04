@@ -18,6 +18,58 @@ if ($conn->connect_error)
 	die ( "Connection failed: " . $conn->connect_error );
 }
 
+
+
+function saveChanges(){
+	$roomid = $_POST ['roomid'];
+	$type = $_POST ['type'];
+	$floor = $_POST ['floor'];
+	$seats = ( int ) $_POST ['seats'];
+	$numComputers = ( int ) $_POST ['numcomputers'];
+	$limit = $_POST['limit'];
+	// if ($_POST ['hascomputers'] == "on")
+	
+	if($numComputers <= 0){
+		$hasComputers = 0;
+	}
+	else{
+		$hasComputers = 1;
+	}
+	
+	
+	if($limit == "off")
+	{
+		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
+		$areLimiting = 0;
+	}
+	else
+	{
+		// If the checkbox is unchecked, set the flag to 0
+		$areLimiting = 1;
+	}
+
+
+	if ($beingEdited)
+	{
+		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
+			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
+
+		$conn->query ( $_updateSql );
+		header ( "Location: userSettings.php" );
+	} else
+	{
+		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
+		$conn->query ( $_createSql );
+		header ( "Location: userSettings.php" );
+	}
+}
+
+
+
+
+
+
+
 // ////////////////////////////////////////////////////////////////////////////////////
 // /////////SELECT PASSED THROUGH ROOM
 // ////////////////////////////////////////////////////////////////////////////////////
@@ -363,53 +415,6 @@ if(isset($_POST['addUser'])){
 	})
 </script>
 
-<!--PHP FUNCTIONS-->
-<?php
-function saveChanges(){
-	$roomid = $_POST ['roomid'];
-	$type = $_POST ['type'];
-	$floor = $_POST ['floor'];
-	$seats = ( int ) $_POST ['seats'];
-	$numComputers = ( int ) $_POST ['numcomputers'];
-	$limit = $_POST['limit'];
-	// if ($_POST ['hascomputers'] == "on")
-	
-	if($numComputers <= 0){
-		$hasComputers = 0;
-	}
-	else{
-		$hasComputers = 1;
-	}
-	
-	
-	if($limit == "off")
-	{
-		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
-		$areLimiting = 0;
-	}
-	else
-	{
-		// If the checkbox is unchecked, set the flag to 0
-		$areLimiting = 1;
-	}
-
-
-	if ($beingEdited)
-	{
-		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
-			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
-
-		$conn->query ( $_updateSql );
-		header ( "Location: userSettings.php" );
-	} else
-	{
-		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
-		$conn->query ( $_createSql );
-		header ( "Location: userSettings.php" );
-	}
-}
-
-?>
 
 
 
