@@ -106,17 +106,25 @@ if(isset($_POST['addUser'])){
 		//$email = "test@una.edu";
 		$roomid = $_POST['roomid'];
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
-		$conn->query ( $_allowedSql ) or die($conn->error);
+		$conn->query ( $_allowedSql );
+		
+		if(isset($conn->error)){
+			// display error
+			$sqlError = $conn->error;
+		}
+		
 	//	echo "meta http-equiv='refresh' content='0'";
 	//	header ( "Location: createEditRoom.php" );
+		$_POST['submit'] = 1;
 		header("Refresh: 0");
 	}
 }
 
 
-//if(isset($_POST['ourDeleteUserButton'])){
-	// do stuff
-	// Delete from `whitelist` where email=user email AND room= '$roomid'
+// if(isset($_POST['ourDeleteUserButton'])){
+	
+// 	$sql = "DELETE 'user' FROM `whitelist` WHERE 'email' = '$email' AND 'room' = '$roomid'";
+	
 // }
 
 
@@ -268,7 +276,16 @@ if(isset($_POST['addUser'])){
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
 								id="addUser" name="addUser" type="submit">Add User</button>
 					</div>
-					<div>
+					<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"
+								id="deleteUser" name="deleteUser" type="submit">Delete User</button>
+						
+							<!--buttonhtml = "<button id='ConfirmDeleteUser' class='modal-button btn btn-success' >Delete</button><button class='modal-button btn btn-danger' onclick='closeModal()'>Cancel</button>"-->
+							<!--showMessageBox("Are you sure you want to delete this user?", "Confirm", buttonhtml, false);-->
+							<!--document.getElementById('ConfirmDeleteUser').onclick = function() {-->
+							<!--closeModal();-->
+							<!--createClicked(data);-->
+							<!--};-->
+							
 							<!--Put delete button here-->
 							<!--SQL goes up top-->
 							<!--Whenever button gets clicked, so an (onclick) field is needed, call showMessageBox function-->

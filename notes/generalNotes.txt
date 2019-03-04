@@ -11,6 +11,15 @@ CreateReservation.php -> processReservation() holds the key to enforcing the lim
 		closeModal();
 		createClicked(data);
 	};
+	
+	
+	
+	
+TODO:
+	Get Modal to show up on the add user
+	Get Modal to show up in the event of an SQL error (if the user doesn't exist in the tables)
+	Get Modal to show up to verify that a user was added? Deleted?
+	
   
 
 
