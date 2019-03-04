@@ -86,6 +86,7 @@ if (isset ( $_POST ['submit'] ))
 	// }
 	
 	saveChanges($conn, $beingEdited, $_POST);
+	header("Location: userSettings.php");
 	
 }
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
@@ -164,12 +165,12 @@ function saveChanges($conn, $beingEdited, $post_vars){
 			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
 
 		$conn->query ( $_updateSql );
-		header ( "Location: userSettings.php" );
+	//	header ( "Location: userSettings.php" );
 	} else
 	{
 		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
 		$conn->query ( $_createSql );
-		header ( "Location: userSettings.php" );
+	//	header ( "Location: userSettings.php" );
 	}
 }
 
