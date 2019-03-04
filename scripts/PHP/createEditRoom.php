@@ -49,42 +49,7 @@ if (isset ( $_POST ['submit'] ))
 	$seats = ( int ) $_POST ['seats'];
 	$numComputers = ( int ) $_POST ['numcomputers'];
 	$limit = $_POST['limit'];
-	// // if ($_POST ['hascomputers'] == "on")
-	
-	// if($numComputers <= 0){
-	// 	$hasComputers = 0;
-	// }
-	// else{
-	// 	$hasComputers = 1;
-	// }
-	
-	
-	// if($limit == "off")
-	// {
-	// 	// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
-	// 	$areLimiting = 0;
-	// }
-	// else
-	// {
-	// 	// If the checkbox is unchecked, set the flag to 0
-	// 	$areLimiting = 1;
-	// }
 
-
-	// if ($beingEdited)
-	// {
-	// 	$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
-	// 		`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
-
-	// 	$conn->query ( $_updateSql );
-	// 	header ( "Location: userSettings.php" );
-	// } else
-	// {
-	// 	$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
-	// 	$conn->query ( $_createSql );
-	// 	header ( "Location: userSettings.php" );
-	// }
-	
 	saveChanges($conn, $beingEdited, $_POST);
 	header("Location: userSettings.php");
 	
@@ -99,16 +64,10 @@ if(isset($_POST['addUser'])){
 	if($_POST['limit'] != "off"){
 		// insert new user to list
 		$email = $_POST['allowedUser'];
-		
-		//var_dump($_POST);
-		
-		// ISSUE: 
-			// $_POST['email'] doesn't seem to exist
-			// Giving SQL error because the email isn't getting in to the variable on it
-			// Tested with the below email variable and it works fine, so it's an issue with $_POST
-		
-		//$email = "test@una.edu";
 		$roomid = $_POST['roomid'];
+		
+		// Here is where the modal box needs to confirm the user wants to add the person
+		
 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
 		$conn->query ( $_allowedSql );
 		
@@ -117,9 +76,6 @@ if(isset($_POST['addUser'])){
 			$sqlError = $conn->error;
 		}
 		
-	//	echo "meta http-equiv='refresh' content='0'";
-	//	header ( "Location: createEditRoom.php" );
-	//	$_POST['submit'] = 1;
 		saveChanges($conn, $beingEdited, $_POST);
 		header("Refresh: 0");
 	}
@@ -131,6 +87,10 @@ if(isset($_POST['addUser'])){
 // 	$sql = "DELETE 'user' FROM `whitelist` WHERE 'email' = '$email' AND 'room' = '$roomid'";
 	
 // }
+
+
+// Performs the actions associated with the save changes button.
+
 function saveChanges($conn, $beingEdited, $post_vars){
 	$roomid = $post_vars ['roomid'];
 	$type = $post_vars ['type'];
@@ -165,12 +125,10 @@ function saveChanges($conn, $beingEdited, $post_vars){
 			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
 
 		$conn->query ( $_updateSql );
-	//	header ( "Location: userSettings.php" );
 	} else
 	{
 		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
 		$conn->query ( $_createSql );
-	//	header ( "Location: userSettings.php" );
 	}
 }
 
@@ -322,7 +280,8 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="submit">Add User</button>
+								id="addUser" name="addUser" type="submit" onclick="openConfirmCreate()">Add User</button>
+								<!--onclick="openConfirmCreate()"-->
 					</div>
 					<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"
 								id="deleteUser" name="deleteUser" type="submit">Delete User</button>
