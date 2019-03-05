@@ -5,7 +5,7 @@ $conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Conne
 
 $email = $_POST['allowedUser'];
 $roomid = $_POST['roomid'];
-0
+
 $_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
 $conn->query ( $_allowedSql );
 
