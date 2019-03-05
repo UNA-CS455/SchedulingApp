@@ -1,28 +1,19 @@
 createEditRoom.php is the location where we will need to implement the "Limit Reservations" checkbox
 
-
-
-
-	buttonhtml = "<button id='ConfirmDeleteUser' class='modal-button btn btn-success' >Delete</button><button class='modal-button btn btn-danger' onclick='closeModal()'>Cancel</button>"
-	showMessageBox("Are you sure you want to delete this user?", "Confirm", buttonhtml, false);
-	// to pass data, we have to use an anon function.
-	document.getElementById('ConfirmDeleteUser').onclick = function() {
-		closeModal();
-		createClicked(data);
-	};
-	
 	
 
 ISSUE:
-	On add user to whitelist, the modal box will pop up momentarily, but then the page will refresh for whatever reason
-	PHP is also being silly with strings on passing the name of the user into the function
+	PHP is being silly with strings on passing the name of the user into the function
 	
 	
 	
 TODO:
-	Get Modal to show up on the add user
+	Add ajax to call the php function
+		We will need to move the php function to a new separate file, otherwise it gets messy with ajax
+	
 	Get Modal to show up in the event of an SQL error (if the user doesn't exist in the tables)
 	Get Modal to show up to verify that a user was added? Deleted?
+	
 	
 
 
