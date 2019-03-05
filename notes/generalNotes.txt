@@ -10,6 +10,7 @@ ISSUE:
 TODO:
 	Add ajax to call the php function
 		We will need to move the php function to a new separate file, otherwise it gets messy with ajax
+		With a separate php file for the php function (NOT saveChanges, that one is fine), we can easily make the ajax call
 	
 	Get Modal to show up in the event of an SQL error (if the user doesn't exist in the tables)
 	Get Modal to show up to verify that a user was added? Deleted?

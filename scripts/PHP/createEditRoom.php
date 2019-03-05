@@ -51,7 +51,7 @@ if (isset ( $_POST ['submit'] ))
 	$limit = $_POST['limit'];
 
 	saveChanges($conn, $beingEdited, $_POST);
-	//header("Location: userSettings.php");
+	header("Location: userSettings.php");
 	
 }
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
@@ -295,7 +295,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="button" onclick="openConfirmCreateUser(document.getElementById('allowedUser').value)" >Add User</button>
+								id="addUser" name="addUser" type="button" onclick="openConfirmCreateUser()" >Add User</button>
 					</div>
 					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
 					<!--			id="deleteUser" name="deleteUser" type="submit">Delete User</button>-->
