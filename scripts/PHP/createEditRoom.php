@@ -295,7 +295,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="submit" onclick="openConfirmCreateUser('<?php echo $_POST['allowedUser']; ?>')">Add User</button>
+								id="addUser" name="addUser" type="submit" onclick="openConfirmCreateUser('<?php echo $_POST['allowedUser'] ?>')">Add User</button>
 								<!--onclick="openConfirmCreate()"-->
 					</div>
 					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
