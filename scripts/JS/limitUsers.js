@@ -14,13 +14,13 @@ function openConfirmCreateUser(name, roomid)
 
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='addToWhiteList(" + name + "," + roomid + ")' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
 	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
-	alert(17);
+	
 	
 }
 
 function addToWhiteList(name, roomid){
 	
-	alert(32);
+	showMessageBoxOK();
 	
 	if (window.location.href.includes('PHP'))
 	{
