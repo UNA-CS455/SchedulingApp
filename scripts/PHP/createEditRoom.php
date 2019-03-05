@@ -298,20 +298,20 @@ function saveChanges($conn, $beingEdited, $post_vars){
 								id="addUser" name="addUser" type="submit" onclick="openConfirmCreateUser()">Add User</button>
 								<!--onclick="openConfirmCreate()"-->
 					</div>
-					<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"
-								id="deleteUser" name="deleteUser" type="submit">Delete User</button>
+					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
+					<!--			id="deleteUser" name="deleteUser" type="submit">Delete User</button>-->
 						
-							<!--buttonhtml = "<button id='ConfirmDeleteUser' class='modal-button btn btn-success' >Delete</button><button class='modal-button btn btn-danger' onclick='closeModal()'>Cancel</button>"-->
-							<!--showMessageBox("Are you sure you want to delete this user?", "Confirm", buttonhtml, false);-->
-							<!--document.getElementById('ConfirmDeleteUser').onclick = function() {-->
-							<!--closeModal();-->
-							<!--createClicked(data);-->
-							<!--};-->
+					<!--		buttonhtml = "<button id='ConfirmDeleteUser' class='modal-button btn btn-success' >Delete</button><button class='modal-button btn btn-danger' onclick='closeModal()'>Cancel</button>"-->
+					<!--		showMessageBox("Are you sure you want to delete this user?", "Confirm", buttonhtml, false);-->
+					<!--		document.getElementById('ConfirmDeleteUser').onclick = function() {-->
+					<!--		closeModal();-->
+					<!--		createClicked(data);-->
+					<!--		};-->
 							
 							<!--Put delete button here-->
 							<!--SQL goes up top-->
 							<!--Whenever button gets clicked, so an (onclick) field is needed, call showMessageBox function-->
-					</div>
+					<!--</div>-->
 				</div>
 				
 				
