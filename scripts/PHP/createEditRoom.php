@@ -286,7 +286,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
 						<div class="row-md-1"  style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
-								<input type="text" id="allowedUser" name="allowedUser" class="form-control">
+								<input type="text" id="email" name="allowedUser" class="form-control">
 						</div>
 						<div>
 							<!--Put delete here-->
@@ -363,13 +363,13 @@ function saveChanges($conn, $beingEdited, $post_vars){
 			//show some boxes, maybe some other stuff?
 			$('#allowedReserve').show();
 			$('#addUser').show();
-			$('#allowedUser').show();
+			$('#email').show();
 		}	
 		else{
 			//don't show some boxes
 			$('#allowedReserve').hide();
 			$('#addUser').hide();
-			$('#allowedUser').hide();
+			$('#email').hide();
 		}
 	})
 </script>
