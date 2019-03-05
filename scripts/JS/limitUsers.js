@@ -14,7 +14,7 @@ function openConfirmCreateUser(formElement)
 		
 	//var name = data.allowedUser;
 	//var name = document.getElementById(asdf).value;
-	var name = formElement.value;
+	var name = formElement;
 	
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='insertUserWhitelist()'>Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
 	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
