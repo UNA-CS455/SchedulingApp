@@ -28,6 +28,7 @@ function addToWhiteList(name, roomid){
 		xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
 	}
 	
+	alert(32);
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
