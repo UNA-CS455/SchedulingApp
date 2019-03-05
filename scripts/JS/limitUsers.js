@@ -19,6 +19,8 @@ function openConfirmCreateUser(name, roomid)
 
 function addToWhiteList(name, roomid){
 	
+	alert(32);
+	
 	if (window.location.href.includes('PHP'))
 	{
 		xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
@@ -28,7 +30,7 @@ function addToWhiteList(name, roomid){
 		xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
 	}
 	
-	alert(32);
+	
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
