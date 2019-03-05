@@ -10,7 +10,7 @@ $_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$
 $conn->query ( $_allowedSql );
 
 if(!empty($conn->error)){
-    echo $conn->error;
+    die $conn->error;
 }
 
 $conn->close;
