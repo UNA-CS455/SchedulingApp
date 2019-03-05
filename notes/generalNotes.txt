@@ -1,6 +1,5 @@
 createEditRoom.php is the location where we will need to implement the "Limit Reservations" checkbox
 
-CreateReservation.php -> processReservation() holds the key to enforcing the limit possibly maybe hopefully?
 
 
 
@@ -13,6 +12,11 @@ CreateReservation.php -> processReservation() holds the key to enforcing the lim
 	};
 	
 	
+
+ISSUE:
+	On add user to whitelist, the modal box will pop up momentarily, but then the page will refresh for whatever reason
+	PHP is also being silly with strings on passing the name of the user into the function
+	
 	
 	
 TODO:
@@ -20,7 +24,7 @@ TODO:
 	Get Modal to show up in the event of an SQL error (if the user doesn't exist in the tables)
 	Get Modal to show up to verify that a user was added? Deleted?
 	
-  
+
 
 
 

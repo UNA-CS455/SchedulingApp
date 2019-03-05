@@ -272,7 +272,7 @@ function openConfirmDelete(ele)
 	// set id of info tag to append this info below.
 
 	lastDeleteClicked = ele;
-	buttonhtml = "<button class='modal-button' onclick='closeModal()'>Ok</button>"
+	buttonhtml = "<button class='modal-button' onclick='closeModal()'>Ok</button>"; //this was missing a semicolon? unsure why, added it back in.
 	showMessageBox("<br><br>Are you sure you want to delete reservation:<br><br>" + ele.children[0].innerHTML + "<br>From:<br>" + ele.children[1].innerHTML + "<br>To:<br>" + ele.children[2].innerHTML + "<br><br><button class = 'modal-button btn btn-success' id='yesDelete' onclick='deleteClicked(this.id," + String(ele.children[0].id) + ")'>Yes</button><button class='modal-button btn btn-danger' id='noDelete' onclick='closeModal()'>No</button>", "Delete Reservation", "", false);
 
 }
