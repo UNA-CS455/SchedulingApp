@@ -57,29 +57,43 @@ if (isset ( $_POST ['submit'] ))
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
 // We also can go ahead and call our other SQL call to get the list of allowed users
 
-if(isset($_POST['addUser'])){
-	// We need to set the limit check to whatever "on" is here as well. That way we don't have to have them check the box, then hit "save changes"
-		// and then add the user. We can do it in one fell swoop.
+// if(isset($_POST['addUser'])){
+// 	// We need to set the limit check to whatever "on" is here as well. That way we don't have to have them check the box, then hit "save changes"
+// 		// and then add the user. We can do it in one fell swoop.
 		
-	if($_POST['limit'] != "off"){
-		// insert new user to list
-		$email = $_POST['allowedUser'];
-		$roomid = $_POST['roomid'];
+// 	if($_POST['limit'] != "off"){
+// 		// insert new user to list
+// 		$email = $_POST['allowedUser'];
+// 		$roomid = $_POST['roomid'];
 		
-		// Here is where the modal box needs to confirm the user wants to add the person
+// 		// Here is where the modal box needs to confirm the user wants to add the person
 		
-		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
-		$conn->query ( $_allowedSql );
+// 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
+// 		$conn->query ( $_allowedSql );
 		
-		if(isset($conn->error)){
-			// display error
-			$sqlError = $conn->error;
-		}
+// 		if(isset($conn->error)){
+// 			// display error
+// 			$sqlError = $conn->error;
+// 		}
 		
-		saveChanges($conn, $beingEdited, $_POST);
-		header("Refresh: 0");
+// 		saveChanges($conn, $beingEdited, $_POST);
+// 		header("Refresh: 0");
+// 	}
+// }
+
+function insertUserWhitelist(){
+	$email = $_POST['allowedUser'];
+	$roomid = $_POST['roomid'];
+
+	$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
+	$conn->query ( $_allowedSql );
+		
+	if(isset($conn->error)){
+		// display error
+		$sqlError = $conn->error;
 	}
 }
+
 
 
 // if(isset($_POST['ourDeleteUserButton'])){
@@ -156,6 +170,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 	<!-- Local scripts -->
 	<script src="../JS/popup.js"></script>
 	<script src="../JS/rooms.js"></script>
+	<script src="../JS/limitUsers.js"></script>
 	<script src="../JS/settingsDisplay.js"></script>
 	<!-- Include FontAwesome -->
 	<link rel="stylesheet"
@@ -280,7 +295,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="submit" onclick="openConfirmCreate()">Add User</button>
+								id="addUser" name="addUser" type="submit" >Add User</button>
 								<!--onclick="openConfirmCreate()"-->
 					</div>
 					<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"
