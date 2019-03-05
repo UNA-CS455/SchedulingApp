@@ -51,7 +51,7 @@ if (isset ( $_POST ['submit'] ))
 	$limit = $_POST['limit'];
 
 	saveChanges($conn, $beingEdited, $_POST);
-	header("Location: userSettings.php");
+	// header("Location: userSettings.php");
 	
 }
 // Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
