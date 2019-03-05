@@ -363,13 +363,13 @@ function saveChanges($conn, $beingEdited, $post_vars){
 			//show some boxes, maybe some other stuff?
 			$('#allowedReserve').show();
 			$('#addUser').show();
-			$('#email').show();
+			$('#allowedUser').show();
 		}	
 		else{
 			//don't show some boxes
 			$('#allowedReserve').hide();
 			$('#addUser').hide();
-			$('#email').hide();
+			$('#allowedUser').hide();
 		}
 	})
 </script>
