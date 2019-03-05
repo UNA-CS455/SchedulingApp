@@ -285,8 +285,8 @@ function saveChanges($conn, $beingEdited, $post_vars){
 						<input type="hidden" name="limit" value="off">
 						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
-						<div class="row-md-1" id="email"  style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
-								<input type="text" name="allowedUser" class="form-control">
+						<div class="row-md-1"  style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
+								<input type="text" id="allowedUser" name="allowedUser" class="form-control">
 						</div>
 						<div>
 							<!--Put delete here-->
@@ -295,7 +295,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="button" onclick="openConfirmCreateUser(document.getElementById('email').value)" >Add User</button>
+								id="addUser" name="addUser" type="button" onclick="openConfirmCreateUser(document.getElementById('allowedUser').value)" >Add User</button>
 					</div>
 					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
 					<!--			id="deleteUser" name="deleteUser" type="submit">Delete User</button>-->
