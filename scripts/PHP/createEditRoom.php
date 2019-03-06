@@ -250,7 +250,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					
 					<div class="col-md-1 form-group">
 						<label for="floor">Floor</label>
-						<input type="text" name="floor" class="form-control"
+						<input type="text" name="floor" id="floor" class="form-control"
 							<?php echo($roomToEdit['floor']) ? 'value=" '.$roomToEdit['floor'].' "' : '' ?>>
 					</div>
 					
@@ -259,7 +259,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 				<div class="row">
 					<div class="col-md-1 form-group">
 						<label for="seats">Seats</label>
-						<input type="text" name="seats" class="form-control"
+						<input type="text" name="seats" id="seats" class="form-control"
 							<?php echo($roomToEdit['seats']) ? 'value=" '.$roomToEdit['seats'].' "' : '' ?>>
 					</div>
 					
