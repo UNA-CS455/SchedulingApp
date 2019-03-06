@@ -37,9 +37,9 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 		var numComputers = document.getElementById('numcomputers');
 	}	
 	
-	var roomType = document.getElementById('type');
-	var floorNum = document.getElementById('floor');
-	var seats = document.getElementById('seats');
+	var roomType = document.getElementById('type').value;
+	var floorNum = document.getElementById('floor').value;
+	var seats = document.getElementById('seats').value;
 	
 	
 	
@@ -51,7 +51,6 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
-		alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited);
 		addWL(name, roomid);
 
