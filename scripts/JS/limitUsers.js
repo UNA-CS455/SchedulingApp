@@ -18,16 +18,14 @@ function openConfirmCreateUser(name, roomid)
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
-		addWL();
+		addWL(name, roomid);
 	};
 	
 	
 	
 }
 
-function addWL(){
-	var name = "user@una.edu";
-	var roomid = "Keller 233";
+function addWL(name, roomid){
 	var xhttp = new XMLHttpRequest();
 
 
