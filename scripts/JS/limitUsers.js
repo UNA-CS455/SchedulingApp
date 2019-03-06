@@ -21,7 +21,7 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
 		addWL(name, roomid);
-		alert(document.getElementById('limitCheck'));
+		alert(document.getElementById('limitCheck').value);
 		//save changes
 	};
 	
