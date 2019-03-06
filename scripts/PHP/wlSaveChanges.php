@@ -9,6 +9,7 @@ $conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Conne
 	$floor = $_POST ['floorNum'];
 	$seats = ( int ) $_POST ['seats'];
 	$numComputers = ( int ) $_POST ['numComputers'];
+	$hasComputers = $_POST['hasComputers'];
 	$limit = $_POST['limit'];
 	$beingEdited = $_POST['beingEdited'];
 

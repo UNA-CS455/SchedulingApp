@@ -58,7 +58,7 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		alert(document.getElementById('hasComputersCheck').value + ' ' + hasComputers + ' ' + beingEdited);
 		addWL(name, roomid);
-		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited);
+		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 
 		//save changes
@@ -87,7 +87,7 @@ function addWL(name, roomid){
 	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
 }
 
-function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited){
+function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
 	var xhttp = new XMLHttpRequest();
 
 	if (window.location.href.includes('PHP'))
@@ -102,6 +102,6 @@ function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, bei
 	
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("roomid=" + roomid + "&roomType=" + roomType + "&floorNum=" + floorNum + "&seats=" + seats + "&numComputers=" + numComputers + "&limit=" + limit + "&beingEdited=" + beingEdited);// send stuff
+	xhttp.send("roomid=" + roomid + "&roomType=" + roomType + "&floorNum=" + floorNum + "&seats=" + seats + "&numComputers=" + numComputers + "&limit=" + limit + "&beingEdited=" + beingEdited + "&hasComputers=" + hasComputers);// send stuff
 	
 }
