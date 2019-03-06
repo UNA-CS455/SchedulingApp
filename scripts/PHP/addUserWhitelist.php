@@ -1,4 +1,4 @@
-<?php session_start()
+<?php session_start();
 
 require "db_conf.php";
 $conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Connection failed: " . $conn->connect_error );
@@ -10,7 +10,7 @@ $_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$
 $conn->query ( $_allowedSql );
 
 if(!empty($conn->error)){
-    die $conn->error;
+    die($conn->error);
 }
 
 $conn->close;
