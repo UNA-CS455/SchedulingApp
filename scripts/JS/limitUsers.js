@@ -18,15 +18,16 @@ function openConfirmCreateUser(name, roomid)
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
-		addWL(name, roomid);
+		addWL();
 	};
 	
 	
 	
 }
 
-function addWL(name, roomid){
-	
+function addWL(){
+	var name = "user@una.edu";
+	var roomid = "Keller 233";
 
 	if (window.location.href.includes('PHP'))
 	{
