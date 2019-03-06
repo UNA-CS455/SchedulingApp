@@ -19,14 +19,14 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 		beingEdited = 0;
 	}
 		
-	if(document.getElementById('limitCheck').value == 'on'){
+	if(document.getElementById('limitCheck').value == 'on' || document.getElementById('limitCheck').value == 1){
 		var limit = 1;
 	}
 	else{
 		var limit = 0;
 	}
 	
-	if(document.getElementById('hasComputersCheck').value == 'on'){
+	if(document.getElementById('hasComputersCheck').value == 'on' || document.getElementById('hasComputersCheck').value == 1){
 		var hasComputers = 1;
 	}
 	else{
