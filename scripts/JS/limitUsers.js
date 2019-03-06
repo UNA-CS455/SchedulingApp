@@ -28,6 +28,8 @@ function openConfirmCreateUser(name, roomid)
 function addWL(){
 	var name = "user@una.edu";
 	var roomid = "Keller 233";
+	var xhttp = new XMLHttpRequest();
+
 
 	if (window.location.href.includes('PHP'))
 	{
