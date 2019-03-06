@@ -45,7 +45,7 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	
 	
 
-    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL'' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
+    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' type='submit' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
     // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='addToWhiteList('user@una.edu', 'Keller 233')' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
 	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
 	
