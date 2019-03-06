@@ -5,14 +5,15 @@ $conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Conne
 
 
     $roomid = $_POST ['roomid'];
-	$type = $_POST ['type'];
-	$floor = $_POST ['floor'];
+	$type = $_POST ['roomType'];
+	$floor = $_POST ['floorNum'];
 	$seats = ( int ) $_POST ['seats'];
-	$numComputers = ( int ) $_POST ['numcomputers'];
+	$numComputers = ( int ) $_POST ['numComputers'];
 	$limit = $_POST['limit'];
+	$beingEdited = $_POST['beingEdited'];
 
 
-	if ($beingEdited)
+	if ($beingEdited == 1)
 	{
 		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
 			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$limit' WHERE `rooms`.`roomid` = '$roomid'";
