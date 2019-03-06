@@ -36,9 +36,7 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	if(hasComputers == 1){
 		var numComputers = document.getElementById('numComputers');
 	}	
-	else{
-		var numComputers = null;
-	}
+
 	
 	var roomType = document.getElementById('type').value;
 	var floorNum = document.getElementById('floor').value;
