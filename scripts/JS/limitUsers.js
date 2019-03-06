@@ -51,6 +51,7 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
+		alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited);
 		addWL(name, roomid);
 
