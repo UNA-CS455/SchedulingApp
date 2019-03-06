@@ -19,14 +19,14 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 		beingEdited = 0;
 	}
 		
-	if(document.getElementById('limitCheck') == 'on'){
+	if(document.getElementById('limitCheck').value == 'on'){
 		var limit = 1;
 	}
 	else{
 		var limit = 0;
 	}
 	
-	if(document.getElementById('hasComputersCheck') == 'on'){
+	if(document.getElementById('hasComputersCheck').value == 'on'){
 		var hasComputers = 1;
 	}
 	else{
@@ -34,7 +34,7 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	}
 	
 	if(hasComputers == 1){
-		var numComputers = document.getElementById('numComputers');
+		var numComputers = document.getElementById('numComputers').value;
 	}	
 	else{
 		var numComputers = null;
@@ -56,7 +56,6 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
-		alert(document.getElementById('hasComputersCheck'));
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited);
 		addWL(name, roomid);
 
