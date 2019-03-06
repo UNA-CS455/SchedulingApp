@@ -3,7 +3,7 @@ createEditRoom.php is the location where we will need to implement the "Limit Re
 	
 
 ISSUE:
-	PHP is being silly with strings on passing the name of the user into the function
+	When unchecking the "has computers" box, it will not delete the num computers from the database (or even update the fact that it has been changed)
 	
 	
 	
