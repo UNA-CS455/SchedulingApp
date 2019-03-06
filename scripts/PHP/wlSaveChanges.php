@@ -17,7 +17,7 @@ $conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Conne
 		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
 			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$limit' WHERE `rooms`.`roomid` = '$roomid'";
 
-		$conn->query ( $_updateSql ) or die($conn->error);
+		$conn->query ( $_updateSql ) or header("Location:index.php");
 	} else
 	{
 		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`, `limit`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers', '$limit')";
