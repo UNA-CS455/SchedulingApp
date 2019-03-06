@@ -18,14 +18,14 @@ function openConfirmCreateUser(name, roomid)
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
-		addToWhiteList(name, roomid);
+		addWL(name, roomid);
 	};
 	
 	
 	
 }
 
-function addToWhiteList(name, roomid){
+function addWL(name, roomid){
 	
 
 	if (window.location.href.includes('PHP'))
