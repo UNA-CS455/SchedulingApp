@@ -7,7 +7,7 @@
 
 
 
-function openConfirmCreateUser(name, roomid, beingEdited)
+function openConfirmAddUser(userExists, name, roomid, beingEdited)
 {
 	if(beingEdited){
 		beingEdited = 1;
@@ -51,33 +51,41 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		
-		addWL(name, roomid);
+		addWL(userExists, name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
 	};
 }
 
-function addWL(name, roomid){
+function addWL(userExists, name, roomid){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 	var xhttp = new XMLHttpRequest();
+	
+	
+	
+	
 
-
-	if (window.location.href.includes('PHP'))
-	{
-		xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
+	if(userExists){
+		if (window.location.href.includes('PHP'))
+		{
+			xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
+		}
+		else
+		{
+			xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
+		}
+		
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
 	}
-	else
-	{
-		xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
+	else{
+		showMessageBoxOk("User does not exist!", "ERROR", true); // Error finding person, they don't exist!
 	}
-	
-	
-	
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
 }
+
+
 
 function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
 	var xhttp = new XMLHttpRequest();
