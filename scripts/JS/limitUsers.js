@@ -9,9 +9,6 @@
 
 function openConfirmCreateUser(name, roomid, beingEdited)
 {
-	// xhttp send is structured like this:
-		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
-		
 	if(beingEdited){
 		beingEdited = 1;
 	}
@@ -44,10 +41,6 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	var roomType = document.getElementById('type').value;
 	var floorNum = document.getElementById('floor').value;
 	var seats = document.getElementById('seats').value;
-	
-	
-	
-	
 
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
     // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='addToWhiteList('user@una.edu', 'Keller 233')' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
@@ -56,19 +49,18 @@ function openConfirmCreateUser(name, roomid, beingEdited)
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
-		alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
+		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
+		
 		addWL(name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
-
 		//save changes
 	};
-	
-	
-	
 }
 
 function addWL(name, roomid){
+	// xhttp send is structured like this:
+		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 	var xhttp = new XMLHttpRequest();
 
 

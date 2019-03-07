@@ -7,7 +7,7 @@ $email = $_POST['allowedUser'];
 $roomid = $_POST['roomid'];
 
 $_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
-$conn->query ( $_allowedSql );
+$conn->query ( $_allowedSql ) or die($conn->error);
 
 if(!empty($conn->error)){
     die($conn->error);

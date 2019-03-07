@@ -32,7 +32,7 @@ if(!empty($conn->error)){
 }
 
 $conn->close;
-header("Location: userSettings.php");
+header("Refresh: 0");
 // Isn't sending back to userSettings.php :(
 
 ?>
