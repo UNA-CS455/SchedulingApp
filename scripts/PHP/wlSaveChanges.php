@@ -33,5 +33,6 @@ if(!empty($conn->error)){
 
 $conn->close;
 header("Location: userSettings.php");
+// Isn't sending back to userSettings.php :(
 
 ?>
