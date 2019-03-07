@@ -282,7 +282,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="button" onclick="openConfirmCreateUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value), <?php echo(json_encode($beingEdited)); ?>)" >Add User</button>
+								id="addUser" name="addUser" type="button" onclick="openConfirmCreateUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, <?php echo(json_encode($beingEdited)); ?>)" >Add User</button>
 					</div>
 					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
 					<!--			id="deleteUser" name="deleteUser" type="submit">Delete User</button>-->
