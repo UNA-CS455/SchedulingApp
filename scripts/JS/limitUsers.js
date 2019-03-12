@@ -71,6 +71,7 @@ function checkUserExists(name){
 function addWL(userExists, name, roomid){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
+		
 	var xhttp = new XMLHttpRequest();
 
 	if(userExists){

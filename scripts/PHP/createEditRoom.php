@@ -382,6 +382,7 @@ function verifyUserExists($userToVerify){
 	var addUserElement = document.getElementById('addUser');
 
 	addUserElement.addEventListener('click', function() {
-    	alert(document.getElementById('allowedUser').value);
+    	// alert(document.getElementById('allowedUser').value);
+    	openConfirmAddUser(document.getElementById('allowedUser'), document.getElementById('roomid'), true);
 	}, false);
 </script>
