@@ -135,7 +135,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 }
 
 
-function verifyUserExists($userToVerify):int{
+function verifyUserExists($userToVerify){
 	// Something in this is breaking our code. It causes the other stuff to not show up around the text box.
 	$verifySql = "SELECT * FROM `users` WHERE `users`.`email` = $userToVerify";
 	$verifyRes = $conn->query($verifySql);
@@ -298,8 +298,7 @@ function verifyUserExists($userToVerify):int{
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="button" 
-								onclick="openConfirmAddUser(<?php echo(verifyUserExists($roomToEdit['allowedUser'])); ?>, document.getElementById('allowedUser').value, document.getElementById('roomid').value, <?php echo(json_encode($beingEdited)); ?>)" >Add User</button>
+								id="addUser" name="addUser" type="button">Add User</button>
 					</div>
 					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
 					<!--			id="deleteUser" name="deleteUser" type="submit">Delete User</button>-->
@@ -379,10 +378,10 @@ function verifyUserExists($userToVerify):int{
 </script>
 
 <script>
-	// $('#addUser').onclick(function(){
-	// 	// move saveChanges to its own php script
-	// 	openConfirmCreateUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value);
-	// })
+	$('#addUser').onclick(function(){
+		// move saveChanges to its own php script
+		openConfirmCreateUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value);
+	})
 </script>
 
 
