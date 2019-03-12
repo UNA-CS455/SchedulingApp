@@ -135,7 +135,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 }
 
 
-function verifyUserExists($userToVerify){
+function verifyUserExists($userToVerify):int{
 	// Something in this is breaking our code. It causes the other stuff to not show up around the text box.
 	$verifySql = "SELECT * FROM `users` WHERE `users`.`email` = $userToVerify";
 	$verifyRes = $conn->query($verifySql);
