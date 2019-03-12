@@ -36,14 +36,16 @@ function openConfirmAddUser(name, roomid, beingEdited)
 
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
     // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='addToWhiteList('user@una.edu', 'Keller 233')' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
-	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
+	//showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
+	alert('name=' + name + ' roomid=' + roomid);
+
+	
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		
-		alert('name=' + name + ' roomid=' + roomid);
 	//	addWL(checkUserExists(name), name, roomid);
 	//	saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
