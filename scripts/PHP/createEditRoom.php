@@ -141,10 +141,10 @@ function verifyUserExists($userToVerify){
 	$verifyRes = $conn->query($verifySql);
 	
 	if($verifyRes->num_rows == 1){
-		echo 1;
+		return 1;
 	}
 	else{
-		echo 0;
+		return 0;
 	}
 	
 }
@@ -299,7 +299,7 @@ function verifyUserExists($userToVerify){
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
 								id="addUser" name="addUser" type="button" 
-								onclick="openConfirmAddUser(<?php echo(verifyUserExists($roomToEdit['allowedUser'])) ?>, document.getElementById('allowedUser').value, document.getElementById('roomid').value, <?php echo(json_encode($beingEdited)); ?>)" >Add User</button>
+								onclick="openConfirmAddUser(<?php echo(verifyUserExists($roomToEdit['allowedUser'])); ?>, document.getElementById('allowedUser').value, document.getElementById('roomid').value, <?php echo(json_encode($beingEdited)); ?>)" >Add User</button>
 					</div>
 					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
 					<!--			id="deleteUser" name="deleteUser" type="submit">Delete User</button>-->
