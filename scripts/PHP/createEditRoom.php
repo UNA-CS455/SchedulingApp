@@ -322,7 +322,7 @@ function verifyUserExists($userToVerify){
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
 					
-					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
+					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; padding-left: 7px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
 						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
@@ -379,8 +379,7 @@ function verifyUserExists($userToVerify){
 </script>
 
 <script>
-	$('#addUser').onclick(function(){
-		// move saveChanges to its own php script
+	document.getElementById('addUser').onclick(function(){
 		openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, true);
 	})
 </script>
