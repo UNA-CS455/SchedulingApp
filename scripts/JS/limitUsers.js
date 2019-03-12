@@ -43,8 +43,9 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		
-		addWL(checkUserExists(name), name, roomid);
-		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
+		alert('name=' + name + ' roomid=' + roomid);
+	//	addWL(checkUserExists(name), name, roomid);
+	//	saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
 	};
