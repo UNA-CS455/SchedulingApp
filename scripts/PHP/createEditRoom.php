@@ -379,7 +379,7 @@ function verifyUserExists($userToVerify){
 </script>
 
 <script>
-	document.getElementById('addUser').onclick(function(){
+	document.getElementById('addUser').click(function(){
 		alert("CLICKED!");
 		openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, true);
 	})
