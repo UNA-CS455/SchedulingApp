@@ -14,5 +14,7 @@ if(!empty($conn->error)){
 }
 
 $conn->close;
+header("Refresh: 0");
+
 
 ?>
