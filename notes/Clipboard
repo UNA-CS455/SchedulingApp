@@ -2,46 +2,4 @@
 
 
 
-
-                                <tr>
-							      <td>user@una.edu</td>
-							    </tr>
-							    <tr>
-							    	<td>bcornelius@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>tnelson3@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>fjager@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>dhayter@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>otacon3@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>ssnake@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>rocelot@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>bboss@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>thepain@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>thefear@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>thesorrow@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>theboss@una.edu</td>
-							    </tr>
-							    <tr>
-							      <td>nsnake@una.edu</td>
-							    </tr>
+onclick="openConfirmAddUser(<?php echo(verifyUserExists($roomToEdit['allowedUser'])); ?>, document.getElementById('allowedUser').value, document.getElementById('roomid').value, <?php echo(json_encode($beingEdited)); ?>)" >

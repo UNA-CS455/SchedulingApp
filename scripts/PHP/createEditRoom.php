@@ -298,7 +298,8 @@ function verifyUserExists($userToVerify){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="button">Add User</button>
+								id="addUser" name="addUser" type="button">
+								Add User</button>
 					</div>
 					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
 					<!--			id="deleteUser" name="deleteUser" type="submit">Delete User</button>-->
@@ -380,7 +381,7 @@ function verifyUserExists($userToVerify){
 <script>
 	$('#addUser').onclick(function(){
 		// move saveChanges to its own php script
-		openConfirmCreateUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value);
+		openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, true);
 	})
 </script>
 

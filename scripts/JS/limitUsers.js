@@ -7,7 +7,7 @@
 
 
 
-function openConfirmAddUser(userExists, name, roomid, beingEdited)
+function openConfirmAddUser(name, roomid, beingEdited)
 {
 	if(beingEdited){
 		beingEdited = 1;
@@ -51,21 +51,35 @@ function openConfirmAddUser(userExists, name, roomid, beingEdited)
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		
-		addWL(userExists, name, roomid);
+		addWL(checkUserExists(name), name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
 	};
 }
 
+function checkUserExists(name){
+	var xhttp = new XMLHttpRequest();
+	
+	if (window.location.href.includes('PHP'))
+	{
+		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
+	}
+	else
+	{
+		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
+	}
+	
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("allowedUser=" + name);// send stuff
+}
+
+
+
 function addWL(userExists, name, roomid){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 	var xhttp = new XMLHttpRequest();
-	
-	
-	
-	
 
 	if(userExists){
 		if (window.location.href.includes('PHP'))
@@ -99,7 +113,7 @@ function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, bei
 		xhttp.open("POST", "scripts/PHP/wlSaveChanges.php", true);
 	}
 	
-	
+	alert("This is in saveChanges");
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("roomid=" + roomid + "&roomType=" + roomType + "&floorNum=" + floorNum + "&seats=" + seats + "&numComputers=" + numComputers + "&limit=" + limit + "&beingEdited=" + beingEdited + "&hasComputers=" + hasComputers);// send stuff
