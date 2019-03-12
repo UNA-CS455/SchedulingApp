@@ -55,6 +55,8 @@ function openConfirmAddUser(name, roomid, beingEdited)
 function checkUserExists(name){
 	var xhttp = new XMLHttpRequest();
 	
+	alert("In checkUserExists");
+	
 	if (window.location.href.includes('PHP'))
 	{
 		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
