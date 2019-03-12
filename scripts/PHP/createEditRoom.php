@@ -137,7 +137,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 
 function verifyUserExists($userToVerify){
 	$verifySql = "SELECT * FROM `users` WHERE `users`.`email` = $userToVerify";
-	$verifyRes = $conn->query($verifySql) or die($conn->error);
+	$verifyRes = $conn->query($verifySql);
 	
 	if($verifyRes->num_rows == 1){
 		return 1;
