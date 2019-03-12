@@ -382,9 +382,6 @@ function verifyUserExists($userToVerify){
 	var addUserElement = document.getElementById('addUser');
 
 	addUserElement.addEventListener('click', function() {
-    alert(document.getElementById('allowedUser'));
+    	alert(document.getElementById('allowedUser').value);
 	}, false);
 </script>
-
-
-
