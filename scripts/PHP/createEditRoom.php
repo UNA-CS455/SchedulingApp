@@ -382,7 +382,7 @@ function verifyUserExists($userToVerify){
 	var addUserElement = document.getElementById('addUser');
 
 	addUserElement.addEventListener('click', function() {
-    alert('Hello world');
+    alert(document.getElementById('allowedUser'));
 	}, false);
 </script>
 
