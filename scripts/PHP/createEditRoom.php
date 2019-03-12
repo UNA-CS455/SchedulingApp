@@ -298,7 +298,8 @@ function verifyUserExists($userToVerify){
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="addUser" name="addUser" type="button">
+								id="addUser" name="addUser" type="button"
+								onclick="alert('Clickify')">
 								Add User</button>
 					</div>
 					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
@@ -379,7 +380,7 @@ function verifyUserExists($userToVerify){
 </script>
 
 <script>
-	document.getElementById('addUser').click(function(){
+	document.getElementById('addUser').onclick(function(){
 		alert("CLICKED!");
 		openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, true);
 	})

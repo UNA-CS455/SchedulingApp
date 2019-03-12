@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 function openConfirmAddUser(name, roomid, beingEdited)
 {
 	if(beingEdited){
