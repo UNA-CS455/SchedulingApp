@@ -1,4 +1,4 @@
-
+var xhttp;
 
 
 //************************************************************************************************
@@ -53,7 +53,6 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		closeModal();
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
-		alert(checkUserExists(name));
 		
 		addWL(checkUserExists(name), name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
@@ -97,8 +96,10 @@ function checkUserExists(name){
 
 function stateChanged(){
 	if(xhttp.readyState == 4 && this.status == 200){
+	
         var exists = xhttp.responseText;
         var boolExists = parseInt(exists);
+        alert("In stateChanged, boolExists is " + boolExists);
         return exists;
     }
 }
