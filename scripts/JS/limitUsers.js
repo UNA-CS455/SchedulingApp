@@ -91,7 +91,7 @@ function checkUserExists(name){
 	if(xhttp.readyState == 4 && this.status == 200){
         var exists = xhttp.responseText;
         var boolExists = parseInt(exists);
-        return boolExists;
+        return exists;
     }
 
 	
