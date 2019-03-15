@@ -120,6 +120,8 @@ function addWL(userExists, name, roomid){
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 		
 	var xhttp = new XMLHttpRequest();
+	
+	alert(userExists);
 
 	if(userExists){
 		if (window.location.href.includes('PHP'))
