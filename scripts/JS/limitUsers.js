@@ -87,17 +87,20 @@ function checkUserExists(name){
 	}
 
 	// onreadystatechange to get the result!
+	xhttp.onreadystatechange = stateChanged;
 	
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("allowedUser=" + name);// send stuff
+	
+}
+
+
+function stateChanged(){
 	if(xhttp.readyState == 4 && this.status == 200){
         var exists = xhttp.responseText;
         var boolExists = parseInt(exists);
         return exists;
     }
-
-	
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("allowedUser=" + name);// send stuff
-	
 }
 
 
