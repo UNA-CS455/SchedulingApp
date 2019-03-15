@@ -324,7 +324,7 @@ function verifyUserExists($userToVerify){
 					
 					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; padding-left: 7px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
-						<div class="col-md-2" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
+						<div class="col-md-2" id="reserveBox" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
 								<?php
 									while($allowedUsers = $allowedUsersRes->fetch_assoc()){

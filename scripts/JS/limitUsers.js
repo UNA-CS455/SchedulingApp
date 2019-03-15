@@ -1,4 +1,13 @@
 
+
+
+//************************************************************************************************
+// Method Name: openConfirmAddUser
+//
+// Incoming params: name (String), roomid (String), beingEdited (int bool)
+//
+// Purpose: Opens the modal box to have the user confirm if they really want to add the user
+//*************************************************************************************************
 function openConfirmAddUser(name, roomid, beingEdited)
 {
 	if(beingEdited){
@@ -52,10 +61,20 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	};
 }
 
+
+
+
+//************************************************************************************************
+// Method Name: checkUserExists
+//
+// Incoming params: name (String)
+//
+// Purpose: Checks if the user passed in actually exists in the system. Makes a call to a PHP
+//			file called userExistsCheck.php, which actually verifies the user in the system.
+//			The PHP file returns 1 or 0 if the user exists in the system or not, respectively.
+//*************************************************************************************************
 function checkUserExists(name){
 	var xhttp = new XMLHttpRequest();
-	
-	alert("In checkUserExists");
 	
 	if (window.location.href.includes('PHP'))
 	{
@@ -65,13 +84,32 @@ function checkUserExists(name){
 	{
 		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
 	}
+
+	// onreadystatechange to get the result!
+	
+	if(xhttp.readyState == 4 && this.status == 200){
+        var exists = xhttp.responseText;
+        var boolExists = parseInt(exists);
+        return boolExists;
+    }
+
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
+	
 }
 
 
 
+//************************************************************************************************
+// Method Name: addWL
+//
+// Incoming params: userExists (int bool), name (String), roomid (String)
+//
+// Purpose: Checks the int/bool userExists and sees if we need to add the user to the whitelist
+//			or not. If we do, it will call addUserWhitelist.php, which actually adds the user
+//			to the whitelist.
+//*************************************************************************************************
 function addWL(userExists, name, roomid){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
@@ -98,6 +136,15 @@ function addWL(userExists, name, roomid){
 
 
 
+//************************************************************************************************
+// Method Name: saveChanges
+//
+// Incoming params: roomid (String), roomType (String), floorNum (int), seats (int),
+//					numComputers (int), limit (int bool), beingEdited (int bool), 
+//					hasComputers (int bool)
+//
+// Purpose: Saves the changes made to the room. Called in openConfirmAddUser if the user hits yes.
+//*************************************************************************************************
 function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
 	var xhttp = new XMLHttpRequest();
 

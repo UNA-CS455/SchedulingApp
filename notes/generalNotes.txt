@@ -14,9 +14,22 @@ TODO:
 	Get Modal to show up to verify that a user was added? Deleted?
 	
 	
+Note:
+	We could likely use AJAX's innerhtml edit rather than refresh the page for add user & delete user?
+	
 
 
 
 
 IMPORTANT:
     When working with the Production version, we need to update the database to the specifications in cs455.sql
+    
+    
+    
+//************************************************************************************************
+// Method Name: 
+//
+// Incoming params: 
+//
+// Purpose: 
+//*************************************************************************************************
