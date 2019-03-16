@@ -4,6 +4,7 @@ createEditRoom.php is the location where we will need to implement the "Limit Re
 
 ISSUE:
 	When unchecking the "has computers" box, it will not delete the num computers from the database (or even update the fact that it has been changed)
+	On userExistsCheck, the database connection is not working for whatever reason. I have tried to grab working code from it, but it is still not working :(
 	
 	
 	
