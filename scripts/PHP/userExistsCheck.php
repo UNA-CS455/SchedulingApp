@@ -5,7 +5,7 @@ $username = "root";
 $password = "";
 $dbname = "cs455";
 
-$conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Connection failed: " . $conn->connect_error );
+$conn = new mysqli ( $servername, $username, $password, $dbname );
 
 $userToVerify = $_POST['allowedUser'];
 
