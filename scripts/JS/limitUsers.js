@@ -86,7 +86,13 @@ function checkUserExists(name){
 	}
 
 	// onreadystatechange to get the result!
-	xhttp.onreadystatechange = stateChanged;
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && this.status == 200){
+	        var exists = xhttp.responseText;
+	        var boolExists = parseInt(exists);
+	        alert("In onreadystatechange, boolExists is " + boolExists);
+	    }
+	};
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
