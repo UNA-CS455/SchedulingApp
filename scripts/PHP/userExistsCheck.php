@@ -1,6 +1,10 @@
 <?php session_start();
 
-require "db_conf.php";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cs455";
+
 $conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Connection failed: " . $conn->connect_error );
 
 $userToVerify = $_POST['allowedUser'];
