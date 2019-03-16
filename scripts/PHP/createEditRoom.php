@@ -170,7 +170,7 @@ function verifyUserExists($userToVerify){
 	
 	<div id="shader" onclick="shaderClicked()"></div>
 	<!-- Jquery -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- Local scripts -->
 	<script src="../JS/popup.js"></script>
 	<script src="../JS/rooms.js"></script>

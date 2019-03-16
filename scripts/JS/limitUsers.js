@@ -54,7 +54,7 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		
-		addWL(checkUserExists(name), name, roomid);
+		addWL(name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
@@ -109,17 +109,20 @@ function stateChanged(){
 //************************************************************************************************
 // Method Name: addWL
 //
-// Incoming params: userExists (int bool), name (String), roomid (String)
+// Incoming params: name (String), roomid (String)
 //
 // Purpose: Checks the int/bool userExists and sees if we need to add the user to the whitelist
 //			or not. If we do, it will call addUserWhitelist.php, which actually adds the user
 //			to the whitelist.
 //*************************************************************************************************
-function addWL(userExists, name, roomid){
+function addWL(name, roomid){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 		
 	var xhttp = new XMLHttpRequest();
+	
+	var userExists = checkUserExists(name);
+	
 	
 	alert(userExists);
 
