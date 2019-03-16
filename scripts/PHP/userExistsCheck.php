@@ -11,11 +11,11 @@ $verifyRes = $conn->query($verifySql);
 
 if($verifyRes->num_rows == 1){
     $conn->close;
-	return 1;
+	echo 1;
 }
 else{
     $conn->close;
-	return 0;
+	echo 0;
 }
 
 $conn->close;

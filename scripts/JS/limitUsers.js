@@ -84,6 +84,8 @@ function checkUserExists(name){
 	{
 		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
 	}
+	
+	alert("name= " + name);
 
 	// onreadystatechange to get the result!
 	xhttp.onreadystatechange = function(){
