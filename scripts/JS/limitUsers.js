@@ -138,9 +138,9 @@ function addWL(name, roomid){
 	
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && this.status == 200){
-	       // userExists = xhttp.responseText;
+	        userExists = xhttp.responseText;
 	        // userExists = parseInt(userExists);
-	        document.getElementById("reserveBox").innerHTML = xhttp.responseText;
+	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText;
 	        
 	        alert("Inside anon function userExists  =  " + userExists);
 		}
