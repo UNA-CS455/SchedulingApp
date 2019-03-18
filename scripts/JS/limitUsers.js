@@ -139,7 +139,7 @@ function addWL(userExists, name, roomid){
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && this.status == 200){
 	        userExists = xhttp.responseText;
-	        userExists = parseInt(userExists);
+	        // userExists = parseInt(userExists);
 	        
 	        alert("Inside anon function userExists  =  " + userExists);
 		}
