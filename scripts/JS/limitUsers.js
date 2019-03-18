@@ -47,9 +47,9 @@ function openConfirmAddUser(name, roomid, beingEdited, callback)
 	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
 	// alert('name=' + name + ' roomid=' + roomid);
 
-	// var exists = checkUserExists(name);
+	var exists = checkUserExists(name);
 	//alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
-	alert("In openConfirmAddUser, checkUserExists is " + callback(name));
+	alert("In openConfirmAddUser, checkUserExists is " + exists);
 	
 
 	
@@ -101,7 +101,6 @@ function checkUserExists(name){
 	// Use callbacks to get value of boolExists back?
 	
 	xhttp.onreadystatechange = function(){
-		alert("Inside the callback");
 		if(xhttp.readyState == 4 && this.status == 200){
 	        var exists = xhttp.responseText;
 	        boolExists = parseInt(exists);
