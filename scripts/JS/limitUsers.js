@@ -8,7 +8,7 @@ var xhttp;
 //
 // Purpose: Opens the modal box to have the user confirm if they really want to add the user
 //*************************************************************************************************
-function openConfirmAddUser(name, roomid, beingEdited)
+function openConfirmAddUser(name, roomid, beingEdited, callback)
 {
 	if(beingEdited){
 		beingEdited = 1;
@@ -49,7 +49,7 @@ function openConfirmAddUser(name, roomid, beingEdited)
 
 	// var exists = checkUserExists(name);
 	//alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
-	alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name, getResponse));
+	alert("In openConfirmAddUser, checkUserExists is " + callback(name));
 	
 
 	
@@ -80,12 +80,12 @@ function openConfirmAddUser(name, roomid, beingEdited)
 //			file called userExistsCheck.php, which actually verifies the user in the system.
 //			The PHP file returns 1 or 0 if the user exists in the system or not, respectively.
 //*************************************************************************************************
-function checkUserExists(name, callback){
+function checkUserExists(name){
 	var xhttp = new XMLHttpRequest();
 	
 	alert("CheckUserExists");
 	
-	var boolExists;
+	var boolExists = false;
 	
 	if (window.location.href.includes('PHP'))
 	{
@@ -100,7 +100,17 @@ function checkUserExists(name, callback){
 	// onreadystatechange to get the result!
 	// Use callbacks to get value of boolExists back?
 	
-	xhttp.onreadystatechange = callback();
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && this.status == 200){
+	        var exists = xhttp.responseText;
+	        boolExists = parseInt(exists);
+	        
+	        // This is not right
+	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
+	        alert("boolExists  =  " + boolExists);
+		}
+		return boolExists;
+	};
 	
 	alert("After callback");
 	
@@ -108,20 +118,6 @@ function checkUserExists(name, callback){
 	xhttp.send("allowedUser=" + name);// send stuff
 	
 
-}
-
-
-function getResponse(){
-	var boolExists;
-	if(xhttp.readyState == 4 && this.status == 200){
-        var exists = xhttp.responseText;
-        boolExists = parseInt(exists);
-        
-        // This is not right
-        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
-        alert("boolExists  =  " + boolExists);
-	}
-	return boolExists;
 }
 
 
