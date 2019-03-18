@@ -26,6 +26,4 @@ else{
     die($conn->error);
 }
 
-$conn->close();
-
 ?>
