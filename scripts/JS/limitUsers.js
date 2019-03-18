@@ -47,14 +47,15 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
 	// alert('name=' + name + ' roomid=' + roomid);
 
-	
+	var exists = checkUserExists(name);
+
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
-		
-		addWL(name, roomid);
+		// exists = checkUserExists(name);
+		addWL(exists, name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
@@ -94,7 +95,7 @@ function checkUserExists(name){
 	        
 	        // This is not right
 	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
-	        return exists;
+	        return boolExists;
 	    }
 	};
 	
@@ -115,14 +116,11 @@ function checkUserExists(name){
 //			or not. If we do, it will call addUserWhitelist.php, which actually adds the user
 //			to the whitelist.
 //*************************************************************************************************
-function addWL(name, roomid){
+function addWL(userExists, name, roomid){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 		
 	var xhttp = new XMLHttpRequest();
-	
-	var userExists = checkUserExists(name);
-	
 	
 	alert(userExists);
 
