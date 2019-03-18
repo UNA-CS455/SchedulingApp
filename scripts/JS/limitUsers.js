@@ -143,12 +143,10 @@ function addWL(name, roomid){
 	        // userExists = parseInt(userExists);
 	        alert("Inside anon function userExists  =  " + userExists);
 	        
-        	if (window.location.href.includes('PHP'))
-			{
+        	if (window.location.href.includes('PHP')){
 				xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
 			}
-			else
-			{
+			else{
 				xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
 			}
 	        
@@ -157,8 +155,10 @@ function addWL(name, roomid){
 	    		 inserted = 1;
 	        }
 	        
-			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
+	        if(!inserted){
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
+	        }
 		}
 	};
 	
