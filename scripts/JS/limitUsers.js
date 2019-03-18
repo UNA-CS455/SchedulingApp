@@ -168,6 +168,9 @@ function addWL(name, roomid){
 					showMessageBoxOK("User does not exist!", "Error", false);
 	        	}
 	        }
+	        else{
+	        	window.location.reload();
+	        }
 	        
 		}
 	};
