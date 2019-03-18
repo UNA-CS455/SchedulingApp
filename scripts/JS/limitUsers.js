@@ -49,7 +49,7 @@ function openConfirmAddUser(name, roomid, beingEdited, callback)
 
 	// var exists = checkUserExists(name);
 	//alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
-	alert("In openConfirmAddUser, checkUserExists is " + callback(name));
+	alert("In openConfirmAddUser, checkUserExists is " + callback(name, getResponse));
 	
 
 	
@@ -80,7 +80,7 @@ function openConfirmAddUser(name, roomid, beingEdited, callback)
 //			file called userExistsCheck.php, which actually verifies the user in the system.
 //			The PHP file returns 1 or 0 if the user exists in the system or not, respectively.
 //*************************************************************************************************
-function checkUserExists(name){
+function checkUserExists(name, callback){
 	var xhttp = new XMLHttpRequest();
 	
 	var boolExists;
@@ -98,22 +98,25 @@ function checkUserExists(name){
 	// onreadystatechange to get the result!
 	// Use callbacks to get value of boolExists back?
 	
-	xhttp.onreadystatechange = function(){
-		if(xhttp.readyState == 4 && this.status == 200){
-	        var exists = xhttp.responseText;
-	        boolExists = parseInt(exists);
-	        
-	        // This is not right
-	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
-	        alert("boolExists  =  " + boolExists);
-	    }
-	};
+	xhttp.onreadystatechange = callback();
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
 	
-	return 1;
+	return boolExists;
 	
+}
+
+
+function getResponse(){
+	if(xhttp.readyState == 4 && this.status == 200){
+        var exists = xhttp.responseText;
+        boolExists = parseInt(exists);
+        
+        // This is not right
+        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
+        alert("boolExists  =  " + boolExists);
+	}
 }
 
 
