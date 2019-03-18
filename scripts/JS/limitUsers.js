@@ -91,8 +91,16 @@ function checkUserExists(name){
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && this.status == 200){
 	        var exists = xhttp.responseText;
-	        var boolExists = parseInt(exists);
+	        // var boolExists = parseInt(exists);
+	        
+	        // This is not right
+	        
 	        alert("In onreadystatechange, exists is " + exists);
+	        document.getElementById("reserveBox").innerHTML = xhttp.responseText;
+	        
+	        // We need to rewrite the allowed user's box to include the new user once it gets confirmed.
+	        // document.getElementById("reserveBox").innerHTML = old table data + new table data on top
+	        
 	    }
 	};
 	
