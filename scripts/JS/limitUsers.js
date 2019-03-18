@@ -55,6 +55,9 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		// exists = checkUserExists(name);
+		
+		alert("In openConfirmAddUser onclick, name is " + name);
+		
 		addWL(exists, name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
@@ -101,7 +104,6 @@ function checkUserExists(name){
 	};
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	alert("In checkUserExists, name is = " + name);
 	xhttp.send("allowedUser=" + name);// send stuff
 	
 }
