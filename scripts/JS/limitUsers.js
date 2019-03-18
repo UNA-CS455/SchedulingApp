@@ -212,9 +212,14 @@ function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, bei
 		xhttp.open("POST", "scripts/PHP/wlSaveChanges.php", true);
 	}
 	
-	alert("This is in saveChanges");
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && this.status == 200){
+	        window.location.reload();
+		}
+	};
+	
+	
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("roomid=" + roomid + "&roomType=" + roomType + "&floorNum=" + floorNum + "&seats=" + seats + "&numComputers=" + numComputers + "&limit=" + limit + "&beingEdited=" + beingEdited + "&hasComputers=" + hasComputers);// send stuff
-	window.location.reload();
 }
