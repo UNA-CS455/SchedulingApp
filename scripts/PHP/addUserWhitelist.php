@@ -16,6 +16,8 @@ else{
     echo $email;
 }
 
+echo 3;
+
 $conn->close();
 header("Refresh: 0");
 
