@@ -100,7 +100,7 @@ function checkUserExists(name){
 	        // This is not right
 	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
 	        alert("boolExists = " + boolExists);
-	        // return boolExists;
+	        return boolExists;
 	    }
 	};
 	
