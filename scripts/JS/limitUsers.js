@@ -83,6 +83,8 @@ function openConfirmAddUser(name, roomid, beingEdited)
 function checkUserExists(name, callback){
 	var xhttp = new XMLHttpRequest();
 	
+	alert("CheckUserExists");
+	
 	var boolExists;
 	
 	if (window.location.href.includes('PHP'))
@@ -99,6 +101,8 @@ function checkUserExists(name, callback){
 	// Use callbacks to get value of boolExists back?
 	
 	xhttp.onreadystatechange = callback();
+	
+	alert("After callback");
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
