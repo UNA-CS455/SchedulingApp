@@ -19,7 +19,7 @@ if($verifyRes = $conn->query($verifySql)){
     }
     else{
         $conn->close();
-    	echo 0;
+    	echo $userToVerify;
     }
 }
 else{
