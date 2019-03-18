@@ -112,7 +112,7 @@ function checkUserExists(name){
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
 	
-	return boolExists;
+	return 1;
 	
 }
 
