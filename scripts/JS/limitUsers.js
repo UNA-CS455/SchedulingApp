@@ -155,7 +155,7 @@ function addWL(name, roomid){
 	    		inserted = true;
 	    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
-				document.getElementById("reserveBox").innerHTML = xhttp.responseText;
+				document.getElementById("reserveBox").innerHTML += xhttp.responseText;
 	        }
 	        
 		}
