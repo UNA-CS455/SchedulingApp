@@ -165,7 +165,7 @@ function addWL(name, roomid){
 	        	}
 	        	else{
 	        		alert("hello wrold");
-	        		showMessageBoxOk("User does not exist", "ERROR", false);
+					showMessageBoxOK("User does not exist!", "Error", false);
 	        	}
 	        }
 	        
