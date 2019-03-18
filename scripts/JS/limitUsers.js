@@ -8,7 +8,7 @@ var xhttp;
 //
 // Purpose: Opens the modal box to have the user confirm if they really want to add the user
 //*************************************************************************************************
-function openConfirmAddUser(name, roomid, beingEdited, callback)
+function openConfirmAddUser(name, roomid, beingEdited)
 {
 	if(beingEdited){
 		beingEdited = 1;
@@ -49,8 +49,7 @@ function openConfirmAddUser(name, roomid, beingEdited, callback)
 
 	// var exists = checkUserExists(name);
 	//alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
-	alert(1);
-	alert("In openConfirmAddUser, checkUserExists is " + callback(name, getResponse));
+	alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name, getResponse));
 	
 
 	
