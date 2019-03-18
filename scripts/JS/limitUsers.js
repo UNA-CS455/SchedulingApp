@@ -169,7 +169,8 @@ function addWL(name, roomid){
 	        	}
 	        }
 	        else{
-	        	window.location.reload();
+        	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='window.location.reload()'>Ok</button>";
+	        	showMessageBox("", "Success!", buttonhtml, false);
 	        }
 	        
 		}
