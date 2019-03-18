@@ -53,8 +53,9 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
-		window.location.reload();
 	};
+			window.location.reload();
+
 }
 
 
