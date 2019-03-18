@@ -101,6 +101,7 @@ function checkUserExists(name){
 	// Use callbacks to get value of boolExists back?
 	
 	xhttp.onreadystatechange = function(){
+		alert("Inside the callback");
 		if(xhttp.readyState == 4 && this.status == 200){
 	        var exists = xhttp.responseText;
 	        boolExists = parseInt(exists);
