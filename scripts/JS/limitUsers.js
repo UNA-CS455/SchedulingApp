@@ -59,8 +59,8 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		
 		// alert("In openConfirmAddUser onclick, exists is " + exists);
 		
-		// addWL(exists, name, roomid);
-		// saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
+		addWL(exists, name, roomid);
+		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
 	};
@@ -78,7 +78,7 @@ function openConfirmAddUser(name, roomid, beingEdited)
 //			file called userExistsCheck.php, which actually verifies the user in the system.
 //			The PHP file returns 1 or 0 if the user exists in the system or not, respectively.
 //*************************************************************************************************
-function checkUserExists(name){
+async function checkUserExists(name){
 	var xhttp = new XMLHttpRequest();
 	
 	if (window.location.href.includes('PHP'))
@@ -93,15 +93,19 @@ function checkUserExists(name){
 
 	// onreadystatechange to get the result!
 	xhttp.onreadystatechange = function(){
-		if(xhttp.readyState == 4 && this.status == 200){
-	        var exists = xhttp.responseText;
-	        var boolExists = parseInt(exists);
-	        
-	        // This is not right
-	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
-	        alert("boolExists = " + boolExists);
-	        return boolExists;
-	    }
+		let promise = new Promise((resolve, reject) => {
+			if(xhttp.readyState == 4 && this.status == 200){
+		        var exists = xhttp.responseText;
+		        var boolExists = parseInt(exists);
+		        
+		        // This is not right
+		        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
+		        alert("boolExists = " + boolExists);
+	    	}
+		});
+		
+		let result = await promise;
+		
 	};
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
