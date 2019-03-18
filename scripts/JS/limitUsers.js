@@ -78,7 +78,7 @@ function openConfirmAddUser(name, roomid, beingEdited)
 //			file called userExistsCheck.php, which actually verifies the user in the system.
 //			The PHP file returns 1 or 0 if the user exists in the system or not, respectively.
 //*************************************************************************************************
-async function checkUserExists(name){
+function checkUserExists(name){
 	var xhttp = new XMLHttpRequest();
 	
 	if (window.location.href.includes('PHP'))
@@ -92,26 +92,21 @@ async function checkUserExists(name){
 	
 
 	// onreadystatechange to get the result!
-	let promise = new Promise((resolve, reject) =>{
-		xhttp.onreadystatechange = function(){
-			if(xhttp.readyState == 4 && this.status == 200){
-		        var exists = xhttp.responseText;
-		        var boolExists = parseInt(exists);
-		        
-		        // This is not right
-		        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
-		        alert("boolExists = " + boolExists);
-		        return boolExists;
-		    }
-		};
-	});
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && this.status == 200){
+	        var exists = xhttp.responseText;
+	        var boolExists = parseInt(exists);
+	        
+	        // This is not right
+	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
+	        alert("boolExists = " + boolExists);
+	        return boolExists;
+	    }
+	};
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
 	
-	let result = await promise;
-	// return result;
-	alert(result);
 }
 
 
