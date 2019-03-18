@@ -49,7 +49,8 @@ function openConfirmAddUser(name, roomid, beingEdited, callback)
 
 	// var exists = checkUserExists(name);
 	//alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
-	alert("In openConfirmAddUser, checkUserExists is " + callback(name));
+	//alert("In openConfirmAddUser, checkUserExists is " + callback(name));
+	
 	
 
 	
