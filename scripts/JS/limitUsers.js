@@ -83,6 +83,8 @@ function openConfirmAddUser(name, roomid, beingEdited, callback)
 function checkUserExists(name){
 	var xhttp = new XMLHttpRequest();
 	
+	var boolExists;
+	
 	if (window.location.href.includes('PHP'))
 	{
 		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
@@ -99,17 +101,19 @@ function checkUserExists(name){
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && this.status == 200){
 	        var exists = xhttp.responseText;
-	        var boolExists = parseInt(exists);
+	        boolExists = parseInt(exists);
 	        
 	        // This is not right
 	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
 	        alert("boolExists  =  " + boolExists);
-	        return boolExists;
 	    }
 	};
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
+	
+	return boolExists;
+	
 }
 
 
