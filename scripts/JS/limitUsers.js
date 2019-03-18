@@ -54,7 +54,6 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		
 		//save changes
 	};
-			window.location.reload();
 
 }
 
@@ -217,5 +216,5 @@ function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, bei
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("roomid=" + roomid + "&roomType=" + roomType + "&floorNum=" + floorNum + "&seats=" + seats + "&numComputers=" + numComputers + "&limit=" + limit + "&beingEdited=" + beingEdited + "&hasComputers=" + hasComputers);// send stuff
-	
+	window.location.reload();
 }
