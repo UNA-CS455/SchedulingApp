@@ -47,7 +47,8 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
 	// alert('name=' + name + ' roomid=' + roomid);
 
-	var exists = checkUserExists(name);
+	// var exists = checkUserExists(name);
+	alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
 
 	
 	document.getElementById('yesAddWL').onclick = function() {
@@ -56,10 +57,10 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		// exists = checkUserExists(name);
 		
-		alert("In openConfirmAddUser onclick, exists is " + exists);
+		// alert("In openConfirmAddUser onclick, exists is " + exists);
 		
-		addWL(exists, name, roomid);
-		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
+		// addWL(exists, name, roomid);
+		// saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
 	};
@@ -99,7 +100,7 @@ function checkUserExists(name){
 	        // This is not right
 	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
 	        alert("boolExists = " + boolExists);
-	        return boolExists;
+	        // return boolExists;
 	    }
 	};
 	
