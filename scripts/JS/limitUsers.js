@@ -50,7 +50,6 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
 		addWL(name, roomid);
-		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
 	};
@@ -151,13 +150,20 @@ function addWL(name, roomid){
 				xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
 			}
 	        
-	        if(userExists && !inserted){
-	    		//document.getElementById("reserveBox").innerHTML = xhttp.responseText;
-	    		inserted = true;
-	    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
-				document.getElementById("reserveBox").innerHTML += xhttp.responseText;
+	        if(!inserted){
+	        	if(userExists){
+		    		//document.getElementById("reserveBox").innerHTML = xhttp.responseText;
+		    		inserted = true;
+		    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
+					document.getElementById("reserveBox").innerHTML += xhttp.responseText;
+	        	}
+	        	else{
+	        		showMessageBoxOk("User does not exist", "ERROR", true);
+	        	}
 	        }
+	        
+	        
 	        
 		}
 	};
@@ -165,24 +171,6 @@ function addWL(name, roomid){
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
 
-	
-	// if(userExists){
-	// 	if (window.location.href.includes('PHP'))
-	// 	{
-	// 		xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
-	// 	}
-	// 	else
-	// 	{
-	// 		xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
-	// 	}
-		
-	// 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	// 	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
-		
-	//     // document.getElementById("reserveBox").innerHTML = old table data + new table data on top
-	    
-		
-		
 	// }
 	// else{
 	// 	showMessageBoxOk("User does not exist!", "ERROR", true); // Error finding person, they don't exist!
