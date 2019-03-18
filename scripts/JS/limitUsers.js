@@ -59,54 +59,48 @@ function openConfirmAddUser(name, roomid, beingEdited)
 
 
 
-//************************************************************************************************
-// Method Name: checkUserExists
-//
-// Incoming params: name (String)
-//
-// Purpose: Checks if the user passed in actually exists in the system. Makes a call to a PHP
-//			file called userExistsCheck.php, which actually verifies the user in the system.
-//			The PHP file returns 1 or 0 if the user exists in the system or not, respectively.
-//*************************************************************************************************
-function checkUserExists(name){
-	var xhttp = new XMLHttpRequest();
+// //************************************************************************************************
+// // Method Name: checkUserExists
+// //
+// // Incoming params: name (String)
+// //
+// // Purpose: Checks if the user passed in actually exists in the system. Makes a call to a PHP
+// //			file called userExistsCheck.php, which actually verifies the user in the system.
+// //			The PHP file returns 1 or 0 if the user exists in the system or not, respectively.
+// //*************************************************************************************************
+// function checkUserExists(name){
+// 	var xhttp = new XMLHttpRequest();
 	
-	alert("CheckUserExists");
+// 	var boolExists = false;
 	
-	var boolExists = false;
-	
-	if (window.location.href.includes('PHP'))
-	{
-		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
-	}
-	else
-	{
-		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
-	}
+// 	if (window.location.href.includes('PHP'))
+// 	{
+// 		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
+// 	}
+// 	else
+// 	{
+// 		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
+// 	}
 	
 
-	// onreadystatechange to get the result!
-	// Use callbacks to get value of boolExists back?
+// 	// onreadystatechange to get the result!
+// 	// Use callbacks to get value of boolExists back?
 	
-	xhttp.onreadystatechange = function(){
-		if(xhttp.readyState == 4 && this.status == 200){
-	        var exists = xhttp.responseText;
-	        boolExists = parseInt(exists);
-	        
-	        // This is not right
-	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
-	        alert("boolExists  =  " + boolExists);
-		}
-		return boolExists;
-	};
+// 	xhttp.onreadystatechange = function(){
+// 		if(xhttp.readyState == 4 && this.status == 200){
+// 	        var exists = xhttp.responseText;
+// 	        boolExists = parseInt(exists);
+// 	    }
+// 		return boolExists;
+// 	};
 	
-	alert("After callback");
+// 	alert("After callback");
 	
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("allowedUser=" + name);// send stuff
+// 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+// 	xhttp.send("allowedUser=" + name);// send stuff
 	
 
-}
+// }
 
 
 
@@ -140,9 +134,6 @@ function addWL(name, roomid){
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && this.status == 200){
 	        userExists = xhttp.responseText;
-	        // userExists = parseInt(userExists);
-	        alert("Inside anon function userExists  =  " + userExists);
-	        alert("inserted is " + inserted);
 	        
         	if (window.location.href.includes('PHP')){
 				xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
@@ -161,10 +152,8 @@ function addWL(name, roomid){
 					xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
 					
 					document.getElementById("reserveBox").innerHTML += xhttp.responseText;
-					alert("Inside if UserExists");
 	        	}
 	        	else{
-	        		alert("hello wrold");
 					showMessageBoxOK("User does not exist!", "Error", false);
 	        	}
 	        }
