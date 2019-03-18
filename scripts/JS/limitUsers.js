@@ -126,6 +126,7 @@ function addWL(name, roomid){
 		
 	var xhttp = new XMLHttpRequest();
 	var userExists = 0;
+	var inserted = 0;
 	
 	if (window.location.href.includes('PHP'))
 	{
@@ -153,6 +154,7 @@ function addWL(name, roomid){
 	        
 	        if(userExists){
 	    		 document.getElementById("reserveBox").innerHTML = xhttp.responseText;
+	    		 inserted = 1;
 	        }
 	        
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
