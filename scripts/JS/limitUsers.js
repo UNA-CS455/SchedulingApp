@@ -141,7 +141,7 @@ function addWL(userExists, name, roomid){
 	        userExists = xhttp.responseText;
 	        userExists = parseInt(userExists);
 	        
-	        alert("userExists  =  " + userExists);
+	        alert("Inside anon function userExists  =  " + userExists);
 		}
 	};
 	
