@@ -85,22 +85,16 @@ function checkUserExists(name){
 		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
 	}
 	
-	alert("name= " + name);
 
 	// onreadystatechange to get the result!
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && this.status == 200){
 	        var exists = xhttp.responseText;
-	        // var boolExists = parseInt(exists);
+	        var boolExists = parseInt(exists);
 	        
 	        // This is not right
-	        
-	        alert("In onreadystatechange, exists is " + exists);
-	        document.getElementById("reserveBox").innerHTML = xhttp.responseText;
-	        
-	        // We need to rewrite the allowed user's box to include the new user once it gets confirmed.
-	        // document.getElementById("reserveBox").innerHTML = old table data + new table data on top
-	        
+	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
+	        return exists;
 	    }
 	};
 	
@@ -109,16 +103,6 @@ function checkUserExists(name){
 	
 }
 
-
-function stateChanged(){
-	if(xhttp.readyState == 4 && this.status == 200){
-	
-        var exists = xhttp.responseText;
-        var boolExists = parseInt(exists);
-        alert("In stateChanged, boolExists is " + boolExists);
-        return exists;
-    }
-}
 
 
 
@@ -154,6 +138,11 @@ function addWL(name, roomid){
 		
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
+		
+	    // document.getElementById("reserveBox").innerHTML = old table data + new table data on top
+	    
+		
+		
 	}
 	else{
 		showMessageBoxOk("User does not exist!", "ERROR", true); // Error finding person, they don't exist!
