@@ -92,8 +92,8 @@ async function checkUserExists(name){
 	
 
 	// onreadystatechange to get the result!
-	xhttp.onreadystatechange = function(){
-		let promise = new Promise((resolve, reject) => {
+	let promise = new Promise((resolve, reject) =>{
+		xhttp.onreadystatechange = function(){
 			if(xhttp.readyState == 4 && this.status == 200){
 		        var exists = xhttp.responseText;
 		        var boolExists = parseInt(exists);
@@ -101,16 +101,17 @@ async function checkUserExists(name){
 		        // This is not right
 		        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
 		        alert("boolExists = " + boolExists);
-	    	}
-		});
-		
-		let result = await promise;
-		
-	};
+		        return boolExists;
+		    }
+		};
+	});
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
 	
+	let result = await promise;
+	// return result;
+	alert(result);
 }
 
 
