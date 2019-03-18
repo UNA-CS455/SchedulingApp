@@ -14,11 +14,11 @@ $verifySql = "SELECT * FROM `users` WHERE `users`.`email` = '$userToVerify'";
 
 if($verifyRes = $conn->query($verifySql)){
     if($verifyRes->num_rows == 1){
-        $conn->close;
+        $conn->close();
     	echo 1;
     }
     else{
-        $conn->close;
+        $conn->close();
     	echo 0;
     }
 }
@@ -26,6 +26,6 @@ else{
     die($conn->error);
 }
 
-$conn->close;
+$conn->close();
 
 ?>
