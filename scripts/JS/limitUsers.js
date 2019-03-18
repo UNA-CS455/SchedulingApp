@@ -155,18 +155,20 @@ function addWL(name, roomid){
 	        	if(userExists == 1){
 		    		//document.getElementById("reserveBox").innerHTML = xhttp.responseText;
 		    		inserted = true;
+		    		userExists = 0;
+		    		
 		    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
+					
 					document.getElementById("reserveBox").innerHTML += xhttp.responseText;
 					alert("Inside if UserExists");
 	        	}
-	        	
+	        	else{
+	        		alert("hello wrold");
+	        		showMessageBoxOk("User does not exist", "ERROR", false);
+	        	}
 	        }
-	        else{
-	        	alert("hello wrold");
-	        	showMessageBoxOk("User does not exist", "ERROR", true);
-	        	
-	        }
+	        
 		}
 	};
 	
