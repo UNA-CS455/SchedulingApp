@@ -44,38 +44,12 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	var seats = document.getElementById('seats').value;
 
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
-	
-	var xhttp = new XMLHttpRequest();
-	var boolExists = false;
-	var exists = false;
-	
-	if (window.location.href.includes('PHP'))
-	{
-		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
-	}
-	else
-	{
-		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
-	}
-	
-	xhttp.onreadystatechange = function(){
-		if(xhttp.readyState == 4 && this.status == 200){
-	        exists = xhttp.responseText;
-	        boolExists = parseInt(exists);
-			showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
-	        
-	        alert("boolExists  =  " + boolExists);
-		}
-	};
-	
-	alert("After callback");
-	
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("allowedUser=" + name);// send stuff
+	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
+
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
-		addWL(exists, name, roomid);
+		addWL(name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
@@ -151,30 +125,53 @@ function addWL(userExists, name, roomid){
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 		
 	var xhttp = new XMLHttpRequest();
+	var userExists = 0;
 	
-	alert(userExists);
+	if (window.location.href.includes('PHP'))
+	{
+		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
+	}
+	else
+	{
+		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
+	}
+	
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && this.status == 200){
+	        userExists = xhttp.responseText;
+	        userExists = parseInt(userExists);
+	        
+	        alert("userExists  =  " + userExists);
+		}
+	};
+	
+	alert("After callback, userExists = " + userExists);
+	
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("allowedUser=" + name);// send stuff
 
-	if(userExists){
-		if (window.location.href.includes('PHP'))
-		{
-			xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
-		}
-		else
-		{
-			xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
-		}
+	
+	// if(userExists){
+	// 	if (window.location.href.includes('PHP'))
+	// 	{
+	// 		xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
+	// 	}
+	// 	else
+	// 	{
+	// 		xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
+	// 	}
 		
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
+	// 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	// 	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// send stuff
 		
-	    // document.getElementById("reserveBox").innerHTML = old table data + new table data on top
+	//     // document.getElementById("reserveBox").innerHTML = old table data + new table data on top
 	    
 		
 		
-	}
-	else{
-		showMessageBoxOk("User does not exist!", "ERROR", true); // Error finding person, they don't exist!
-	}
+	// }
+	// else{
+	// 	showMessageBoxOk("User does not exist!", "ERROR", true); // Error finding person, they don't exist!
+	// }
 }
 
 
