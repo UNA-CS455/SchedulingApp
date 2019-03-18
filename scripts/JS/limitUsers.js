@@ -151,7 +151,7 @@ function addWL(name, roomid){
 			}
 	        
 	        if(!inserted){
-	        	if(userExists){
+	        	if(userExists == 1){
 		    		//document.getElementById("reserveBox").innerHTML = xhttp.responseText;
 		    		inserted = true;
 		    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
