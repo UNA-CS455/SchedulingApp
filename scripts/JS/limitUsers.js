@@ -50,6 +50,7 @@ function openConfirmAddUser(name, roomid, beingEdited, callback)
 	// var exists = checkUserExists(name);
 	//alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
 	alert("In openConfirmAddUser, checkUserExists is " + callback(name));
+	
 
 	
 	document.getElementById('yesAddWL').onclick = function() {
@@ -109,7 +110,7 @@ function checkUserExists(name){
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
-	
+	return 1;
 }
 
 
