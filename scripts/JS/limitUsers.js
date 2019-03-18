@@ -152,7 +152,7 @@ function addWL(name, roomid){
 	        
 	        if(userExists){
 	    		 //document.getElementById("reserveBox").innerHTML = xhttp.responseText;
-	    		 alert("Inside if userExists");
+	    		 alert("Inside if userExists: " +  xhttp.responseText);
 	    		 inserted = true;
 	        }
 	        
