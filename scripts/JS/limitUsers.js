@@ -110,16 +110,6 @@ function checkUserExists(name){
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
-	//return 1;
-	if(xhttp.readyState == 4 && this.status == 200){
-	        var exists = xhttp.responseText;
-	        var boolExists = parseInt(exists);
-	        
-	        // This is not right
-	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
-	        alert("boolExists  =  " + boolExists);
-	        return boolExists;
-	    }
 }
 
 
