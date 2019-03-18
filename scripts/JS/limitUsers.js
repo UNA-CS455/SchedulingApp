@@ -95,11 +95,13 @@ function checkUserExists(name){
 	        
 	        // This is not right
 	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
+	        alert("boolExists = " + boolExists);
 	        return boolExists;
 	    }
 	};
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	alert("In checkUserExists, name is = " + name);
 	xhttp.send("allowedUser=" + name);// send stuff
 	
 }
