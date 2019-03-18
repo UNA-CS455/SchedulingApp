@@ -10,7 +10,7 @@ if ($conn->connect_error)
 $userToVerify = $_POST['allowedUser'];
 
 
-$verifySql = "SELECT * FROM `users` WHERE `users`.`email` = $userToVerify;";
+$verifySql = "SELECT * FROM `users` WHERE `users`.`email` = $userToVerify";
 
 if($verifyRes = $conn->query($verifySql)){
     if($verifyRes->num_rows == 1){
