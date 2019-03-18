@@ -157,6 +157,7 @@ function addWL(name, roomid){
 		    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
 					document.getElementById("reserveBox").innerHTML += xhttp.responseText;
+					alert("Inside if UserExists");
 	        	}
 	        	else{
 	        		showMessageBoxOk("User does not exist", "ERROR", true);
