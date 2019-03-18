@@ -56,7 +56,7 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		// exists = checkUserExists(name);
 		
-		alert("In openConfirmAddUser onclick, name is " + name);
+		alert("In openConfirmAddUser onclick, exists is " + exists);
 		
 		addWL(exists, name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
