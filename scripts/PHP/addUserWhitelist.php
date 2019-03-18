@@ -13,7 +13,7 @@ if(!empty($conn->error)){
     die($conn->error);
 }
 
-$conn->close;
+$conn->close();
 header("Refresh: 0");
 
 
