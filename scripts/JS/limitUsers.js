@@ -103,12 +103,12 @@ function checkUserExists(name, callback){
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
 	
-	return boolExists;
-	
+
 }
 
 
 function getResponse(){
+	var boolExists;
 	if(xhttp.readyState == 4 && this.status == 200){
         var exists = xhttp.responseText;
         boolExists = parseInt(exists);
@@ -117,6 +117,7 @@ function getResponse(){
         // document.getElementById("reserveBox").innerHTML = xhttp.responseText
         alert("boolExists  =  " + boolExists);
 	}
+	return boolExists;
 }
 
 
