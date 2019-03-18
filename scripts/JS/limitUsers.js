@@ -140,13 +140,25 @@ function addWL(name, roomid){
 		if(xhttp.readyState == 4 && this.status == 200){
 	        userExists = xhttp.responseText;
 	        // userExists = parseInt(userExists);
-	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText;
-	        
 	        alert("Inside anon function userExists  =  " + userExists);
+	        
+        	if (window.location.href.includes('PHP'))
+			{
+				xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
+			}
+			else
+			{
+				xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
+			}
+	        
+	        if(userExists){
+	    		 document.getElementById("reserveBox").innerHTML = xhttp.responseText;
+	        }
+	        
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
 		}
 	};
-	
-	alert("After callback, userExists = " + userExists);
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
