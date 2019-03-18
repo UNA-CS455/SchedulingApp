@@ -8,7 +8,7 @@ var xhttp;
 //
 // Purpose: Opens the modal box to have the user confirm if they really want to add the user
 //*************************************************************************************************
-function openConfirmAddUser(name, roomid, beingEdited, callback)
+function openConfirmAddUser(name, roomid, beingEdited)
 {
 	if(beingEdited){
 		beingEdited = 1;
@@ -44,23 +44,37 @@ function openConfirmAddUser(name, roomid, beingEdited, callback)
 	var seats = document.getElementById('seats').value;
 
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
-	showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
-	// alert('name=' + name + ' roomid=' + roomid);
-
-	var exists = callback(name);
-	//alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
-	alert("In openConfirmAddUser, checkUserExists is " + exists);
 	
-
+	var xhttp = new XMLHttpRequest();
+	var boolExists = false;
+	var exists = false;
+	
+	if (window.location.href.includes('PHP'))
+	{
+		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
+	}
+	else
+	{
+		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
+	}
+	
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && this.status == 200){
+	        exists = xhttp.responseText;
+	        boolExists = parseInt(exists);
+			showMessageBox("<br><br>Are you sure you want to add:<br><br>" + name, "Add user", buttonhtml, false);
+	        
+	        alert("boolExists  =  " + boolExists);
+		}
+	};
+	
+	alert("After callback");
+	
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("allowedUser=" + name);// send stuff
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
-		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
-		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
-		// exists = checkUserExists(name);
-		
-		// alert("In openConfirmAddUser onclick, exists is " + exists);
-		
 		addWL(exists, name, roomid);
 		saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
