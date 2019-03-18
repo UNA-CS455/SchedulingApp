@@ -48,7 +48,7 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	// alert('name=' + name + ' roomid=' + roomid);
 
 	// var exists = checkUserExists(name);
-	alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
+	
 
 	
 	document.getElementById('yesAddWL').onclick = function() {
@@ -56,6 +56,8 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		// alert(roomid + roomType + floorNum + seats + numComputers + limit + beingEdited);
 		// alert('hasComputersCheck= ' + document.getElementById('hasComputersCheck').value + ' hasComputers=' + hasComputers + ' beingEdited=' + beingEdited + ' limit= ' + limit);
 		// exists = checkUserExists(name);
+		
+		alert("In openConfirmAddUser, checkUserExists is " + checkUserExists(name));
 		
 		// alert("In openConfirmAddUser onclick, exists is " + exists);
 		
