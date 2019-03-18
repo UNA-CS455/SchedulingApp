@@ -383,6 +383,6 @@ function verifyUserExists($userToVerify){
 
 	addUserElement.addEventListener('click', function() {
     	// alert(document.getElementById('allowedUser').value);
-    	openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, true);
+    	openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, true, 'checkUserExists');
 	}, false);
 </script>
