@@ -142,6 +142,7 @@ function addWL(name, roomid){
 	        userExists = xhttp.responseText;
 	        // userExists = parseInt(userExists);
 	        alert("Inside anon function userExists  =  " + userExists);
+	        alert("inserted is " + inserted);
 	        
         	if (window.location.href.includes('PHP')){
 				xhttp.open("POST", "../../scripts/PHP/addUserWhitelist.php", true);
@@ -164,9 +165,6 @@ function addWL(name, roomid){
 	        		alert("hello wrold");
 	        	}
 	        }
-	        
-	        
-	        
 		}
 	};
 	
