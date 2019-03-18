@@ -12,6 +12,9 @@ $conn->query ( $_allowedSql ) or die($conn->error);
 if(!empty($conn->error)){
     die($conn->error);
 }
+else{
+    echo $email;
+}
 
 $conn->close();
 header("Refresh: 0");
