@@ -22,6 +22,9 @@ if($verifyRes = $conn->query($verifySql)){
     	echo 0;
     }
 }
+else{
+    die($conn->error);
+}
 
 $conn->close;
 
