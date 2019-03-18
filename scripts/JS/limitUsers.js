@@ -160,10 +160,11 @@ function addWL(name, roomid){
 					document.getElementById("reserveBox").innerHTML += xhttp.responseText;
 					alert("Inside if UserExists");
 	        	}
-	        	else{
-	        		showMessageBoxOk("User does not exist", "ERROR", true);
-	        		alert("hello wrold");
-	        	}
+	        	
+	        }
+	        else{
+	        	showMessageBoxOk("User does not exist", "ERROR", true);
+	        	alert("hello wrold");
 	        }
 		}
 	};
