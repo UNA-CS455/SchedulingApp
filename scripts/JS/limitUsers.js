@@ -92,6 +92,8 @@ function checkUserExists(name){
 	
 
 	// onreadystatechange to get the result!
+	// Use callbacks to get value of boolExists back?
+	
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && this.status == 200){
 	        var exists = xhttp.responseText;
@@ -99,7 +101,7 @@ function checkUserExists(name){
 	        
 	        // This is not right
 	        // document.getElementById("reserveBox").innerHTML = xhttp.responseText
-	        alert("boolExists = " + boolExists);
+	        alert("boolExists  =  " + boolExists);
 	        return boolExists;
 	    }
 	};
