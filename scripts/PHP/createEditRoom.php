@@ -291,24 +291,17 @@ function verifyUserExists($userToVerify){
 						<div class="row-md-1" id="email"  style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
 								<input type="text" id="allowedUser" name="allowedUser" class="form-control">
 						</div>
-						<div>
-							<!--Put delete here-->
-							<!--SQL goes up top-->
-						</div>
 					</div>
 					<div class="col-xl-3" >
 							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
 								id="addUser" name="addUser" type="button">
 								Add User</button>
 					</div>
-					<!--<div button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px"-->
-					<!--			id="deleteUser" name="deleteUser" type="submit">Delete User</button>-->
-						
+					<div>
+						<!--Delete button here?-->
+					</div>
 					
-							<!--Put delete button here-->
-							<!--SQL goes up top-->
-							<!--Whenever button gets clicked, so an (onclick) field is needed, call newly defined JS function-->
-					<!--</div>-->
+					
 				</div>
 				
 				
