@@ -120,7 +120,7 @@ function checkUserExists(name){
 //			or not. If we do, it will call addUserWhitelist.php, which actually adds the user
 //			to the whitelist.
 //*************************************************************************************************
-function addWL(userExists, name, roomid){
+function addWL(name, roomid){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 		
