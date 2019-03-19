@@ -127,7 +127,7 @@ function addWL(name, roomid, beingEdited){
 	        else{
         	    // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(saveObject); window.location.reload();'>Ok</button>";
         	    
-        	    alert("In anon, name is " + name);
+        	    // alert("In anon, name is " + name);
         	    
         	    //var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(" + roomid + "," + roomType + "," + floorNum + "," + seats + "," + numComputers + "," + limit + "," + beingEdited + "," + hasComputers + "); window.location.reload();'>Ok</button>";
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okAdd' >Ok</button>";
@@ -216,6 +216,8 @@ function saveChanges(name, roomid, beingEdited){
 
 	alert("In saveChanges, hasComputersCheck is " + document.getElementById('hasComputersCheck').value);
 	alert("In savechanges, limitCheck is " + document.getElementById('limitCheck').value);
+	alert("In savechanges, limit is " + limit);
+	
 
 	if (window.location.href.includes('PHP'))
 	{
