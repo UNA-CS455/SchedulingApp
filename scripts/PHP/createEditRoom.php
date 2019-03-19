@@ -313,14 +313,13 @@ function saveChanges($conn, $beingEdited, $post_vars){
 
 <script>
 	var addUserElement = document.getElementById('addUser');
+	var edit = false;
 
 	addUserElement.addEventListener('click', function() {
-    	// alert(document.getElementById('allowedUser').value);
+    	if(document.getElementById('submit').value == 1){ // If the room is being edited, pass true to openConfirmAddUser
+    		edit = true;
+    	} // Else, pass default false
     	
-    	// if(document.getElementById('submit').value)
-    	
-    	alert(document.getElementById('submit').value);
-    	
-    	openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, true);
+    	openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, edit);
 	}, false);
 </script>
