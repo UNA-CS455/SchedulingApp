@@ -166,15 +166,7 @@ function saveChanges(saveObject){
 	{
 		xhttp.open("POST", "scripts/PHP/wlSaveChanges.php", true);
 	}
-	
-	alert("After things");
-	
-	xhttp.onreadystatechange = function(){
-		if(xhttp.readyState == 4 && this.status == 200){
-	        
-		}
-	};
-	
+
 	
 	// var saveObject = {
 	// 	numComp : numComputers,
