@@ -328,10 +328,12 @@ function saveChanges($conn, $beingEdited, $post_vars){
 		if(this.checked)
 		{
 			$('#computerBlock').show();
+			this.value = 1;
 		}
 		else
 		{
 			$('#computerBlock').hide();
+			this.value = 0;
 		}
 	})
 </script>
