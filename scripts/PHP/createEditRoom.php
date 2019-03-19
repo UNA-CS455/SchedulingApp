@@ -1,20 +1,17 @@
 <?php
 session_start ();
 
-if (! isset ( $_SESSION ['username'] ))
-{
+if (! isset ( $_SESSION ['username'] )){
 	header ( 'location: ../../login.html' );
 }
 // only admin can view this page
-if ($_SESSION ['permission'] != 1)
-{
+if ($_SESSION ['permission'] != 1){
 	header ( 'location: ../../login.html' );
 }
 
 require "db_conf.php";
 $conn = new mysqli ( $servername, $username, $password, $dbname );
-if ($conn->connect_error)
-{
+if ($conn->connect_error){
 	die ( "Connection failed: " . $conn->connect_error );
 }
 
@@ -22,8 +19,7 @@ if ($conn->connect_error)
 // /////////SELECT PASSED THROUGH ROOM
 // ////////////////////////////////////////////////////////////////////////////////////
 
-if (isset ( $_GET ['roomid'] ))
-{
+if (isset ( $_GET ['roomid'] )){
 	$beingEdited = true;
 	$gotRoom = $_GET ['roomid'];
 	
@@ -34,14 +30,13 @@ if (isset ( $_GET ['roomid'] ))
 	$getAllowedUsers = "SELECT * FROM `whitelist` WHERE `whitelist`.`roomid` = '$gotRoom'";
 	$allowedUsersRes = $conn->query($getAllowedUsers);
 	
-} else
-{
+} 
+else{
 	$roomToEdit = null;
 	$beingEdited = false;
 }
 
-if (isset ( $_POST ['submit'] ))
-{
+if (isset ( $_POST ['submit'] )){
 	
 	$roomid = $_POST ['roomid'];
 	$type = $_POST ['type'];
@@ -54,45 +49,8 @@ if (isset ( $_POST ['submit'] ))
 	header("Location: userSettings.php");
 	
 }
-// Here is where we need to make our call to the "Who can reserve" boxes. We will check if the button is pressed, then update accordingly.
-// We also can go ahead and call our other SQL call to get the list of allowed users
-
-// if(isset($_POST['addUser'])){
-// 	// We need to set the limit check to whatever "on" is here as well. That way we don't have to have them check the box, then hit "save changes"
-// 		// and then add the user. We can do it in one fell swoop.
-		
-// 	if($_POST['limit'] != "off"){
-// 		// insert new user to list
-// 		$email = $_POST['allowedUser'];
-// 		$roomid = $_POST['roomid'];
-		
-// 		// Here is where the modal box needs to confirm the user wants to add the person
-		
-// 		$_allowedSql = "INSERT INTO `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
-// 		$conn->query ( $_allowedSql );
-		
-// 		if(isset($conn->error)){
-// 			// display error
-// 			$sqlError = $conn->error;
-// 		}
-		
-// 		saveChanges($conn, $beingEdited, $_POST);
-// 		header("Refresh: 0");
-// 	}
-// }
-
-
-
-
-// if(isset($_POST['ourDeleteUserButton'])){
-	
-// 	$sql = "DELETE 'user' FROM `whitelist` WHERE 'email' = '$email' AND 'room' = '$roomid'";
-	
-// }
-
 
 // Performs the actions associated with the save changes button.
-
 function saveChanges($conn, $beingEdited, $post_vars){
 	$roomid = $post_vars ['roomid'];
 	$type = $post_vars ['type'];
@@ -121,14 +79,13 @@ function saveChanges($conn, $beingEdited, $post_vars){
 	}
 
 
-	if ($beingEdited)
-	{
+	if ($beingEdited){ // If we're editing the room
 		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
 			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
 
 		$conn->query ( $_updateSql );
-	} else
-	{
+	} 
+	else{ // If we're creating a new room
 		$_createSql = "INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`) VALUES ('$roomid', '$type', '$floor', '$seats', '$hasComputers', '$numComputers')";
 		$conn->query ( $_createSql );
 	}
@@ -322,7 +279,6 @@ function saveChanges($conn, $beingEdited, $post_vars){
 </html>
 
 <script>
-
 	$('#hasComputersCheck').change(function()
 	{
 		if(this.checked)
@@ -360,6 +316,11 @@ function saveChanges($conn, $beingEdited, $post_vars){
 
 	addUserElement.addEventListener('click', function() {
     	// alert(document.getElementById('allowedUser').value);
+    	
+    	// if(document.getElementById('submit').value)
+    	
+    	alert(document.getElementById('submit').value);
+    	
     	openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, true);
 	}, false);
 </script>
