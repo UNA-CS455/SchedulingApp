@@ -127,14 +127,6 @@ function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, bei
 	        else{
         	    // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(saveObject); window.location.reload();'>Ok</button>";
         	    
-        	    roomid=roomid;
-        	    roomType=roomType;
-        	    floorNum=floorNum;
-        	    seats=seats;
-        	    numComputers=numComputers;
-        	    limit=limit;
-        	    beingEdited=beingEdited;
-        	    hasComputers=hasComputers;
         	    alert("In anon, roomid is " + roomid);
         	    
         	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(" + roomid + "," + roomType + "," + floorNum + "," + seats + "," + numComputers + "," + limit + "," + beingEdited + "," + hasComputers + "); window.location.reload();'>Ok</button>";
@@ -194,16 +186,6 @@ function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, bei
 	//  roomID : roomid,
 	//  edit : beingEdited
 	// };
-	
-	roomid=roomid;
-    roomType=roomType;
-    floorNum=floorNum;
-    seats=seats;
-    numComputers=numComputers;
-    limit=limit;
-    beingEdited=beingEdited;
-    hasComputers=hasComputers;
-
 	
 	alert("saveObject.roomID = ");
 	
