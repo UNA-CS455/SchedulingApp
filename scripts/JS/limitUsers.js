@@ -218,6 +218,7 @@ function saveChanges(name, roomid, beingEdited){
 	var xhttp = new XMLHttpRequest();
 
 	alert("In saveChanges, hasComputersCheck is " + hasComputers);
+	alert("In savechanges, roomid is " + roomid);
 
 	if (window.location.href.includes('PHP'))
 	{
