@@ -136,8 +136,6 @@ function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, bei
         	    beingEdited=beingEdited;
         	    hasComputers=hasComputers;
         	    
-        	    alert(roomid);
-        	    
         	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers); window.location.reload();'>Ok</button>";
         	    // saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 	        	showMessageBox("", "Success!", buttonhtml, false);
@@ -166,8 +164,8 @@ function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, bei
 //
 // Purpose: Saves the changes made to the room. Called in openConfirmAddUser if the user hits yes.
 //*************************************************************************************************
-// function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
-function saveChanges(saveObject){
+function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
+// function saveChanges(saveObject){
 	// roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers
 	
 	var xhttp = new XMLHttpRequest();
@@ -194,6 +192,16 @@ function saveChanges(saveObject){
 	//  roomID : roomid,
 	//  edit : beingEdited
 	// };
+	
+	roomid=roomid;
+    roomType=roomType;
+    floorNum=floorNum;
+    seats=seats;
+    numComputers=numComputers;
+    limit=limit;
+    beingEdited=beingEdited;
+    hasComputers=hasComputers;
+
 	
 	alert("saveObject.roomID = ");
 	
