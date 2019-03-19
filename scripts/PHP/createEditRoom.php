@@ -268,8 +268,8 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					
 				</div>
-				<div class="row">
-					<button class="btn btn-secondary" id="submit" name="submit" type="submit" ><?php (($beingEdited == true) ? print "Save Changes" : print "Create Room") ?></button>
+				<div class="row" style="display: block">
+					<button class="btn btn-secondary" id="submit" name="submit" type="submit" value="<?php echo $beingEdited; ?>"><?php (($beingEdited == true) ? print "Save Changes" : print "Create Room") ?></button>
 				</div>
 			</form>
 		</div>
