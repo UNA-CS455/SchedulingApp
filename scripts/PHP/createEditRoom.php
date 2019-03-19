@@ -33,6 +33,7 @@ if (isset ( $_GET ['roomid'] )){
 } 
 else{
 	$roomToEdit = null;
+	$allowedUsersRes = null;
 	$beingEdited = false;
 }
 
