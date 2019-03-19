@@ -247,8 +247,6 @@ function saveChanges(name, roomid, beingEdited){
 	};
 	
 	
-	alert("saveObject.roomID = ");
-	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	// xhttp.send("roomid=" + saveObject.roomID + "&roomType=" + saveObject.roomT + "&floorNum=" + saveObject.floor + "&seats=" + saveObject.seatNum + "&numComputers=" + saveObject.numComp + "&limit=" + saveObject.lim + "&beingEdited=" + saveObject.edit + "&hasComputers=" + saveObject.hasComp);// send stuff
 	xhttp.send("roomid=" + roomid + "&roomType=" + roomType + "&floorNum=" + floorNum + "&seats=" + seats + "&numComputers=" + numComputers + "&limit=" + limit + "&beingEdited=" + beingEdited + "&hasComputers=" + hasComputers);// send stuff
