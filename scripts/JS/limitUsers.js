@@ -242,7 +242,7 @@ function saveChanges(name, roomid, beingEdited){
 	
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState == 4 && this.status == 200){
-			alert(xhttp.responseText);
+			window.location.reload();
 		}
 	};
 	
