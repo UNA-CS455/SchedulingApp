@@ -80,8 +80,8 @@ function openConfirmAddUser(name, roomid, beingEdited)
 //			or not. If we do, it will call addUserWhitelist.php, which actually adds the user
 //			to the whitelist.
 //*************************************************************************************************
-// function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
-function addWL(name, roomid, saveObject){
+function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
+// function addWL(name, roomid, saveObject){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 		
@@ -125,7 +125,21 @@ function addWL(name, roomid, saveObject){
 	        	}
 	        }
 	        else{
+        	    // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(saveObject); window.location.reload();'>Ok</button>";
+        	    
+        	    roomid=roomid;
+        	    roomType=roomType;
+        	    floorNum=floorNum;
+        	    seats=seats;
+        	    numComputers=numComputers;
+        	    limit=limit;
+        	    beingEdited=beingEdited;
+        	    hasComputers=hasComputers;
+        	    
+        	    alert(roomid);
+        	    
         	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers); window.location.reload();'>Ok</button>";
+        	    // saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 	        	showMessageBox("", "Success!", buttonhtml, false);
 	        }
 	        
