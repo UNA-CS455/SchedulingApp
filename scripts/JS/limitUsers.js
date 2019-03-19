@@ -155,6 +155,8 @@ function saveChanges(saveObject){
 	
 	var xhttp = new XMLHttpRequest();
 
+	alert("In saveChanges");
+
 	if (window.location.href.includes('PHP'))
 	{
 		xhttp.open("POST", "../../scripts/PHP/wlSaveChanges.php", true);
