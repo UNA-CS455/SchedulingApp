@@ -135,6 +135,7 @@ function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, bei
         	    limit=limit;
         	    beingEdited=beingEdited;
         	    hasComputers=hasComputers;
+        	    alert("In anon");
         	    
         	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers); window.location.reload();'>Ok</button>";
         	    // saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
