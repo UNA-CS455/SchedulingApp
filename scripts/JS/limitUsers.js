@@ -44,16 +44,16 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	var floorNum = document.getElementById('floor').value;
 	var seats = document.getElementById('seats').value;
 	
-	var saveObject = {
-		numComp : numComputers,
-		hasComp : hasComputers,
-		lim : limit,
-		seatNum : seats,
-		floor : floorNum,
-		roomT : roomType,
-		roomID : roomid,
-		edit : beingEdited
-	};
+	// var saveObject = {
+	// 	numComp : numComputers,
+	// 	hasComp : hasComputers,
+	// 	lim : limit,
+	// 	seatNum : seats,
+	// 	floor : floorNum,
+	// 	roomT : roomType,
+	// 	roomID : roomid,
+	// 	edit : beingEdited
+	// };
 	
 
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
@@ -62,7 +62,7 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
-		addWL(name, roomid, saveObject);
+		addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
 	};
@@ -79,7 +79,7 @@ function openConfirmAddUser(name, roomid, beingEdited)
 //			or not. If we do, it will call addUserWhitelist.php, which actually adds the user
 //			to the whitelist.
 //*************************************************************************************************
-function addWL(name, roomid, saveObject){
+function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 		
@@ -123,7 +123,7 @@ function addWL(name, roomid, saveObject){
 	        	}
 	        }
 	        else{
-        	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(saveObject); window.location.reload();'>Ok</button>";
+        	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers); window.location.reload();'>Ok</button>";
 	        	showMessageBox("", "Success!", buttonhtml, false);
 	        }
 	        
@@ -150,7 +150,7 @@ function addWL(name, roomid, saveObject){
 //
 // Purpose: Saves the changes made to the room. Called in openConfirmAddUser if the user hits yes.
 //*************************************************************************************************
-function saveChanges(saveObject){
+function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
 	
 	// roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers
 	
@@ -182,5 +182,7 @@ function saveChanges(saveObject){
 	alert("saveObject.roomID = ");
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("roomid=" + saveObject.roomID + "&roomType=" + saveObject.roomT + "&floorNum=" + saveObject.floor + "&seats=" + saveObject.seatNum + "&numComputers=" + saveObject.numComp + "&limit=" + saveObject.lim + "&beingEdited=" + saveObject.edit + "&hasComputers=" + saveObject.hasComp);// send stuff
+	// xhttp.send("roomid=" + saveObject.roomID + "&roomType=" + saveObject.roomT + "&floorNum=" + saveObject.floor + "&seats=" + saveObject.seatNum + "&numComputers=" + saveObject.numComp + "&limit=" + saveObject.lim + "&beingEdited=" + saveObject.edit + "&hasComputers=" + saveObject.hasComp);// send stuff
+	xhttp.send("roomid=" + roomid + "&roomType=" + roomType + "&floorNum=" + floorNum + "&seats=" + seats + "&numComputers=" + numComputers + "&limit=" + limit + "&beingEdited=" + beingEdited + "&hasComputers=" + hasComputers);// send stuff
+
 }
