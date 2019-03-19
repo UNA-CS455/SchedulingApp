@@ -191,6 +191,11 @@ function saveChanges(name, roomid, beingEdited){
 	var seats = document.getElementById('seats').value;
 	
 	
+	//For whatever reason, we're getting an illegal character in this.
+	alert("Illegal?");
+	
+	
+	
 	var xhttp = new XMLHttpRequest();
 
 	alert("In saveChanges");
