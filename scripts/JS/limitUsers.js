@@ -3,7 +3,7 @@
 //
 // Incoming params: name (String), roomid (String), beingEdited (int bool)
 //
-// Purpose: Opens the modal box to have the user confirm if they really want to add the user
+// Purpose: Opens the modal box to have the user confirm if they really want to add the user.
 //*************************************************************************************************
 function openConfirmAddUser(name, roomid, beingEdited)
 {
@@ -29,11 +29,10 @@ function openConfirmAddUser(name, roomid, beingEdited)
 //************************************************************************************************
 // Method Name: addWL
 //
-// Incoming params: name (String), roomid (String)
+// Incoming params: name (String), roomid (String), beingEdited (int Bool)
 //
-// Purpose: Checks the int/bool userExists and sees if we need to add the user to the whitelist
-//			or not. If we do, it will call addUserWhitelist.php, which actually adds the user
-//			to the whitelist.
+// Purpose: Checks if the given user (name) exists in the system. If so, insert them into the 
+//			whitelist. If not, reject it.
 //*************************************************************************************************
 function addWL(name, roomid, beingEdited){
 	var xhttp = new XMLHttpRequest();
@@ -78,7 +77,7 @@ function addWL(name, roomid, beingEdited){
 	        	var addUserElement = document.getElementById('okAdd');
 
 				addUserElement.addEventListener('click', function() {
-		   			saveChanges(name, roomid, beingEdited);
+		   			saveChanges(name, roomid, beingEdited); // Save changes to any forms that may have been filled in
 				}, false);
 	        	
 	        }
@@ -95,14 +94,14 @@ function addWL(name, roomid, beingEdited){
 //************************************************************************************************
 // Method Name: saveChanges
 //
-// Incoming params: roomid (String), roomType (String), floorNum (int), seats (int),
-//					numComputers (int), limit (int bool), beingEdited (int bool), 
-//					hasComputers (int bool)
+// Incoming params: roomid (String), roomType (String), beingEdited (int bool)
 //
 // Purpose: Saves the changes made to the room. Called in openConfirmAddUser if the user hits yes.
 //*************************************************************************************************
 function saveChanges(name, roomid, beingEdited){
 
+	
+	// See if we want to even limit the room reservations
 	if(document.getElementById('limitCheck').value == 'on' || document.getElementById('limitCheck').value == 1){
 		var limit = 1;
 	}
@@ -110,6 +109,7 @@ function saveChanges(name, roomid, beingEdited){
 		var limit = 0;
 	}
 	
+	// See if it has computers
 	if(document.getElementById('hasComputersCheck').value == 'on' || document.getElementById('hasComputersCheck').value == 1){
 		var hasComputers = 1;
 	}
@@ -117,6 +117,8 @@ function saveChanges(name, roomid, beingEdited){
 		var hasComputers = 0;
 	}
 	
+	
+	// See how many, if any, computers there are
 	if(hasComputers == 1){
 		var numComputers = document.getElementById('numComputers').value;
 	}	
@@ -125,35 +127,21 @@ function saveChanges(name, roomid, beingEdited){
 	}
 
 	
-	var roomType = document.getElementById('type').value;
-	var floorNum = document.getElementById('floor').value;
-	var seats = document.getElementById('seats').value;
+	var roomType = document.getElementById('type').value; // What room type is it?
+	var floorNum = document.getElementById('floor').value; // What floor is it on?
+	var seats = document.getElementById('seats').value; // How many seats are there?
 	
 	var xhttp = new XMLHttpRequest();
 	
 
-	if (window.location.href.includes('PHP'))
-	{
+	if (window.location.href.includes('PHP')){ // Prepare to save changes
 		xhttp.open("POST", "../../scripts/PHP/wlSaveChanges.php", true);
 	}
-	else
-	{
+	else{
 		xhttp.open("POST", "scripts/PHP/wlSaveChanges.php", true);
 	}
-
 	
-	// var saveObject = {
-	// 	numComp : numComputers,
-	// 	hasComp : hasComputers,
-	// 	lim : limit,
-	// 	seatNum : seats,
-	// 	floor : floorNum,
-	// 	roomT : roomType,
-	//  roomID : roomid,
-	//  edit : beingEdited
-	// };
-	
-	xhttp.onreadystatechange = function(){
+	xhttp.onreadystatechange = function(){ // Once we get a response, refresh the page
 		if(xhttp.readyState == 4 && this.status == 200){
 			window.location.reload();
 		}
@@ -161,7 +149,7 @@ function saveChanges(name, roomid, beingEdited){
 	
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	// xhttp.send("roomid=" + saveObject.roomID + "&roomType=" + saveObject.roomT + "&floorNum=" + saveObject.floor + "&seats=" + saveObject.seatNum + "&numComputers=" + saveObject.numComp + "&limit=" + saveObject.lim + "&beingEdited=" + saveObject.edit + "&hasComputers=" + saveObject.hasComp);// send stuff
 	xhttp.send("roomid=" + roomid + "&roomType=" + roomType + "&floorNum=" + floorNum + "&seats=" + seats + "&numComputers=" + numComputers + "&limit=" + limit + "&beingEdited=" + beingEdited + "&hasComputers=" + hasComputers);// send stuff
-
+	// Send the request to wlSaveChanges.php
+	
 }

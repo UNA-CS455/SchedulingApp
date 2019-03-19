@@ -3,21 +3,16 @@ createEditRoom.php is the location where we will need to implement the "Limit Re
 	
 
 ISSUE:
-	When unchecking the "has computers" box, it will not delete the num computers from the database (or even update the fact that it has been changed)
-	On userExistsCheck, the database connection is not working for whatever reason. I have tried to grab working code from it, but it is still not working :(
 	
 	
 	
 TODO:
-	Move the "addUser" onclick to jQuery .onclick events
-	
-	Get Modal to show up in the event of an SQL error (if the user doesn't exist in the tables)
-	Get Modal to show up to verify that a user was added? Deleted?
+	Delete button & select box
 	
 	
 Note:
-	We could likely use AJAX's innerhtml edit rather than refresh the page for add user & delete user?
-	
+	Idea for delete select box:
+		Might could have some default value as the top one like --SELECT USER-- or something similar to protect from accidental deletion
 
 
 
