@@ -146,7 +146,9 @@ function addWL(name, roomid, beingEdited){
 
 				addUserElement.addEventListener('click', function() {
 			    	// alert(document.getElementById('allowedUser').value);
-			    	alert("Clicked!");
+			    	// alert("Clicked!");
+		   			saveChanges(name, roomid, beingEdited);
+					window.location.reload();
 				}, false);
 	        	
 	        }
