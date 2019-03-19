@@ -18,42 +18,42 @@ function openConfirmAddUser(name, roomid, beingEdited)
 		beingEdited = 0;
 	}
 		
-	if(document.getElementById('limitCheck').value == 'on' || document.getElementById('limitCheck').value == 1){
-		var limit = 1;
-	}
-	else{
-		var limit = 0;
-	}
+	// if(document.getElementById('limitCheck').value == 'on' || document.getElementById('limitCheck').value == 1){
+	// 	var limit = 1;
+	// }
+	// else{
+	// 	var limit = 0;
+	// }
 	
-	if(document.getElementById('hasComputersCheck').value == 'on' || document.getElementById('hasComputersCheck').value == 1){
-		var hasComputers = 1;
-	}
-	else{
-		var hasComputers = 0;
-	}
+	// if(document.getElementById('hasComputersCheck').value == 'on' || document.getElementById('hasComputersCheck').value == 1){
+	// 	var hasComputers = 1;
+	// }
+	// else{
+	// 	var hasComputers = 0;
+	// }
 	
-	if(hasComputers == 1){
-		var numComputers = document.getElementById('numComputers').value;
-	}	
-	else{
-		var numComputers = null;
-	}
+	// if(hasComputers == 1){
+	// 	var numComputers = document.getElementById('numComputers').value;
+	// }	
+	// else{
+	// 	var numComputers = null;
+	// }
 
 	
-	var roomType = document.getElementById('type').value;
-	var floorNum = document.getElementById('floor').value;
-	var seats = document.getElementById('seats').value;
+	// var roomType = document.getElementById('type').value;
+	// var floorNum = document.getElementById('floor').value;
+	// var seats = document.getElementById('seats').value;
 	
-	var saveObject = {
-		numComp : numComputers,
-		hasComp : hasComputers,
-		lim : limit,
-		seatNum : seats,
-		floor : floorNum,
-		roomT : roomType,
-		roomID : roomid,
-		edit : beingEdited
-	};
+	// var saveObject = {
+	// 	numComp : numComputers,
+	// 	hasComp : hasComputers,
+	// 	lim : limit,
+	// 	seatNum : seats,
+	// 	floor : floorNum,
+	// 	roomT : roomType,
+	// 	roomID : roomid,
+	// 	edit : beingEdited
+	// };
 	
 
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' >Yes</button> <button class='modal-button btn btn-danger' id='noAddWL' onclick='closeModal()'>No</button>";
@@ -62,8 +62,8 @@ function openConfirmAddUser(name, roomid, beingEdited)
 	
 	document.getElementById('yesAddWL').onclick = function() {
 		closeModal();
-		// addWL(name, roomid, saveObject);
-		addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
+		addWL(name, roomid, beingEdited);
+		// addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
 		
 		//save changes
 	};
@@ -80,8 +80,8 @@ function openConfirmAddUser(name, roomid, beingEdited)
 //			or not. If we do, it will call addUserWhitelist.php, which actually adds the user
 //			to the whitelist.
 //*************************************************************************************************
-function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
-// function addWL(name, roomid, saveObject){
+// function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
+function addWL(name, roomid, beingEdited){
 	// xhttp send is structured like this:
 		// xhttp.send("variable=" + variable + "&variable2=" + variable2 + ...)
 		
@@ -130,7 +130,7 @@ function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, bei
         	    alert("In anon, roomid is " + roomid);
         	    
         	    //var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(" + roomid + "," + roomType + "," + floorNum + "," + seats + "," + numComputers + "," + limit + "," + beingEdited + "," + hasComputers + "); window.location.reload();'>Ok</button>";
-         	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(); window.location.reload();'>Ok</button>";
+         	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(" + name + "," + roomid + "," + beingEdited + "); window.location.reload();'>Ok</button>";
 
         	    // saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers);
         	    // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(1, 1, 1, 1, 11, 1, 1, 1); window.location.reload();'>Ok</button>";
@@ -160,9 +160,36 @@ function addWL(name, roomid, roomType, floorNum, seats, numComputers, limit, bei
 //
 // Purpose: Saves the changes made to the room. Called in openConfirmAddUser if the user hits yes.
 //*************************************************************************************************
-function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
-// function saveChanges(saveObject){
+// function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
+function saveChanges(name, roomid, beingEdited){
 	// roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers
+	
+	if(document.getElementById('limitCheck').value == 'on' || document.getElementById('limitCheck').value == 1){
+		var limit = 1;
+	}
+	else{
+		var limit = 0;
+	}
+	
+	if(document.getElementById('hasComputersCheck').value == 'on' || document.getElementById('hasComputersCheck').value == 1){
+		var hasComputers = 1;
+	}
+	else{
+		var hasComputers = 0;
+	}
+	
+	if(hasComputers == 1){
+		var numComputers = document.getElementById('numComputers').value;
+	}	
+	else{
+		var numComputers = null;
+	}
+
+	
+	var roomType = document.getElementById('type').value;
+	var floorNum = document.getElementById('floor').value;
+	var seats = document.getElementById('seats').value;
+	
 	
 	var xhttp = new XMLHttpRequest();
 
