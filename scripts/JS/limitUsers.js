@@ -139,17 +139,16 @@ function addWL(name, roomid, beingEdited){
 				// 	window.location.reload();
 				// };
 				
-				var addUserElement = document.getElementById('okAdd');
+	        	showMessageBox("", "Success!", buttonhtml, false);
+	        	inserted = true;
+	        	
+	        	var addUserElement = document.getElementById('okAdd');
 
 				addUserElement.addEventListener('click', function() {
 			    	// alert(document.getElementById('allowedUser').value);
 			    	alert("Clicked!");
 				}, false);
-				
-				
-        	    
-	        	showMessageBox("", "Success!", buttonhtml, false);
-	        	inserted = true;
+	        	
 	        }
 	        
 		}
