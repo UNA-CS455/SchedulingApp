@@ -133,11 +133,20 @@ function addWL(name, roomid, beingEdited){
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okAdd' >Ok</button>";
 				//onclick='saveChanges(\'" + name + "\',\'" + roomid + "\'," + beingEdited + "); window.location.reload();'
 				
-				document.getElementById("okAdd").onclick = function(){
-					// onclick='saveChanges(\'" + name + "\',\'" + roomid + "\'," + beingEdited + "); window.location.reload();'
-					saveChanges(name, roomid, beingEdited);
-					window.location.reload();
-				};
+				// document.getElementById("okAdd").onclick = function(){
+				// 	// onclick='saveChanges(\'" + name + "\',\'" + roomid + "\'," + beingEdited + "); window.location.reload();'
+				// 	saveChanges(name, roomid, beingEdited);
+				// 	window.location.reload();
+				// };
+				
+				var addUserElement = document.getElementById('okAdd');
+
+				addUserElement.addEventListener('click', function() {
+			    	// alert(document.getElementById('allowedUser').value);
+			    	alert("Clicked!");
+				}, false);
+				
+				
         	    
 	        	showMessageBox("", "Success!", buttonhtml, false);
 	        	inserted = true;
