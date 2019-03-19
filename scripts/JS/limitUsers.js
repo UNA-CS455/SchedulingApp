@@ -164,7 +164,8 @@ function addWL(name, roomid, beingEdited){
 function saveChanges(name, roomid, beingEdited){
 	// roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers
 	
-	alert("Illegal?");
+	alert("Illegal? Maybe?");
+	
 	
 	if(document.getElementById('limitCheck').value == 'on' || document.getElementById('limitCheck').value == 1){
 		var limit = 1;
