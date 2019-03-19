@@ -127,7 +127,7 @@ function addWL(name, roomid, beingEdited){
 	        else{
         	    // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(saveObject); window.location.reload();'>Ok</button>";
         	    
-        	    alert("In anon, roomid is " + roomid);
+        	    alert("In anon, name is " + name);
         	    
         	    //var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(" + roomid + "," + roomType + "," + floorNum + "," + seats + "," + numComputers + "," + limit + "," + beingEdited + "," + hasComputers + "); window.location.reload();'>Ok</button>";
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(\'" + name + "\',\'" + roomid + "\'," + beingEdited + "); window.location.reload();'>Ok</button>";
