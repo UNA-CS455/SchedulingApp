@@ -109,46 +109,29 @@ function addWL(name, roomid, beingEdited){
 				xhttp.open("POST", "scripts/PHP/addUserWhitelist.php", true);
 			}
 	        
-	        if(!inserted){
-	        	if(userExists == 1){
-		    		//document.getElementById("reserveBox").innerHTML = xhttp.responseText;
-		    		inserted = true;
+	        if(!inserted){ // If user has not been inserted yet
+	        	if(userExists == 1){ // If user exists
+	        		inserted = true;
 		    		userExists = 0;
 		    		
 		    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					xhttp.send("allowedUser=" + name + "&roomid=" + roomid);
+					xhttp.send("allowedUser=" + name + "&roomid=" + roomid); // Add user to whitelist for this room
 					
-					document.getElementById("reserveBox").innerHTML += xhttp.responseText;
+					// document.getElementById("reserveBox").innerHTML += xhttp.responseText;
 	        	}
 	        	else{
 					showMessageBoxOK("User does not exist!", "Error", false);
 	        	}
 	        }
-	        else{
-        	    // var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(saveObject); window.location.reload();'>Ok</button>";
-        	    
-        	    // alert("In anon, name is " + name);
-        	    
-        	    //var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(" + roomid + "," + roomType + "," + floorNum + "," + seats + "," + numComputers + "," + limit + "," + beingEdited + "," + hasComputers + "); window.location.reload();'>Ok</button>";
+	        else{ // User was inserted
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okAdd' >Ok</button>";
-				//onclick='saveChanges(\'" + name + "\',\'" + roomid + "\'," + beingEdited + "); window.location.reload();'
-				
-				// document.getElementById("okAdd").onclick = function(){
-				// 	// onclick='saveChanges(\'" + name + "\',\'" + roomid + "\'," + beingEdited + "); window.location.reload();'
-				// 	saveChanges(name, roomid, beingEdited);
-				// 	window.location.reload();
-				// };
-				
 	        	showMessageBox("", "Success!", buttonhtml, false);
 	        	inserted = true;
 	        	
 	        	var addUserElement = document.getElementById('okAdd');
 
 				addUserElement.addEventListener('click', function() {
-			    	// alert(document.getElementById('allowedUser').value);
-			    	// alert("Clicked!");
 		   			saveChanges(name, roomid, beingEdited);
-					//window.location.reload();
 				}, false);
 	        	
 	        }
@@ -159,10 +142,7 @@ function addWL(name, roomid, beingEdited){
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("allowedUser=" + name);// send stuff
 
-	// }
-	// else{
-	// 	showMessageBoxOk("User does not exist!", "ERROR", true); // Error finding person, they don't exist!
-	// }
+	
 }
 
 
@@ -176,10 +156,8 @@ function addWL(name, roomid, beingEdited){
 //
 // Purpose: Saves the changes made to the room. Called in openConfirmAddUser if the user hits yes.
 //*************************************************************************************************
-// function saveChanges(roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers){
 function saveChanges(name, roomid, beingEdited){
-	// roomid, roomType, floorNum, seats, numComputers, limit, beingEdited, hasComputers
-	
+
 	if(document.getElementById('limitCheck').value == 'on' || document.getElementById('limitCheck').value == 1){
 		var limit = 1;
 	}
@@ -206,17 +184,7 @@ function saveChanges(name, roomid, beingEdited){
 	var floorNum = document.getElementById('floor').value;
 	var seats = document.getElementById('seats').value;
 	
-	
-	//For whatever reason, we're getting an illegal character in this.
-	// alert("Illegal?");
-	
-	
-	
 	var xhttp = new XMLHttpRequest();
-
-	alert("In saveChanges, hasComputersCheck is " + document.getElementById('hasComputersCheck').value);
-	alert("In savechanges, limitCheck is " + document.getElementById('limitCheck').value);
-	alert("In savechanges, limit is " + limit);
 	
 
 	if (window.location.href.includes('PHP'))
