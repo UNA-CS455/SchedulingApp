@@ -260,9 +260,11 @@ function saveChanges($conn, $beingEdited, $post_vars){
 						<div class="col-md-2" id="reserveBox" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
 								<?php
-									while($allowedUsers = $allowedUsersRes->fetch_assoc()){
-										echo "<tr> <td>" . $allowedUsers['email'] . " </td> </tr>";
-									}
+								if(isset($allowedUsersRes)){
+										while($allowedUsers = $allowedUsersRes->fetch_assoc()){
+											echo "<tr> <td>" . $allowedUsers['email'] . " </td> </tr>";
+										}
+								}
 								?>
 							</table>
 						</div>
