@@ -122,7 +122,7 @@ function addWL(name, roomid, saveObject){
 	        	}
 	        }
 	        else{
-        	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(saveObject); window.location.reload()'>Ok</button>";
+        	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesAddWL' onclick='saveChanges(saveObject); window.location.reload();'>Ok</button>";
 	        	showMessageBox("", "Success!", buttonhtml, false);
 	        }
 	        
