@@ -12,6 +12,8 @@ $conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Conne
 	$hasComputers = $_POST['hasComputers'];
 	$limit = $_POST['limit'];
 	$beingEdited = $_POST['beingEdited'];
+	
+	echo var_dump($_POST);
 
 
 	if ($beingEdited == 1)

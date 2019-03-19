@@ -240,6 +240,13 @@ function saveChanges(name, roomid, beingEdited){
 	//  edit : beingEdited
 	// };
 	
+	xhttp.onreadystatechange = function(){
+		if(xhttp.readyState == 4 && this.status == 200){
+			alert(xhttp.responseText);
+		}
+	};
+	
+	
 	alert("saveObject.roomID = ");
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
