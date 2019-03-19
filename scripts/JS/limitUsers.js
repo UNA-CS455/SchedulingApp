@@ -148,7 +148,7 @@ function addWL(name, roomid, beingEdited){
 			    	// alert(document.getElementById('allowedUser').value);
 			    	// alert("Clicked!");
 		   			saveChanges(name, roomid, beingEdited);
-					window.location.reload();
+					//window.location.reload();
 				}, false);
 	        	
 	        }
