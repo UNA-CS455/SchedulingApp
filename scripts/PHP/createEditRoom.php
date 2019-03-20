@@ -355,3 +355,16 @@ function saveChanges($conn, $beingEdited, $post_vars){
     	openConfirmAddUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, edit);
 	}, false);
 </script>
+
+<script>
+	var addUserElement = document.getElementById('delUser');
+	var edit = false;
+
+	addUserElement.addEventListener('click', function() {
+    	if(document.getElementById('submit').value == 1){ // If the room is being edited, pass true to openConfirmAddUser
+    		edit = true;
+    	} // Else, pass default false
+    	
+    	openConfirmDELUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, edit);
+	}, false);
+</script>
