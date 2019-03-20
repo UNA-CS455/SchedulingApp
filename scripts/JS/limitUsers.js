@@ -36,7 +36,12 @@ function delWL(name, roomid, beingEdited){
 		if(xhttp.readyState == 4 && this.status == 200){ // If the response was "200 OK" http
 			var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
         	showMessageBox(xhttp.responseText, "", buttonhtml, true);
-        	saveChanges(name, roomid, beingEdited);
+        	
+        	var addUserElement = document.getElementById('okDel');
+
+			addUserElement.addEventListener('click', function() {
+	   			saveChanges(name, roomid, beingEdited); // Save changes to any forms that may have been filled in
+			}, false);
 		}
 	};
 	
