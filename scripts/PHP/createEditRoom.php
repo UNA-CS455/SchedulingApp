@@ -247,7 +247,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
 					<div class="col">
-						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px">
+						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
 							<!--Delete button here?-->
 							<select name="cars" style="min-width: 170px" id="userToDelete">
 								<option>--SELECT USER--</option>
@@ -260,6 +260,8 @@ function saveChanges($conn, $beingEdited, $post_vars){
 								?>
 							</select>
 							
+							<!--This needs to be better-->
+							<!--It is messing up the rest of the interface for delete-->
 							<div class="col-xs-4" >
 								<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
 									id="delUser" name="delUser" type="button">
@@ -329,6 +331,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 		if(this.checked){
 			//show some boxes, maybe some other stuff?
 			$('#allowedReserve').show();
+			$('#userToDelete').show();
 			$('#addUser').show();
 			$('#delUser').show();
 			$('#email').show();
@@ -336,6 +339,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 		else{
 			//don't show some boxes
 			$('#allowedReserve').hide();
+			$('#userToDelete').hide();
 			$('#addUser').hide();
 			$('#email').hide();
 			$('#delUser').hide();
