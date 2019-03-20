@@ -365,6 +365,6 @@ function saveChanges($conn, $beingEdited, $post_vars){
     		edit = true;
     	} // Else, pass default false
     	
-    	openConfirmDELUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, edit);
+    	openConfirmDelUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, edit);
 	}, false);
 </script>
