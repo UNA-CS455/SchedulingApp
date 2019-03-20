@@ -239,6 +239,12 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					<div>
 						<!--Delete button here?-->
+						<select name="cars">
+						  <option value="volvo">Volvo</option>
+						  <option value="saab">Saab</option>
+						  <option value="fiat">Fiat</option>
+						  <option value="audi">Audi</option>
+						</select>
 					</div>
 					
 					
@@ -272,7 +278,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					
 				</div>
 				<div class="row" style="display: run-in">
-					<button class="btn btn-secondary" id="submit" name="submit" type="submit" ><?php (($beingEdited == true) ? print "Save Changes" : print "Create Room") ?></button>
+					<button class="btn btn-secondary" id="submit" name="submit" type="submit" value="<?php echo $beingEdited; ?>"><?php (($beingEdited == true) ? print "Save Changes" : print "Create Room") ?></button>
 				</div>
 			</form>
 		</div>
