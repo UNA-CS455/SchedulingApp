@@ -245,16 +245,20 @@ function saveChanges($conn, $beingEdited, $post_vars){
                     <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px; visibility: hidden">
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
-					<div class = "col-md-3">
+					<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px">
 						<!--Delete button here?-->
-						<select name="cars">
+						<select name="cars" style="min-width: 170px">
 						  <option value="volvo">Volvo</option>
 						  <option value="saab">Saab</option>
 						  <option value="fiat">Fiat</option>
 						  <option value="audi">Audi</option>
 						</select>
 					</div>
-					
+					<div class="col-xl-3" >
+							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+								id="delUser" name="delUser" type="button">
+								Delete User</button>
+					</div>
 					
 				</div>
 				
