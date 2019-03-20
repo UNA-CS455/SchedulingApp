@@ -1,5 +1,5 @@
 
-function openConfirmDeleteUser(name, roomid, beingEdited)
+function openConfirmDelUser(name, roomid, beingEdited)
 {
 	if(beingEdited){
 		beingEdited = 1;
