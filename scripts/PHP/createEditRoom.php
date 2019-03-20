@@ -249,7 +249,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					<div class="col">
 						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px">
 							<!--Delete button here?-->
-							<select name="cars" style="min-width: 170px">
+							<select name="cars" style="min-width: 170px" id="userToDelete">
 								<option>--SELECT USER--</option>
 							  <?php
 								if(isset($allowedUsersRes1)){
@@ -365,6 +365,6 @@ function saveChanges($conn, $beingEdited, $post_vars){
     		edit = true;
     	} // Else, pass default false
     	
-    	openConfirmDelUser(document.getElementById('allowedUser').value, document.getElementById('roomid').value, edit);
+    	openConfirmDelUser(document.getElementById('userToDelete').value, document.getElementById('roomid').value, edit);
 	}, false);
 </script>
