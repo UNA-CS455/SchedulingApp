@@ -16,7 +16,8 @@ else{ // Else, echo out the email to limitUser.js
     echo "Successfully deleted $email";
 }
 
-echo "<br> hello " + $email + " in " + $roomid;
+// echo "<br> hello " + $email + " in " + $roomid;
+echo $_POST['allowedUser'] + " " + $_POST['roomid'];
 
 $conn->close();
 ?>
