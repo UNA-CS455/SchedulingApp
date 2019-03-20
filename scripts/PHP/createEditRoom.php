@@ -252,7 +252,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 							<select name="cars" style="min-width: 170px">
 								<option>--SELECT USER--</option>
 							  <?php
-								if(isset($allowedUsersRes)){
+								if(isset($allowedUsersRes1)){
 										while($allowedUsers = $allowedUsersRes1->fetch_assoc()){
 											echo "<option>" . $allowedUsers['email'] . " </option>";
 										}
@@ -287,7 +287,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 						<div class="col-md-2" id="reserveBox" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
 								<?php
-								if(isset($allowedUsersRes)){
+								if(isset($allowedUsersRes2)){
 										while($allowedUsers = $allowedUsersRes2->fetch_assoc()){
 											echo "<tr> <td>" . $allowedUsers['email'] . " </td> </tr>";
 										}
