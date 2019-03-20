@@ -237,7 +237,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 								id="addUser" name="addUser" type="button">
 								Add User</button>
 					</div>
-					<div>
+					<div class = "col-md-3">
 						<!--Delete button here?-->
 						<select name="cars">
 						  <option value="volvo">Volvo</option>
