@@ -212,7 +212,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 						style="position: relative; top: .5vh; left: 5vh;">
 						<!-- hidden field for if checkbox is not checked -->
 						<!--<input type="hidden" name="hascomputers" value="off">-->
-						<input class="form-check-input" name="hascomputers" id="hasComputersCheck" type="checkbox" <?php echo($roomToEdit['hascomputers'] == 1) ? 'checked value="1"' : '' ?>>
+						<input class="form-check-input" name="hascomputers" id="hasComputersCheck" type="checkbox" <?php echo($roomToEdit['hascomputers'] == 1) ? 'checked value="1"' : 'value=0' ?>>
 						<label for="hasComputers">Has Computers</label>
 
 						<div class="row-xs-0 form-group" id="computerBlock" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none"?>">
