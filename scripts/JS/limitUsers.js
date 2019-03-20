@@ -1,3 +1,51 @@
+
+function openConfirmDeleteUser(name, roomid, beingEdited)
+{
+	if(beingEdited){
+		beingEdited = 1;
+	}
+	else{
+		beingEdited = 0;
+	}
+
+    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesDelWL' >Yes</button> <button class='modal-button btn btn-danger' id='noDelWl' onclick='closeModal()'>No</button>";
+	showMessageBox("<br><br>Are you sure you want to delete:<br><br>" + name, "Add user", buttonhtml, false);
+
+	
+	document.getElementById('yesDelWL').onclick = function() {
+		closeModal();
+		delWL(name, roomid, beingEdited);
+	};
+
+}
+
+
+function delWL(name, roomid, beingEdited){
+	var xhttp = new XMLHttpRequest();
+	
+	if (window.location.href.includes('PHP')){ // Set up checking if user exists
+		xhttp.open("POST", "../../scripts/PHP/delUserWl.php", true);
+	}
+	else{
+		xhttp.open("POST", "scripts/PHP/delUserWl.php", true);
+	}
+	
+	xhttp.onreadystatechange = function(){ // When we get a response 
+		if(xhttp.readyState == 4 && this.status == 200){ // If the response was "200 OK" http
+			var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
+        	showMessageBox("", xhttp.responseText, buttonhtml, false);
+		}
+	};
+	
+	
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("allowedUser=" + name);// Send name to userExistsCheck.php
+}
+
+
+
+
+
 //************************************************************************************************
 // Method Name: openConfirmAddUser
 //
