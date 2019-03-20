@@ -321,6 +321,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 			//show some boxes, maybe some other stuff?
 			$('#allowedReserve').show();
 			$('#addUser').show();
+			$('#delUser').show();
 			$('#email').show();
 		}	
 		else{
@@ -328,6 +329,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 			$('#allowedReserve').hide();
 			$('#addUser').hide();
 			$('#email').hide();
+			$('#delUser').hide();
 		}
 	})
 </script>
