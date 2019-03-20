@@ -39,7 +39,7 @@ function delWL(name, roomid, beingEdited){
 	
 	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("allowedUser=" + name);// Send name to userExistsCheck.php
+	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// Send name to userExistsCheck.php
 }
 
 
