@@ -237,6 +237,14 @@ function saveChanges($conn, $beingEdited, $post_vars){
 								id="addUser" name="addUser" type="button">
 								Add User</button>
 					</div>
+					<div class="col-md-1" style="visibility: hidden">
+						<br />
+						<b>Spacer, shouldn't be seen</b>
+					</div>
+					
+                    <div class="col-md-1 form-group" style="min-width: 190px; margin-left: 45px; visibility: hidden">
+                    	<b>Spacer, shouldn't be seen</b>
+					</div>
 					<div class = "col-md-3">
 						<!--Delete button here?-->
 						<select name="cars">
