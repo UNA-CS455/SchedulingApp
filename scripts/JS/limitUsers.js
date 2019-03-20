@@ -33,7 +33,7 @@ function delWL(name, roomid, beingEdited){
 	xhttp.onreadystatechange = function(){ // When we get a response 
 		if(xhttp.readyState == 4 && this.status == 200){ // If the response was "200 OK" http
 			var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
-        	showMessageBox("", xhttp.responseText, buttonhtml, false);
+        	showMessageBox("Result", xhttp.responseText, buttonhtml, false);
 		}
 	};
 	
