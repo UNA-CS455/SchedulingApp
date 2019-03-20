@@ -9,7 +9,7 @@ function openConfirmDelUser(name, roomid, beingEdited)
 	}
 
     var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='yesDelWL' >Yes</button> <button class='modal-button btn btn-danger' id='noDelWl' onclick='closeModal()'>No</button>";
-	showMessageBox("<br><br>Are you sure you want to delete:<br><br>" + name, "Add user", buttonhtml, false);
+	showMessageBox("<br><br>Are you sure you want to delete:<br><br>" + name, "Delete user", buttonhtml, false);
 
 	
 	document.getElementById('yesDelWL').onclick = function() {
@@ -29,6 +29,8 @@ function delWL(name, roomid, beingEdited){
 	else{
 		xhttp.open("POST", "scripts/PHP/delUserWl.php", true);
 	}
+	
+	alert(name + " " + roomid);
 	
 	xhttp.onreadystatechange = function(){ // When we get a response 
 		if(xhttp.readyState == 4 && this.status == 200){ // If the response was "200 OK" http
