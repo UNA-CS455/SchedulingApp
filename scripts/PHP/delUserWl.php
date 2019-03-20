@@ -6,7 +6,7 @@ $conn = new mysqli ( $servername, $username, $password, $dbname ) or die( "Conne
 $email = $_POST['allowedUser']; // We pass in allowedUser and roomid from limitUser.js
 $roomid = $_POST['roomid'];
 
-$_allowedSql = "DELETE FROM `whitelist` (`email`, `roomid`) VALUES ('$email', '$roomid')";
+$_allowedSql = "DELETE FROM `whitelist` WHERE `whitelist`.`email` = $email AND `whitelist`.`roomid` = $roomid";
 $conn->query ( $_allowedSql ); 
 
 if(!empty($conn->error)){ // If there were ANY issues with the query, kill the connection and give an error
