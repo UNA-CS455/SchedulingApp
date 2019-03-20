@@ -246,7 +246,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
 					<div class="col">
-						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px">
+						<div class = "row-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px">
 							<!--Delete button here?-->
 							<select name="cars" style="min-width: 170px">
 							  <option value="volvo">Volvo</option>
