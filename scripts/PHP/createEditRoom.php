@@ -249,6 +249,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px">
 							<!--Delete button here?-->
 							<select name="cars" style="min-width: 170px">
+								<option>--SELECT USER--</option>
 							  <?php
 								if(isset($allowedUsersRes)){
 										while($allowedUsers = $allowedUsersRes->fetch_assoc()){
