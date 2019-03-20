@@ -158,6 +158,7 @@ function saveChanges(name, roomid, beingEdited){
 	}
 	
 	// See if it has computers
+	// Still giving hasComputers = 1 when it is clearly not
 	if(document.getElementById('hasComputersCheck').value == 'on' || document.getElementById('hasComputersCheck').value == 1){
 		var hasComputers = 1;
 	}

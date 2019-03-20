@@ -28,7 +28,8 @@ if (isset ( $_GET ['roomid'] )){
 	$roomToEdit = $_editRoomRes->fetch_assoc ();
 	
 	$getAllowedUsers = "SELECT * FROM `whitelist` WHERE `whitelist`.`roomid` = '$gotRoom'";
-	$allowedUsersRes = $conn->query($getAllowedUsers);
+	$allowedUsersRes1 = $conn->query($getAllowedUsers);
+	$allowedUsersRes2 = $conn->query($getAllowedUsers);
 	
 } 
 else{
@@ -252,7 +253,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 								<option>--SELECT USER--</option>
 							  <?php
 								if(isset($allowedUsersRes)){
-										while($allowedUsers = $allowedUsersRes->fetch_assoc()){
+										while($allowedUsers = $allowedUsersRes1->fetch_assoc()){
 											echo "<option>" . $allowedUsers['email'] . " </option>";
 										}
 								}
@@ -287,7 +288,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 							<table>
 								<?php
 								if(isset($allowedUsersRes)){
-										while($allowedUsers = $allowedUsersRes->fetch_assoc()){
+										while($allowedUsers = $allowedUsersRes2->fetch_assoc()){
 											echo "<tr> <td>" . $allowedUsers['email'] . " </td> </tr>";
 										}
 								}
