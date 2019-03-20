@@ -255,13 +255,13 @@ function saveChanges($conn, $beingEdited, $post_vars){
 							  <option value="audi">Audi</option>
 							</select>
 							
-							
+							<div class="col-xs-4" >
+								<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+									id="delUser" name="delUser" type="button">
+									Delete User</button>
+							</div>
 						</div>
-						<div class="col-xs-4" >
-							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
-								id="delUser" name="delUser" type="button">
-								Delete User</button>
-						</div>
+						
 					</div>
 					
 				</div>
