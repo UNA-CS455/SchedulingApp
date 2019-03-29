@@ -248,11 +248,8 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					<div class="col">
 						
-						<!--Play around with display:run-in and other display values, look at others that I have on here. It works differently for different elements unfortunately-->
-						
-						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px">
-							<!--Delete button here?-->
-							<select name="cars" style="min-width: 170px; <?php echo ($roomToEdit['limit'] == 1) ? "display: inline" : "display: none" ?>" id="userToDelete">
+						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px; width: 200px; margin-top: 10px">
+							<select name="cars" style="min-width: 170px; margin-top: 5px; <?php echo ($roomToEdit['limit'] == 1) ? "display: inline" : "display: none" ?>" id="userToDelete">
 								<option>--SELECT USER--</option>
 							  <?php
 								if(isset($allowedUsersRes1)){
@@ -263,19 +260,15 @@ function saveChanges($conn, $beingEdited, $post_vars){
 								?>
 							</select>
 							
-							<!--This needs to be better-->
-							<!--It is messing up the rest of the interface for delete-->
-							
 						</div>
 						
 					</div>
 					
-					<div class="col-xs-4" >
-						<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+					<div class="col-xs-4" style="width: 80px; height: 50px;" >
+						<button class="btn btn-secondary" style="margin-top: 13px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
 							id="delUser" name="delUser" type="button">
 							Delete User</button>
 					</div>
-					
 					
 				</div>
 				
