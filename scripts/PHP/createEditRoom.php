@@ -265,7 +265,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					
 					<div class="col-xs-4" style="width: 80px; height: 50px;" >
-						<button class="btn btn-secondary" style="margin-top: 13px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+						<button class="btn btn-secondary" style="margin-top: 18px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
 							id="delUser" name="delUser" type="button">
 							Delete User</button>
 					</div>
