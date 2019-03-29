@@ -87,7 +87,7 @@ function delWL(name, roomid, beingEdited){
 	        
 	        if(success){ // User was deleted successfully
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
-	        	showMessageBox("One", "Two", buttonhtml, false);
+	        	showMessageBox("Successfully deleted " + name, "Success!", buttonhtml, false);
 	        	deleted = true; // Keep it from going back into the deletion, which will force it to say false and give a blank user error
 	        	
 	        	var addUserElement = document.getElementById('okDel');
@@ -183,7 +183,7 @@ function addWL(name, roomid, beingEdited){
 	        }
 	        else{ // User was inserted
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okAdd' >Ok</button>";
-	        	showMessageBox("", "Successfully added user!", buttonhtml, false);
+	        	showMessageBox("Successfully added " + name, "Success!", buttonhtml, false);
 	        	inserted = true;
 	        	
 	        	var addUserElement = document.getElementById('okAdd');
