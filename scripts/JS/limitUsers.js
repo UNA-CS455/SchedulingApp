@@ -21,31 +21,86 @@ function openConfirmDelUser(name, roomid, beingEdited)
 
 
 function delWL(name, roomid, beingEdited){
+	// var xhttp = new XMLHttpRequest();
+	
+	// if (window.location.href.includes('PHP')){ // Set up checking if user exists
+	// 	xhttp.open("POST", "../../scripts/PHP/delUserWl.php", true);
+	// }
+	// else{
+	// 	xhttp.open("POST", "scripts/PHP/delUserWl.php", true);
+	// }
+	
+	// xhttp.onreadystatechange = function(){ // When we get a response 
+	// 	if(xhttp.readyState == 4 && this.status == 200){ // If the response was "200 OK" http
+	// 		var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
+ //       	showMessageBox(xhttp.responseText, "", buttonhtml, true);
+        	
+ //       	var addUserElement = document.getElementById('okDel');
+
+	// 		addUserElement.addEventListener('click', function() {
+	//   			saveChanges(name, roomid, beingEdited); // Save changes to any forms that may have been filled in
+	// 		}, false);
+	// 	}
+	// };
+	
+	
+	// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// Send name to userExistsCheck.php
 	var xhttp = new XMLHttpRequest();
+	var userExists = 0;
+	var inserted = false;
+	var success = false;
 	
 	if (window.location.href.includes('PHP')){ // Set up checking if user exists
-		xhttp.open("POST", "../../scripts/PHP/delUserWl.php", true);
+		xhttp.open("POST", "../../scripts/PHP/userExistsCheck.php", true);
 	}
 	else{
-		xhttp.open("POST", "scripts/PHP/delUserWl.php", true);
+		xhttp.open("POST", "scripts/PHP/userExistsCheck.php", true);
 	}
 	
-	xhttp.onreadystatechange = function(){ // When we get a response 
+	xhttp.onreadystatechange = function(){ // When we get a response from checking if users exist
 		if(xhttp.readyState == 4 && this.status == 200){ // If the response was "200 OK" http
-			var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
-        	showMessageBox(xhttp.responseText, "", buttonhtml, true);
-        	
-        	var addUserElement = document.getElementById('okDel');
+	        userExists = xhttp.responseText; // userExists is returned from the php file here
+	        
+        	if (window.location.href.includes('PHP')){ // Set up addition to whitelist
+				xhttp.open("POST", "../../scripts/PHP/delUserWhitelist.php", true);
+			}
+			else{
+				xhttp.open("POST", "scripts/PHP/delUserWhitelist.php", true);
+			}
+	        
+	        if(userExists == 1){ // If user exists
+	        	inserted = true;
+		    	userExists = 0;
+		    	
+		    	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("allowedUser=" + name + "&roomid=" + roomid); // Add user to whitelist for this room
+				success = true;
+	        }
+	        else{
+				showMessageBoxOK("Please select a user.", "Error", false);
+				success = false;
+	        }
+	        
+	        if(success){ // User was deleted successfully
+         	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
+	        	showMessageBox("", "Successfully deleted user!", buttonhtml, false);
+	        	inserted = true;
+	        	
+	        	var addUserElement = document.getElementById('okDel');
 
-			addUserElement.addEventListener('click', function() {
-	   			saveChanges(name, roomid, beingEdited); // Save changes to any forms that may have been filled in
-			}, false);
+				addUserElement.addEventListener('click', function() {
+		   			saveChanges(name, roomid, beingEdited); // Save changes to any forms that may have been filled in
+				}, false);
+	        	
+	        }
+	        
 		}
 	};
 	
-	
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// Send name to userExistsCheck.php
+	xhttp.send("allowedUser=" + name);// Send name to userExistsCheck.php
+
 }
 
 
@@ -125,7 +180,7 @@ function addWL(name, roomid, beingEdited){
 	        }
 	        else{ // User was inserted
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okAdd' >Ok</button>";
-	        	showMessageBox("", "Success!", buttonhtml, false);
+	        	showMessageBox("", "Successfully added user!", buttonhtml, false);
 	        	inserted = true;
 	        	
 	        	var addUserElement = document.getElementById('okAdd');

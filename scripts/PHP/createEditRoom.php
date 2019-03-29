@@ -247,7 +247,10 @@ function saveChanges($conn, $beingEdited, $post_vars){
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
 					<div class="col">
-						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
+						
+						<!--Play around with display:run-in and other display values, look at others that I have on here. It works differently for different elements unfortunately-->
+						
+						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px <?php echo ($roomToEdit['limit'] == 1) ? "display: inline" : "display: none" ?>">
 							<!--Delete button here?-->
 							<select name="cars" style="min-width: 170px" id="userToDelete">
 								<option>--SELECT USER--</option>
