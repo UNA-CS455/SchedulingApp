@@ -215,7 +215,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 						<input class="form-check-input" name="hascomputers" id="hasComputersCheck" type="checkbox" <?php echo($roomToEdit['hascomputers'] == 1) ? 'checked value="1"' : 'value=0' ?>>
 						<label for="hasComputers">Has Computers</label>
 
-						<div class="row-xs-0 form-group" id="computerBlock" style="min-width: 190px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none"?>">
+						<div class="row-xs-0 form-group" id="computerBlock" style="min-width: 190px; margin-bottom: 0px; <?php echo ($roomToEdit['hascomputers'] == 1) ? "display: run-in" : "display: none"?>">
 	                    	<b>Number of Computers</b>
 	                    	<div class="row-md-2" style="max-width: 175px">
 								<input type="text" id="numComputers" name="numcomputers" class="form-control" <?php echo($roomToEdit['numcomputers']) ? 'value=" '.$roomToEdit['numcomputers'].' "' : 'value="0"' ?>>
