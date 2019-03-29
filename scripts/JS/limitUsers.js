@@ -84,7 +84,7 @@ function delWL(name, roomid, beingEdited){
 	        
 	        if(success){ // User was deleted successfully
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
-	        	showMessageBox("", "Successfully deleted user!", buttonhtml, false);
+	        	showMessageBox("", xhttp.responseText, buttonhtml, false);
 	        	inserted = true;
 	        	
 	        	var addUserElement = document.getElementById('okDel');
