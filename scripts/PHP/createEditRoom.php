@@ -250,9 +250,9 @@ function saveChanges($conn, $beingEdited, $post_vars){
 						
 						<!--Play around with display:run-in and other display values, look at others that I have on here. It works differently for different elements unfortunately-->
 						
-						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px <?php echo ($roomToEdit['limit'] == 1) ? "display: inline" : "display: none" ?>">
+						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px">
 							<!--Delete button here?-->
-							<select name="cars" style="min-width: 170px" id="userToDelete">
+							<select name="cars" style="min-width: 170px; <?php echo ($roomToEdit['limit'] == 1) ? "display: inline" : "display: none" ?>" id="userToDelete">
 								<option>--SELECT USER--</option>
 							  <?php
 								if(isset($allowedUsersRes1)){
