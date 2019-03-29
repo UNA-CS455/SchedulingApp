@@ -48,7 +48,7 @@ function delWL(name, roomid, beingEdited){
 //	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// Send name to userExistsCheck.php
 	var xhttp = new XMLHttpRequest();
 	var userExists = 0;
-	var inserted = false;
+	var deleted = false;
 	var success = false;
 	
 	if (window.location.href.includes('PHP')){ // Set up checking if user exists
@@ -69,24 +69,26 @@ function delWL(name, roomid, beingEdited){
 				xhttp.open("POST", "scripts/PHP/delUserWhitelist.php", true);
 			}
 	        
-	        if(userExists == 1){ // If user exists
-	        	inserted = true;
-		    	userExists = 0;
-		    	success = true;
-		    	
-		    	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send("allowedUser=" + name + "&roomid=" + roomid); // Add user to whitelist for this room
-				
-	        }
-	        else{
-				showMessageBoxOK("Please select a user.", "Error", false);
-				success = false;
+	        if(!deleted){
+		        if(userExists == 1){ // If user exists
+		        	deleted = true;
+			    	userExists = 0;
+			    	success = true;
+			    	
+			    	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send("allowedUser=" + name + "&roomid=" + roomid); // Add user to whitelist for this room
+					
+		        }
+		        else{
+					showMessageBoxOK("Please select a user.", "Error", false);
+					success = false;
+		        }
 	        }
 	        
 	        if(success){ // User was deleted successfully
          	    var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
 	        	showMessageBox("", xhttp.responseText, buttonhtml, false);
-	        	inserted = true;
+	        	deleted = true; // Keep it from going back into the deletion, which will force it to say false and give a blank user error
 	        	
 	        	var addUserElement = document.getElementById('okDel');
 
