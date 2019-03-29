@@ -72,10 +72,11 @@ function delWL(name, roomid, beingEdited){
 	        if(userExists == 1){ // If user exists
 	        	inserted = true;
 		    	userExists = 0;
+		    	success = true;
 		    	
 		    	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhttp.send("allowedUser=" + name + "&roomid=" + roomid); // Add user to whitelist for this room
-				success = true;
+				
 	        }
 	        else{
 				showMessageBoxOK("Please select a user.", "Error", false);
