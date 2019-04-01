@@ -1,4 +1,11 @@
-
+//************************************************************************************************
+// Method Name: openConfirmDelUser
+//
+// Incoming params: name (String), roomid (String), beingEdited (int bool)
+//
+// Purpose: Opens a modal box to have the user actually confirm if they want to delete the
+//			selected user. If so, open delWL function. Else, close modal box.
+//*************************************************************************************************
 function openConfirmDelUser(name, roomid, beingEdited)
 {
 	if(beingEdited){
@@ -20,32 +27,17 @@ function openConfirmDelUser(name, roomid, beingEdited)
 }
 
 
+//************************************************************************************************
+// Method Name: delWL
+//
+// Incoming params: name (String), roomid (String), beingEdited (int bool)
+//
+// Purpose: This method will call two php scripts: userExistsCheck.php (to check if the user
+//          actually selected a user or left it at the default --SELECT USER-- option) and 
+//			delUserWhitelist.php (which will handle actually deleting the user from the whitelist),
+//			and will then give feedback on the success/failure of the action.
+//*************************************************************************************************
 function delWL(name, roomid, beingEdited){
-	// var xhttp = new XMLHttpRequest();
-	
-	// if (window.location.href.includes('PHP')){ // Set up checking if user exists
-	// 	xhttp.open("POST", "../../scripts/PHP/delUserWl.php", true);
-	// }
-	// else{
-	// 	xhttp.open("POST", "scripts/PHP/delUserWl.php", true);
-	// }
-	
-	// xhttp.onreadystatechange = function(){ // When we get a response 
-	// 	if(xhttp.readyState == 4 && this.status == 200){ // If the response was "200 OK" http
-	// 		var buttonhtml = "<br> <br><button class = 'modal-button btn btn-success' id='okDel' >Ok</button>";
- //       	showMessageBox(xhttp.responseText, "", buttonhtml, true);
-        	
- //       	var addUserElement = document.getElementById('okDel');
-
-	// 		addUserElement.addEventListener('click', function() {
-	//   			saveChanges(name, roomid, beingEdited); // Save changes to any forms that may have been filled in
-	// 		}, false);
-	// 	}
-	// };
-	
-	
-	// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//	xhttp.send("allowedUser=" + name + "&roomid=" + roomid);// Send name to userExistsCheck.php
 	var xhttp = new XMLHttpRequest();
 	var userExists = 0;
 	var deleted = false;
