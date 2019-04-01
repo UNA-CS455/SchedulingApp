@@ -1,5 +1,12 @@
 #!/bin/sh
 
-cmp -s '2018Fall_course_info1.csv' '2018Fall_course_info2.csv' && echo 'Files are the same' || echo 'Files are different';
+file1 = "/2018Fall_course_info1.csv"
+file2 = "/2018Fall_course_info2.csv"
+
+if cmp -s "$file1" "$file2"; then
+    printf 'The file "%s" is the same as "%s"\n' "$file1" "$file2"
+else
+    printf 'The file "%s" is different from "%s"\n' "$file1" "$file2"
+fi
 
 sleep 5s;
