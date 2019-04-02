@@ -3,10 +3,13 @@
 file1="../../2018Fall_course_info1.csv"
 file2="../../2018Fall_course_info2.csv"
 
-if cmp -s "$file1" "$file1"; then
-    printf 'The file "%s" is the same as "%s"\n' "$file1" "$file2"
+diff $file1 $file2 >/dev/null
+
+if $? -eq 1
+then
+    echo "Same"
 else
-    printf 'The file "%s" is different from "%s"\n' "$file1" "$file2"
+    echo "Different"
 fi
 
 sleep 5s;
