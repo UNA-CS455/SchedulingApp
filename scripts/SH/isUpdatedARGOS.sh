@@ -9,4 +9,4 @@ ls
 cmp "$file1" "$file1"
 
 
-sleep 5s;
+sleep 5m;
