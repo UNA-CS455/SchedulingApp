@@ -4,9 +4,9 @@ file1="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info1.csv"
 file2="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
 
 if cmp -s "$file1" "$file2"; then
-    printf 'The file "%s" is the same as "%s"\n' "$file1" "$file2"
+    printf 'The files are the same! :)'
 else
-    printf 'The file "%s" is different from "%s"\n' "$file1" "$file2"
+    printf 'The files are different! :('
 fi
 
 sleep 5m;
