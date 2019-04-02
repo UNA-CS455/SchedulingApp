@@ -449,7 +449,7 @@ function fieldChanged(getAll)
 	xhttp.onreadystatechange = function() {
 		if (this.readyState === 4 && this.status === 200)
 		{
-			document.getElementById("roomContainer").innerHTML = this.responseText + "bugTest";
+			document.getElementById("roomContainer").innerHTML = this.responseText;
 			if (document.getElementById("allroomsheader") != null && document.getElementById("favsheader") != null)
 			{
 				document.getElementById("allroomsheader").innerHTML = "<h1 style='font-size: 19; background-color: #337ab7; border-color: #2e6da4; color: white; padding: 5px; border-radius: 5px;'>All Rooms<h1>"
@@ -943,7 +943,7 @@ function populateBlacklistRooms(groupChosen)
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200)
 		{
-			e.innerHTML = this.responseText;
+			e.innerHTML = this.responseText + '2';
 			var name = document.getElementById(groupChosen);
 
 			if (name != null && groupChosen != null)
