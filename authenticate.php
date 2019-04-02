@@ -101,7 +101,7 @@ $user .= "@una.edu";
         header('location: index.php');
     }
     if ($result == 404){
-        header('location: index.php');
+        header('location: login.html');
     }
     else {
         echo $result . " " . $user . " " . $pass;
