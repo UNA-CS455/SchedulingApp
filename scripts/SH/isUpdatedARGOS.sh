@@ -20,7 +20,7 @@ file2="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
 result_file="C:/xampp/htdocs/SchedulingApp/ARGOS_diff_result.csv"
 
 
-comm -2 -3 <(sort $file1) <(sort $file2) > $result_file
+comm -1 -3 <(sort $file1) <(sort $file2) > $result_file
 
 #We will need to make a file/function to handle the case where we need to export the differences in the new file to another file
 #so that we can easily parse the CSV with the function we have (parseCSV.php), and then insert the new data while deleting any
@@ -29,7 +29,7 @@ comm -2 -3 <(sort $file1) <(sort $file2) > $result_file
 
 #if [[ -s diff.txt ]]; then echo "file has something"; else echo "file is empty"; fi
 
-if [[-s $result_file]];
+if [-s $result_file];
 then
     echo "File has stuff :)";
     
