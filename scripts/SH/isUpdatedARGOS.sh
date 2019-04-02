@@ -29,7 +29,7 @@ comm -1 -3 <(sort $file1) <(sort $file2) > $result_file
 
 #if [[ -s diff.txt ]]; then echo "file has something"; else echo "file is empty"; fi
 
-if [-s $result_file];
+if [[ -s $result_file ]];
 then
     echo "File has stuff :)";
     
