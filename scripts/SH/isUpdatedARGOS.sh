@@ -1,12 +1,12 @@
 #!/bin/sh
 
-file1="../../2018Fall_course_info1.csv"
-file2="../../2018Fall_course_info2.csv"
+file1="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info1.csv"
+file2="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
 
-
-ls
-
-cmp "$file1" "$file1"
-
+if cmp -s "$file1" "$file2"; then
+    printf 'The file "%s" is the same as "%s"\n' "$file1" "$file2"
+else
+    printf 'The file "%s" is different from "%s"\n' "$file1" "$file2"
+fi
 
 sleep 5m;
