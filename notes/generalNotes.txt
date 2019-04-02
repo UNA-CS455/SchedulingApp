@@ -1,18 +1,11 @@
-createEditRoom.php is the location where we will need to implement the "Limit Reservations" checkbox
-
-	
-
 ISSUE:
 	
 	
 	
 TODO:
-	Delete button & select box
-	
+
 	
 Note:
-	Idea for delete select box:
-		Might could have some default value as the top one like --SELECT USER-- or something similar to protect from accidental deletion
 
 
 
