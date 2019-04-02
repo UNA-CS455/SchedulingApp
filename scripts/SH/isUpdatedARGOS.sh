@@ -9,4 +9,8 @@ else
     printf 'The files are different! :('
 fi
 
+
+rename -n 's/C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv/C:/xampp/htdocs/SchedulingApp/fall-info.csv' $file2
+
+
 sleep 5m;
