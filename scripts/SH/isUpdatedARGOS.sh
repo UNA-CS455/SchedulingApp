@@ -18,7 +18,7 @@ file2="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
 #comm -2 -3 <(sort file1) <(sort file2) > file3
 
 unique_to_file1="C:/xampp/htdocs/SchedulingApp/unique_to_file1.csv"
-unique_to_file1="C:/xampp/htdocs/SchedulingApp/unique_to_file2.csv"
+unique_to_file2="C:/xampp/htdocs/SchedulingApp/unique_to_file2.csv"
 
 comm -2 -3 <(sort $file1) <(sort $file2) > $unique_to_file1
 comm -1 -3 <(sort $file1) <(sort $file2) > $unique_to_file2
