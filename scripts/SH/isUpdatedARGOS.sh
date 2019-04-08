@@ -17,10 +17,12 @@ file2="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
 
 #comm -2 -3 <(sort file1) <(sort file2) > file3
 
-result_file="C:/xampp/htdocs/SchedulingApp/ARGOS_diff_result.csv"
+unique_to_file1="C:/xampp/htdocs/SchedulingApp/unique_to_file1.csv"
+unique_to_file1="C:/xampp/htdocs/SchedulingApp/unique_to_file2.csv"
 
+comm -2 -3 <(sort $file1) <(sort $file2) > $unique_to_file1
+comm -1 -3 <(sort $file1) <(sort $file2) > $unique_to_file2
 
-comm -1 -3 <(sort $file1) <(sort $file2) > $result_file
 
 #We will need to make a file/function to handle the case where we need to export the differences in the new file to another file
 #so that we can easily parse the CSV with the function we have (parseCSV.php), and then insert the new data while deleting any
@@ -36,20 +38,6 @@ then
 else
     echo "File has no stuff :(";
 fi
-
-
-
-
-
-# if cmp -s "$file1" "$file2"; then
-#     printf 'The files are the same! :)'
-#     # This will rename the file in your LOCAL copy once you run the file
-#     # So, check C:/xampp/htdocs/SchedulingApp/ for the file renamed
-#     mv $file2 'C:/xampp/htdocs/SchedulingApp/2018Fall-info.csv'
-# else
-#     printf 'The files are different! :('
-# fi
-
 
 
 

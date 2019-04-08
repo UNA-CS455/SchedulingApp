@@ -12,6 +12,9 @@ TODO:
 				-e.g., if one line is different, only import that line
 					-if one is different and it is changing another line from the old file, we must delete
 					  the old data from the database and insert the new data
+					  
+		https://stackoverflow.com/questions/4544709/compare-two-files-line-by-line-and-generate-the-difference-in-another-file
+		https://stackoverflow.com/questions/9964823/how-to-check-if-a-file-is-empty-in-bash
 	
 Note:
 	-The ARGOS auto import is a lot more difficult than it seems at first
