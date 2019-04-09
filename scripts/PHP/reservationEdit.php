@@ -184,13 +184,13 @@ if(isset($_POST['submit']))
             <div class="col-lg-2 col-md-2 col-sm-2">
               <div class="form-group">
                 <label for="termstart">Term Start</label>
-                <input class="form-control" type="date" name="termstart" <?php echo($reservation['termstart']) ? 'placeholder= " '.$reservation['termstart'].' "' : 'placeholder = "yyyy - mm - dd"' ?> >
+                <input class="form-control" type="date" name="termstart" <?php echo($reservation['termstart']) ? 'value=" '.$reservation['termstart'].'"' : 'placeholder = "yyyy - mm - dd"' ?> >
               </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
               <div class="form-group">
                 <label for="termend">Term End</label>
-                <input class="form-control" type="date" name="termend" <?php echo($reservation['termend']) ? 'placeholder= " '.$reservation['termend'].' "' : 'placeholder = "yyyy - mm - dd"' ?> >
+                <input class="form-control" type="date" name="termend" <?php echo($reservation['termend']) ? 'value=" '.$reservation['termend'].'"' : 'placeholder = "yyyy - mm - dd"' ?> >
               </div>
             </div>
           </div>
@@ -198,13 +198,13 @@ if(isset($_POST['submit']))
             <div class="col-lg-2 col-md-2 col-sm-2">
               <div class="form-group">
                 <label for="startdate">Start Date <i class="fas fa-exclamation-triangle fa-xs"></i></label>
-                <input id="startdate" required="required" class="form-control" type="date" name="startdate" <?php echo($reservation['startdate']) ? 'value= " '.$reservation['startdate'].' "' : '' ?> >
+                <input id="startdate" required="required" class="form-control" type="date" name="startdate" <?php echo($reservation['startdate']) ? 'value=" '.$reservation['startdate'].'"' : '' ?> >
               </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
               <div class="form-group">
                 <label for="enddate">End Date <i class="fas fa-exclamation-triangle fa-xs"></i></label>
-                <input required="required" class="form-control" type="date" name="enddate" <?php echo($reservation['enddate']) ? 'placeholder= " '.$reservation['enddate'].' "' : 'placeholder = "yyyy - mm - dd"' ?> >
+                <input required="required" class="form-control" type="date" name="enddate" <?php echo($reservation['enddate']) ? 'value=" '.$reservation['enddate'].'"' : 'placeholder = "yyyy - mm - dd"' ?> >
               </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
@@ -219,11 +219,13 @@ if(isset($_POST['submit']))
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
               <label for="starttime">Start Time <i class="fas fa-exclamation-triangle fa-xs"></i></label>
-              <input required type="time" name="starttime" class="form-control">
+              <input required type="time" name="starttime" class="form-control"
+              <?php echo($reservation['starttime']) ? 'value=" '.$reservation['starttime'].'"' : '' ?>>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
               <label for="endtime">End Time <i class="fas fa-exclamation-triangle fa-xs"></i></label>
-              <input required type="time" name="endtime" class="form-control">
+              <input required type="time" name="endtime" class="form-control"
+              <?php echo($reservation['endtime']) ? 'value=" '.$reservation['endtime'].'"' : '' ?>>
             </div>
           </div>
           <div class="row">
