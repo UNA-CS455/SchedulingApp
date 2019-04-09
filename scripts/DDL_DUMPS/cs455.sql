@@ -36,8 +36,6 @@ INSERT INTO `blacklist` (`group_id`, `numeric_room_id`, `blacklist_id`) VALUES
 	(2, 1, 13);
 /*!40000 ALTER TABLE `blacklist` ENABLE KEYS */;
 
-
-
 -- Dumping structure for table cs455.favorites
 CREATE TABLE IF NOT EXISTS `favorites` (
   `email` varchar(100) NOT NULL,
@@ -6173,7 +6171,6 @@ CREATE TABLE IF NOT EXISTS `rooms` (
   `seats` int(11) NOT NULL COMMENT 'The number of open seats',
   `hascomputers` int(11) unsigned DEFAULT NULL,
   `numcomputers` int(11) DEFAULT NULL COMMENT 'number of open computers given that hascomputers is true.',
-  `limit` int(11) unsigned DEFAULT NULL COMMENT 'indicates if an Admin can limit reservations on a room',
   `numeric_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`numeric_id`),
   UNIQUE KEY `roomid` (`roomid`) USING BTREE
@@ -6182,28 +6179,28 @@ CREATE TABLE IF NOT EXISTS `rooms` (
 -- Dumping data for table cs455.rooms: ~22 rows (approximately)
 /*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
 INSERT INTO `rooms` (`roomid`, `type`, `floor`, `seats`, `hascomputers`, `numcomputers`, `numeric_id`) VALUES
-	('Keller 122', 'Classroom', 1, 40, 0, NULL, 1),
-	('Keller 133', 'Classroom', 1, 64, 0, NULL, 2),
-	('Keller 220', 'Classroom', 2, 36, 0, NULL, 3),
-	('Keller 222', 'Classroom', 2, 40, 0, NULL, 4),
-	('Keller 227', 'Classroom', 2, 32, 0, NULL, 5),
-	('Keller 320', 'Classroom', 3, 36, 0, NULL, 6),
-	('Keller 322', 'Classroom', 3, 40, 0, NULL, 7),
-	('Keller 327', 'Classroom', 3, 32, 0, NULL, 8),
-	('Keller 333', 'Classroom', 3, 48, 0, NULL, 9),
-	('Keller 221', 'Conference Room', 3, 10, 0, NULL, 10),
+	('Keller 122', 'Classroom', 1, 40, 0, 0, 1),
+	('Keller 133', 'Computer Lab', 1, 64, 0, NULL, 2),
+	('Keller 220', 'Computer Lab', 2, 36, 0, 0, 3),
+	('Keller 222', 'Computer Lab', 2, 40, 0, NULL, 4),
+	('Keller 227', 'Computer Lab', 2, 32, 0, NULL, 5),
+	('Keller 320', 'Computer Lab', 3, 36, 0, NULL, 6),
+	('Keller 322', 'Computer Lab', 3, 40, 0, NULL, 7),
+	('Keller 327', 'Computer Lab', 3, 32, 0, NULL, 8),
+	('Keller 333', 'Computer Lab', 3, 48, 0, 0, 9),
+	('Keller 221', 'Computer Lab', 3, 10, 0, NULL, 10),
 	('Keller 233', 'Computer Lab', 3, 58, 1, 58, 11),
-	('Keller 234', 'Conference Room', 3, 24, 0, NULL, 12),
+	('Keller 234', 'Computer Lab', 3, 24, 0, NULL, 12),
 	('Keller 334', 'Computer Lab', 3, 24, 1, 24, 14),
-	('Raburn 104', 'Classroom', 1, 50, 0, NULL, 15),
-	('Raburn 109', 'Classroom', 1, 50, 0, NULL, 16),
-	('Raburn 110', 'Classroom', 1, 50, 0, NULL, 17),
+	('Raburn 104', 'Computer Lab', 1, 50, 0, NULL, 15),
+	('Raburn 109', 'Computer Lab', 1, 50, 0, NULL, 16),
+	('Raburn 110', 'Computer Lab', 1, 50, 0, NULL, 17),
 	('Raburn 206', 'Computer Lab', 2, 30, 1, 30, 18),
 	('Raburn 207', 'Computer Lab', 2, 12, 1, 12, 19),
 	('Raburn 210', 'Computer Lab', 2, 24, 1, 24, 20),
 	('Raburn 211', 'Computer Lab', 2, 30, 1, 30, 21),
-	('Raburn 305', 'Conference Room', 3, 25, 0, NULL, 22),
-	('Keller 240', 'Conference Room', 2, 8, 0, NULL, 23);
+	('Raburn 305', 'Computer Lab', 3, 25, 0, NULL, 22),
+	('Keller 240', 'Computer Lab', 2, 8, 0, NULL, 23);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 
 -- Dumping structure for table cs455.users
@@ -6224,28 +6221,6 @@ INSERT INTO `users` (`email`, `firstname`, `lastname`, `password`, `classificati
 	('super@una.edu', 'super', 'super', 'e97ce80acab2f20ca045fe17ba1d3f5a8087e963', 'ADMIN', 2),
 	('user@una.edu', 'user', 'user', 'f9b047f39effbd6912cc851ff989115f9b4f9ada', 'USER', 2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
-
-
-CREATE TABLE IF NOT EXISTS `whitelist` (
-  `email` varchar(100) NOT NULL,
-  `roomid` varchar(100) NOT NULL,
-  FOREIGN KEY (`email`) REFERENCES users(`email`),
-  FOREIGN KEY (`roomid`) REFERENCES rooms(`roomid`),
-  PRIMARY KEY (`email`, `roomid`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
--- `email` is the primary key of the `users` table
--- `numeric_id` is the primary key of the `rooms` table
--- `roomid` is a unique key of the `rooms` table
-
-
-
-/*!40000 ALTER TABLE `whitelist` DISABLE KEYS */;
-INSERT INTO `whitelist` (`email`, `roomid`) VALUES	
-	('user@una.edu', 'Keller 122'),
-	('user@una.edu', 'Keller 133'),
-	('user@una.edu', 'Raburn 305');
-/*!40000 ALTER TABLE `whitelist` ENABLE KEYS */;
-
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
