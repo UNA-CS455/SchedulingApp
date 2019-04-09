@@ -1,7 +1,7 @@
 #!/bin/sh
 
-file1="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info1.csv"
-file2="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
+file01="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info1.csv"
+file02="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
 
 #cmp may not be the thing we want to use, as we need to get what the differences actually are
     #and actually update the database based on what is new
@@ -20,8 +20,8 @@ file2="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
 unique_to_file1="C:/xampp/htdocs/SchedulingApp/unique_to_file1.csv"
 unique_to_file2="C:/xampp/htdocs/SchedulingApp/unique_to_file2.csv"
 
-comm -2 -3 <(sort $file1) <(sort $file2) > $unique_to_file1
-comm -1 -3 $file1 $file2 > $unique_to_file2
+comm -2 -3 <(sort $file01) <(sort $file02) > $unique_to_file1
+comm -1 -3 $file01 $file02 > $unique_to_file2
 
 
 #We will need to make a file/function to handle the case where we need to export the differences in the new file to another file
