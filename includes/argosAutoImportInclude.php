@@ -26,8 +26,8 @@
   <br />
   
   <h4>Sort by:</h4>
-  <input type="radio" name="sortBy" id="sortBy" value="room" checked="checked">Room
-  <input type="radio" name="sortBy" id="sortBy" value="class">Class
+  <input type="radio" name="sortBy" id="sortBy" value="room" checked="checked"> Room   
+  <input type="radio" name="sortBy" id="sortBy" value="class"> Class
   
   
   <div class="row reservationsTable"
