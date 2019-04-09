@@ -1,0 +1,33 @@
+ISSUE:
+	
+	
+	
+TODO:
+	-Schedule isUpdatedARGOS.sh to run at a specific time each day
+	-Get a file of a given (and concrete) name and test if it and another file (whose name is also known)
+	  are the same
+		-If so, do nothing
+		-If not, rename the given file (one that we will get from a NEW ARGOS report) to the one we have
+			-Import the difference in the files into the database
+				-e.g., if one line is different, only import that line
+					-if one is different and it is changing another line from the old file, we must delete
+					  the old data from the database and insert the new data
+	
+Note:
+	-The ARGOS auto import is a lot more difficult than it seems at first
+		-We have to get the differences, then decide if we delete a different line or keep it
+
+
+
+IMPORTANT:
+    -When working with the Production version, we need to update the database to the specifications in cs455.sql
+    
+    
+    
+//************************************************************************************************
+// Method Name: 
+//
+// Incoming params: 
+//
+// Purpose: 
+//*************************************************************************************************

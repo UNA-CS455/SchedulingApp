@@ -10,16 +10,16 @@ $_SESSION['username'] = $user;
 $pass = $_POST['password'];
 $user .= "@una.edu";
 
- echo $user;
-  echo "\n";
-  echo $pass;
-  echo "\n";
+//  echo $user;
+//   echo "\n";
+//   echo $pass;
+//   echo "\n";
 
   $_sql = "SELECT * FROM `users` WHERE `users`.`email` = '$user' ORDER BY `firstname` ASC";
   $_res = $conn->query($_sql);
   $_userRes = $_res->fetch_assoc();
 
-  var_dump($_userRes);
+//   var_dump($_userRes);
 
   if($_userRes['classification'] != "")
   $_SESSION['classification'] =  $_userRes['classification'];
@@ -99,7 +99,11 @@ $user .= "@una.edu";
         $_SESSION['username'] = $user;
         $_SESSION['permission'] = $ldap_permissions;
         header('location: index.php');
-    } else {
+    }
+    if ($result == 404){
+        header('location: login.html');
+    }
+    else {
         echo $result . " " . $user . " " . $pass;
         //header('location: login.html');
     }
