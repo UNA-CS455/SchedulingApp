@@ -111,33 +111,19 @@
 </div>
 
 <script>
-//  var sortByClassElem = document.getElementById('sortBy');
 
-// 	sortByClassElem.addEventListener('RadioStateChange', function() {
-//     	if(document.getElementById("sortBy").value == "room"){
-//     	    alert("Sort by room");
-//     	    alert(document.getElementById("sortByRoom").value);
-//     	} 
-//     	else{
-//     	    alert("Sort by class");
-//     	    alert(document.getElementById("sortByClass").value);
-//     	}
-    	
-// 	}, false);
-	
-// 	alert("Change!");
-  
   $('input:radio[name="sortBy"]').change(
     function(){
         if (this.checked && this.value == 'room') {
-            alert("Room!");
+            // alert("Room!");
+            // $('#sortByClass').hide();
+            $('#sortByRoom').show();
         }
         else if(this.checked && this.value == 'class'){
-            alert("Class!");
+            // alert("Class!");
+            // $('#sortByClass').show();
+            $('#sortByRoom').hide();
         }
     });
     
-    
-  
-
 </script>
