@@ -115,12 +115,7 @@ function findRoom(str) {
                   {
                     echo '<td>No</td>';
                   }
-                  if($roomRes[5] == 0){
-                    echo '<td>' . '' . '</td>';
-                  }
-                  else{
-                    echo '<td>' . $roomRes[5]. '</td>';
-                  }
+                  echo '<td>' . $roomRes[5]. '</td>';
                   echo '<td>';
                   echo '<a style="margin-right: 5px;" class="btn btn-default editBtn" href="createEditRoom.php?roomid=' . $roomRes [0] . '"><i class="fas fa-pencil-alt"></i></a>';
                   echo '<a style="margin-right: 5px;" class="btn btn-default" href="deleteRoom.php?roomid=' . $roomRes[0].'"><i class="fas fa-trash-alt"></i></a>';
