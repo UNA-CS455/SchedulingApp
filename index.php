@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="styles/calendar.css">
   <link rel="stylesheet" href="styles/popup.css">
   <!-- Jquery -->
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
   <!-- Scripts -->
   <script src="scripts/JS/roomObjects.js"></script>
   <title>LeoBook</title>
