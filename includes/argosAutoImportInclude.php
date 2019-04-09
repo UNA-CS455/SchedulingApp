@@ -117,12 +117,13 @@
         if (this.checked && this.value == 'room') {
             // alert("Room!");
             // $('#sortByClass').hide();
-            $('#sortByRoom').show();
+            // $('#sortByRoom').show();
         }
         else if(this.checked && this.value == 'class'){
             // alert("Class!");
             // $('#sortByClass').show();
-            $('#sortByRoom').hide();
+            // $('#sortByRoom').hide();
+            // Not quite, fix the ID's
         }
     });
     

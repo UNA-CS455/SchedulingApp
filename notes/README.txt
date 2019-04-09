@@ -1,0 +1,1 @@
+Before you push up to production, make SURE you change the PHP includes in 'index.php' and 'scripts/PHP/userSettings.php' to remove the /schedulingApp portion

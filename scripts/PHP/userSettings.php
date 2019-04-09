@@ -214,6 +214,10 @@
         <a id="groupSettingsBtn" style="font-size: 18.63px;">User Reservations</a>
         <a id="autoImportSettingsBtn">ARGOS Class Reservations</a>
     </div>
+    
+    <!-- BEFORE WE ADD TO LIVE VERSION -->
+    <!-- TAKE OUT THE /schedulingApp ON THE INCLUDES!!! -->
+    
     <!-- Display user settings -->
     <div id="displayUserSettings" style="display: none;">
       <?php 
