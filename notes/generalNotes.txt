@@ -5,7 +5,12 @@ ISSUE:
 TODO:
 	-Add the course number (including subject) in the "reservations" table so that we can work with it with the
 	ARGOS auto imported classes so that we can distinguish unique ones.
+		-This will mean adding a "Course Number" field when the user makes a reservation. It can either be optional
+		or we can default it to blank/null/empty
 	-Possibly have a <select> box with each course number to filter the results
+	
+	-Add sort functionality to sort by either Class number OR by Room number based on what the user wants
+		-Could have both called, and use jQuery to change based on a radio button or something like that
 	
 Note:
 	

@@ -24,6 +24,12 @@
   <br/>
   <br />
   <br />
+  
+  <h4>Sort by:</h4>
+  <input type="radio" name="sortBy" id="sortBy" value="room" checked="checked">Room
+  <input type="radio" name="sortBy" id="sortBy" value="class">Class
+  
+  
   <div class="row reservationsTable"
     style="display: block; max-height: 400px; overflow-y: auto;">
     <div class="col-md-9">
@@ -39,7 +45,7 @@
         </thead>
         <tbody>
           <?php
-            while($reservation = $autoImportReservationRes->fetch_assoc())
+            while($reservation = $autoImportRoomSortRes->fetch_assoc())
             {
               echo '<tr>';
               echo '<td style="display: none;" hidden>' . $reservation['id'] . '</td>';

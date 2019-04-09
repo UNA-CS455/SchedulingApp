@@ -44,8 +44,8 @@
   $_reservationsSql = "SELECT * FROM `reservations` WHERE `reservations`.`owneremail` != 'N/A' ORDER BY `roomnumber`, `startdate`";
   $_reservationsRes = $conn->query($_reservationsSql);
   
-  $autoImportReservationSQL = "SELECT * FROM `reservations` WHERE `reservations`.`owneremail` = 'N/A' ORDER BY `roomnumber`, `startdate`";
-  $autoImportReservationRes = $conn->query($autoImportReservationSQL);
+  $autoImportRoomNumSortSQL = "SELECT * FROM `reservations` WHERE `reservations`.`owneremail` = 'N/A' ORDER BY `roomnumber`, `startdate`";
+  $autoImportRoomNumSortRes = $conn->query($autoImportRoomNumSortSQL);
 
   // $userReservations = $_reservationsRes->fetch_assoc();
 
