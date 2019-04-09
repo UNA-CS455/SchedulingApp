@@ -26,7 +26,7 @@
   <br />
   
   <h4>Sort by:</h4>
-  <input type="radio" name="sortByRoom" id="sortBy" value="room" checked="checked"> Room   
+  <input type="radio" name="sortByRoom" id="sortBy" value="room" > Room   
   <input type="radio" name="sortByClass" id="sortBy" value="class"> Class
   
   
