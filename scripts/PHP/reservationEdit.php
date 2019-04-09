@@ -220,12 +220,12 @@ if(isset($_POST['submit']))
             <div class="col-lg-2 col-md-2 col-sm-2">
               <label for="starttime">Start Time <i class="fas fa-exclamation-triangle fa-xs"></i></label>
               <input required type="time" name="starttime" class="form-control"
-              <?php echo($reservation['starttime']) ? 'value=" '.$reservation['starttime'].'"' : '' ?>>
+              <?php echo($reservation['starttime']) ? 'value="'.$reservation['starttime'].'"' : '' ?>>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
               <label for="endtime">End Time <i class="fas fa-exclamation-triangle fa-xs"></i></label>
               <input required type="time" name="endtime" class="form-control"
-              <?php echo($reservation['endtime']) ? 'value=" '.$reservation['endtime'].'"' : '' ?>>
+              <?php echo($reservation['endtime']) ? 'value="'.$reservation['endtime'].'"' : '' ?>>
             </div>
           </div>
           <div class="row">
