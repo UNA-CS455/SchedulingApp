@@ -229,7 +229,7 @@
         include("{$_SERVER['DOCUMENT_ROOT']}/schedulingApp/includes/userReservationsInclude.php")
       ?>
     </div>
-    <div id="ARGOSautoImportSettings" style="">
+    <div id="ARGOSautoImportSettings" style="display: none;">
       <?php  
         include("{$_SERVER['DOCUMENT_ROOT']}/schedulingApp/includes/argosAutoImportInclude.php")
       ?>
