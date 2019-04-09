@@ -124,6 +124,8 @@
     	}
     	
 	}, false);
+	
+	alert("Change!");
   
 
 </script>
