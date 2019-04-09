@@ -115,8 +115,13 @@
 
 	sortByClassElem.addEventListener('RadioStateChange', function() {
     	if(document.getElementById("sortBy").value == "room"){
-    	    
+    	    alert("Sort by room");
+    	    alert(document.getElementById("sortBy").value);
     	} 
+    	else{
+    	    alert("Sort by class");
+    	    alert(document.getElementById("sortBy").value);
+    	}
     	
 	}, false);
   
