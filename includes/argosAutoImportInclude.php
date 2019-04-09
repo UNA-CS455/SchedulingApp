@@ -111,4 +111,8 @@
 </div>
 
 <script>
+  $("#sortBy").change(function(){
+      alert($("#sortBy").val());
+  });
+
 </script>
