@@ -32,10 +32,14 @@ comm -1 -3 $file01 $file02 > $unique_to_file2
 
 #if [[ -s diff.txt ]]; then echo "file has something"; else echo "file is empty"; fi
 
-if [[ -s $result_file ]];
+if [[ -s $unique_to_file1 ]];
 then
-    echo "File has stuff :)";
+    echo "File has stuff unique to file 1";
+fi
     
+if [[ -s $unique_to_file2 ]]
+then
+    echo "File has stuff unique to file 2";
 else
     echo "File has no stuff :(";
 fi
