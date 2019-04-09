@@ -1,0 +1,5 @@
+<?php echo($roomToEdit['hascomputers'] == 1) ? (($roomToEdit['numcomputers']) ? 'value=" '.$roomToEdit['numcomputers'].' "' : 'value="0"') : '' ?>
+
+
+
+onclick="openConfirmAddUser(<?php echo(verifyUserExists($roomToEdit['allowedUser'])); ?>, document.getElementById('allowedUser').value, document.getElementById('roomid').value, <?php echo(json_encode($beingEdited)); ?>)" >
