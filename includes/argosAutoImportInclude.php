@@ -26,8 +26,8 @@
   <br />
   
   <h4>Sort by:</h4>
-  <input type="radio" name="sortByRoom" id="sortByRoom" value="room" checked="checked"> Room   
-  <input type="radio" name="sortByClass" id="sortByClass" value="class"> Class
+  <input type="radio" name="sortByRoom" id="sortBy" value="room" checked="checked"> Room   
+  <input type="radio" name="sortByClass" id="sortBy" value="class"> Class
   
   
   <div class="row reservationsTable"
@@ -111,6 +111,14 @@
 </div>
 
 <script>
-  alert($('input[name="sortByClass"]:checked').val());
-  alert($('input[name="sortByRoom"]:checked').val());
+ var sortByClassElem = document.getElementById('sortByClass');
+
+	sortByClassElem.addEventListener('RadioStateChange', function() {
+    	if(document.getElementById("sortBy").value == "room"){
+    	    
+    	} 
+    	
+	}, false);
+  
+
 </script>
