@@ -42,8 +42,10 @@
 ///////////SELECT ALL USER RESERVATIONS
 //////////////////////////////////////////////////////////////////////////////////////
   $_reservationsSql = "SELECT * FROM `reservations` WHERE `reservations`.`owneremail` != 'N/A' ORDER BY `roomnumber`, `startdate`";
-
   $_reservationsRes = $conn->query($_reservationsSql);
+  
+  $autoImportReservationSQL = "SELECT * FROM `reservations` WHERE `reservations`.`owneremail` = 'N/A' ORDER BY `roomnumber`, `startdate`";
+  $autoImportReservationRes = $conn->query($autoImportReservationSQL);
 
   // $userReservations = $_reservationsRes->fetch_assoc();
 
@@ -207,6 +209,7 @@
         <a id="userSettingsBtn">User Settings</a>
         <a id="roomSettingsBtn">Room Settings</a>
         <a id="groupSettingsBtn" style="font-size: 18.63px;">User Reservations</a>
+        <a id="autoImportSettingsBtn">ARGOS Class Reservations</a>
     </div>
     <!-- Display user settings -->
     <div id="displayUserSettings" style="display: none;">
@@ -226,6 +229,12 @@
         include("{$_SERVER['DOCUMENT_ROOT']}/schedulingApp/includes/userReservationsInclude.php")
       ?>
     </div>
+    <div id="ARGOSautoImportSettings" style="">
+      <?php  
+        include("{$_SERVER['DOCUMENT_ROOT']}/schedulingApp/includes/argosAutoImportInclude.php")
+      ?>
+    </div>
+    </style>
 </body>
 
 </html>
