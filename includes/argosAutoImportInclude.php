@@ -111,7 +111,7 @@
 </div>
 
 <script>
- var sortByClassElem = document.getElementById('sortByClass');
+ var sortByClassElem = document.getElementById('sortBy');
 
 	sortByClassElem.addEventListener('RadioStateChange', function() {
     	if(document.getElementById("sortBy").value == "room"){
