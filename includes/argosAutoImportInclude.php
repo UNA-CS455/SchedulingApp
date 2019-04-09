@@ -45,7 +45,7 @@
         </thead>
         <tbody>
           <?php
-            while($reservation = $autoImportRoomSortRes->fetch_assoc())
+            while($reservation = $autoImportRoomNumSortRes->fetch_assoc())
             {
               echo '<tr>';
               echo '<td style="display: none;" hidden>' . $reservation['id'] . '</td>';
