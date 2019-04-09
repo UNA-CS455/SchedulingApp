@@ -32,7 +32,7 @@
   
   <div class="row reservationsTable"
     style="display: block; max-height: 400px; overflow-y: auto;">
-    <div class="col-md-9">
+    <div class="col-md-9" id="sortByRoom">
       <table class="table table-responsive">
         <thead>
           <th>Class Title</th>
@@ -66,6 +66,48 @@
       </table>
     </div>
   </div>
+  
+  
+  <!--<div class="row reservationsTable"
+    style="display: block; max-height: 400px; overflow-y: auto;">
+    <div class="col-md-9" id="sortByClass">
+      <table class="table table-responsive">
+        <thead>
+          <th>Class Title</th>
+          <th>Room Number</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <?php
+            // while($reservation = $autoImportClassNumSortRes->fetch_assoc())
+            // {
+            //   echo '<tr>';
+            //   echo '<td style="display: none;" hidden>' . $reservation['id'] . '</td>';
+            // //   echo '<td>' . $reservation['owneremail'] . '</td>';
+            //   echo '<td>' . "CLASS NUMBER" . '</td>';
+            //   echo '<td>' . $reservation['roomnumber'] . '</td>';
+            //   echo '<td>' . $reservation['startdate'] . '</td>';
+            //   echo '<td>' . $reservation['enddate'] . '</td>';
+            //   echo '<td>' . $reservation['starttime'] . '</td>';
+            //   echo '<td>' . $reservation['endtime'] . '</td>';
+            //   echo '<td>';
+            //   echo '<a style="margin-right: 5px;" class="btn btn-default" href="reservationEdit.php?id=' . $reservation['id'] . '"><i class="fas fa-pencil-alt"></i></a>';
+            //   echo '<a style="margin-right: 5px;" class="btn btn-default" href="room_remove.php?id=' . $reservation['id'] . '"><i class="fas fa-trash-alt"></i></a>';
+            //   echo '</td></tr>';
+            // }
+          ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  -->
+  
+  
 </div>
 
 <script>

@@ -46,6 +46,9 @@
   
   $autoImportRoomNumSortSQL = "SELECT * FROM `reservations` WHERE `reservations`.`owneremail` = 'N/A' ORDER BY `roomnumber`, `startdate`";
   $autoImportRoomNumSortRes = $conn->query($autoImportRoomNumSortSQL);
+  
+  $autoImportClassNumSortSQL = "SELECT * FROM `reservations` WHERE `reservations`.`owneremail` = 'N/A' ORDER BY `classnumber`, `startdate`";
+  $autoImportClassNumSortRes = $conn->query($autoImportClassNumSortSQL);
 
   // $userReservations = $_reservationsRes->fetch_assoc();
 
