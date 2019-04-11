@@ -45,7 +45,7 @@ if (isset ( $_POST ['submit'] )){
 	$floor = $_POST ['floor'];
 	$seats = ( int ) $_POST ['seats'];
 	$numComputers = ( int ) $_POST ['numcomputers'];
-	$limit = $_POST['limit'];
+	$limitusers = $_POST['limitusers'];
 
 	saveChanges($conn, $beingEdited, $_POST);
 	header("Location: userSettings.php");
@@ -59,7 +59,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 	$floor = $post_vars ['floor'];
 	$seats = ( int ) $post_vars ['seats'];
 	$numComputers = ( int ) $post_vars ['numcomputers'];
-	$limit = $post_vars['limit'];
+	$limitusers = $post_vars['limitusers'];
 	
 	if($numComputers <= 0){
 		$hasComputers = 0;
@@ -69,7 +69,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 	}
 	
 	
-	if($limit == "off")
+	if($limitusers == "off")
 	{
 		// If the checkbox "Limit Reservations" has been checked, set the flag to 1 (true)
 		$areLimiting = 0;
@@ -83,7 +83,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 
 	if ($beingEdited){ // If we're editing the room
 		$_updateSql = "UPDATE `rooms` SET `rooms`.`type` = '$type', `rooms`.`floor` = '$floor', `rooms`.`seats` = '$seats', `rooms`.`hascomputers` = '$hasComputers',
-			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limit` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
+			`rooms`.`numcomputers` = '$numComputers', `rooms`.`limitusers` = '$areLimiting' WHERE `rooms`.`roomid` = '$roomid'";
 
 		$conn->query ( $_updateSql );
 	} 
@@ -227,14 +227,14 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					<div class="col-md-2 form-check"
 						style="position: relative; top: .5vh; left: 5vh;">
 						<input type="hidden" name="limit" value="off">
-						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limit'] == 1) ? 'checked value="1"' : '' ?>>
+						<input class="form-check-input" name="limit" id="limitCheck" type="checkbox" <?php echo($roomToEdit['limitusers'] == 1) ? 'checked value="1"' : '' ?>>
 						<label for="limit">Limit Reservations</label>
-						<div class="row-md-1" id="email"  style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limit'] == 1) ? "display: block" : "display: none"?>">
+						<div class="row-md-1" id="email"  style="max-width: 175px; margin-top: 23px; <?php echo ($roomToEdit['limitusers'] == 1) ? "display: block" : "display: none"?>">
 								<input type="text" id="allowedUser" name="allowedUser" class="form-control" placeholder="Enter an email address.">
 						</div>
 					</div>
 					<div class="col-xl-3" >
-							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+							<button class="btn btn-secondary" style="margin-top: 55px; margin-left: 50px; <?php echo ($roomToEdit['limitusers'] == 1) ? "display: run-in" : "display: none"?>" 
 								id="addUser" name="addUser" type="button">
 								Add User</button>
 					</div>
@@ -249,7 +249,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					<div class="col">
 						
 						<div class = "col-md-3" style="padding-left: 27px; padding-top: 10px; padding-right: 15px; padding-bottom: 5px; width: 200px; margin-top: 10px">
-							<select name="cars" style="min-width: 170px; margin-top: 5px; <?php echo ($roomToEdit['limit'] == 1) ? "display: inline" : "display: none" ?>" id="userToDelete">
+							<select name="cars" style="min-width: 170px; margin-top: 5px; <?php echo ($roomToEdit['limitusers'] == 1) ? "display: inline" : "display: none" ?>" id="userToDelete">
 								<option>--SELECT USER--</option>
 							  <?php
 								if(isset($allowedUsersRes1)){
@@ -265,7 +265,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
 					</div>
 					
 					<div class="col-xs-4" style="width: 80px; height: 50px;" >
-						<button class="btn btn-secondary" style="margin-top: 18px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none"?>" 
+						<button class="btn btn-secondary" style="margin-top: 18px; <?php echo ($roomToEdit['limitusers'] == 1) ? "display: run-in" : "display: none"?>" 
 							id="delUser" name="delUser" type="button">
 							Delete User</button>
 					</div>
@@ -283,7 +283,7 @@ function saveChanges($conn, $beingEdited, $post_vars){
                     	<b>Spacer, shouldn't be seen</b>
 					</div>
 					
-					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; padding-left: 26px; min-width: 250px; <?php echo ($roomToEdit['limit'] == 1) ? "display: run-in" : "display: none" ?>">
+					<div class="col-lg-1" id="allowedReserve" style="margin: 1px; padding-left: 26px; min-width: 250px; <?php echo ($roomToEdit['limitusers'] == 1) ? "display: run-in" : "display: none" ?>">
 						<b>Allowed Users</b>
 						<div class="col-md-2" id="reserveBox" style="overflow-y:auto; min-height: 96px; min-width: 250px; max-height: 96px; border: 1px solid black">
 							<table>
