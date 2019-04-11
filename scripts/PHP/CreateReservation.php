@@ -58,7 +58,7 @@ function processReservation()
 	//We will need to check in the database to see if:
 		//1) The room has restrictions on reservations (limit)
 		//2) The user is in the list of users who can reserve, given that 1) is true
-	$limitSqlCheck = "SELECT * FROM `rooms` WHERE `rooms`.`roomid` = '$roomnumber' AND `rooms`.`limit` = '1'";
+	$limitSqlCheck = "SELECT * FROM `rooms` WHERE `rooms`.`roomid` = '$roomnumber' AND `rooms`.`limitusers` = '1'";
 	$limitRes = $conn->query($limitSqlCheck);
 	$limitRows = $limitRes->num_rows;
 	//If there are more than 0 rows, then the room has the limit check on it
