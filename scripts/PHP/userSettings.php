@@ -203,10 +203,17 @@
     <div style="position:absolute" id="agendaReservations"></div>
     <div id="deleteRes"></div>
     <!-- Side navigation -->
+    
+    <style>
+      .userSettingsMO {cursor: pointer;}
+      .roomSettingsMO {cursor: pointer;}
+      .groupSettingsMO {cursor: pointer;}
+    </style>
+    
     <div class="sidenav">
-        <a id="userSettingsBtn">User Settings</a>
-        <a id="roomSettingsBtn">Room Settings</a>
-        <a id="groupSettingsBtn" style="font-size: 18.63px;">User Reservations</a>
+        <a class="userSettingsMO" id="userSettingsBtn">User Settings</a>
+        <a class="roomSettingsMO" id="roomSettingsBtn">Room Settings</a>
+        <a class="groupSettingsMO" id="groupSettingsBtn" style="font-size: 18.63px;">User Reservations</a>
     </div>
     <!-- Display user settings -->
     <div id="displayUserSettings" style="display: none;">
