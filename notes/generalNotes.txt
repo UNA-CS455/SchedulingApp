@@ -3,9 +3,10 @@ ISSUE:
 		-Maybe we're thinking of it all wrong
 		-Maybe we have to call the .sh file from a php file?
 		
-	-May need to use Perl instead of .SH file to do everything
+	-May need to use Perl/Python instead of .SH file to do everything
 		-Per Dr. Crabtree, this would likely work better
 		
+	-Ask Dr. Banks the current way they insert ARGOS data
 		
 	-To do auto time, use CRON to run shell script every so often
 	
