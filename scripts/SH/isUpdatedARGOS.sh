@@ -48,13 +48,13 @@ comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new
 #     item?
 
 
-if [[ -s $unique_to_file1 ]];
+if [[ -s $unique_to_old ]];
 then
     echo "File has stuff unique to file 1";
     # mysql -u username –-password=your_password database_name < file.sql 
 fi
     
-if [[ -s $unique_to_file2 ]]
+if [[ -s $unique_to_new ]]
 then
     echo "File has stuff unique to file 2";
     # mysql -u username –-password=your_password database_name < file.sql 
