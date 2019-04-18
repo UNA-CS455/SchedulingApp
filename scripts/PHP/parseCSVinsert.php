@@ -81,11 +81,13 @@ for ($i = 0; $i < count($data); $i++) {
             
             $dateToInsert = date("Y-m-d", $dateIterator);
             $collisionID = md5($roomnumber . $owneremail . $allowshare . $headcount . $termStart . $termEnd . $dateToInsert . $dateToInsert . $startTime . $endTime . $occur . $comment . $owneremail);
-            echo "<br>$collisionID</br>";
+            // echo "<br>$collisionID</br>";
+            echo "\n \n" . $roomnumber . ' ' . $owneremail . ' ' . $allowshare . ' ' . $headcount . ' ' . $termStart . ' ' . $termEnd . ' ' . $dateToInsert . ' ' . $dateToInsert . ' ' . $startTime . ' ' . $endTime . ' ' . $occur . ' ' . $comment . ' ' . $owneremail . "\n\n";
+
             
             $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, termstart, termend, startdate, enddate, starttime, endtime, occur, comment, res_email, unique_identifier)
                     VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$termStart', '$termEnd', '$dateToInsert', '$dateToInsert', '$startTime', '$endTime', '$occur', '$comment', '$owneremail', '$collisionID')";
-            $sqlFile = file_put_contents('../../sqlResult.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
+            $sqlFile = file_put_contents('../../argosInsert.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
             
             
             //$txt = "user id date";
