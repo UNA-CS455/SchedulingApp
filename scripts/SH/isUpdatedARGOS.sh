@@ -1,39 +1,52 @@
 #!/bin/sh
 
-old="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info1.csv"
-new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info2.csv"
-# file01="/2018Fall_course_info1.csv"
-# file02="/2018Fall_course_info2.csv"
+# -----------------------------------------------------------------------------------------------
+# Things to know beforehand:
+#     1) YYYYSemester_course_info.csv holds the course info for that semester of YYYY
+#         (for example, 2018Fall_course_info.csv)
+# 
+#     2) That file is from ARGOS, and is given to the server from ITS
+#     3) The current ARGOS file will be named YYYYSemester_course_info_old.csv
+# -----------------------------------------------------------------------------------------------
+# Flow of the ARGOS auto import, generalized so that it is the same for Server and Local testing
+#     1) Recieve the new file from ITS directly into the home directory
+#     2) 
+#     3)
+# 
+# 
+# 
+# 
 
-    
-#comm may give us what we want
+
+# Server version
+# old="/2018Fall_course_info_old.csv"
+# new="/2018Fall_course_info.csv"
+
+# Local version
+old="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info_old.csv"
+new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
+
+# Server version
+# unique_to_old="/unique_to_old.csv"
+# unique_to_new="/unique_to_new.csv"
+
+# Local version
+unique_to_old="C:/xampp/htdocs/SchedulingApp/unique_to_old.csv"
+unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
+
+
+
+
+# For 'comm [OPTION]... FILE1 FILE2'
 #  -1              suppress column 1 (lines unique to FILE1)
 #  -2              suppress column 2 (lines unique to FILE2)
 #  -3              suppress column 3 (lines that appear in both files)
 #  --check-order   check that the input is correctly sorted, even if all input lines are pairable
 
 
-#comm -2 -3 <(sort file1) <(sort file2) > file3
-
-unique_to_old="C:/xampp/htdocs/SchedulingApp/unique_to_old.csv"
-unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
-# unique_to_file1="/unique_to_old.csv"
-# unique_to_file2="/unique_to_new.csv"
-
-echo 'Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_old;
-echo 'Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_new;
-# The parseCSV files need this at the beginning of the file... for reasons unknown
-
-
-# Need to erase everything that's in the SQL files to ensure no extra data is coming in first
-# echo '' >> "uniqueDelete.sql";
-# echo '' >> "uniqueInsert.sql"
-
 comm -2 -3 <(sort $old) <(sort $new) > $unique_to_old
 comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new
 
-
-# We need a way to parse through these csv files.. oh wait we have parseCSV.php
 
 # We can change parseCSV.php, or even split into two separate files, to handle
 #     inserting and deleting, or even just update the fields that are relevant
@@ -48,19 +61,43 @@ comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new
 #     item?
 
 
-if [[ -s $unique_to_old ]];
+if [[ -s $unique_to_old ]]; # There were items we need to delete
 then
-    echo "File has stuff unique to file 1";
-    # mysql -u username –-password=your_password database_name < file.sql 
+    echo "File has stuff unique to old file";
+    echo 'Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_old;
+    
+    # Server version (These are created here, but used in both parseCSV*.php files)
+    # echo '' >> "uniqueDelete.sql";
+    
+    # Local version
+    # echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
+    
+    # Hayden computer path
+    echo '' >> "E:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
+    
+    # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEDELETE/uniqueDelete.sql"
 fi
     
-if [[ -s $unique_to_new ]]
+if [[ -s $unique_to_new ]]; # There were items we need to add
 then
-    echo "File has stuff unique to file 2";
-    # mysql -u username –-password=your_password database_name < file.sql 
+    echo "File has stuff unique to new file";
+    echo 'Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_new;
+    
+    # Server version
+    # echo '' >> "uniqueDelete.sql";
+    
+    # Local version
+    # echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
+    
+    # Hayden computer path
+    echo '' >> "E:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
+    
+    # php 
+    
+    # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEINSERT/uniqueInsert.sql"
 else
     echo "File has no stuff :(";
-    # Do nothing
+    # Do nothing, there were no changes in ARGOS
 fi
 
 
