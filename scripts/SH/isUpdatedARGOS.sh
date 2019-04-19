@@ -23,17 +23,25 @@
 # new="/2018Fall_course_info.csv"
 
 # Local version
-old="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info_old.csv"
-new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
+# old="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info_old.csv"
+# new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
+
+# Hayden version
+old="E:/xampp/htdocs/SchedulingApp/2018Fall_course_info_old.csv"
+new="E:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
+
 
 # Server version
 # unique_to_old="/unique_to_old.csv"
 # unique_to_new="/unique_to_new.csv"
 
 # Local version
-unique_to_old="C:/xampp/htdocs/SchedulingApp/unique_to_old.csv"
-unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
+# unique_to_old="C:/xampp/htdocs/SchedulingApp/unique_to_old.csv"
+# unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
 
+# Hayden version
+unique_to_old="E:/xampp/htdocs/SchedulingApp/unique_to_old.csv"
+unique_to_new="E:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
 
 
 
