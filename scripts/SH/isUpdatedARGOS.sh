@@ -72,7 +72,7 @@ comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new
 if [[ -s $unique_to_old ]]; # There were items we need to delete
 then
     echo "File has stuff unique to old file";
-    echo 'Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_old;
+    echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_old;
     
     # Server version (These are created here, but used in both parseCSV*.php files)
     # echo '' >> "uniqueDelete.sql";
@@ -83,13 +83,15 @@ then
     # Hayden computer path
     echo '' > "E:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
     
+    # php parseCSVdelete.php $unique_to_old
+    
     # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEDELETE/uniqueDelete.sql"
 fi
     
 if [[ -s $unique_to_new ]]; # There were items we need to add
 then
     echo "File has stuff unique to new file";
-    echo 'Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_new;
+    echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_new;
     
     # Server version
     # echo '' >> "uniqueDelete.sql";
@@ -100,7 +102,7 @@ then
     # Hayden computer path
     echo '' > "E:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
     
-    # php 
+    # php parseCSVinsert.php $unique_to_new
     
     # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEINSERT/uniqueInsert.sql"
 else
