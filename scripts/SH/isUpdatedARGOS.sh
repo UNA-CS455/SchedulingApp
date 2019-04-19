@@ -81,7 +81,7 @@ then
     # echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
     
     # Hayden computer path
-    echo '' >> "E:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
+    echo '' > "E:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
     
     # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEDELETE/uniqueDelete.sql"
 fi
@@ -98,7 +98,7 @@ then
     # echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
     
     # Hayden computer path
-    echo '' >> "E:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
+    echo '' > "E:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
     
     # php 
     
