@@ -23,8 +23,8 @@
 # new="/2018Fall_course_info.csv"
 
 # Local version
-old="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info_old.csv"
-new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
+old="C:\\xampp\\htdocs\SchedulingApp\\2018Fall_course_info_old.csv"
+new="C:\\xampp\\htdocs\\SchedulingApp\\2018Fall_course_info.csv"
 
 # C9 version
 # old="/home/ubuntu/workspace/SchedulingApp/2018Fall_course_info_old.csv"
@@ -36,8 +36,8 @@ new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
 # unique_to_new="/unique_to_new.csv"
 
 # Local version
-unique_to_old="C:/xampp/htdocs/SchedulingApp/unique_to_old.csv"
-unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
+unique_to_old="C:\\xampp\\htdocs\\SchedulingApp\\unique_to_old.csv"
+unique_to_new="C:\\xampp\\htdocs\\SchedulingApp\\unique_to_new.csv"
 
 # C9 version
 # unique_to_old="/home/ubuntu/workspace/SchedulingApp/unique_to_old.csv"
@@ -87,7 +87,7 @@ then
     # echo '' >> "uniqueDelete.sql";
     
     # Local version
-    echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
+    echo '' >> "C:\\xampp\\htdocs\\SchedulingApp\\uniqueDelete.sql";
     
     # C9 version
     # echo '' >> "/home/ubuntu/workspace/SchedulingApp/uniqueDelete.sql";
@@ -113,7 +113,7 @@ then
     # echo '' >> "uniqueDelete.sql";
     
     # Local version
-    echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
+    echo '' >> "C:\\xampp\\htdocs\\SchedulingApp\\uniqueInsert.sql";
     
     # C9 version
     # echo '' >> "/home/ubuntu/workspace/SchedulingApp/uniqueInsert.sql";
