@@ -99,7 +99,7 @@ then
     # Hayden computer path
     # echo '' > "E:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
     
-    sh ./argosDelete.sh $unique_to_old "delete"
+    sh ./scripts/SH/argosDelete.sh $unique_to_old "delete"
     
     
     # php parseCSVdelete.php $unique_to_old
