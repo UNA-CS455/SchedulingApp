@@ -55,6 +55,12 @@ touch $unique_to_new
 #  --check-order   check that the input is correctly sorted, even if all input lines are pairable
 
 
+echo $old;
+echo $new;
+echo $unique_to_old;
+echo $unique_to_new;
+
+
 comm -2 -3 <sort $old <sort $new > $unique_to_old
 comm -1 -3 <sort $old <sort $new > $unique_to_new
 
