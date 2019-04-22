@@ -92,13 +92,16 @@ then
     # Local version
     echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
     
-    # C9 version
-    # echo '' >> "/home/ubuntu/workspace/SchedulingApp/uniqueDelete.sql";
     
+    # ----------------------------------------------------------------
+    
+    # Server version
+    # argosDeletePath="/figurethisout"
     
     # Local version
     argosDeletePath="C:/xampp/htdocs/SchedulingApp/scripts/SH/argosDelete.sh"
     
+    # ----------------------------------------------------------------
     
     sh $argosDeletePath $unique_to_old "delete"
     
@@ -119,8 +122,18 @@ then
     # Local version
     echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
     
-    # C9 version
-    # echo '' >> "/home/ubuntu/workspace/SchedulingApp/uniqueInsert.sql";
+    
+    # ----------------------------------------------------------------
+    
+    # Server version
+    # argosInsertPath="/figurethisout"
+    
+    # Local version
+    argosInsertPath="C:/xampp/htdocs/SchedulingApp/scripts/SH/argosInsert.sh"
+    
+    # ----------------------------------------------------------------
+    
+    
     
     # php parseCSVinsert.php $unique_to_new
     
