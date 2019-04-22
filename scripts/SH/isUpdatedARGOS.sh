@@ -96,10 +96,11 @@ then
     # echo '' >> "/home/ubuntu/workspace/SchedulingApp/uniqueDelete.sql";
     
     
-    # Hayden computer path
-    # echo '' > "E:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
+    # Local version
+    argosDeletePath="C:/xampp/htdocs/SchedulingApp/scripts/SH/argosDelete.sh"
     
-    sh ./scripts/SH/argosDelete.sh $unique_to_old "delete"
+    
+    sh $argosDeletePath $unique_to_old "delete"
     
     
     # php parseCSVdelete.php $unique_to_old
