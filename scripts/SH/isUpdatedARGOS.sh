@@ -43,6 +43,10 @@ unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
 # unique_to_old="/home/ubuntu/workspace/SchedulingApp/unique_to_old.csv"
 # unique_to_new="/home/ubuntu/workspace/SchedulingApp/unique_to_new.csv"
 
+#Ensure they exist
+touch $unique_to_old
+touch $unique_to_new
+
 
 # For 'comm [OPTION]... FILE1 FILE2'
 #  -1              suppress column 1 (lines unique to FILE1)
