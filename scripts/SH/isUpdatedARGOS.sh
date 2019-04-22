@@ -63,12 +63,12 @@ then
  
     echo "File has stuff unique to old file";
     
-    deleteCSV="C:/xampp/htdocs/SchedulingApp/argos/classesToDelete_raw.csv"
+    deleteCSV="C:/xampp/htdocs/SchedulingApp/argos/classesToDelete.csv"
     
     # Need the following in the header of the uniqueDelete.csv files for associative array headers
     echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $deleteCSV;
     echo $unique_to_old >> $deleteCSV
-        
+    
     
     # ----------------------------------------------------------------
     
@@ -92,7 +92,7 @@ if [[ -s $unique_to_new ]]; # There were items we need to add
 then
     
     # Local version
-    uniqueInsert="C:/xampp/htdocs/SchedulingApp/argos/uniqueInsert.csv"
+    insertCSV="C:/xampp/htdocs/SchedulingApp/argos/classesToInsert.csv"
     
     
     echo "File has stuff unique to new file";
