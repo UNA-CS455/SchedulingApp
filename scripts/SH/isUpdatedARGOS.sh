@@ -44,8 +44,6 @@ unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
 # unique_to_new="/home/ubuntu/workspace/SchedulingApp/unique_to_new.csv"
 
 #Ensure they exist
-touch $old
-touch $new
 touch $unique_to_old
 touch $unique_to_new
 
@@ -63,8 +61,11 @@ echo $unique_to_old;
 echo $unique_to_new;
 
 
-comm -2 -3 <sort $old <sort $new > $unique_to_old
-comm -1 -3 <sort $old <sort $new > $unique_to_new
+
+# We may have to remove the () from the sorts when moved into production
+# Got conflicting results when tried on the C9 bash environment and a windows environment
+comm -2 -3 <(sort $old) <(sort $new) > $unique_to_old
+comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new
 
 
 # We can change parseCSV.php, or even split into two separate files, to handle
