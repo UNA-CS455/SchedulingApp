@@ -52,6 +52,9 @@ touch $unique_to_new
 # We may have to remove the () from the sorts when moved into production
 # Got conflicting results when tried on the C9 bash environment and a windows environment
 
+header='"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"'
+
+
 comm -2 -3 <(sort $old) <(sort $new) > $unique_to_old # Put items unique to the old version of the class times/locations here
 comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new # Put items unique to the new version of the class times/locations here
 
@@ -66,7 +69,7 @@ then
     deleteCSV="C:/xampp/htdocs/SchedulingApp/argos/classesToDelete.csv"
     
     # Need the following in the header of the uniqueDelete.csv files for associative array headers
-    echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $deleteCSV;
+    echo $header > $deleteCSV;
     cat $unique_to_old >> $deleteCSV
     
     
@@ -98,7 +101,8 @@ then
     echo "File has stuff unique to new file";
     
     # Need the following in the header of the uniqueInsert.csv files for associative array headers
-    echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $insertCSV;
+    echo $header > $insertCSV;
+    cat $unique_to_new >> $insertCSV
 
     # ----------------------------------------------------------------
     
@@ -109,6 +113,9 @@ then
     argosInsertPath="C:/xampp/htdocs/SchedulingApp/scripts/PHP/doArgosInsert.php"
     
     # ----------------------------------------------------------------
+    
+    
+    # Now, call the php file to get the stuff into the .sql files
     
     
     
