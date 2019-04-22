@@ -13,6 +13,10 @@
 #     2) 
 #     3)
 # 
+# -----------------------------------------------------------------------------------------------
+# Relevant files:
+#   doArgosDelete.php : Handles the deletion of items from the database with a php script
+# 
 # 
 # 
 # 
@@ -23,16 +27,16 @@
 # new="/2018Fall_course_info.csv"
 
 # Local version
-old="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info_old.csv"
-new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
+old="C:/xampp/htdocs/SchedulingApp/argos/2018Fall_course_info_old.csv"
+new="C:/xampp/htdocs/SchedulingApp/argos/2018Fall_course_info.csv"
 
 # Server version
 # unique_to_old="/unique_to_old.csv"
 # unique_to_new="/unique_to_new.csv"
 
 # Local version
-unique_to_old="C:/xampp/htdocs/SchedulingApp/unique_to_old.csv"
-unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
+unique_to_old="C:/xampp/htdocs/SchedulingApp/argos/unique_to_old.csv"
+unique_to_new="C:/xampp/htdocs/SchedulingApp/argos/unique_to_new.csv"
 
 #Ensure they exist
 touch $unique_to_old
@@ -45,40 +49,23 @@ touch $unique_to_new
 #  -3              suppress column 3 (lines that appear in both files)
 #  --check-order   check that the input is correctly sorted, even if all input lines are pairable
 
-
-# echo $old;
-# echo $new;
-# echo $unique_to_old;
-# echo $unique_to_new;
-
-
-
 # We may have to remove the () from the sorts when moved into production
 # Got conflicting results when tried on the C9 bash environment and a windows environment
-comm -2 -3 <(sort $old) <(sort $new) > $unique_to_old
-comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new
 
-    
-# For now, I think that deleting and inserting reservations all over again
-#     would be inefficient, but do we really need to worry about it?
-#     It will be running when no one will be using it, so performance will not
-#     be noticably impacted. It will also be easier to implement than checking
-#     every single reservation for changes and updating all of them. So maybe
-#     deleting/inserting would be more efficient than having to search each
-#     item?
+comm -2 -3 <(sort $old) <(sort $new) > $unique_to_old # Put items unique to the old version of the class times/locations here
+comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new # Put items unique to the new version of the class times/locations here
 
 
 if [[ -s $unique_to_old ]]; # There were items we need to delete
 then
-    echo "File has stuff unique to old file";
-    echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_old;
-    
-    # Server version (These are created here, but used in both parseCSV*.php files)
-    # echo '' >> "uniqueDelete.sql";
-    
     # Local version
-    echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueDelete.sql";
+    # uniqueDelete="C:/xampp/htdocs/SchedulingApp/argos/uniqueDelete.csv"
+ 
+    echo "File has stuff unique to old file";
     
+    # Need the following in the header of the uniqueDelete.csv files for associative array headers
+    echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_old;
+
     
     # ----------------------------------------------------------------
     
@@ -86,45 +73,42 @@ then
     # argosDeletePath="/figurethisout"
     
     # Local version
-    argosDeletePath="C:/xampp/htdocs/SchedulingApp/scripts/SH/argosDelete.sh"
+    argosDeletePath="C:/xampp/htdocs/SchedulingApp/scripts/PHP/doArgosDelete.php"
     
     # ----------------------------------------------------------------
+    deletePHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVdelete.php"
+    deleteSQL="C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql"
     
-    sh $argosDeletePath $unique_to_old "delete"
     
     
-    php parseCSVdelete.php $unique_to_old
     
-    # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEDELETE/uniqueDelete.sql"
+    
 fi
     
 if [[ -s $unique_to_new ]]; # There were items we need to add
 then
-    echo "File has stuff unique to new file";
-    echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_new;
-    
-    # Server version
-    # echo '' >> "uniqueDelete.sql";
     
     # Local version
-    echo '' >> "C:/xampp/htdocs/SchedulingApp/uniqueInsert.sql";
+    uniqueInsert="C:/xampp/htdocs/SchedulingApp/argos/uniqueInsert.csv"
     
     
+    echo "File has stuff unique to new file";
+    
+    # Need the following in the header of the uniqueInsert.csv files for associative array headers
+    echo '"Term Code","Term Description","Full/Part Term Description","Course CRN","Course Subject","Course Number","Course Sequence Number","Building Name","Room Number","Course Start Time","Course End Time","Course Start Date","Course End Date","Sunday Indicator","Monday Indicator","Tuesday Indicator","Wednesday Indicator","Thursday Indicator","Friday Indicator","Saturday Indicator","Course Maximum Enrollment","Course Enrollment"' > $unique_to_new;
+
     # ----------------------------------------------------------------
     
     # Server version
     # argosInsertPath="/figurethisout"
     
     # Local version
-    argosInsertPath="C:/xampp/htdocs/SchedulingApp/scripts/SH/argosInsert.sh"
+    argosInsertPath="C:/xampp/htdocs/SchedulingApp/scripts/PHP/doArgosInsert.php"
     
     # ----------------------------------------------------------------
     
     
     
-    php parseCSVinsert.php $unique_to_new
-    
-    # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEINSERT/uniqueInsert.sql"
 else
     echo "File has no stuff :(";
     # Do nothing, there were no changes in ARGOS
