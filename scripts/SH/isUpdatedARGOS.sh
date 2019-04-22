@@ -26,11 +26,6 @@
 old="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info_old.csv"
 new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
 
-# C9 version
-# old="/home/ubuntu/workspace/SchedulingApp/2018Fall_course_info_old.csv"
-# new="/home/ubuntu/workspace/SchedulingApp/2018Fall_course_info.csv"
-
-
 # Server version
 # unique_to_old="/unique_to_old.csv"
 # unique_to_new="/unique_to_new.csv"
@@ -38,10 +33,6 @@ new="C:/xampp/htdocs/SchedulingApp/2018Fall_course_info.csv"
 # Local version
 unique_to_old="C:/xampp/htdocs/SchedulingApp/unique_to_old.csv"
 unique_to_new="C:/xampp/htdocs/SchedulingApp/unique_to_new.csv"
-
-# C9 version
-# unique_to_old="/home/ubuntu/workspace/SchedulingApp/unique_to_old.csv"
-# unique_to_new="/home/ubuntu/workspace/SchedulingApp/unique_to_new.csv"
 
 #Ensure they exist
 touch $unique_to_old
@@ -55,10 +46,10 @@ touch $unique_to_new
 #  --check-order   check that the input is correctly sorted, even if all input lines are pairable
 
 
-echo $old;
-echo $new;
-echo $unique_to_old;
-echo $unique_to_new;
+# echo $old;
+# echo $new;
+# echo $unique_to_old;
+# echo $unique_to_new;
 
 
 
@@ -67,10 +58,6 @@ echo $unique_to_new;
 comm -2 -3 <(sort $old) <(sort $new) > $unique_to_old
 comm -1 -3 <(sort $old) <(sort $new) > $unique_to_new
 
-
-# We can change parseCSV.php, or even split into two separate files, to handle
-#     inserting and deleting, or even just update the fields that are relevant
-#     to the reservations of the given classes.
     
 # For now, I think that deleting and inserting reservations all over again
 #     would be inefficient, but do we really need to worry about it?
@@ -106,7 +93,7 @@ then
     sh $argosDeletePath $unique_to_old "delete"
     
     
-    # php parseCSVdelete.php $unique_to_old
+    php parseCSVdelete.php $unique_to_old
     
     # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEDELETE/uniqueDelete.sql"
 fi
@@ -135,7 +122,7 @@ then
     
     
     
-    # php parseCSVinsert.php $unique_to_new
+    php parseCSVinsert.php $unique_to_new
     
     # mysql -u root –-password=CSIS455 database_name < "PATH_TO_UNIQUEINSERT/uniqueInsert.sql"
 else
