@@ -91,7 +91,7 @@ for ($i = 0; $i < count($data); $i++) {
             
             
             if ($conn->query($sql) === TRUE) {
-              echo "New record created successfully";
+              echo "New record created successfully \r\n";
             } else {
               echo "Error: " . $sql . "\r\n" . $conn->error . "\r\n \r\n";
             }
