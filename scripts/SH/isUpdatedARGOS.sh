@@ -85,7 +85,7 @@ then
     deletePHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVdelete.php"
     deleteSQL="C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql"
     
-    echo '' > $deleteSQL
+    >$deleteSQL
     
     php $deletePHP $deleteCSV
     
@@ -122,7 +122,7 @@ then
     insertPHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVinsert.php"
     insertSQL="C:/xampp/htdocs/SchedulingApp/argos/argosInsert.sql"
     
-    echo '' > $insertSQL
+    >$insertSQL
     
     php $insertPHP $insertCSV
     
