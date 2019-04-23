@@ -13,9 +13,6 @@ require "db_conf.php"; // set servername,username,password,and dbname
 $csvFileName = $argv[1];
 $filePath = "$csvFileName";
 
-echo '';
-echo $filePath;
-echo '';
 
 $csv = file_get_contents($filePath, FILE_USE_INCLUDE_PATH);
 $lines = explode("\n", $csv);

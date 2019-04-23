@@ -58,11 +58,11 @@ for ($i = 0; $i < count($data); $i++) {
     // echo $headcount . '<br>';
 
     // skip the inner loop for now until we understand how the new databse table works.
-    // $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
-    // if ($conn->connect_error) {
-    //     die("Connection failed: " . $conn->connect_error);
-    // }
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
     
     $intTermStart = strtotime($termStart);
     $intTermEnd = strtotime($termEnd);
@@ -87,14 +87,14 @@ for ($i = 0; $i < count($data); $i++) {
             
             $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, termstart, termend, startdate, enddate, starttime, endtime, occur, comment, res_email, unique_identifier)
                     VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$termStart', '$termEnd', '$dateToInsert', '$dateToInsert', '$startTime', '$endTime', '$occur', '$comment', '$owneremail', '$collisionID')";
-            $sqlFile = file_put_contents('C:/xampp/htdocs/SchedulingApp/argos/argosInsert.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
+           // $sqlFile = file_put_contents('C:/xampp/htdocs/SchedulingApp/argos/argosInsert.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
             
             
-            //   if ($conn->query($sql) === TRUE) {
-            //   echo "New record created successfully";
-            //   } else {
-            //   echo "Error: " . $sql . "<br>" . $conn->error;
-            //   }
+            if ($conn->query($sql) === TRUE) {
+              echo "New record created successfully";
+            } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+            }
             
         }
 
@@ -105,4 +105,4 @@ for ($i = 0; $i < count($data); $i++) {
         $dateIterator = $dateIterator + 86400;
     }
 }
-// $conn->close();
+$conn->close();
