@@ -97,14 +97,14 @@ for ($i = 0; $i < count($data); $i++) {
             $sql = "DELETE FROM `reservations` WHERE `reservations`.`unique_identifier` = '$collisionID'";
             
             
-            $sqlFile = file_put_contents('C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
+            // $sqlFile = file_put_contents('C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
             
             
-            //   if ($conn->query($sql) === TRUE) {
-            //   echo "Deletion successfull";
-            //   } else {
-            //   echo "Error: " . $sql . "<br>" . $conn->error;
-            //   }
+            if ($conn->query($sql) === TRUE) {
+              echo "Deletion successfull";
+            } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+            }
             
         }
 
