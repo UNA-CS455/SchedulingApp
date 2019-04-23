@@ -50,7 +50,7 @@
               echo '<td>' . $reservation['starttime'] . '</td>';
               echo '<td>' . $reservation['endtime'] . '</td>';
               echo '<td>';
-              echo '<a disabled style="margin-right: 5px;" class="btn btn-default" href="reservationEdit.php?id=' . $reservation['id'] . '"><i class="fas fa-pencil-alt"></i></a>';
+              echo '<a style="margin-right: 5px;" class="btn btn-default" href="reservationEdit.php?id=' . $reservation['id'] . '"><i class="fas fa-pencil-alt"></i></a>';
               echo '<a style="margin-right: 5px;" class="btn btn-default" href="room_remove.php?id=' . $reservation['id'] . '"><i class="fas fa-trash-alt"></i></a>';
               echo '</td></tr>';
             }
