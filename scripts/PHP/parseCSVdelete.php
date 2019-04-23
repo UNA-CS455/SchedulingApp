@@ -64,11 +64,11 @@ for ($i = 0; $i < count($data); $i++) {
     // echo $headcount . '<br>';
 
     // skip the inner loop for now until we understand how the new databse table works.
-    // $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
-    // if ($conn->connect_error) {
-    //     die("Connection failed: " . $conn->connect_error);
-    // }
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
     
     $intTermStart = strtotime($termStart);
     $intTermEnd = strtotime($termEnd);
@@ -115,4 +115,4 @@ for ($i = 0; $i < count($data); $i++) {
         $dateIterator = $dateIterator + 86400;
     }
 }
-// $conn->close();
+$conn->close();
