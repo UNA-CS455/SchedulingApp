@@ -100,7 +100,7 @@ for ($i = 0; $i < count($data); $i++) {
             
             $selectSQL = "SELECT * FROM `reservations` WHERE `reservations`.`unique_identifier` = '$collisionID'";
             
-            if ($conn->query($selectSQL) === TRUE) {
+            if ($conn->query($selectSQL) === FALSE) {
               echo "Deletion successfull \r\n";
             } else {
               echo "Error: " . $sql . "\r\n" . $conn->error . "\r\n \r\n";
