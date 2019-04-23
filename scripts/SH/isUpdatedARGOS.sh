@@ -7,19 +7,22 @@
 # 
 #     2) That file is from ARGOS, and is given to the server from ITS
 #     3) The current ARGOS file will be named YYYYSemester_course_info_old.csv
+# 
 # -----------------------------------------------------------------------------------------------
 # Flow of the ARGOS auto import, generalized so that it is the same for Server and Local testing
 #     1) Recieve the new file from ITS directly into the home directory
-#     2) 
-#     3)
+#     2) Check if any changes have been made
+#     3) If not, exit. Else, separate the data into old and new changes
+#     4) Delete old data, insert new data
+#     5) Remove old ARGOS CSV file, rename new CSV file to 2018YYYYSemester_course_info_old.csv (******TODO!******)
 # 
 # -----------------------------------------------------------------------------------------------
 # Relevant files:
-#   doArgosDelete.php : Handles the deletion of items from the database with a php script
-# 
-# 
-# 
-# 
+#   parseCSVinsert.php : Converts our CSV files to a usable format, then inserts the data into the database
+#   parseCSVdelete.php : Same as insert, but it deletes
+#   unique_to_old.csv  : Holds the CSV data on items unique to the old version of the ARGOS report
+#   unique_to_new.csv  : Same as old, but it holds the new data
+#   
 
 
 # Server version
@@ -73,15 +76,6 @@ then
     cat $unique_to_old >> $deleteCSV
     
     
-    # ----------------------------------------------------------------
-    
-    # Server version
-    # argosDeletePath="/figurethisout"
-    
-    # Local version
-    argosDeletePath="C:/xampp/htdocs/SchedulingApp/scripts/PHP/doArgosDelete.php"
-    
-    # ----------------------------------------------------------------
     deletePHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVdelete.php"
     deleteSQL="C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql"
     
@@ -106,16 +100,6 @@ then
     # Need the following in the header of the uniqueInsert.csv files for associative array headers
     echo $header > $insertCSV;
     cat $unique_to_new >> $insertCSV
-
-    # ----------------------------------------------------------------
-    
-    # Server version
-    # argosInsertPath="/figurethisout"
-    
-    # Local version
-    argosInsertPath="C:/xampp/htdocs/SchedulingApp/scripts/PHP/doArgosInsert.php"
-    
-    # ----------------------------------------------------------------
     
     
     # Now, call the php file to get the stuff into the .sql files
