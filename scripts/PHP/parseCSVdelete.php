@@ -80,7 +80,7 @@ for ($i = 0; $i < count($data); $i++) {
 
             // echo 'NON NULL DATE:' . date('Y-m-d', $dateIterator);
             // echo "<br>";
-            print_r($data[$i][$dayIndicator]);
+            // print_r($data[$i][$dayIndicator]);
             
             $dateToInsert = date("Y-m-d", $dateIterator);
             $collisionID = md5($roomnumber . $owneremail . $allowshare . $headcount . $termStart . $termEnd . $dateToInsert . $dateToInsert . $startTime . $endTime . $occur . $comment . $owneremail);
@@ -96,12 +96,13 @@ for ($i = 0; $i < count($data); $i++) {
             
             // $sqlFile = file_put_contents('C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
             
+            $conn->query($sql);
             
-            if ($conn->query($sql) === TRUE) {
-              echo "Deletion successfull \r\n";
-            } else {
-              echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+            // if ($conn->query($sql) === TRUE) {
+            //   echo "Deletion successfull \r\n";
+            // } else {
+            //   echo "Error: " . $sql . "<br>" . $conn->error;
+            // }
             
         }
 

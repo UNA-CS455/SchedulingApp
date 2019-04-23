@@ -77,7 +77,7 @@ for ($i = 0; $i < count($data); $i++) {
 
             // echo 'NON NULL DATE:' . date('Y-m-d', $dateIterator);
             // echo "<br>";
-            print_r($data[$i][$dayIndicator]);
+            // print_r($data[$i][$dayIndicator]);
             
             $dateToInsert = date("Y-m-d", $dateIterator);
             $collisionID = md5($roomnumber . $owneremail . $allowshare . $headcount . $termStart . $termEnd . $dateToInsert . $dateToInsert . $startTime . $endTime . $occur . $comment . $owneremail);
@@ -93,7 +93,7 @@ for ($i = 0; $i < count($data); $i++) {
             if ($conn->query($sql) === TRUE) {
               echo "New record created successfully";
             } else {
-              echo "Error: " . $sql . "<br>" . $conn->error;
+              echo "Error: " . $sql . "<br>" . $conn->error . "\r\n \r\n";
             }
             
         }
