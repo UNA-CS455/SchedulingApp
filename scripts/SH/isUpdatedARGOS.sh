@@ -85,6 +85,8 @@ then
     deletePHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVdelete.php"
     deleteSQL="C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql"
     
+    echo '' >> $deleteSQL
+    
     php $deletePHP $deleteCSV
     
     
