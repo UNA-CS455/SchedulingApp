@@ -98,11 +98,13 @@ for ($i = 0; $i < count($data); $i++) {
             
             $conn->query($sql);
             
-            // if ($conn->query($sql) === TRUE) {
-            //   echo "Deletion successfull \r\n";
-            // } else {
-            //   echo "Error: " . $sql . "<br>" . $conn->error;
-            // }
+            $selectSQL = "SELECT * FROM `reservations` WHERE `reservations`.`unique_identifier` = '$collisionID'";
+            
+            if ($conn->query($selectSQL) === TRUE) {
+              echo "Deletion successfull \r\n";
+            } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+            }
             
         }
 
