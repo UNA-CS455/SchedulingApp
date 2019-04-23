@@ -110,6 +110,10 @@ then
     
     php $insertPHP $insertCSV
     
+    # Remove old file, rename new file to old
+    rm $old
+    mv $new $old
+    
 else
     echo "File has no stuff :(";
     # Do nothing, there were no changes in ARGOS
