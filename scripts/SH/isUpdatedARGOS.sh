@@ -85,7 +85,7 @@ then
     deletePHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVdelete.php"
     deleteSQL="C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql"
     
-    echo '' >> $deleteSQL
+    echo '' > $deleteSQL
     
     php $deletePHP $deleteCSV
     
@@ -119,8 +119,12 @@ then
     
     
     # Now, call the php file to get the stuff into the .sql files
+    insertPHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVinsert.php"
+    insertSQL="C:/xampp/htdocs/SchedulingApp/argos/argosInsert.sql"
     
+    echo '' > $insertSQL
     
+    php $insertPHP $insertCSV
     
 else
     echo "File has no stuff :(";
