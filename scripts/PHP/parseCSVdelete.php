@@ -103,7 +103,7 @@ for ($i = 0; $i < count($data); $i++) {
             if ($conn->query($selectSQL) === TRUE) {
               echo "Deletion successfull \r\n";
             } else {
-              echo "Error: " . $sql . "<br>" . $conn->error;
+              echo "Error: " . $sql . "\r\n" . $conn->error . "\r\n \r\n";
             }
             
         }
