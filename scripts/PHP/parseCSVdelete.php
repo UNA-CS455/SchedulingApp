@@ -98,7 +98,7 @@ for ($i = 0; $i < count($data); $i++) {
             
             
             if ($conn->query($sql) === TRUE) {
-              echo "Deletion successfull";
+              echo "Deletion successfull \r\n";
             } else {
               echo "Error: " . $sql . "<br>" . $conn->error;
             }

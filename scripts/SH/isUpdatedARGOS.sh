@@ -14,7 +14,7 @@
 #     2) Check if any changes have been made
 #     3) If not, exit. Else, separate the data into old and new changes
 #     4) Delete old data, insert new data
-#     5) Remove old ARGOS CSV file, rename new CSV file to 2018YYYYSemester_course_info_old.csv (******TODO!******)
+#     5) Remove old ARGOS CSV file, rename new CSV file to 2018YYYYSemester_course_info_old.csv (******TODO!*******)
 # 
 # -----------------------------------------------------------------------------------------------
 # Relevant files:
@@ -22,7 +22,7 @@
 #   parseCSVdelete.php : Same as insert, but it deletes
 #   unique_to_old.csv  : Holds the CSV data on items unique to the old version of the ARGOS report
 #   unique_to_new.csv  : Same as old, but it holds the new data
-#   
+# -----------------------------------------------------------------------------------------------  
 
 
 # Server version
