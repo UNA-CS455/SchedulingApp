@@ -41,78 +41,84 @@ for ($i = 0; $i < count($data); $i++) {
     // echo $endTime . '<br>';
 
     $termStart = DateTime::createFromFormat('j-M-y', $data[$i]['Course Start Date']);
-    $termStart = $termStart->format('Y-m-d');
-    $termEnd = DateTime::createFromFormat('j-M-y', $data[$i]['Course End Date']);
-    $termEnd = $termEnd->format('Y-m-d');
-    $occur = "weekly";
-    $crn = $data[$i]['Course CRN'];
-
-
-    // echo $termStart . '<br>';
-    // echo $termEnd . '<br>';
-
-    $roomnumber = $data[$i]['Building Name'] . ' ' . $data[$i]['Room Number'];
-    // echo $roomnumber . '<br>';
-    $owneremail = "N/A";
-    // not sharing for lectures
-    $allowshare = 0;
-    $headcount = $data[$i]['Course Enrollment'];
-    $comment = "Automated reservation by parseCSV.php";
-    // echo $headcount . '<br>';
-
-    // skip the inner loop for now until we understand how the new databse table works.
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
     
-    $intTermStart = strtotime($termStart);
-    $intTermEnd = strtotime($termEnd);
-    $dateIterator = $intTermStart;
+    if($termStart !== FALSE){
+        $termStart = $termStart->format('Y-m-d');
+        $termEnd = DateTime::createFromFormat('j-M-y', $data[$i]['Course End Date']);
+        $termEnd = $termEnd->format('Y-m-d');
+        $occur = "weekly";
+        $crn = $data[$i]['Course CRN'];
     
-    while ($dateIterator <= $intTermEnd) {
-        $weekdayNum = date('w', $dateIterator);
-        $day = $days[$weekdayNum % 7];
-        $dayIndicator = $day . ' ' . 'Indicator';
-        // echo $dayIndicator . "<br>";
-        if ($data[$i][$dayIndicator] != NULL) {
-
-            // echo 'NON NULL DATE:' . date('Y-m-d', $dateIterator);
-            // echo "<br>";
-            // print_r($data[$i][$dayIndicator]);
-            
-            $dateToInsert = date("Y-m-d", $dateIterator);
-            $collisionID = md5($roomnumber . $owneremail . $allowshare . $headcount . $termStart . $termEnd . $dateToInsert . $dateToInsert . $startTime . $endTime . $occur . $comment . $owneremail);
-            //echo "<br>$collisionID</br>";
-            // echo "\n \n" . $roomnumber . ' ' . $owneremail . ' ' . $allowshare . ' ' . $headcount . ' ' . $termStart . ' ' . $termEnd . ' ' . $dateToInsert . ' ' . $dateToInsert . ' ' . $startTime . ' ' . $endTime . ' ' . $occur . ' ' . $comment . ' ' . $owneremail . "\n\n";
-            
-            // $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, termstart, termend, startdate, enddate, starttime, endtime, occur, comment, res_email, unique_identifier)
-            //         VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$termStart', '$termEnd', '$dateToInsert', '$dateToInsert', '$startTime', '$endTime', '$occur', '$comment', '$owneremail', '$collisionID')";
-            
-            // This may be working!
-            $sql = "DELETE FROM `reservations` WHERE `reservations`.`unique_identifier` = '$collisionID'";
-            
-            
-            // $sqlFile = file_put_contents('C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
-            
-            $conn->query($sql);
-            
-            $selectSQL = "SELECT * FROM `reservations` WHERE `reservations`.`unique_identifier` = '$collisionID'";
-            
-            if ($conn->query($selectSQL) !== FALSE) {
-              echo "Deletion successfull \r\n";
-            } else {
-              echo "Error: " . $sql . "\r\n" . $conn->error . "\r\n \r\n";
-            }
-            
+    
+        // echo $termStart . '<br>';
+        // echo $termEnd . '<br>';
+    
+        $roomnumber = $data[$i]['Building Name'] . ' ' . $data[$i]['Room Number'];
+        // echo $roomnumber . '<br>';
+        $owneremail = "N/A";
+        // not sharing for lectures
+        $allowshare = 0;
+        $headcount = $data[$i]['Course Enrollment'];
+        $comment = "Automated reservation by parseCSV.php";
+        // echo $headcount . '<br>';
+    
+        // skip the inner loop for now until we understand how the new databse table works.
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
-
-
-         
-        //echo date('Y-m-d', $dateIterator);
-        // echo "<br>----------<br>";
-        $dateIterator = $dateIterator + 86400;
+        
+        $intTermStart = strtotime($termStart);
+        $intTermEnd = strtotime($termEnd);
+        $dateIterator = $intTermStart;
+        
+        while ($dateIterator <= $intTermEnd) {
+            $weekdayNum = date('w', $dateIterator);
+            $day = $days[$weekdayNum % 7];
+            $dayIndicator = $day . ' ' . 'Indicator';
+            // echo $dayIndicator . "<br>";
+            if ($data[$i][$dayIndicator] != NULL) {
+    
+                // echo 'NON NULL DATE:' . date('Y-m-d', $dateIterator);
+                // echo "<br>";
+                // print_r($data[$i][$dayIndicator]);
+                
+                $dateToInsert = date("Y-m-d", $dateIterator);
+                $collisionID = md5($roomnumber . $owneremail . $allowshare . $headcount . $termStart . $termEnd . $dateToInsert . $dateToInsert . $startTime . $endTime . $occur . $comment . $owneremail);
+                //echo "<br>$collisionID</br>";
+                // echo "\n \n" . $roomnumber . ' ' . $owneremail . ' ' . $allowshare . ' ' . $headcount . ' ' . $termStart . ' ' . $termEnd . ' ' . $dateToInsert . ' ' . $dateToInsert . ' ' . $startTime . ' ' . $endTime . ' ' . $occur . ' ' . $comment . ' ' . $owneremail . "\n\n";
+                
+                // $sql = "INSERT INTO reservations (roomnumber, owneremail, allowshare, headcount, termstart, termend, startdate, enddate, starttime, endtime, occur, comment, res_email, unique_identifier)
+                //         VALUES ('$roomnumber', '$owneremail', '$allowshare', '$headcount', '$termStart', '$termEnd', '$dateToInsert', '$dateToInsert', '$startTime', '$endTime', '$occur', '$comment', '$owneremail', '$collisionID')";
+                
+                // This may be working!
+                $sql = "DELETE FROM `reservations` WHERE `reservations`.`unique_identifier` = '$collisionID'";
+                
+                
+                // $sqlFile = file_put_contents('C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql', $sql.PHP_EOL, FILE_APPEND | LOCK_EX);
+                
+                $conn->query($sql);
+                
+                $selectSQL = "SELECT * FROM `reservations` WHERE `reservations`.`unique_identifier` = '$collisionID'";
+                
+                if ($conn->query($selectSQL) !== FALSE) {
+                  echo "Deletion successfull \r\n";
+                } else {
+                  echo "Error: " . $sql . "\r\n" . $conn->error . "\r\n \r\n";
+                }
+                
+            }
+    
+    
+             
+            //echo date('Y-m-d', $dateIterator);
+            // echo "<br>----------<br>";
+            $dateIterator = $dateIterator + 86400;
+        }
+    }
+    else{
+        echo "Finished deleting";
     }
 }
 $conn->close();
