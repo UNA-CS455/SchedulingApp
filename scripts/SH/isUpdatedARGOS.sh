@@ -2,19 +2,17 @@
 
 # -----------------------------------------------------------------------------------------------
 # Things to know beforehand:
-#     1) YYYYSemester_course_info.csv holds the course info for that semester of YYYY
-#         (for example, 2018Fall_course_info.csv)
+#     1) course_info.csv holds the "new" ARGOS report information. course_info_old.csv holds the
+#          old course information
 # 
-#     2) That file is from ARGOS, and is given to the server from ITS
-#     3) The current ARGOS file will be named YYYYSemester_course_info_old.csv
-# 
+#     2) That file is from ARGOS, and is given to the server from ITS 
 # -----------------------------------------------------------------------------------------------
 # Flow of the ARGOS auto import, generalized so that it is the same for Server and Local testing
-#     1) Recieve the new file from ITS directly into the home directory
+#     1) Receive the new file from ITS directly into the home directory
 #     2) Check if any changes have been made
 #     3) If not, exit. Else, separate the data into old and new changes
 #     4) Delete old data, insert new data
-#     5) Remove old ARGOS CSV file, rename new CSV file to 2018YYYYSemester_course_info_old.csv (******TODO!*******)
+#     5) Remove old ARGOS CSV file, rename new CSV file to course_info_old.csv 
 # 
 # -----------------------------------------------------------------------------------------------
 # Relevant files:
@@ -22,26 +20,27 @@
 #   parseCSVdelete.php : Same as insert, but it deletes
 #   unique_to_old.csv  : Holds the CSV data on items unique to the old version of the ARGOS report
 #   unique_to_new.csv  : Same as old, but it holds the new data
-# -----------------------------------------------------------------------------------------------  
+# -----------------------------------------------------------------------------------------------
 
 
 # Server version
-# old="/2018Fall_course_info_old.csv"
-# new="/2018Fall_course_info.csv"
+old="/var/www/html/argos/course_info_old.csv"
+new="/var/www/html/argos/course_info.csv"
 
 # Local version
-old="C:/xampp/htdocs/SchedulingApp/argos/2018Fall_course_info_old.csv"
-new="C:/xampp/htdocs/SchedulingApp/argos/2018Fall_course_info.csv"
+# old="C:/xampp/htdocs/SchedulingApp/argos/course_info_old.csv"
+# new="C:/xampp/htdocs/SchedulingApp/argos/course_info.csv"
 
 # Server version
-# unique_to_old="/unique_to_old.csv"
-# unique_to_new="/unique_to_new.csv"
+unique_to_old="/var/www/html/argos/unique_to_old.csv"
+unique_to_new="/var/www/html/argos/unique_to_new.csv"
 
 # Local version
-unique_to_old="C:/xampp/htdocs/SchedulingApp/argos/unique_to_old.csv"
-unique_to_new="C:/xampp/htdocs/SchedulingApp/argos/unique_to_new.csv"
+# unique_to_old="C:/xampp/htdocs/SchedulingApp/argos/unique_to_old.csv"
+# unique_to_new="C:/xampp/htdocs/SchedulingApp/argos/unique_to_new.csv"
 
 #Ensure they exist
+touch $new
 touch $unique_to_old
 touch $unique_to_new
 
@@ -67,19 +66,28 @@ then
     # Local version
     # uniqueDelete="C:/xampp/htdocs/SchedulingApp/argos/uniqueDelete.csv"
  
-    echo "File has stuff unique to old file";
+    echo "We have some out of date information, time to delete it";
     
-    deleteCSV="C:/xampp/htdocs/SchedulingApp/argos/classesToDelete.csv"
+    # Local version
+    # deleteCSV="C:/xampp/htdocs/SchedulingApp/argos/classesToDelete.csv"
+    
+    # Server version
+    deleteCSV="/var/www/html/argos/classesToDelete.csv"
+    
     
     # Need the following in the header of the uniqueDelete.csv files for associative array headers
     echo $header > $deleteCSV;
     cat $unique_to_old >> $deleteCSV
     
+    # Local version
+    # deletePHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVdelete.php"
+    # deleteSQL="C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql"
     
-    deletePHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVdelete.php"
-    deleteSQL="C:/xampp/htdocs/SchedulingApp/argos/argosDelete.sql"
+    # Server version
+    deletePHP="/var/www/html/scripts/PHP/parseCSVdelete.php"
     
-    >$deleteSQL
+    
+    # >$deleteSQL
     
     php $deletePHP $deleteCSV
     
@@ -92,10 +100,11 @@ if [[ -s $unique_to_new ]]; # There were items we need to add
 then
     
     # Local version
-    insertCSV="C:/xampp/htdocs/SchedulingApp/argos/classesToInsert.csv"
+    # insertCSV="C:/xampp/htdocs/SchedulingApp/argos/classesToInsert.csv"
     
+    insertCSV="/var/www/html/argos/classesToInsert.csv"
     
-    echo "File has stuff unique to new file";
+    echo "We have classes to insert in to the reservations table";
     
     # Need the following in the header of the uniqueInsert.csv files for associative array headers
     echo $header > $insertCSV;
@@ -103,10 +112,16 @@ then
     
     
     # Now, call the php file to get the stuff into the .sql files
-    insertPHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVinsert.php"
-    insertSQL="C:/xampp/htdocs/SchedulingApp/argos/argosInsert.sql"
+    # insertPHP="C:/xampp/htdocs/SchedulingApp/scripts/PHP/parseCSVinsert.php"
+    # insertSQL="C:/xampp/htdocs/SchedulingApp/argos/argosInsert.sql"
     
-    >$insertSQL
+    # Note that insertSQL was used purely for debugging
+    
+    # Server version
+    insertPHP="/var/www/html/scripts/PHP/parseCSVinsert.php"
+    
+    
+    # >$insertSQL
     
     php $insertPHP $insertCSV
     
@@ -115,10 +130,8 @@ then
     mv $new $old
     
 else
-    echo "File has no stuff :(";
+    echo "Nothing to update";
+    rm $new
     # Do nothing, there were no changes in ARGOS
 fi
 
-
-
-sleep 1m;
