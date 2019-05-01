@@ -59,7 +59,7 @@ for ($i = 0; $i < count($data); $i++) {
         // not sharing for lectures
         $allowshare = 0;
         $headcount = $data[$i]['Course Enrollment'];
-        $comment = "Automated reservation by parseCSV.php";
+        $comment = "ARGOS CRN: " . $crn;
         // echo $headcount . '<br>';
     
         // skip the inner loop for now until we understand how the new databse table works.
@@ -85,7 +85,7 @@ for ($i = 0; $i < count($data); $i++) {
                 // print_r($data[$i][$dayIndicator]);
                 
                 $dateToInsert = date("Y-m-d", $dateIterator);
-                $collisionID = md5($roomnumber . $owneremail . $allowshare . $headcount . $termStart . $termEnd . $dateToInsert . $dateToInsert . $startTime . $endTime . $occur . $comment . $owneremail);
+                $collisionID = md5($roomnumber . $owneremail . $crn . $allowshare . $headcount . $termStart . $termEnd . $dateToInsert . $dateToInsert . $startTime . $endTime . $occur . $comment . $owneremail);
                 //echo "<br>$collisionID</br>";
                 // echo "\n \n" . $roomnumber . ' ' . $owneremail . ' ' . $allowshare . ' ' . $headcount . ' ' . $termStart . ' ' . $termEnd . ' ' . $dateToInsert . ' ' . $dateToInsert . ' ' . $startTime . ' ' . $endTime . ' ' . $occur . ' ' . $comment . ' ' . $owneremail . "\n\n";
                 
@@ -119,6 +119,7 @@ for ($i = 0; $i < count($data); $i++) {
     }
     else{
         echo "Finished deleting";
+        return;
     }
 }
 $conn->close();
